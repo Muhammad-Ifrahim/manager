@@ -20,10 +20,7 @@
            <link rel="stylesheet" href="{{ asset('asset/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> 
 
-
-
-            <!-- Styling Files -->
-        </head>
+  </head>
     <body class="hold-transition skin-blue sidebar-mini">
       <div class="wrapper">
 

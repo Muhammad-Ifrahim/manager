@@ -10,7 +10,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Customer</h3>
-              <a type="button" class="btn btn-block btn-primary" style="float: right;width: 13%">New Customer</a>
+              <a type="button" href="{{url('customer/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Customer</a>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

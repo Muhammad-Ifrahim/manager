@@ -10,16 +10,10 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+ Route::resource('/','ApplicationController');
 
-Route::get('/', function () {
-    return view('layouts/master');
-});
-
-Route::resource('customer','CustomerController');
-
-
-// Route::get('/customer', function(){
-    
-//    return View::make('customer-view.customer-view');
+// Route::get('/', function () {
+//     return view('layouts/master');
 // });
 
+Route::resource('customer','CustomerController');
