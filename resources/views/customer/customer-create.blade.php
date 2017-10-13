@@ -92,7 +92,7 @@
               <div class="box-footer">
               
                 <a href="{{url('customer/create-student')}}" type="submit" class="btn btn-success ">Create</a>
-                <a href="{{}}" type="submit" class="btn btn-info ">Create & Add Another </a>
+                <a href="" type="submit" class="btn btn-info ">Create & Add Another </a>
               </div>
               <!-- /.box-footer -->
             </form>
