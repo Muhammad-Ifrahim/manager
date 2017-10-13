@@ -34,11 +34,11 @@
           <a href="{{url('customer')}}">
             <i class="fa fa-users"></i> <span>Customer</span>
             <span class="pull-right-container"> 
-            <small class="label pull-right bg-green">{{count($customers) or 'none'}}</small>
+            <small class="label pull-right bg-green"></small>
             </span>
           </a>
         </li> 
-          <!-- {{count($customers)}} -->
+          
 
         <li>
           <a href="pages/widgets.html">
