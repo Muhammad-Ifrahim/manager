@@ -27,20 +27,22 @@
               <h3 class="box-title">Add Customer</h3>
             </div>
             <!-- form start -->
-            <form class="form-horizontal" >
+            <!-- method="POST" action="{{url('customer/createRecord')}} -->
+
+            <form class="form-horizontal">
               <div class="box-body">
                 <div class="form-group">
                   <label for="Name" class="col-sm-2 control-label">Name</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control"  placeholder="Name">
+                    <input type="text" class="form-control" name="Name" id="Name" placeholder="Name">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="Code" class="col-sm-2 control-label">Code</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Code">
+                    <input type="text" class="form-control" id="Code" placeholder="Code">
                   </div>
                 </div>
 
@@ -48,7 +50,7 @@
                   <label  class="col-sm-2 control-label">Buisness Identifier</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Identifier">
+                    <input type="text" class="form-control" id="BuisnessIdentifier" placeholder="Identifier">
                   </div>
                 </div>
 
@@ -56,7 +58,7 @@
                   <label class="col-sm-2 control-label">Email</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Email">
+                    <input type="text" class="form-control" id="Email" placeholder="Email">
                   </div>
                 </div>
 
@@ -64,14 +66,14 @@
                   <label for="Code" class="col-sm-2 control-label">Telephone</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Code">
+                    <input type="text" class="form-control" id="Telephone" placeholder="Telephone">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label for="Code" class="col-sm-2 control-label">Mobile</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" placeholder="Mobile">
+                    <input type="text" class="form-control" id="Mobile" placeholder="Mobile">
                   </div>
                 </div>
 
@@ -91,8 +93,8 @@
               </div>
               <div class="box-footer">
               
-                <a href="{{url('customer/create-student')}}" type="submit" class="btn btn-success ">Create</a>
-                <a href="" type="submit" class="btn btn-info ">Create & Add Another </a>
+                <a href="{{url('customer/store')}}" type="submit" class="btn btn-success">Create</a>
+                <a href="{{url('customer/createAnother')}}" type="submit" class="btn btn-info ">Create & Add Another </a>
               </div>
               <!-- /.box-footer -->
             </form>
