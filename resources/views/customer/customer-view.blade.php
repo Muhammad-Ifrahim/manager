@@ -1,7 +1,15 @@
 
   @extends('layouts.master')
     @section('content')
-     
+    <style type="text/css">
+        .box-header .box-title {
+    display: inline-block;
+    font-size: 23px;
+    margin: 3px;
+    line-height: 1;
+    color: rgba(76, 175, 80, 0.87);
+    }
+    </style>     
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -9,7 +17,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Customer</h3>
+              <h3 class="box-title">Customers</h3>
               <a type="button" href="{{url('customer/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Customer</a>
             </div>
             <!-- /.box-header -->

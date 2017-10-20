@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
-	use CustomerTrait;
+	use CustomerTrait; 					//Trait is class develop to used by Multiple Users    
     function index(){
-         $customers=$this->allCustomer();
-    	return view('layouts.master')->with('customers',$customers);
+    	return view('layouts.master');
     }
 }
