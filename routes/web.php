@@ -13,5 +13,4 @@
 
 Route::resource('/','ApplicationController');
 Route::resource('customer','CustomerController');
-Route::get('customer/createAnother','CustomerController@createAnother');
 
