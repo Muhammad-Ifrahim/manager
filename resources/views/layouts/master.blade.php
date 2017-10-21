@@ -15,6 +15,7 @@
            <link rel="stylesheet" href="{{asset('asset/jvectormap/jquery-jvectormap.css')}}">
            <!-- <link rel="stylesheet" href="{{asset('asset/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}"> -->
            <!-- Data Tables -->
+           <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
            <link rel="stylesheet" href="{{asset('asset/datatables.net-bs/css/dataTables.bootstrap.min.css')}}">
            <link rel="stylesheet" href="{{ asset('asset/bootstrap-daterangepicker/daterangepicker.css') }}">
            <link rel="stylesheet" href="{{ asset('asset/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
@@ -35,20 +36,23 @@
          @include('partials.footer')
      </div>
                         <!-- Scrips Included from the Public Asset Folder -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                        
       <script src="{{asset('asset/jquery/dist/jquery.min.js')}}"></script>
       <script src="{{asset('asset/jquery-ui/jquery-ui.min.js')}}"></script>
       <script>
         $.widget.bridge('uibutton', $.ui.button);
       </script>
       <script src="{{ asset('asset/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+      <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
      <!--  <script src="{{ asset('asset/raphael/raphael.min.js') }}"></script> -->
                         <!-- Data Tables -->
       <script src="{{ asset('asset/datatables.net/js/jquery.dataTables.min.js')}}"></script>
       <script src="{{ asset('asset/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
       <script src="{{ asset('asset/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-      <script src="{{asset('asset/dist/js/adminlte.min.js') }}"></script>
-    
-
+      <script src="{{ asset('asset/dist/js/adminlte.min.js') }}"></script>
+     
+      {!! Toastr::message() !!}
                           <!-- Scripts Ended -->
        <script>
       $(function () {
@@ -60,8 +64,19 @@
             'ordering'    : true,
             'info'        : true,
             'autoWidth'   : false
-    })
-  })
+        })
+        });
+
+      
+    $('input[type="checkbox"]').click(function () {
+        alert('dsdsd');
+    });
+      // For tool tip
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip({
+        placement : 'top'
+     });
+   });
 </script>
         
 </html>
