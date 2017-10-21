@@ -12,5 +12,8 @@
 */
 
 Route::resource('/','ApplicationController');
+// Customer Panel
 Route::resource('customer','CustomerController');
+// Customize Dashboard
+Route::resource('customize','CustomizeController');
 

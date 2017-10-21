@@ -161,7 +161,7 @@
         </li>
 
 
-       <li>
+       <li class="FixedAsset">
           <a href="pages/widgets.html">
             <i class="fa fa-print"></i> <span>Fixed Asset</span>
             <span class="pull-right-container">
@@ -170,9 +170,15 @@
           </a>
         </li>
 
+      <li class="customize">
+          <a href="{{ url('customize')}}">
+            <i class="fa fa-wrench"></i>
+             <span style="text-align: center;">Customize</span>
+            
+          </a>
+        </li>
         
     </ul>
     </section>
       
   </aside> 
-
