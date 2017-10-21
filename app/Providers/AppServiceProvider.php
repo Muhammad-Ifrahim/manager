@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Customer;
+use App\Models\FixedAsset;
 use View;
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $customers=Customer::all();            //this is used to share data between all view
         View::share('customers',$customers);
+
+        $fixedassets=FixedAsset::all();
+        View::share('fixedassets',$fixedassets);
     }
 
     /**

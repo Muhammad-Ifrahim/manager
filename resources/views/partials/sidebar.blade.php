@@ -124,14 +124,7 @@
         </li>
           
 
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-print"></i> <span>Reports</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
-            </span>
-          </a>
-        </li>
+      
          <li>
           <a href="pages/widgets.html">
             <i class="fa fa-print"></i> <span>Reports</span>
@@ -162,10 +155,10 @@
 
 
        <li class="FixedAsset">
-          <a href="pages/widgets.html">
+          <a href="{{url('fixedasset')}}">
             <i class="fa fa-print"></i> <span>Fixed Asset</span>
             <span class="pull-right-container">
-             <small class="label pull-right bg-green">0</small> 
+             <small class="label pull-right bg-green">{{count($fixedassets)}}</small> 
             </span>
           </a>
         </li>
