@@ -5,7 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use  Illuminate\Support\Facades\Schema;
 use App\Models\Customer;
+
 use App\Models\Employee;
+use App\Models\FixedAsset;
+
 use View;
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,6 +27,9 @@ class AppServiceProvider extends ServiceProvider
         
         //To avoid migration issue
         Schema::defaultStringLength(191);
+
+        $fixedassets=FixedAsset::all();
+        View::share('fixedassets',$fixedassets);
     }
 
     /**

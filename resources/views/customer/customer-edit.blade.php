@@ -36,7 +36,7 @@
        <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-               <h2 class="box-title">Add Customer</h2>
+               <h2 class="box-title">Edit Customer: {{$customer->Name}}</h2>
             </div>
         
         <div class="box-body">
@@ -44,10 +44,9 @@
         
          @include('common.errors')
  
-    {!! Form::open(['url' => 'customer',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
-
- 
-           <!-- Name -->
+        {{ Form::model($customer, array('route' => array('customer.update', $customer->custId), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+         
+        <!-- Name -->
         <div class="form-group {{ $errors->has('Name') ? 'has-error' : ''}} ">
             {!! Form::label('Name', 'Name:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
@@ -110,6 +109,7 @@
            {!!Form::label('Mobile','Mobile:',['class' => 'col-lg-2 control-label' ]) !!}
            <div class="col-lg-10">
               {!! Form::text('Mobile', $value=null, ['class' => 'form-control','placeholder' => 'Mobile'])!!}
+              <!-- <div class="help-block">{{ $errors->first('CreditLimit') }}</div> -->
            </div>
        </div>
       
@@ -134,7 +134,7 @@
         <!-- Submit Button -->
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-info pull-right'] ) !!}
+                {!! Form::submit('Update', ['class' => 'btn btn-lg btn-success pull-right'] ) !!}
             </div>
         </div>
  

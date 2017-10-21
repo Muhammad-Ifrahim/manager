@@ -3,12 +3,20 @@
     @section('content')
     <style type="text/css">
         .box-header .box-title {
-    display: inline-block;
-    font-size: 23px;
-    margin: 3px;
-    line-height: 1;
-    color: rgba(76, 175, 80, 0.87);
-    }
+          display: inline-block;
+          font-size: 23px;
+          margin: 3px;
+          line-height: 1;
+          color: rgba(76, 175, 80, 0.87);
+          }
+          .action-region{
+            margin: 0px;
+          }
+          .action-region a{
+            font-size: 22px;        
+            text-decoration: none;
+            margin: 0 10px;
+    } 
     </style>     
     <section class="content">
       <div class="row">
@@ -47,7 +55,13 @@
                     <td class="col-md-1"></td>
                     <td class="col-md-1"></td>
                     <td class="col-md-1">{{$value->CreditLimit}}</td>
-                    <td class="col-md-1">Action</td>
+                    <td class="col-md-1">
+                     <div class="action-region">
+                       <a href="{{ URL::to('customer/' . $value->custId . '/edit') }}">
+                        <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Customer"></span>
+                       </a>
+                      </div>
+                    </td>
 
                   </tr> 
                @endForeach

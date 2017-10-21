@@ -124,14 +124,7 @@
         </li>
           
 
-        <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-print"></i> <span>Reports</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
-            </span>
-          </a>
-        </li>
+      
          <li>
           <a href="pages/widgets.html">
             <i class="fa fa-print"></i> <span>Reports</span>
@@ -161,15 +154,16 @@
         </li>
 
 
-       <li>
-          <a href="pages/widgets.html">
+       <li class="FixedAsset">
+          <a href="{{url('fixedasset')}}">
             <i class="fa fa-print"></i> <span>Fixed Asset</span>
             <span class="pull-right-container">
-             <small class="label pull-right bg-green">0</small> 
+             <small class="label pull-right bg-green">{{count($fixedassets)}}</small> 
             </span>
           </a>
         </li>
 
+<<<<<<< HEAD
       <li>
         <a href="pages/settings">
           <i class="fa fa-print"></i> <span>Settings</span>
@@ -178,8 +172,17 @@
         </a>
       </li>
               
+=======
+      <li class="customize">
+          <a href="{{ url('customize')}}">
+            <i class="fa fa-wrench"></i>
+             <span style="text-align: center;">Customize</span>
+            
+          </a>
+        </li>
+        
+>>>>>>> 8390704a219c4a8bb2b4f93f8149f2789aaded68
     </ul>
     </section>
       
   </aside> 
-
