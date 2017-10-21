@@ -13,4 +13,5 @@
 
 Route::resource('/','ApplicationController');
 Route::resource('customer','CustomerController');
+Route::resource('employee','EmployeeController');
 

@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use  Illuminate\Support\Facades\Schema;
 use App\Models\Customer;
+use App\Models\Employee;
 use View;
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,6 +18,12 @@ class AppServiceProvider extends ServiceProvider
     {
         $customers=Customer::all();            //this is used to share data between all view
         View::share('customers',$customers);
+
+        $employees=Employee::all();
+        View::share('employees',$employees);
+        
+        //To avoid migration issue
+        Schema::defaultStringLength(191);
     }
 
     /**

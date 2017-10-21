@@ -68,10 +68,10 @@
         </li>
 
         <li>
-          <a href="pages/widgets.html">
-            <i class="fa fa-address-card"></i> <span>Employee</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+           <a href="{{url('employee')}}">
+            <i class="fa fa-users"></i> <span>Employee</span>
+            <span class="pull-right-container"> 
+            <small class="label pull-right bg-green">{{count($employees)}}</small>
             </span>
           </a>
         </li>
@@ -170,7 +170,14 @@
           </a>
         </li>
 
-        
+      <li>
+        <a href="pages/settings">
+          <i class="fa fa-print"></i> <span>Settings</span>
+          <span class="pull-right-container">
+          </span>
+        </a>
+      </li>
+              
     </ul>
     </section>
       
