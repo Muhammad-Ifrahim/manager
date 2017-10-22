@@ -10,22 +10,38 @@
     line-height: 1;
     color: rgba(76, 175, 80, 0.87);
     }
+    ul {
+          list-style: none;
+    margin-top: 25px;
+    margin-left: 5px;
+    }
+    .settings{
+        font-size: 25px;
+    }
     </style>     
 
     
 
     <section class="content">
       <div class="row">
-      <section>Settings</section>
-      
-      <li>
-        <a href="{{url('date-setter')}}">
-          <b></i> <span>Start Date</span></b>
-          <span class="pull-right-container">
-          </span>
-        </a>
-      </li>
-
+        <div class="col-md-12">
+          <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Settings</h3>
+            </div>
+            <div class="box-body">
+            <ul >  
+              <li class="settings">
+                <a href="{{url('date-setter')}}">
+                  <i class="fa fa-calendar" ></i> <span>Start Date</span>
+                  <span class="pull-right-container">
+                  </span>
+                </a>
+              </li>
+            </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
     @endsection('content')

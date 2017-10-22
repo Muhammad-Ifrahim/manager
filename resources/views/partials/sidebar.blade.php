@@ -69,7 +69,7 @@
 
         <li>
            <a href="{{url('employee')}}">
-            <i class="fa fa-users"></i> <span>Employee</span>
+            <i class="fa fa-id-card"></i> <span>Employee</span>
             <span class="pull-right-container"> 
             <small class="label pull-right bg-green">{{count($employees)}}</small>
             </span>
@@ -136,7 +136,7 @@
 
        <li>
           <a href="pages/widgets.html">
-            <i class="fa fa-print"></i> <span>Inventory Items</span>
+            <i class="fa fa-archive"></i> <span>Inventory Items</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>
             </span>
@@ -146,7 +146,8 @@
         
         <li>
           <a href="pages/widgets.html">
-            <i class="fa fa-exchange"></i> <span>Inventory Transfer</span>
+            <i class="fa fa-exchange"></i>
+                 <span>Inventory Transfer</span>
             <span class="pull-right-container">
              <small class="label pull-right bg-green">0</small>
             </span>
@@ -165,7 +166,7 @@
 
       <li>
         <a href="{{url('settings')}}">
-          <i class="fa fa-print"></i> <span>Settings</span>
+          <i class="fa fa-cog"></i> <span>Settings</span>
           <span class="pull-right-container">
           </span>
         </a>
