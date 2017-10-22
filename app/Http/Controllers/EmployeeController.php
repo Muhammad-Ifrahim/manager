@@ -67,7 +67,7 @@ class EmployeeController extends Controller
               if($employee->save())
               {
                     $employee=Employee::find($Id);
-                    //Toastr::success('Successfully Updated', 'Employee');
+                    Toastr::success('Successfully Updated', 'Employee');
                      return Redirect::to('employee');
               }
           }
