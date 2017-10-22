@@ -53,14 +53,10 @@
                        <a href="{{ URL::to('employee/' . $value->empId . '/edit') }}">
                         <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Employee"></span>
                        </a>
-                        
-                      {!! Form::open([
-                            'method' => 'DELETE',
-                            'route' => ['employee.destroy', $value->empId]
-                            ]) 
-                      !!}
-                      &nbsp;
-                      {{ Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit','style'=>'background-color: transparent','style'=>'border-style: none', 'onclick'=>'return confirm("Are you sure want to delete")'] ) }}                         
+                        &nbsp;&nbsp;
+                        <a href="{{ URL::to('employee/' . $value->empId . '/delete') }}">
+                        <span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Employee"></span>
+                       </a>                      
                       </div>
 
                     </td>
