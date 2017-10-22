@@ -54,9 +54,14 @@
                         <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Employee"></span>
                        </a>
                         &nbsp;&nbsp;
-                        <a href="{{ URL::to('employee/' . $value->empId . '/delete') }}">
+                      <!--  {{ Form::open(array('url' => 'employee/' . $value->empId, 'class' => 'pull-right')) }}
+                        {{ Form::hidden('_method', 'DELETE') }}
+                        {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Employee"></span>', array( 'type'=>'submit')) }}
+                      {{ Form::close() }}  -->
+
+                       <!--  <a href="{{ URL::to('employee.destroy',$value->empId) }}">
                         <span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Employee"></span>
-                       </a>                      
+                       </a> -->                      
                       </div>
 
                     </td>
