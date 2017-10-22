@@ -74,12 +74,12 @@ class EmployeeController extends Controller
       }
    }
    public function show(){
-     dd('hello2');
+       
    }
 
    public function destroy($Id)
    {
-    dd('hello');
+
  
      $delEmployee=Employee::find($Id);
      if($delEmployee!=null)

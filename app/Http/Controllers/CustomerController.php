@@ -55,8 +55,8 @@ class CustomerController extends Controller
              $Customer->fill(Request::all());
              if($Customer->save()){
                
-                Toastr::success('Successfully Created', 'Customer', ["positionClass" => "toast-top-right"]);
-            //  Session::flash('flash_message', 'customer successfully created!');
+               Toastr::success('Successfully Created', 'Customer', ["positionClass" => "toast-top-right"]);
+           
               }
            return Redirect::to('customer');
         }
@@ -112,6 +112,19 @@ class CustomerController extends Controller
    public function show(){
         
     
+   }
+   public function destroy($id){
+
+    $customerDelete=Customer::find($id);
+     if($customerDelete!=null)
+     {
+         $customerDelete->delete();
+         Toastr::success('Successfully Deleted', 'Customer', ["positionClass" => "toast-top-right"]);
+              
+     }
+    
+     return Redirect::to('customer');
+
    }
 
 

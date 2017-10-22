@@ -60,7 +60,7 @@ class FixedAssetController extends Controller
              $fixedasset->fill(Request::all());
              if($fixedasset->save()){
                
-                Toastr::success('Successfully Created', 'Asset', ["positionClass" => "toast-top-right"]);
+        Toastr::success('Successfully Created', 'Asset', ["positionClass" => "toast-top-right"]);
               }
            return Redirect::to('fixedasset');
         }
@@ -68,48 +68,33 @@ class FixedAssetController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        
+     $fixedAssetDelete=FixedAsset::find($id);
+     if($fixedAssetDelete!=null)
+     {
+         $fixedAssetDelete->delete();
+         Toastr::success('Successfully Deleted', 'Asset', ["positionClass" => "toast-top-right"]);
+              
+     }
+    
+     return Redirect::to('fixedasset');
     }
 }
