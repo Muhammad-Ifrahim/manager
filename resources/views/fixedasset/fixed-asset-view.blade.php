@@ -11,8 +11,8 @@
           .action-region{
             margin: 0px;
           }
-          .action-region a{
-            font-size: 22px;        
+          .action-region span{
+            font-size: 20px;        
             text-decoration: none;
             margin: 0 10px;
          }
@@ -20,18 +20,26 @@
          	margin-left: 10px;
          	width: 98%;
          } 
+           button{
+            padding: 0;
+            border: none;
+            background: none;
+          }
+          .pull-left{
+            margin-right: 10px;
+        }
   </style>
   <section class="content">
   	 <div class="row">
-
-  	 	<div class="box">
+        <div class="col-md-12">
+  	 	   <div class="box">
             <div class="box-header">
                <h2 class="box-title">Fixed Assest</h2>
                  <a type="button" href="{{url('fixedasset/create')}}" class="btn btn-block btn-success" style="float: right;width: 13%">New Fixed Assest</a>
             </div>
 
             <div class="box-body">
-          
+                    <!--  -->
                   <table id="example1" class="table table-bordered table-striped">
                   	<thead>
                     <tr>
@@ -59,7 +67,14 @@
                             <a href="{{ URL::to('fixedasset/' . $value->fixId . '/edit') }}">
                                <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Assest"></span>
                             </a>
+
+                          {{ Form::open(array('url' => 'fixedasset/' . $value->fixId, 'class' => 'pull-left')) }}
+                           {{ Form::hidden('_method', 'DELETE') }}
+                           {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Employee"></span>', array( 'type'=>'submit')) }}
+                          {{ Form::close() }} 
                           </div>
+                          
+                          
                       </td> 
                     </tr>
                    @endForeach		
@@ -68,6 +83,7 @@
             	
             </div>
   	 	  </div>
+       </div> 
   	 </div>
   </section>
 
