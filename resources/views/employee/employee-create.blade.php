@@ -29,11 +29,14 @@
     line-height: 1;
     color: rgba(76, 175, 80, 0.87);
     }
+    .date-size {
+        width = 10px;
+    }
+
   </style>
   
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
-    alert('ff');
     $(document).ready(function() {
         console.log('1');
         $("#checker").click(function(){
@@ -42,12 +45,15 @@
 
             //show if checked
             if ( formElementVisible ){
-                $(".shownDiv").show( );
+                $("#amount1").show( );
+                $(".shownDiv").show( );                 
                 return true;
             }
-
+            else{
+                $("#amount1").hide( );
+                $(".shownDiv").hide( );
+            }
             //hide if unchecked
-            $(".shownDiv").hide( );
         });
 
         });
@@ -120,6 +126,23 @@
         <div id="shownDiv" class="shownDiv" style="display:none;">
             You will be able to enter starting balance once you set Start date under Settings tab
         </div>
+        
+        <div class="col-lg-30" id="stDate">
+        {{ Form::text('ok', '01/10/2015', array('disabled')) }}
+       
+        </div>
+
+        <div class="col-lg-30" id="amount1" style="display:none;">
+        {{ Form::select('amount1', ['Amount to pay', 'Paid in advance']) }}
+       
+        </div>
+
+        <div class="form-group">
+         <div class="col-lg-10">
+                {!! Form::text('', $value = null, ['class' => 'form-control']) !!}
+            </div>
+        </div>
+
         <!-- Submit Button -->
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">

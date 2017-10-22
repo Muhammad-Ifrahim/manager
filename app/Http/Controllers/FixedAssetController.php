@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
 use View;
 use Request;
 use Validator;
-use Toastr;
+//use Toastr;
 use Redirect;
 class FixedAssetController extends Controller
 {
@@ -60,7 +60,7 @@ class FixedAssetController extends Controller
              $fixedasset->fill(Request::all());
              if($fixedasset->save()){
                
-                Toastr::success('Successfully Created', 'Asset', ["positionClass" => "toast-top-right"]);
+  //              Toastr::success('Successfully Created', 'Asset', ["positionClass" => "toast-top-right"]);
               }
            return Redirect::to('fixedasset');
         }

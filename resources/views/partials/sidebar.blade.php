@@ -163,16 +163,14 @@
           </a>
         </li>
 
-<<<<<<< HEAD
       <li>
-        <a href="pages/settings">
+        <a href="{{url('settings')}}">
           <i class="fa fa-print"></i> <span>Settings</span>
           <span class="pull-right-container">
           </span>
         </a>
       </li>
-              
-=======
+
       <li class="customize">
           <a href="{{ url('customize')}}">
             <i class="fa fa-wrench"></i>
@@ -180,8 +178,6 @@
             
           </a>
         </li>
-        
->>>>>>> 8390704a219c4a8bb2b4f93f8149f2789aaded68
     </ul>
     </section>
       

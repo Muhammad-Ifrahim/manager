@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 use View;
 use Request;
 use Validator;
-use Toastr;
+//use Toastr;
 use Redirect;
 
 class CustomerController extends Controller
@@ -55,7 +55,7 @@ class CustomerController extends Controller
              $Customer->fill(Request::all());
              if($Customer->save()){
                
-                Toastr::success('Successfully Created', 'Customer', ["positionClass" => "toast-top-right"]);
+             //   Toastr::success('Successfully Created', 'Customer', ["positionClass" => "toast-top-right"]);
             //  Session::flash('flash_message', 'customer successfully created!');
               }
            return Redirect::to('customer');

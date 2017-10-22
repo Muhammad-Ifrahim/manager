@@ -25,32 +25,45 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
+             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Address</th>
-                  <th>Email Address</th>
                   <th>Telephone</th>
                   <th>Mobile</th>
-                  <th>Additional Information</th>
+                  <th>Email Address</th>
                   <th>Advance Paid</th>
                   <th>Amount To Pay</th>
-                  <th>Last Modified</th>
+                   <th>Last Modified</th>
+                  <th>Action</th>                 
                 </tr>
                 </thead>
                 <tbody>
                 @Foreach($employees as $key => $value)
                     <tr>
                       <td class="col-md-1">{{$value->name}}</td>
-                      <td class="col-md-1">{{$value->address}} </td>
-                      <td class="col-md-1">{{$value->email_address}}</td>
                       <td class="col-md-1">{{$value->telephone}}</td>
                       <td class="col-md-1">{{$value->mobile}} </td>
-                      <td class="col-md-1">{{$value->additional_information}}</td>
+                      <td class="col-md-1">{{$value->email_address}}</td>
                       <td class="col-md-1">{{$value->amount_to_pay}} </td>
                       <td class="col-md-1">{{$value->advance_paid}}</td>
                       <td class="col-md-1">{{$value->updated_at}}</td>
+                      <td class="col-md-1">
+                      <div class="action-region">
+                       <a href="{{ URL::to('employee/' . $value->empId . '/edit') }}">
+                        <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Employee"></span>
+                       </a>
+                        
+                      {!! Form::open([
+                            'method' => 'DELETE',
+                            'route' => ['employee.destroy', $value->empId]
+                            ]) 
+                      !!}
+                      &nbsp;
+                      {{ Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit','style'=>'background-color: transparent','style'=>'border-style: none', 'onclick'=>'return confirm("Are you sure want to delete")'] ) }}                         
+                      </div>
+
+                    </td>
                     </tr> 
                  @endForeach
                 </tbody>

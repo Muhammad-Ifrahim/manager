@@ -15,14 +15,12 @@ Route::resource('/','ApplicationController');
                  
                  // Customer Panel
 Route::resource('customer','CustomerController');
-<<<<<<< HEAD
 Route::resource('employee','EmployeeController');
-=======
-             
                 // Customize Dashboard
 Route::resource('customize','CustomizeController');
                 
                 //Fixed Asset
 Route::resource('fixedasset', 'FixedAssetController');
->>>>>>> 8390704a219c4a8bb2b4f93f8149f2789aaded68
+Route::resource('settings', 'SettingController');
+Route::resource('date-setter', 'DateSettingController');
 
