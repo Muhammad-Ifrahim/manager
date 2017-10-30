@@ -8,7 +8,7 @@ use App\Models\Customer;
 
 use App\Models\Employee;
 use App\Models\FixedAsset;
-
+use App\Models\User;
 use View;
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +30,9 @@ class AppServiceProvider extends ServiceProvider
 
         $fixedassets=FixedAsset::all();
         View::share('fixedassets',$fixedassets);
+
+        $user=User::find(6);
+        View::share('user',$user);
     }
 
     /**
