@@ -76,6 +76,10 @@ class EmployeeController extends Controller
    public function show(){
        
    }
+   public function setBid(){
+        // dd('we are here');
+    echo "ok";
+   }
 
    public function destroy($Id)
    {

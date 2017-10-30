@@ -4,6 +4,7 @@
         
            <!-- Tell the browser to be responsive to screen width -->
             <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+            <meta name="csrf-token" content="{{ csrf_token() }}">
            
            <link href="{{ asset('asset/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet"/>
            <link href="{{ asset('asset/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet"/>
@@ -29,7 +30,7 @@
 
   </head>
     <body class="hold-transition skin-blue sidebar-mini">
-      <div class="wrapper">
+      <div class="wrapper" >
 
         @include('partials.header')
 
@@ -84,18 +85,25 @@
         })
         });
 
-      
-    $('input[type="checkbox"]').click(function () {
-        alert('dsdsd');
-    });
-      // For tool tip
     $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip({
         placement : 'top'
      });
    });
+      
+   // $('input[type="checkbox"]').click(function () {
+
+          
+   //      if(this.checked)
+   //         $('#'+this.id).fadeIn(1000,function(){
+   //         });
+   //       else 
+   //         $('#'+this.id).fadeOut();  
+   //  });
+                // Customize the Dashboard
+
+  
 </script>
-        
 </html>
 
-</style>
+

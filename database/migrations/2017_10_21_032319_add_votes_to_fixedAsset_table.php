@@ -6,11 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddVotesToFixedAssetTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+    
     public function up()
     {
         Schema::table('fixedasset', function (Blueprint $table) {
