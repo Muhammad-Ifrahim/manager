@@ -66,9 +66,22 @@
             </span>
           </a>
         </li>
-
+        @php
+          $prevUrl = URL::full();
+          $splitUrl = explode('/', $prevUrl);
+          if( strpos( $prevUrl, 'file' ) !== false ) 
+          {
+             $bId = $splitUrl[6];
+             $bidUrl = '/file/'.$bId.'/employee';
+          }
+          else
+          {
+          $bidUrl = '/employee';
+          }
+                        @endphp
         <li>
-           <a href="{{url('employee')}}">
+           <a href="{{url($bidUrl)}}">
+           
             <i class="fa fa-id-card"></i> <span>Employee</span>
             <span class="pull-right-container"> 
             <small class="label pull-right bg-green">{{count($employees)}}</small>
@@ -122,8 +135,6 @@
             </span>
           </a>
         </li>
-          
-
       
          <li>
           <a href="pages/widgets.html">
@@ -165,7 +176,7 @@
         </li>
 
       <li>
-        <a href="{{url('settings')}}">
+        <a href="{{url('/file/'.$bId.'/settings')}}">
           <i class="fa fa-cog"></i> <span>Settings</span>
           <span class="pull-right-container">
           </span>
@@ -178,7 +189,7 @@
              <span style="text-align: center;">Customize</span>
             
           </a>
-        </li>
+      </li>
     </ul>
     </section>
       

@@ -70,9 +70,13 @@
         <div class="box-body">
           
         
-         @include('common.errors')
- 
-    {!! Form::open(['url' => 'employee',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
+        @include('common.errors')
+        @php
+        $prevUrl = URL::full();
+        $splitUrl = explode('/', $prevUrl);
+        $bId = $splitUrl[6];
+        @endphp
+        {!! Form::open(['url' => '/file/'.$bId.'/employee/store',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
 
  
         <!-- Name -->
@@ -143,13 +147,13 @@
             </div>
         </div>
 
+         {{ Form::hidden('bId', $bId) }}
         <!-- Submit Button -->
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
                 {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-info pull-middle'] ) !!}
             </div>
         </div>
- 
     {!! Form::close()  !!}
      </div>
      </div>

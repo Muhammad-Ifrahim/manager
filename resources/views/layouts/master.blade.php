@@ -86,7 +86,7 @@
 
       
     $('input[type="checkbox"]').click(function () {
-        alert('dsdsd');
+       // alert('dsdsd');
     });
       // For tool tip
     $(document).ready(function(){

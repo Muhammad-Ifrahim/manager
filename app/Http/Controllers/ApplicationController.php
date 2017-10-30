@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
-	use CustomerTrait; 					//Trait is class develop to used by Multiple Users    
+	use CustomerTrait; 					//Trait is class develop to used by Multiple Users  
+
     function index(){
     	return view('layouts.master');
     }

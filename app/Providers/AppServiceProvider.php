@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use  Illuminate\Support\Facades\Schema;
 use App\Models\Customer;
-
+use App\Models\Business;
 use App\Models\Employee;
 use App\Models\FixedAsset;
 
@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
 
         $employees=Employee::all();
         View::share('employees',$employees);
+
+        $business = Business::all();
+        View::share('business', $business);
         
         //To avoid migration issue
         Schema::defaultStringLength(191);

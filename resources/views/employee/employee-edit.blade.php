@@ -67,8 +67,14 @@
           
         
          @include('common.errors')
- 
-        {{ Form::model($employee, array('route' => array('employee.update', $employee->empId), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+         @php
+          $prevUrl = URL::full();
+          $splitUrl = explode('/', $prevUrl);
+          $bId = $splitUrl[6];
+         @endphp
+     {!! Form::open(['url' => '/file/'.$bId.'/employee/'.$employee->empId.'/update',  'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+
+        {{-- Form::model($employee, array('route' => '/file/'.$bId.'/employee/'.$employee->empId.'/update', 'method' => 'PUT', 'class' => 'form-horizontal')) --}}
          
         <!-- Name -->
         <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}} ">

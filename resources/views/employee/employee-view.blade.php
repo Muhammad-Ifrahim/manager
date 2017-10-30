@@ -34,7 +34,12 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Employees</h3>
-              <a type="button" href="{{url('employee/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Employee</a>
+               @php
+                $prevUrl = URL::full();
+                $splitUrl = explode('/', $prevUrl);
+                $bId = $splitUrl[6];
+               @endphp
+              <a type="button" href="{{url('/file/'.$bId.'/employee/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Employee</a>
             </div>
             
             <div class="box-body">
@@ -63,17 +68,14 @@
                       <td class="col-md-1">{{$value->updated_at}}</td>
                       <td class="col-md-1">
                       <div class="action-region">
-                       <a href="{{ URL::to('employee/' . $value->empId . '/edit') }}">
+                       <a href="{{ URL::to('/file/'. $bId.'/employee/' . $value->empId . '/edit') }}">
                         <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Employee"></span>
                        </a>
-                        
-                       {{ Form::open(array('url' => 'employee/' . $value->empId, 'class' => 'pull-left')) }}
+                       {{ Form::open(array('url' => '/file/'. $bId.'/employee/' . $value->empId, 'class' => 'pull-left')) }}
                         {{ Form::hidden('_method', 'DELETE') }}
                         {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Employee"></span>', array( 'type'=>'submit')) }}
-                      {{ Form::close() }} 
-                   
+                       {{ Form::close() }}                    
                       </div>
-
                     </td>
                     </tr> 
                  @endForeach
@@ -82,6 +84,6 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>  
     </section>
     @endsection('content')
