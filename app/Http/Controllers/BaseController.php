@@ -1,26 +1,24 @@
 <?php
 
-namespace App\Providers;
-
-use Illuminate\Support\ServiceProvider;
+namespace App\Http\Controllers;
 use  Illuminate\Support\Facades\Schema;
+use Illuminate\Http\Request;
 use App\Models\Customer;
-
 use App\Models\Employee;
 use App\Models\FixedAsset;
 use App\Models\User;
 use View;
-class AppServiceProvider extends ServiceProvider
+use Debugbar;
+
+class BaseController extends Controller
 {
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $customers=Customer::all();            //this is used to share data between all view
+    public function __construct(){
+
+        Debugbar::addMessage('Another message', 'mylabel');
+     
+    	$customers=Customer::all();          
         View::share('customers',$customers);
+
 
         $employees=Employee::all();
         View::share('employees',$employees);
@@ -33,15 +31,10 @@ class AppServiceProvider extends ServiceProvider
 
         $user=User::find(6);
         View::share('user',$user);
+      
+        // dd('--------->>>>>>>>>>>------------');
     }
-
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
+    public function getAllData(){
+    	
     }
 }
