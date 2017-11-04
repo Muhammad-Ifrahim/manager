@@ -7,8 +7,10 @@ use  Illuminate\Support\Facades\Schema;
 use App\Models\Customer;
 use App\Models\Business;
 use App\Models\Employee;
+use App\Models\StartDate;
 use App\Models\FixedAsset;
 
+use Session;
 use View;
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,10 +21,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $bid = '1';
+        Session::put('bId', $bid);
+        
+        $strtDate= StartDate::where('bId', $bid)->get();
+        
+        //View::share('employees', $strtDate);
+        view()->share('strtDate', $strtDate);
+
         $customers=Customer::all();            //this is used to share data between all view
         View::share('customers',$customers);
 
-        $employees=Employee::all();
+        $employees=Employee::where('bId', $bid)->get();
         View::share('employees',$employees);
 
         $business = Business::all();
@@ -36,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register any application services.
+     * Register gupnp_service_proxy_add_notify(proxy, value, type, callback) application services.
      *
      * @return void
      */

@@ -11,7 +11,7 @@
     color: rgba(76, 175, 80, 0.87);
     }
     </style>    
- 
+         {!! Form::open(['url' => 'date-setter',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
        <!-- Blade -->
         <section class="content">
       <div class="row">
@@ -31,6 +31,9 @@
                           <label class="control-label" for="date">Date</label>
                           <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
                         </div>
+
+                        {{Form::hidden('bId', Session::get('bId'))}}
+
                         <div class="form-group"> <!-- Submit button -->
                           <button class="btn btn-primary " name="submit" type="submit">Submit</button>
                         </div>
@@ -52,7 +55,7 @@
         var date_input=$('input[name="date"]'); //our date input has the name "date"
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
         var options={
-          format: 'mm/dd/yyyy',
+          format: 'yyyy/mm/dd',
           container: container,
           todayHighlight: true,
           autoclose: true,

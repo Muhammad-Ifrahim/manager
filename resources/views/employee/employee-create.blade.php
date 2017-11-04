@@ -38,25 +38,33 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script>
     $(document).ready(function() {
-        console.log('1');
         $("#checker").click(function(){
             console.log('2');
         var formElementVisible = $(this).is(":checked");
-
             //show if checked
             if ( formElementVisible ){
-                $("#amount1").show( );
-                $(".shownDiv").show( );                 
+                var check = document.getElementById('divId').value;
+                //console.log('DB value '+ document.getElementById('divId').value);
+                if(check=='1')
+                {
+                    $("#stDate").show();
+                    $("#amount1").show();
+                    $("#bal").show();
+                }
+                else
+                {
+                    $(".shownDiv").show();
+                }
                 return true;
             }
             else{
-                $("#amount1").hide( );
-                $(".shownDiv").hide( );
+                $("#stDate").hide();
+                $("#amount1").hide();
+                $(".shownDiv").hide();
+                $("#bal").hide();
             }
-            //hide if unchecked
         });
-
-        });
+    });
     </script>
 
   <section class="content">
@@ -68,17 +76,11 @@
             </div>
         
         <div class="box-body">
-          
         
         @include('common.errors')
-        @php
-        $prevUrl = URL::full();
-        $splitUrl = explode('/', $prevUrl);
-        $bId = $splitUrl[6];
-        @endphp
-        {!! Form::open(['url' => '/file/'.$bId.'/employee/store',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
+    
+        {!! Form::open(['url' => 'employee',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
 
- 
         <!-- Name -->
         <div class="form-group {{ $errors->has('Name') ? 'has-error' : ''}} ">
             {!! Form::label('Name', 'Name:', ['class' => 'col-lg-2 control-label']) !!}
@@ -122,32 +124,49 @@
             </div>
         </div>
 
+        @php
+        if(count($strtDate)==0)
+        {
+            $show=false;
+        }
+        else
+        {
+            $show=true;   
+        }
+        @endphp
+
+        <div>
+        {{ Form::hidden('', $show, ['id'=>'divId']) }} 
+        </div>
         
         <div class="col-lg-30">
-            {{ Form::checkbox('checker', 'checker', false, ['id' => 'checker']) }} Starting Balance as at
+            {{ Form::checkbox('checker', 'checker', false, ['id' => 'checker']) }} Starting Balance as at @foreach ($strtDate as $object)
+                {{ $object->date}}
+               @endforeach
         </div>  
+        
+
         
         <div id="shownDiv" class="shownDiv" style="display:none;">
             You will be able to enter starting balance once you set Start date under Settings tab
         </div>
         
-        <div class="col-lg-30" id="stDate">
-        {{ Form::text('ok', '01/10/2015', array('disabled')) }}
+        <div class="col-lg-30" id="stDate" style="display: none;">
+        {{ Form::text('stDate', $strtDate[0]->date, array('disabled')) }}
        
         </div>
 
-        <div class="col-lg-30" id="amount1" style="display:none;">
+        <div id="amount1" style="display:none;">
         {{ Form::select('amount1', ['Amount to pay', 'Paid in advance']) }}
        
         </div>
 
-        <div class="form-group">
-         <div class="col-lg-10">
+        <div id="bal" style="display:none;">
                 {!! Form::text('', $value = null, ['class' => 'form-control']) !!}
-            </div>
         </div>
 
-         {{ Form::hidden('bId', $bId) }}
+
+         {{ Form::hidden('bId', Session::get('bId')) }}
         <!-- Submit Button -->
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">

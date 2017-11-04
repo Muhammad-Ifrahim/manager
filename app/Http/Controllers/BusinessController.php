@@ -40,7 +40,6 @@ class BusinessController extends Controller
 
     public function store(Request $request)
     {
-        echo "Creter2";
         $validator = Validator::make(Request::all(), [
         'Name'  => 'required|max:255',
     ]);
@@ -49,15 +48,15 @@ class BusinessController extends Controller
        return redirect('business/create')->withInput()->withErrors($validator);
     }
     else{
-        $Business = new Business;
-        
-        $Business->fill(Request::all());
+    $Business = new Business;
+    
+    $Business->fill(Request::all());
 
-        if($Business->save()){
-          //Toastr::success('Successfully Created', 'Business', ["positionClass" => "toast-top-right"]);
-        }
-        $rout = '';
-        return Redirect::to($rout);
+    if($Business->save()){
+      //Toastr::success('Successfully Created', 'Business', ["positionClass" => "toast-top-right"]);
+    }
+    $rout = '';
+    return Redirect::to($rout);
         }
     }
 

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 
+//use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Input;
 use App\Models\Employee;
 
 use View;
-use Session;
 use Request;
+use Session;
 use Validator;
 use Redirect;
 
@@ -17,21 +18,26 @@ class EmployeeController extends Controller
    public function __invoke(){
 
    }
-   public function index($bId){
+
+   public function index(){
+    $bId = Session::get('bId');
+    echo $bId;
 		$employees=Employee::where('bId', $bId)->get();
 		return View::make('employee.employee-view')->with('employees',$employees);
    }
 
-   public function create($bId){
+   public function create(){
       return View::make('employee.employee-create');         //Return and Show the Add View
    }   
 
-  public function store(Request $request, $bId){
+   public function store(Request $request){
     // validations of the Input 
     $validator = Validator::make(Request::all(), [
       'Name'  => 'required|max:255',    
     ]);
-
+    $request = request();
+    $name = $request->checker;
+    echo $name;
     if ($validator->fails()) {
       return redirect('employee/create')->withInput()->withErrors($validator);
     }
@@ -41,24 +47,23 @@ class EmployeeController extends Controller
           if($Employee->save()){
           }
           //Toastr::success('Successfully Created', 'Employee');
-          return redirect('/file/'.$bId.'/employee');
+          return redirect('employee');
     }
   }
 
-  public function edit($bId, $Id){
+  public function edit($Id){
     $employee=Employee::find($Id);
     return View::make('employee.employee-edit')->with('employee',$employee);  
    }
 
-   public function update($bId, $Id){
-    echo "Updaterr";
+   public function update($Id){
      $validationRules=array(
     'Name'  => 'required|max:255',
      );
      $validator=Validator::make(Request::all(),$validationRules);
 
       if ($validator->fails()) {
-        return redirect('/file/'. $bId.'/employee/' . $Id . '/edit')->withInput()->withErrors($validator);
+        return redirect('employee/' . $Id . '/edit')->withInput()->withErrors($validator);
       }
       else{
           $employee=Employee::find($Id);
@@ -69,7 +74,7 @@ class EmployeeController extends Controller
               {
                     $employee=Employee::find($Id);
                     //Toastr::success('Successfully Updated', 'Employee');
-                    return Redirect::to('/file/'.$bId.'/employee');
+                    return Redirect::to('employee');
               }
           }
       }
@@ -78,21 +83,13 @@ class EmployeeController extends Controller
        
    }
 
-  function som($bId)
-  {
-    //echo $bId;
-    $employees=Employee::all();
-    return View::make('employee.employee-view')->with('employees',$employees);
-  }
-
-   public function destroy($bId, $Id)
+   public function destroy($Id)
    {
      $delEmployee=Employee::find($Id);
      if($delEmployee!=null)
      {
          $delEmployee->delete();
      }
-    
-     return Redirect::to('/file/'.$bId.'/employee');
+     return Redirect::to('employee');
    }
 }

@@ -11,4 +11,9 @@ class ApplicationController extends Controller
     function index(){
     	return view('layouts.master');
     }
+
+    function som()
+    {
+    	return view('layouts.master');
+    }
 }
