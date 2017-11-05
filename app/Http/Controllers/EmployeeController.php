@@ -6,9 +6,10 @@ namespace App\Http\Controllers;
 //use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Input;
 use App\Models\Employee;
+use Illuminate\Support\Facades\Request;
 
 use View;
-use Request;
+//use Request;
 use Session;
 use Validator;
 use Redirect;
@@ -21,9 +22,8 @@ class EmployeeController extends Controller
 
    public function index(){
     $bId = Session::get('bId');
-    echo $bId;
-		$employees=Employee::where('bId', $bId)->get();
-		return View::make('employee.employee-view')->with('employees',$employees);
+	$employees=Employee::where('bId', $bId)->get();
+	return View::make('employee.employee-view')->with('employees',$employees);
    }
 
    public function create(){
@@ -35,8 +35,8 @@ class EmployeeController extends Controller
     $validator = Validator::make(Request::all(), [
       'Name'  => 'required|max:255',    
     ]);
-    $request = request();
-    $name = $request->checker;
+    $name = Request::input('name');
+    //echo $request;
     echo $name;
     if ($validator->fails()) {
       return redirect('employee/create')->withInput()->withErrors($validator);
