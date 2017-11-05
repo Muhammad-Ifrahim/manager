@@ -11,16 +11,15 @@
 |
 */
 
-Route::resource('/','ApplicationController');
-                 
-                 // Customer Panel
+Route::get('/','ApplicationController@index');
+// Customer Panel
 Route::resource('customer','CustomerController');
 Route::resource('employee','EmployeeController');
-                // Customize Dashboard
+// Customize Dashboard
 Route::resource('customize','CustomizeController');
                 
-                //Fixed Asset
+//Fixed Asset
 Route::resource('fixedasset', 'FixedAssetController');
 Route::resource('settings', 'SettingController');
 Route::resource('date-setter', 'DateSettingController');
-
+Route::resource('business', 'BusinessController');

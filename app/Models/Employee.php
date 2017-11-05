@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model
 {
-     public $primaryKey ='empId';
+    public $primaryKey ='empId';
     protected $fillable =[
     	'Name',
     	'Address',
@@ -15,6 +15,7 @@ class Employee extends Model
     	'Additional_Information',
     	'amount_to_pay',
     	'advance_paid',
+        'bId',
     ];
     public $timestamps = true;
 }

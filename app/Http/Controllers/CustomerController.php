@@ -54,9 +54,7 @@ class CustomerController extends Controller
              $Customer = new Customer;
              $Customer->fill(Request::all());
              if($Customer->save()){
-               
-               Toastr::success('Successfully Created', 'Customer', ["positionClass" => "toast-top-right"]);
-           
+               //Toastr::success('Successfully Created', 'Customer', ["positionClass" => "toast-top-right"]);
               }
            return Redirect::to('customer');
         }
