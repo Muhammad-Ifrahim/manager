@@ -12,12 +12,9 @@
 */
 
 Route::get('/','ApplicationController@index');
-// Customer Panel
 Route::resource('customer','CustomerController');
 Route::resource('employee','EmployeeController');
-// Customize Dashboard
-Route::resource('customize','CustomizeController');
-                
+Route::resource('customize','CustomizeController');                
 //Fixed Asset
 Route::resource('fixedasset', 'FixedAssetController');
 Route::resource('settings', 'SettingController');

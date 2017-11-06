@@ -13,8 +13,9 @@ class Employee extends Model
     	'Telephone',
     	'Mobile',
     	'Additional_Information',
-    	'amount_to_pay',
-    	'advance_paid',
+    	'checkValue',
+        'paymentStatus',
+    	'amount',
         'bId',
     ];
     public $timestamps = true;

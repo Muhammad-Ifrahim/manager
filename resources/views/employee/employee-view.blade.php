@@ -1,4 +1,3 @@
-
   @extends('layouts.master')
     @section('content')
     <style type="text/css">
@@ -23,8 +22,6 @@
             margin: 0 10px;
       } 
     </style>     
-
-    
 
     <section class="content">
       <div class="row">

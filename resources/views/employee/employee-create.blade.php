@@ -80,7 +80,7 @@
         @include('common.errors')
     
         {!! Form::open(['url' => 'employee',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
-
+    
         <!-- Name -->
         <div class="form-group {{ $errors->has('Name') ? 'has-error' : ''}} ">
             {!! Form::label('Name', 'Name:', ['class' => 'col-lg-2 control-label']) !!}
@@ -140,33 +140,28 @@
         </div>
         
         <div class="col-lg-30">
-            {{ Form::checkbox('checker', 'checker', false, ['id' => 'checker']) }} Starting Balance as at @foreach ($strtDate as $object)
+            {{ Form::checkbox('checkValue','1', false, ['id' => 'checker']) }} Starting Balance as at @foreach ($strtDate as $object)
                 {{ $object->date}}
                @endforeach
         </div>  
         
-
-        
         <div id="shownDiv" class="shownDiv" style="display:none;">
             You will be able to enter starting balance once you set Start date under Settings tab
         </div>
-        
-        <div class="col-lg-30" id="stDate" style="display: none;">
-        {{ Form::text('stDate', $strtDate[0]->date, array('disabled')) }}
-       
-        </div>
 
         <div id="amount1" style="display:none;">
-        {{ Form::select('amount1', ['Amount to pay', 'Paid in advance']) }}
-       
+        {{ Form::select('paymentStatus', ['ap'=>'Amount to pay', 'pa'=>'Paid in advance']) }}
+        </div>
+
+        <div class="col-lg-30" id="stDate" style="display: none;">
+        {{ Form::text('stDate', $strtDate[0]->date, array('disabled')) }}
         </div>
 
         <div id="bal" style="display:none;">
-                {!! Form::text('', $value = null, ['class' => 'form-control']) !!}
+            {!! Form::text('amount', $value = null, ['class' => 'form-control']) !!}
         </div>
 
-
-         {{ Form::hidden('bId', Session::get('bId')) }}
+        {{ Form::hidden('bId', Session::get('bId')) }}
         <!-- Submit Button -->
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">

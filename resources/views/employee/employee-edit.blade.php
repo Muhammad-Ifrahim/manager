@@ -34,21 +34,62 @@
   <script>
   $(document).ready(function() {
       console.log('1');
+      var elem = document.getElementById('checker').value;
+      console.log('Checker '+elem);
+      //In case when page loads and checkbox is true so onclick functionality will not work and we
+      //need to show rest of fields depending checkbox value
+      /*var formElementVisible = $(this).is(":checked");
+      console.log('--'+formElementVisible);
+      if($(this).is(":checked")==false)
+      {
+         console.log('--ok');
+        $("#stDate").hide();
+        $("#amount1").hide();
+        $("#bal").hide();
+      }*/
+
+      if ($('#checker').is(':checked') == false) {
+          $("#stDate").hide();
+          $("#amount1").hide();
+          $("#bal").hide();
+      }
+      else
+      {
+        $("#stDate").show();
+        $("#amount1").show();
+        $("#bal").show();
+      }
+      
+      $("#checker").on("load", function() {
+        console.log('started');
+      });
+
       $("#checker").click(function(){
           console.log('2');
       var formElementVisible = $(this).is(":checked");
-
-          //show if checked
-          if ( formElementVisible ){
-              $("#amount1").show( );
-              $(".shownDiv").show( );                 
-              return true;
+      console.log(formElementVisible);
+      //show if checked
+      if ( formElementVisible ){
+          var check = document.getElementById('divId').value;
+          //console.log('DB value '+ document.getElementById('divId').value);
+          if(check=='1')
+          {
+              $("#stDate").show();
+              $("#amount1").show();
+              $("#bal").show();
           }
-          else{
-              $("#amount1").hide( );
-              $(".shownDiv").hide( );
+          else
+          {
+              $(".shownDiv").show();
           }
-          //hide if unchecked
+          return true;
+      }
+      else{
+          $("#stDate").hide();
+          $("#amount1").hide();
+          $(".shownDiv").hide();
+          $("#bal").hide();
+      }
       });
 
       });
@@ -66,15 +107,13 @@
         <div class="box-body">
           
         
-         @include('common.errors')
-         @php
-          $prevUrl = URL::full();
-          $splitUrl = explode('/', $prevUrl);
-          $bId = $splitUrl[6];
-         @endphp
-     {!! Form::open(['url' => '/file/'.$bId.'/employee/'.$employee->empId.'/update',  'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+      @include('common.errors')
+         
+       {{-- Form::open(['url' => 'employee/'.$employee->empId.'/update',  'method' => 'PUT', 'class' => 'form-horizontal']) --}}
 
-        {{-- Form::model($employee, array('route' => '/file/'.$bId.'/employee/'.$employee->empId.'/update', 'method' => 'PUT', 'class' => 'form-horizontal')) --}}
+       {{-- Form::model($employee, array('route' => 'employee/'.$employee->empId.'/update', 'method' => 'PUT', 'class' => 'form-horizontal')) --}}
+
+        {{ Form::model($employee, array('route' => array('employee.update', $employee->empId), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
          
         <!-- Name -->
         <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}} ">
@@ -122,39 +161,52 @@
            </div>
        </div>
 
-        <div class="col-lg-30">
-            {{ Form::checkbox('checker', 'checker', false, ['id' => 'checker']) }} Starting Balance as at 
-        </div>  
-        
-        <div id="shownDiv" class="shownDiv" style="display:none;">
-            You will be able to enter starting balance once you set Start date under Settings tab
-        </div>
-        
-        <div class="col-lg-30" id="stDate">
-        {{ Form::text('ok', '01/10/2015', array('disabled')) }}
-       
+        @php
+        if(count($strtDate)==0)
+        {
+            $show=false;
+        }
+        else
+        {
+            $show=true;   
+        }
+        @endphp
+
+        <div>
+        {{ Form::hidden('', $show, ['id'=>'divId']) }} 
         </div>
 
-        <div class="col-lg-30" id="amount1" style="display:none;">
-        {{ Form::select('amount1', ['Amount to pay', 'Paid in advance']) }}
-       
-        </div>
+      <div class="col-lg-30">
+          {{ Form::hidden('checkValue', '0') }}
+          {{ Form::checkbox('checkValue', '1', $employee->checkValue, ['id' => 'checker']) }} Starting Balance as at @foreach ($strtDate as $object)
+              {{ $object->date}}
+             @endforeach
+      </div>  
+              
+      <div id="shownDiv" class="shownDiv" style="display:none;">
+          You will be able to enter starting balance once you set Start date under Settings tab
+      </div>
 
-        <div class="form-group">
-         <div class="col-lg-10">
-                {!! Form::text('', $value = null, ['class' => 'form-control']) !!}
-            </div>
-        </div>
+      <div id="amount1" style="display:none;">
+      {{ Form::select('paymentStatus', ['ap'=>'Amount to pay', 'pa'=>'Paid in advance']) }}
+      </div>
+
+      <div class="col-lg-30" id="stDate" style="display: none;">
+      {{ Form::text('stDate', $strtDate[0]->date, array('disabled')) }}
+      </div>
+
+      <div id="bal" style="display:none;">
+          {!! Form::text('amount', $value = null, ['class' => 'form-control']) !!}
+      </div>
 
         <!-- Submit Button -->
         <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-               
+            <div class="col-lg-10 col-lg-offset-2">               
                 <button type="button" class="btn btn-lg btn-success pull-midlle" onclick="window.location='{{ URL::previous() }}'">Cancel</button>
                 {!! Form::submit('Update', ['class' => 'btn btn-lg btn-success pull-midlle'] ) !!}
             </div>
         </div>
-    {!! Form::close()  !!}
+    {!! Form::close()!!}
      </div>
      </div>
     </div>   
