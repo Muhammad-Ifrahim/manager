@@ -1,10 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Input;
 use App\Models\StartDate;
+
 use View;
 use Request;
+use Session;
+use Redirect;
+
 class DateSettingController extends Controller
 {
 
@@ -13,7 +18,16 @@ class DateSettingController extends Controller
    }
    
    public function index(){
-		return View::make('settings.startdate');
+    $bid = Session::get('bId'); 
+    $strtDate = StartDate::where('bId', $bid)->get();
+    if($strtDate==null)
+    {
+      return View::make('settings.startdate'); 
+    }
+    else
+    {
+      return View::make('settings.startdate-edit'); 
+    }
    }
 
    public function create(){
@@ -22,11 +36,28 @@ class DateSettingController extends Controller
 
   public function store(Request $request){
     $DateSet = new StartDate;
-          $DateSet->fill(Request::all());
-          if($DateSet->save()){
-          }
-          //Toastr::success('Successfully Created', 'Employee');
-          return redirect('settings');
+    $DateSet->fill(Request::all());
+    if($DateSet->save()){
+    }
+    //Toastr::success('Successfully Created', 'Employee');
+    return redirect('settings');
+  }
+
+  public function edit($Id){
+
+  }
+
+  public function update($Id){
+    $stDate=StartDate::find($Id);
+    if($stDate){
+        $stDate->fill(Request::all());
+        if($stDate->save())
+        {
+          $stDate=StartDate::find($Id);
+//              Toastr::success('Successfully Updated', 'Employee');
+          return Redirect::to('settings');
+        }
+    }
   }
 
   public function getStartDate()

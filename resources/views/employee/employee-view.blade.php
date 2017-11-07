@@ -41,7 +41,7 @@
                   <th class="col-md-1" >Name</th>
                   <th class="col-md-1">Telephone</th>
                   <th class="col-md-1">Mobile</th>
-                  <th class="col-md-1">Email Address</th>
+                  <th class="col-md-1">Email</th>
                   <th class="col-md-1">Advance Paid</th>
                   <th class="col-md-1" >Amount To Pay</th>
                   <th class="col-md-1" >Last Modified</th>
@@ -49,14 +49,32 @@
                 </tr>
                 </thead>
                 <tbody>
+                @php
+                {{--Using these variables for calculating sum of Advance amount and Payment amount to display in View--}}
+                  $sumPa=0;
+                  $sumAp=0;
+                @endphp
                 @Foreach($employees as $key => $value)
                     <tr>
                       <td class="col-md-1">{{$value->name}}</td>
                       <td class="col-md-1">{{$value->telephone}}</td>
                       <td class="col-md-1">{{$value->mobile}} </td>
                       <td class="col-md-1">{{$value->email_address}}</td>
-                      <td class="col-md-1">{{$value->amount_to_pay}} </td>
-                      <td class="col-md-1">{{$value->advance_paid}}</td>
+
+                      @if ($value->paymentStatus === 'pa')
+                        <td class="col-md-1">{{$value->amount}} </td>
+                        @php
+                        $sumPa = $sumPa+$value->amount;
+                        @endphp
+                        <td class="col-md-1"></td>
+                      @else
+                        @php
+                        $sumAp = $sumAp + $value->amount;
+                        @endphp
+                        <td class="col-md-1"></td>
+                        <td class="col-md-1">{{$value->amount}}</td> 
+
+                      @endif                 
                       <td class="col-md-1">{{$value->updated_at}}</td>
                       <td class="col-md-1">
                       <div class="action-region">
@@ -69,8 +87,16 @@
                        {{ Form::close() }}                    
                       </div>
                     </td>
-                    </tr> 
+                    </tr>
                  @endForeach
+                 <tr>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td></td>
+                 <td><strong>{{$sumPa}}</strong></td>
+                 <td><strong>{{$sumAp}}</strong></td>
+                 </tr>
                 </tbody>
               </table>
             </div>

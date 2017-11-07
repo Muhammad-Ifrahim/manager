@@ -31,6 +31,10 @@
                           <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/>
                         </div>
 
+                        <div class="form-group">
+                          If start date is specified, all accounts will have an option to set starting balances as of start date.
+                        </div>
+
                         {{Form::hidden('bId', Session::get('bId'))}}
 
                         <div class="form-group"> <!-- Submit button -->
@@ -41,7 +45,6 @@
                    </div>    
                </div>
               </div>
-              
             </div>
           </div>
         </div>
