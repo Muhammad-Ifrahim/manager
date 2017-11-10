@@ -14,7 +14,7 @@ class RenameStnkColumn extends Migration
     public function up()
     {
         Schema::table('employees', function (Blueprint $table) {
-            $table->renameColumn('amount_to_pay', 'paymentStatus');
+             $table->renameColumn('amount_to_pay', 'paymentStatus');
         });
     }
 

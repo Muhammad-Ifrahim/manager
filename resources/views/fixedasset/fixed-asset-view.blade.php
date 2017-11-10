@@ -59,7 +59,7 @@
                       <td class="col-md-1">{{$value->Code}}</td>
                   		<td class="col-md-1">{{$value->Name}}</td>
                   		<td class="col-md-1">{{$value->Description}}</td>
-                  		<td class="col-md-1">{{$value->PurchaseCose}}</td>
+                  		<td class="col-md-1">{{$value->PurchaseCost}}</td>
                   		<td class="col-md-1">{{$value->AccumulatedDepreciation}}</td>
                   		<td class="col-md-1">{{$value->BookValue}}</td>
                   		<td class="col-md-1">

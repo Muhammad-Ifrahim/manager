@@ -76,12 +76,46 @@ class FixedAssetController extends Controller
 
     public function edit($id)
     {
-        //
+        $fixedasset =FixedAsset::find($id);
+        return View::make('fixedasset.fixed-asset-edit')->with('fixedasset',$fixedasset);
+
     }
 
     public function update(Request $request, $id)
     {
-        //
+       $validationRules=array(
+
+        'Name'  => 'required|max:255',
+        'Code'  => 'string|nullable',
+        'Description' => 'nullable|string',
+        'PurchaseCost' =>'integer|nullable',
+        'BookValue'=>'integer|nullable',
+
+         );
+
+      // Validation Rules
+    $validator=Validator::make(Request::all(),$validationRules);
+
+    if ($validator->fails()) {
+      
+        return redirect('fixedasset/' . $id . '/edit')->withInput()->withErrors($validator);
+     }
+     else{
+        $fixedasset=FixedAsset::find($id);
+         if($fixedasset){
+
+             $fixedasset->fill(Request::all());
+            if($fixedasset->save())
+            {
+                  
+                  Toastr::success('Successfully Updated', 'Fixed Assest', ["positionClass" => "toast-top-right"]);
+                   return Redirect::to('fixedasset');
+
+            }
+
+         }
+   
+     }
     }
 
     public function destroy($id)

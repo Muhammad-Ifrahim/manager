@@ -1,9 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-
-
 use Illuminate\Support\Facades\Input;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Session;

@@ -20,3 +20,7 @@ Route::resource('fixedasset', 'FixedAssetController');
 Route::resource('settings', 'SettingController');
 Route::resource('date-setter', 'DateSettingController');
 Route::resource('business', 'BusinessController');
+// Performa
+Route::resource('performa','PerformaController');
+//Inventory
+Route::resource('Inventory','InventoryController');
