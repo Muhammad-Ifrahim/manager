@@ -67,7 +67,6 @@ class EmployeeController extends Controller
     $chkVal = array();
     $chkVal = Request::has('checkValue');
 
-    echo 'V -> '.$chkVal;
     if($chkVal==null)
     {
      // Request::set

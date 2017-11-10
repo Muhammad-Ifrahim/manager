@@ -12,6 +12,7 @@ use App\Models\FixedAsset;
 use App\Models\User;
 use Session;
 use View;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -26,8 +27,6 @@ class AppServiceProvider extends ServiceProvider
         Session::put('bId', $bid);
         
         $strtDate= StartDate::where('bId', $bid)->get();
-        
-        //View::share('employees', $strtDate);
         view()->share('strtDate', $strtDate);
 
         $customers=Customer::all();            //this is used to share data between all view
