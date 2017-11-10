@@ -33,7 +33,7 @@
           </a>
         </li> 
 
-      @if($user->customers)
+      @if($user->customer)
         <li id="customers" >
           <a  href="{{url('customer')}}">
             <i class="fa fa-users"></i> <span>Customer</span>
@@ -66,7 +66,7 @@
         </li>
       @endif  
 
-      @if($user->SalesInvoices)
+      @if($user->SalesInvoice)
         <li id="SalesInvoices">
           <a href="pages/widgets.html">
             <i class="fa fa-th"></i> <span>Sales Invoices</span>
@@ -99,7 +99,7 @@
         </li>
       @endif
 
-      @if($user->Suppliers)
+      @if($user->Supplier)
         <li id="Suppliers">
           <a href="pages/widgets.html">
             <i class="fa fa-building-o"></i> <span>Suppliers</span>
@@ -121,7 +121,7 @@
         </li>
       @endif
 
-      @if($user->PurchaseInvoices)
+      @if($user->PurchaseInvoice)
          <li id="PurchaseInvoices" >
           <a href="pages/widgets.html">
             <i class="fa fa-calendar"></i> <span>Purchase Invoices</span>
