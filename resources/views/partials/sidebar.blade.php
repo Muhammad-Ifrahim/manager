@@ -46,7 +46,7 @@
 
       @if($user->SalesQuote)
         <li id="SalesQuotes">
-          <a href="{{ url('performa')}}">
+          <a href="{{ url('proforma')}}">
             <i class="fa fa-pencil-square"></i> <span>Proforma</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>

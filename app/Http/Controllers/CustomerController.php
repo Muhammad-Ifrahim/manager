@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Session;
-//use Illuminate\Http\Request;
 use View;
 use Request;
 use Validator;

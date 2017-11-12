@@ -45,7 +45,6 @@ class InventoryController extends Controller
       }
       else{
              $inventory = new Inventory;
-             //dd(Request::all());
              $inventory->fill(Request::all());
              if($inventory->save()){
                Toastr::success('Successfully Added', 'Inventory', ["positionClass" => "toast-top-right"]);

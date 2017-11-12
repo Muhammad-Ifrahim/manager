@@ -9,6 +9,7 @@ use App\Models\Business;
 use App\Models\Employee;
 use App\Models\StartDate;
 use App\Models\FixedAsset;
+use App\Models\Inventory;
 use App\Models\User;
 use Session;
 use View;
@@ -46,6 +47,13 @@ class AppServiceProvider extends ServiceProvider
 
         $user=User::find(6);
         View::share('user',$user);
+
+        $inventory=Inventory::all();
+        View::share('inventory',$inventory);
+
+
+
+        
 
     }
 

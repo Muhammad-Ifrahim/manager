@@ -21,6 +21,12 @@ Route::resource('settings', 'SettingController');
 Route::resource('date-setter', 'DateSettingController');
 Route::resource('business', 'BusinessController');
 // Performa
-Route::resource('performa','PerformaController');
+Route::resource('proforma','PerformaController');
 //Inventory
 Route::resource('Inventory','InventoryController');
+
+// Inventory to get in Routes 
+Route::get( '/getinventory', array(
+'as' => 'getinventory',
+'uses' => 'PerformaController@getinventory'
+) );
