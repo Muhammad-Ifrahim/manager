@@ -20,3 +20,6 @@ Route::resource('fixedasset', 'FixedAssetController');
 Route::resource('settings', 'SettingController');
 Route::resource('date-setter', 'DateSettingController');
 Route::resource('business', 'BusinessController');
+Route::resource('pdeductitem', 'pDeductItemController');
+Route::resource('pcontributeitem', 'pContributeItemsController');
+Route::resource('pearnitem', 'pEarnItemsController');

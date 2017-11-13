@@ -10,6 +10,9 @@ use App\Models\Employee;
 use App\Models\StartDate;
 use App\Models\FixedAsset;
 use App\Models\User;
+use App\Models\pEarnItems;
+use App\Models\pDeductItems;
+use App\Models\pContributeItems;
 use Session;
 use View;
 
@@ -26,8 +29,17 @@ class AppServiceProvider extends ServiceProvider
         $bid = '1';
         Session::put('bId', $bid);
         
-        $strtDate= StartDate::where('bId', $bid)->get();
+        $strtDate = StartDate::where('bId', $bid)->get();
         view()->share('strtDate', $strtDate);
+
+        $pEarnItem = pearnitems::where('bId', $bid)->get();
+        view()->share('pEarnItem', $pEarnItem);
+
+        $pContributItem = pContributeItems::where('bId', $bid)->get();
+        view()->share('pContributItem', $pContributItem);
+
+        $pDeductItem = pDeductItems::where('bId', $bid)->get();
+        view()->share('pDeductItem', $pDeductItem);
 
         $customers=Customer::all();            //this is used to share data between all view
         View::share('customers',$customers);
