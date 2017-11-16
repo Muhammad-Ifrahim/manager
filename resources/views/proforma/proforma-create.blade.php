@@ -83,7 +83,7 @@
       margin-left: 10%;
      }
     .box-header .box-title {
-       margin-left: 39%;
+      
       font-size: 35px;
       display: inline-block;
       line-height: 1;
@@ -218,7 +218,7 @@ select.form-control.product_id {
     <div class="col-md-12">
       <div class="box">
          <div class="box-header">
-               <h2 class="box-title">Proforma - Sales Quote</h2>
+               <h2 class="box-title">Proforma</h2>
          </div>
 
         <div class="box-body">

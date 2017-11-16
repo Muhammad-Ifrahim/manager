@@ -6,6 +6,7 @@ use App\Models\Proforma;
 use App\Models\Inventory;
 use App\Models\Sale;
 use Illuminate\Support\Facades\Session;
+use Carbon;
 //use App\Http\Controllers\Response;
 use View;
 use Request;
@@ -42,6 +43,7 @@ class PerformaController extends Controller
     }
     public function store(Request $request)
     {
+        
         $sale = new Sale;
         $input = Input::all();
        // dd(Input::all());
