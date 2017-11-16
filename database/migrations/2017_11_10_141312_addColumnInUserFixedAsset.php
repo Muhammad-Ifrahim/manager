@@ -10,7 +10,7 @@ class AddColumnInUserFixedAsset extends Migration
     public function up()
     {
            Schema::table('users', function (Blueprint $table) {
-                $table->boolean('FixedAsset')->default(0);
+                $table->string('FixedAsset');
            });
         
     }

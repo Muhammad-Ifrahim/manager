@@ -29,4 +29,6 @@ Route::resource('Inventory','InventoryController');
 Route::get( '/getinventory', array(
 'as' => 'getinventory',
 'uses' => 'PerformaController@getinventory'
-) );
+));
+
+Route::get('/proformaPrint/{id}/print', 'PerformaController@printReport');

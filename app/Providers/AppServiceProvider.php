@@ -11,6 +11,7 @@ use App\Models\StartDate;
 use App\Models\FixedAsset;
 use App\Models\Inventory;
 use App\Models\User;
+use App\Models\Proforma;
 use Session;
 use View;
 
@@ -51,8 +52,10 @@ class AppServiceProvider extends ServiceProvider
         $inventory=Inventory::all();
         View::share('inventory',$inventory);
 
+        // $proforma=Proforma::all(); 
+        // View::share('proforma',$proforma); 
 
-
+        
         
 
     }
