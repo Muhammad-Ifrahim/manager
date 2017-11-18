@@ -131,8 +131,7 @@
     $('.add').click(function () {
       var inventory = $('.inventId').html();
       var n = ($('.neworderbody tr').length - 0) + 1;
-      var tr = '<tr><td class="no">' + n + '</td>' + 
-      '<td><select class="form-control inventId form-control-heading" name="inventId[]">' + inventory + '</select></td>' +
+      var tr = '<tr><td><select class="form-control inventId form-control-heading" name="inventId[]">' + inventory + '</select></td>' +
 
        '<td><input type="text" class="discription form-control-heading" name="discription[]"readonly ></td>' +
 
@@ -275,11 +274,7 @@ select.form-control.product_id {
         <thead>
 
           <tr> 
-            <th>
-              <div class="col-lg-1">
-                     {!!Form::label('Id','Id',['class' => 'col-lg-1 control-label head-item' ]) !!}
-              </div>
-            </th>
+            
                 
           <th>
              <div class="col-lg-3">
@@ -288,8 +283,8 @@ select.form-control.product_id {
           </th>
 
          <th>
-           <div class="col-lg-3">
-          {!!Form::label('Descriptin','Description:',['class' => 'col-lg-3 control-label head-item' ]) !!}
+           <div class="col-lg-4">
+          {!!Form::label('Descriptin','Description:',['class' => 'col-lg-4 control-label head-item' ]) !!}
            </div> 
         </th>
 
@@ -327,8 +322,8 @@ select.form-control.product_id {
               </thead>
               <tbody class="neworderbody">
                 <tr>
-                  <td class="no col-lg-1">1</td>
-                  <td>
+                  
+                  <td class="no col-lg-3">
                     <select class="form-control col-lg-3 inventId form-control-heading" name="inventId[]">
                       <option></option>
                       @foreach($inventory as $invent)
@@ -336,7 +331,7 @@ select.form-control.product_id {
                       @endforeach
                     </select>
                   </td>
-                  <td class="col-lg-3">
+                  <td class="col-lg-4">
 
                     <input type="text" class="discription form-control-heading " name="discription[]" readonly>
                   </td>
