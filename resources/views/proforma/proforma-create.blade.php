@@ -28,7 +28,7 @@
     .btn-info{
     padding-top: 6px;
     height: 41px;
-    margin-left: 43%;
+   /*margin-left: 43%;*/
     width: 12%;
     float: left;
       }
@@ -53,13 +53,13 @@
     .form-horizontal{
       margin-left:4px;
       }
-    .btn-info{
-      padding-top: 6px;
-      height: 41px;
-      margin-left: 52%;
-      width: 12%;
-      float: left;
-      border-radius: 6px 6px 6px 6px;
+    .btn-info {
+    padding-top: 6px;
+    height: 44px;
+    margin-left: 14%;
+    width: 173%;
+    float: left;
+    border-radius: 6px 6px 6px 6px;
      }
     .btn-success{
       border-radius: 6px 6px 6px 6px;
@@ -83,7 +83,7 @@
       margin-left: 10%;
      }
     .box-header .box-title {
-      
+      font-weight: 600;
       font-size: 35px;
       display: inline-block;
       line-height: 1;
@@ -218,7 +218,7 @@ select.form-control.product_id {
     <div class="col-md-12">
       <div class="box">
          <div class="box-header">
-               <h2 class="box-title">Proforma</h2>
+               <h2 class="box-title">PROFORMA</h2>
          </div>
 
         <div class="box-body">
@@ -276,49 +276,49 @@ select.form-control.product_id {
 
           <tr> 
             <th>
-              <div class="col-lg-1"
-                     {!!Form::label('Id','Id',['class' => 'col-lg-2 control-label head-item' ]) !!}
+              <div class="col-lg-1">
+                     {!!Form::label('Id','Id',['class' => 'col-lg-1 control-label head-item' ]) !!}
               </div>
             </th>
                 
           <th>
              <div class="col-lg-3">
-               {!!Form::label('Item','item',['class' => 'col-lg-2 control-label head-item' ]) !!}
+               {!!Form::label('Item','item',['class' => 'col-lg-3 control-label head-item' ]) !!}
               </div>
           </th>
 
          <th>
            <div class="col-lg-3">
-          {!!Form::label('Descriptin','Description:',['class' => 'col-lg-2 control-label head-item' ]) !!}
+          {!!Form::label('Descriptin','Description:',['class' => 'col-lg-3 control-label head-item' ]) !!}
            </div> 
         </th>
 
         <th>
           <div class="col-lg-1">
-            {!!Form::label('Qty','Qty',['class' => 'col-lg-2 control-label head-item' ]) !!}
+            {!!Form::label('Qty','Qty',['class' => 'col-lg-1 control-label head-item' ]) !!}
           </div>  
         </th>
 
              <th>
-               <div class="col-lg-2">
-                 {!!Form::label('UnitPrice','Price',['class' => 'col-lg-2 control-label head-item' ]) !!}
+               <div class="col-lg-1">
+                 {!!Form::label('UnitPrice','Price',['class' => 'col-lg-1 control-label head-item' ]) !!}
                </div>  
              </th>
 
              <th>
                <div class="col-lg-1">
-                 {!!Form::label('Discount','Discount',['class' => 'col-lg-2 control-label head-item' ]) !!}
+                 {!!Form::label('Discount','Discount',['class' => 'col-lg-1 control-label head-item' ]) !!}
                </div>  
              </th>
 
             <th>     
-              <div class="col-lg-2">
+              <div class="col-lg-1">
                  {!!Form::label('Amount','Amount',['class' => 'col-lg-1 control-label head-item' ]) !!}
               </div>
             </th> 
 
             <th>     
-              <div class="col-lg-2">
+              <div class="col-lg-1">
                  {!!Form::label('Action','Action',['class' => 'col-lg-1 control-label head-item' ]) !!}
               </div>
             </th>                 
@@ -327,33 +327,33 @@ select.form-control.product_id {
               </thead>
               <tbody class="neworderbody">
                 <tr>
-                  <td class="no">1</td>
+                  <td class="no col-lg-1">1</td>
                   <td>
-                    <select class="form-control inventId form-control-heading" name="inventId[]">
+                    <select class="form-control col-lg-3 inventId form-control-heading" name="inventId[]">
                       <option></option>
                       @foreach($inventory as $invent)
                       <option data-pro="{!! $invent->Description !!}" data-price="{!! $invent->SalePrice !!}" value="{!! $invent->inventId !!}">{!! $invent->ItemName!!}</option>
                       @endforeach
                     </select>
                   </td>
-                  <td>
+                  <td class="col-lg-3">
 
                     <input type="text" class="discription form-control-heading " name="discription[]" readonly>
                   </td>
 
-                  <td>
+                  <td class="col-lg-1">
                     <input type="number" class="qty form-control form-control-heading " name="qty[]" >
                   </td>   
-                  <td>
+                  <td class="col-lg-1">
                 <input type="text" class="price form-control form-control-heading" name="price[]" readonly>
                   </td>
-                  <td>
+                  <td class="col-lg-1">
                   <input type="text" class="dis form-control form-control-heading " name="dis[]" >
                   </td>                
-                  <td>
+                  <td class="col-lg-1">
                     <input type="text" class="amount form-control form-control-heading " name="amount[]" readonly>
                   </td>
-                  <td>
+                  <td class="col-lg-1">
                     <!-- <span class="fa fa-trash delete" ></span> -->
 
                     <!-- <span class="fa fa-trash delete" data-toggle="tooltip" data-original-title="Remove Item" value="x" style="margin-left: 36px;margin-top: 14px;"></span> -->
@@ -367,13 +367,13 @@ select.form-control.product_id {
           
    
     
-      <div class="form-group"> 
-       <div class="col-lg-10" style="margin-left: 48%">      
+      <div > 
+       <div style="margin-left: 66%" >      
           <div  class="col-lg-3" >
-              <input type="button" class=" add btn btn-lg btn-success" value="Add New Item">
+              <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
           </div>
           
-         <div class="col-lg-3">
+         <div class="col-lg-3" style="margin-left: 48px;width: 148px">
              <input type="text" class=" form-control-heading " name="NetAmount" name="total" id="total"
              placeholder="Net Amount" readonly>
          </div>
@@ -386,7 +386,7 @@ select.form-control.product_id {
         <div class="form-group {{ $errors->has('BillingAddress') ? 'has-error' : ''}}">
            {!!Form::label('BillingAddress','Billing Address:',['class' => 'col-lg-2 control-label' ]) !!}
            <div class="col-lg-10">
-              {!! Form::textarea('BillingAddress', $value=null, ['class' => 'addres form-control', 'rows' => 3])!!}
+              {!! Form::textarea('BillingAddress', $value=null, ['class' => 'addres form-control', 'rows' => 3,'readonly', 'placeholder' =>'Billing Address can not Modify here please modify Customer detail'])!!}
               <div class="help-block">{{ $errors->first('BillingAddress') }}</div>
            </div>
        </div>
@@ -396,7 +396,7 @@ select.form-control.product_id {
        <div class="form-group">
            {!!Form::label('Notes','Notes:',['class' => 'col-lg-2 control-label' ]) !!}
            <div class="col-lg-10">
-              {!! Form::textarea('Notes', $value=null, ['class' => 'form-control', 'rows' => 3])!!}
+              {!! Form::textarea('Notes', $value=null, ['class' => 'form-control', 'rows' => 3, ])!!}
               <div class="help-block">{{ $errors->first('Notes') }}</div>
            </div>
        </div>

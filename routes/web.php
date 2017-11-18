@@ -23,6 +23,8 @@ Route::resource('business', 'BusinessController');
 // Performa
 Route::resource('proforma','PerformaController');
 //Inventory
+//login
+
 Route::resource('Inventory','InventoryController');
 
 // Inventory to get in Routes 

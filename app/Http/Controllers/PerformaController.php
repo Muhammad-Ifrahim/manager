@@ -67,6 +67,7 @@ class PerformaController extends Controller
             }
             
         }
+        Toastr::success('Proforma Created Successfully', 'Proforma', ["positionClass" => "toast-top-right"]);
         return Redirect::to('proforma');
 
     }
@@ -74,14 +75,15 @@ class PerformaController extends Controller
     
     public function show($id)
     {
-      $sale=Sale::find($id);
-      return view('proforma.proforma-edit')->with('sale',$sale);  
+         
     }
 
   
     public function edit($id)
     { 
-
+        $sale=Sale::find($id);
+      $salesItem = Sale::with('saleQuote')->with('saleQuote.inventoryItem')->where('SaleId',$id)->get();  
+      return view('proforma.proforma-edit')->with('sale',$sale)->with('salesItem',$salesItem);  
 
 
     }
@@ -89,6 +91,35 @@ class PerformaController extends Controller
    
     public function update(Request $request, $id)
     {
+        $sale=Sale::find($id);
+        if ($sale!=null) {
+             
+        $sale->saleQuote()->delete();
+        $input = Input::all();   
+        $sale->Heading=is_null(Input::get('Heading')) ? '' : Input::get('Heading');
+        $sale->Date=is_null(Input::get('Date')) ? '' : Input::get('Date');
+        $sale->customer =Input::get('customer'); 
+        $sale->Amount = is_null(Input::get('NetAmount')) ? 0 : Input::get('NetAmount');
+        $sale->save();
+        $j = $sale->SaleId;
+        
+        if($sale->save()){
+            for($id = 0; $id < count($input['inventId']); $id++){
+                $proforma = new Proforma;
+                $proforma->saleId=$sale->SaleId;
+                $proforma->inventId = $input['inventId'][$id];
+                $proforma->Quantity = is_null($input['qty'][$id]) ? 0 : $input['qty'][$id] ;
+                $proforma->SalePrice = $input['price'][$id];
+                $proforma->Discount = is_null($input['dis'][$id]) ? 0 : $input['dis'][$id] ;
+                $proforma->Amount = $input['amount'][$id];
+                $proforma->save();
+            }
+            
+        }
+        Toastr::success('Proforma Updated Successfully', 'Proforma', ["positionClass" => "toast-top-right"]);
+        return Redirect::to('proforma');
+
+         }
 
         
     }
@@ -100,7 +131,7 @@ class PerformaController extends Controller
          {
              $sale->saleQuote()->delete();
              $sale->delete();
-             Toastr::success('Proforma Deleted', 'Customer', ["positionClass" => "toast-top-right"]);
+             Toastr::success('Proforma Deleted', 'Proforma', ["positionClass" => "toast-top-right"]);
                   
          }
         
@@ -127,14 +158,12 @@ class PerformaController extends Controller
     }
     public function printReport($id){
          
-        // $proforma=Proforma::with('inventoryItem')->where('saleqId',$id)->get();
-        // dd($proforma);
-       //$sale=Sale::findOrFail($id)->get();
-$sale = Sale::with('saleQuote')->with('saleQuote.inventoryItem')->with('user')->where('SaleId',$id)->get();
-   //    dd($sale);
+
+        $sale = Sale::with('saleQuote')->with('saleQuote.inventoryItem')->with('user')->where('SaleId',$id)->get();
        $pdf = new PDF();
-       $pdf=PDF::loadView('proforma.proforma-print',['sale'=>$sale]); 
-       return $pdf->stream('proforma.proforma-print');
+       $pdf=PDF::loadView('proforma.proforma-print',['sale'=>$sale])->setPaper('A4');
+     return  $pdf->stream('proforma.pdf',array('Attachment'=>0));
+    //   return $pdf->stream();
        
     }
 }
