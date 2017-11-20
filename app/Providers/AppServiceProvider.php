@@ -13,7 +13,7 @@ use App\Models\StartDate;
 use App\Models\FixedAsset;
 use App\Models\Inventory;
 use App\Models\User;
-use App\Models\pEarnItems;
+use App\Models\pearnitems;
 use App\Models\pDeductItems;
 use App\Models\pContributeItems;
 use App\Models\expenseAccounts;

@@ -25,6 +25,8 @@ Route::resource('pdeductitem', 'pDeductItemController');
 Route::resource('pcontributeitem', 'pContributeItemsController');
 Route::resource('pearnitem', 'pEarnItemsController');
 
+Route::resource('deliverynote','DeliveryNotesController');
+Route::get('/deliverynote/{id}/print', 'DeliveryNotesController@printReport');
 //Payslips
 Route::resource('payslip', 'PayslipController');
 // Performa
