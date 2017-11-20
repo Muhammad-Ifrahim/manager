@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
-
+use  Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Session;
-//use Illuminate\Http\Request;
 use View;
 use Request;
 use Validator;
@@ -18,15 +16,22 @@ class CustomerController extends Controller
 {
    // Validation Rules
 
-  
-   public function __invoke(){
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
 
-   }
    public function index(){
-
-     $customers=Customer::all(); 
-     return View::make('customer.customer-view')->with('customers',$customers);
-       
+    $user = App::make('user');
+    if($user->customer>0)
+    {
+      $customers=Customer::all(); 
+      return View::make('customer.customer-view')->with('customers',$customers);
+    }
+    else
+    {
+      return View::make('errors.notAllowed-view');
+    }
    }
    public function  create(){
       return View::make('customer.customer-create');         //Return and Show the Insert View

@@ -10,9 +10,10 @@ use View;
 class SettingController extends Controller
 {
 
-   public function __invoke(){
-
-   }
+  public function __construct()
+    {
+        $this->middleware('auth');
+    }
    public function index(){
 		return View::make('settings.setting');
    }

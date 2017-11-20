@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\App;
 use App\Models\FixedAsset;
 use Illuminate\Support\Facades\Session;
 use View;
@@ -11,6 +12,10 @@ use Toastr;
 use Redirect;
 class FixedAssetController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +23,16 @@ class FixedAssetController extends Controller
      */
     public function index()
     {
-      $fixedasset=FixedAsset::all();
-         
-      return  View::make('fixedasset.fixed-asset-view')->with('fixedasset',$fixedasset);
+        $user = App::make('user');
+        if($user->FixedAsset>0)
+        {
+          $fixedasset=FixedAsset::all();
+          return  View::make('fixedasset.fixed-asset-view')->with('fixedasset',$fixedasset);    
+        }
+        else
+        {
+          return View::make('errors.notAllowed-view');
+        } 
     }
 
     /**
@@ -76,12 +88,46 @@ class FixedAssetController extends Controller
 
     public function edit($id)
     {
-        //
+        $fixedasset =FixedAsset::find($id);
+        return View::make('fixedasset.fixed-asset-edit')->with('fixedasset',$fixedasset);
+
     }
 
     public function update(Request $request, $id)
     {
-        //
+       $validationRules=array(
+
+        'Name'  => 'required|max:255',
+        'Code'  => 'string|nullable',
+        'Description' => 'nullable|string',
+        'PurchaseCost' =>'integer|nullable',
+        'BookValue'=>'integer|nullable',
+
+         );
+
+      // Validation Rules
+    $validator=Validator::make(Request::all(),$validationRules);
+
+    if ($validator->fails()) {
+      
+        return redirect('fixedasset/' . $id . '/edit')->withInput()->withErrors($validator);
+     }
+     else{
+        $fixedasset=FixedAsset::find($id);
+         if($fixedasset){
+
+             $fixedasset->fill(Request::all());
+            if($fixedasset->save())
+            {
+                  
+                  Toastr::success('Successfully Updated', 'Fixed Assest', ["positionClass" => "toast-top-right"]);
+                   return Redirect::to('fixedasset');
+
+            }
+
+         }
+   
+     }
     }
 
     public function destroy($id)

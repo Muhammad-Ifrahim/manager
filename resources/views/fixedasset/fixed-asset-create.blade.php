@@ -93,8 +93,8 @@
           <div class="form-group {{ $errors->has('BookValue') ? 'has-error' : ''}} ">
             {!! Form::label('BookValue', 'Book Value:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
-                {!! Form::text('Book Value', $value = null, ['class' => 'form-control', 'placeholder' => 'Book Value']) !!}
-                 <div class="help-block">{{ $errors->first('Book Value') }}</div>
+                {!! Form::text('BookValue', $value = null, ['class' => 'form-control', 'placeholder' => 'Book Value']) !!}
+                 <div class="help-block">{{ $errors->first('BookValue') }}</div>
             </div>
          </div>
 

@@ -13,7 +13,7 @@ use Debugbar;
 class BaseController extends Controller
 {
     public function __construct(){
-
+    
         Debugbar::addMessage('Another message', 'mylabel');
      
     	$customers=Customer::all();          

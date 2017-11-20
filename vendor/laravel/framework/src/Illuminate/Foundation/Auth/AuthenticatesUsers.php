@@ -4,6 +4,7 @@ namespace Illuminate\Foundation\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 trait AuthenticatesUsers
 {
@@ -34,7 +35,6 @@ trait AuthenticatesUsers
         // the IP address of the client making these requests into this application.
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
-
             return $this->sendLockoutResponse($request);
         }
 
@@ -72,6 +72,9 @@ trait AuthenticatesUsers
      */
     protected function attemptLogin(Request $request)
     {
+        echo 'attemplogin - ';
+        echo 'Guard Output:';
+
         return $this->guard()->attempt(
             $this->credentials($request), $request->has('remember')
         );
@@ -85,6 +88,9 @@ trait AuthenticatesUsers
      */
     protected function credentials(Request $request)
     {
+        echo 'credentials';
+        print_r( $request->only($this->username(), 'password'));
+        echo 'after Only method';
         return $request->only($this->username(), 'password');
     }
 
@@ -99,7 +105,7 @@ trait AuthenticatesUsers
         $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
-
+        echo "sendLoginResponse - ";
         return $this->authenticated($request, $this->guard()->user())
                 ?: redirect()->intended($this->redirectPath());
     }
@@ -113,7 +119,7 @@ trait AuthenticatesUsers
      */
     protected function authenticated(Request $request, $user)
     {
-        //
+        echo "authenticated - ";
     }
 
     /**
@@ -154,7 +160,7 @@ trait AuthenticatesUsers
     public function logout(Request $request)
     {
         $this->guard()->logout();
-
+        Session::flush();
         $request->session()->invalidate();
 
         return redirect('/');

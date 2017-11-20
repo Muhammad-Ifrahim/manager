@@ -34,6 +34,10 @@
               <li class="settings">
                 <a href="{{url('date-setter')}}">
                   <i class="fa fa-calendar" ></i> <span>Start Date</span>
+
+                <a href="{{url('pearnitem')}}">
+                  <i class="fa fa-newspaper-o" ></i> <span>Payslip Items</span>
+
                   <span class="pull-right-container">
                   </span>
                 </a>

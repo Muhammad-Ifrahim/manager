@@ -68,6 +68,11 @@
       <!-- Bootstrap Date-Picker Plugin -->
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+      
+     <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
    
          {!! Toastr::message() !!}
      
@@ -89,19 +94,6 @@
     $('[data-toggle="tooltip"]').tooltip({
         placement : 'top'
      });
-   });
-      
-   // $('input[type="checkbox"]').click(function () {
-
-          
-   //      if(this.checked)
-   //         $('#'+this.id).fadeIn(1000,function(){
-   //         });
-   //       else 
-   //         $('#'+this.id).fadeOut();  
-   //  });
-                // Customize the Dashboard
-
-  
+   });  
 </script>
 </html>

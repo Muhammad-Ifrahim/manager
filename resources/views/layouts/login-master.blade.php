@@ -23,14 +23,8 @@
       <script src="{{asset('asset/jquery/dist/jquery.min.js')}}"></script>
       <script src="{{asset('asset/jquery-ui/jquery-ui.min.js')}}"></script>  
       <script src="{{ asset('asset/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-      <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script
+      <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
      
          {!! Toastr::message() !!}
-     
-
-
-  
 </script>
 </html>
-
-

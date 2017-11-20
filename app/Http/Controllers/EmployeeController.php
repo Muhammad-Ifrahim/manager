@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
+use  Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 use App\Models\Employee;
+use App\Models\User;
 //use Illuminate\Http\Request;
 
 use View;
@@ -15,21 +16,30 @@ use Redirect;
 
 class EmployeeController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
+  public function index(){
+    //$user=User::find(6);
+    $user = App::make('user');
+    if($user->employee>0)
+    {
+      $employees=Employee::all(); 
+      return View::make('employee.employee-view')->with('employees',$employees);
+    }
+    else
+    {
+      return View::make('errors.notAllowed-view');
+    }
+  }
 
-   public function __invoke(){
-
-   }
-   public function index(){
-		$employees=Employee::all(); 
-		return View::make('employee.employee-view')->with('employees',$employees);
-   }
-
-   public function create(){
+  public function create(){
     return View::make('employee.employee-create');         //Return and Show the Add View
-   }   
+  }   
 
   public function store(Request $request){
-    echo "Saver";
+    //echo "Saver";
 
 /*    $n = array();
     $n = $request;
@@ -98,10 +108,6 @@ class EmployeeController extends Controller
 
    public function show(){
        
-   }
-   public function setBid(){
-    // dd('we are here');
-    echo "ok";
    }
 
    public function destroy($Id)

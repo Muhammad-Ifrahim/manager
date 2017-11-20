@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('MAIL_DRIVER', 'smtp'),
+    'driver' => 'smtp',//env('MAIL_DRIVER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => 'smtp.gmail.com',//env('MAIL_HOST', 'smtp.mailgun.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => 587,//env('MAIL_PORT', 587),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,10 +55,10 @@ return [
     |
     */
 
-    'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
-    ],
+    'from' => array('address' => 'racontractt@gmail. com', 'name' => 'Awesome Laravel 4 Auth App'),,/*[
+        'address' => env('MAIL_FROM_ADDRESS', 'racontractt@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Email From Usman Khan'),
+    ],*/
 
     /*
     |--------------------------------------------------------------------------
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => 'tls',//env('MAIL_ENCRYPTION', 'ssl'),
 
     /*
     |--------------------------------------------------------------------------
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => 'racontractt@gmail.com'//env('MAIL_USERNAME'),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => 'samiandusman'//env('MAIL_PASSWORD'),
 
     /*
     |--------------------------------------------------------------------------
@@ -99,7 +99,7 @@ return [
     |
     */
 
-    'sendmail' => '/usr/sbin/sendmail -bs',
+      'sendmail' => '/usr/sbin/sendmail -bs',//env('MAIL_DRIVER'),
 
     /*
     |--------------------------------------------------------------------------

@@ -10,8 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/','ApplicationController@index');
+Auth::routes();
+Route::resource('/','ApplicationController');
 Route::resource('customer','CustomerController');
 Route::resource('employee','EmployeeController');
 Route::resource('customize','CustomizeController');                
@@ -20,6 +20,21 @@ Route::resource('fixedasset', 'FixedAssetController');
 Route::resource('settings', 'SettingController');
 Route::resource('date-setter', 'DateSettingController');
 Route::resource('business', 'BusinessController');
+//Settings of Payslip
 Route::resource('pdeductitem', 'pDeductItemController');
 Route::resource('pcontributeitem', 'pContributeItemsController');
 Route::resource('pearnitem', 'pEarnItemsController');
+
+//Payslips
+Route::resource('payslip', 'PayslipController');
+// Performa
+Route::resource('proforma','PerformaController');
+//Inventory
+Route::resource('Inventory','InventoryController');
+
+// Inventory to get in Routes 
+Route::get( '/getinventory', array(
+'as' => 'getinventory',
+'uses' => 'PerformaController@getinventory'
+) );
+Route::get('/logout', 'Auth\LoginController@logout');

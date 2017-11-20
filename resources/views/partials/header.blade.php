@@ -1,6 +1,6 @@
 
    <header class="main-header">
-    <a href="index2.html" class="logo">
+    <a href="{{ URL::to('/') }}" class="logo">
       <span class="logo-mini"><b>K</b>.IO</span>
       <span class="logo-lg"><b>KOMPANIA</b>.IO</span>
     </a>
@@ -12,6 +12,14 @@
 
       <div class="navbar-custom-menu">
        
+      </div>
+      <div>
+        <li>
+
+        <a href="{{ url('/logout') }}" class="logo" style="float: right; onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+      </li>
       </div>
     </nav>
   </header> 
