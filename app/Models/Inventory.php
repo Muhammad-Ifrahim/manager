@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Proforma; 
 class Inventory extends Model
 {
 	protected $primaryKey='inventId';
@@ -18,4 +19,9 @@ class Inventory extends Model
         'ValueOnHand'
     ];
     public $timestamps=false;
+  public function inventory()
+    {
+   
+        return $this->hasOne('App\Models\Proforma');
+    }
 }

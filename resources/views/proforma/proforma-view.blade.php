@@ -37,27 +37,33 @@
                 <thead>
                 <tr>
                   <th class="col-md-1">Date</th>
+                  <th class="col-md-1">Id</th>
                   <th class="col-md-4">Customer</th>
                   <th class="col-md-1">Amount</th>
                   <th class="col-md-1">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-              @Foreach($customers as $key => $value)
+              @Foreach($sale as $key => $value)
                   <tr>
-                    <td class="col-md-1">{{$value->Code}}</td>
-                    <td class="col-md-4">{{$value->Name}} </td>
-                    <td class="col-md-1">{{$value->CreditLimit}}</td>
+                    <td class="col-md-1">{{$value->Date}}</td>
+                    <td class="col-md-1">{{$value->SaleId}}</td>
+                    <td class="col-md-4">{{$value->user->Name}} </td>
+                    <td class="col-md-1">{{$value->Amount}}</td>
                     <td class="col-md-1">
                      <div class="action-region">
-                       <a href="{{ URL::to('proforma/' . $value->custId . '/edit') }}">
+                       <a href="{{ URL::to('proforma/' . $value->SaleId . '/edit') }}">
                         <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit proforma"></span>
                        </a>
                        
-                       {{ Form::open(array('url' => 'customer/' . $value->custId, 'class' => 'pull-left')) }}
+                       {{ Form::open(array('url' => 'proforma/' . $value->SaleId, 'class' => 'pull-left')) }}
                         {{ Form::hidden('_method', 'DELETE') }}
                         {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete proforma"></span>', array( 'type'=>'submit')) }}
                         {{ Form::close() }} 
+
+                        <a href="{{ url('/proformaPrint/' . $value->SaleId . '/print') }}">
+                        <span class="fa fa-print" data-toggle="tooltip" data-original-title="Print Report"></span>
+                       </a>
 
                       </div>
 
