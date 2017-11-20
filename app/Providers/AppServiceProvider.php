@@ -13,16 +13,12 @@ use App\Models\StartDate;
 use App\Models\FixedAsset;
 use App\Models\Inventory;
 use App\Models\User;
-<<<<<<< HEAD
 use App\Models\pEarnItems;
 use App\Models\pDeductItems;
 use App\Models\pContributeItems;
 use App\Models\expenseAccounts;
 use App\Models\Payslips;
-
-=======
 use App\Models\Proforma;
->>>>>>> 36d8c56161db6565434836b621fee39e942e96de
 use Session;
 use View;
 
@@ -82,18 +78,10 @@ class AppServiceProvider extends ServiceProvider
         });
         $inventory=Inventory::all();
         View::share('inventory',$inventory);
-<<<<<<< HEAD
-   }
-=======
 
         // $proforma=Proforma::all(); 
         // View::share('proforma',$proforma); 
-
-        
-        
-
     }
->>>>>>> 36d8c56161db6565434836b621fee39e942e96de
 
     /**
      * Register gupnp_service_proxy_add_notify(proxy, value, type, callback) application services.

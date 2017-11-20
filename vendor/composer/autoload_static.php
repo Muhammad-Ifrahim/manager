@@ -450,7 +450,6 @@ class ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a
         'BidAdditionContribute' => __DIR__ . '/../..' . '/database/migrations/2017_11_10_040825_bid_addition_Contribute.php',
         'BidAdditionDeductItem' => __DIR__ . '/../..' . '/database/migrations/2017_11_10_040940_bid_addition_DeductItem.php',
         'BidPayslipTableForan' => __DIR__ . '/../..' . '/database/migrations/2017_11_14_034942_bid_Payslip_table_foran.php',
-=======
         'Barryvdh\\DomPDF\\Facade' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/Facade.php',
         'Barryvdh\\DomPDF\\PDF' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/PDF.php',
         'Barryvdh\\DomPDF\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/ServiceProvider.php',
@@ -3293,12 +3292,10 @@ class ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a
         'Ramsey\\Uuid\\UuidFactory' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactory.php',
         'Ramsey\\Uuid\\UuidFactoryInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactoryInterface.php',
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
-<<<<<<< HEAD
         'RenameStnkColumn' => __DIR__ . '/../..' . '/database/2017_11_05_130735_rename_stnk_column.php',
         'RenamepContributionItem' => __DIR__ . '/../..' . '/database/migrations/2017_11_10_040557_renamepContributionItem.php',
         'RenamepDeductItem' => __DIR__ . '/../..' . '/database/migrations/2017_11_10_040451_renamepDeductItem.php',
         'Renametable' => __DIR__ . '/../..' . '/database/migrations/2017_11_10_031113_renametable.php',
-=======
         'RenameStnkColumn' => __DIR__ . '/../..' . '/database/migrations/2017_11_05_130735_rename_stnk_column.php',
         'Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/CSSList/AtRuleBlockList.php',
         'Sabberworm\\CSS\\CSSList\\CSSBlockList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/CSSList/CSSBlockList.php',

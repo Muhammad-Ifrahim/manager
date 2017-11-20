@@ -38,11 +38,7 @@ Route::resource('Inventory','InventoryController');
 Route::get( '/getinventory', array(
 'as' => 'getinventory',
 'uses' => 'PerformaController@getinventory'
-<<<<<<< HEAD
 ) );
 Route::get('/logout', 'Auth\LoginController@logout');
-=======
-));
 
 Route::get('/proformaPrint/{id}/print', 'PerformaController@printReport');
->>>>>>> 36d8c56161db6565434836b621fee39e942e96de
