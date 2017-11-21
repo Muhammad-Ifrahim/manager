@@ -81,7 +81,8 @@ class DeliveryNotesController extends Controller
     
     public function edit($id)
     {
-        $deliverySale = DeliverySale::with('saleDelivery')->with('saleDelivery.inventoryItem')->with('user')->where('id',$id);
+        $deliverySale = DeliverySale::find($id);
+        //dd($deliverySale);
         $deliverySaleItem = DeliverySale::with('saleDelivery')->with('saleDelivery.inventoryItem')->where('id',$id)->get();
         return view('deliverynotes.deliverynotes-edit')->with('deliverySale',$deliverySale)->with('deliverySaleItem',$deliverySaleItem);
     
