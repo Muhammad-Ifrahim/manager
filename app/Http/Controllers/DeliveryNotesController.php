@@ -91,7 +91,41 @@ class DeliveryNotesController extends Controller
    
     public function update(Request $request, $id)
     {
-        //
+         $deliverySale = DeliverySale::find($id);
+         if ($deliverySale!=null) {
+           
+            $deliverySale->saleDelivery()->delete();
+          $input = Input::all();
+            $deliverySale->DeliveryDate=is_null(Input::get('DeliveryDate')) ? '' : Input::get('DeliveryDate');
+            $deliverySale->Reference=is_null(Input::get('Reference')) ? 0 : Input::get('Reference');
+            $deliverySale->OrderNo =is_null(Input::get('OrderNo')) ? 0 : Input::get('OrderNo');
+            $deliverySale->InvoiceNumber = is_null(Input::get('InvoiceNumber')) ? 0 : Input::get('InvoiceNumber');
+            $deliverySale->Description = is_null(Input::get('Descriptions')) ? '' : Input::get('Descriptions');
+            $deliverySale->Notes = is_null(Input::get('Notes')) ? '' : Input::get('Notes');
+            $deliverySale->customer = Input::get('customer');
+
+        $deliverySale->save();
+        $j = $deliverySale->id;
+        
+        if($deliverySale->save()){
+            for($id = 0; $id < count($input['inventId']); $id++){
+                $deliverynote = new DeliveryNote;
+                $deliverynote->deliverysaleId=$deliverySale->id;
+                $deliverynote->inventId = $input['inventId'][$id];
+                $deliverynote->Quantity = is_null($input['qty'][$id]) ? 0 : $input['qty'][$id] ;
+                $deliverynote->save();
+            }
+            
+        }
+        Toastr::success('Created Successfully', 'Delivery Note', ["positionClass" => "toast-top-right"]);
+        return Redirect::to('deliverynote');
+            
+         }
+        
+        //dd($input);
+  
+        
+    
     }
 
     

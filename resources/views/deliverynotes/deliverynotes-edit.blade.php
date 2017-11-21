@@ -2,13 +2,10 @@
 @section('content')
 
  <style type="text/css">
+ 
      table {border: none;}
-     table {
-    border-collapse: collapse;
-      }
-      input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px white inset;
-    }
+     table { border-collapse: collapse;}
+     input:-webkit-autofill {-webkit-box-shadow: 0 0 0 30px white inset;}
 
    td, th {
     padding: 0;
@@ -137,7 +134,7 @@
     $('.add').click(function () {
       var inventory = $('.inventId').html();
       var n = ($('.neworderbody tr').length - 0) + 1;
-      var tr = '<tr><td><select class="form-control inventId form-control-heading" name="inventId[]">' + inventory + '</select></td>' +
+      var tr = '<tr><td><select class="form-control inventId form-control-heading" name="inventId[]"><option></option>' + inventory + '</select></td>' +
 
        '<td><input type="text" class="discription form-control-heading" name="discription[]"readonly ></td>' +
 
@@ -258,10 +255,8 @@
           {!!Form::label('customer','Customer',['class' => 'col-lg-2 control-label ' ]) !!}
         <div class="col-lg-4 customerbody">
           <select  name="customer" class="form-control-heading customer" id="customer">
-
                     <option data-addres="{!! $deliverySale->user->BillingAddress !!}" value="{{ $deliverySale->customer}}">
                       {{ $deliverySale->user->Name}}</option>
-
              @foreach ($customers as $key => $value)
                       @if($deliverySale->customer!=$value->custId)
                      <option data-addres="{!! $value->BillingAddress !!}" value="{{ $value->custId}}">{{$value->custId}}-{{ $value->Name}}</option>
@@ -313,7 +308,7 @@
                       <option data-pro="{!! $value->inventoryItem->Description !!}"  value="{!! $value->inventId !!}">
                         {!! $value->inventoryItem->ItemName!!}
                       </option>
-                      <option></option>
+                      
                       @foreach($inventory as $invent)
                          @if($invent->inventId !=$value->inventId)
                       <option data-pro="{!! $invent->Description !!}" data-price="{!! $invent->SalePrice !!}" value="{!! $invent->inventId !!}">{!! $invent->ItemName!!}</option>
@@ -349,17 +344,9 @@
           <div  class="col-lg-3" >
               <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
           </div>
-          
-         <div class="col-lg-3" style="margin-left: 48px;width: 148px">
-      <input type="text" class=" form-control-heading " name="NetAmount" name="total" id="total"
-             placeholder="Net Amount" readonly value="{{$sale->Amount}}">
-         </div>
-         
       </div>
      </div>       
                 
-        
-         
          <!--  -->
         <div class="form-group {{ $errors->has('BillingAddress') ? 'has-error' : ''}}">
            {!!Form::label('BillingAddress','Billing Address:',['class' => 'col-lg-2 control-label' ]) !!}
