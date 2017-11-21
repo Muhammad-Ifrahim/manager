@@ -96,6 +96,13 @@ class DeliveryNotesController extends Controller
     
     public function destroy($id)
     {
-        //
+       $deliverySale=DeliverySale::find($id);
+       if($deliverySale!=null){
+             $deliverySale->saleDelivery()->delete();
+             $deliverySale->delete();
+            Toastr::success('Deleted Successfully', 'Delivery Note', ["positionClass" => "toast-top-right"]);
+            return Redirect::to('deliverynote');
+
+       } 
     }
 }
