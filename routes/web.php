@@ -24,7 +24,7 @@ Route::resource('business', 'BusinessController');
 Route::resource('pdeductitem', 'pDeductItemController');
 Route::resource('pcontributeitem', 'pContributeItemsController');
 Route::resource('pearnitem', 'pEarnItemsController');
-
+Route::resource('user', 'RegController');
 //Payslips
 Route::resource('payslip', 'PayslipController');
 // Performa
@@ -40,5 +40,5 @@ Route::get( '/getinventory', array(
 'uses' => 'PerformaController@getinventory'
 ) );
 Route::get('/logout', 'Auth\LoginController@logout');
-
+Route::get('{bisId}/business', 'OtherBusinessController@index');
 Route::get('/proformaPrint/{id}/print', 'PerformaController@printReport');

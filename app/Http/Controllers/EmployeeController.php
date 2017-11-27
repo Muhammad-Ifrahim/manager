@@ -21,7 +21,7 @@ class EmployeeController extends Controller
     $this->middleware('auth');
   }
   public function index(){
-    //$user=User::find(6);
+//    $user=User::find(6);
     $user = App::make('user');
     if($user->employee>0)
     {

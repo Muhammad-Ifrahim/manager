@@ -122,13 +122,8 @@ class CustomerController extends Controller
      if($customerDelete!=null)
      {
          $customerDelete->delete();
-         Toastr::success('Successfully Deleted', 'Customer', ["positionClass" => "toast-top-right"]);
-              
+         Toastr::success('Successfully Deleted', 'Customer', ["positionClass" => "toast-top-right"]);      
      }
-    
      return Redirect::to('customer');
-
    }
-
-
 }

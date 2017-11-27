@@ -1,25 +1,36 @@
+<header class="main-header">
+  <a href="{{ URL::to('/') }}" class="logo">
+    <span class="logo-mini"><b>K</b>.IO</span>
+    <span class="logo-lg"><b>KOMPANIA</b>.IO</span>
+  </a>
+  <nav class="navbar navbar-static-top">
+    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
 
-   <header class="main-header">
-    <a href="{{ URL::to('/') }}" class="logo">
-      <span class="logo-mini"><b>K</b>.IO</span>
-      <span class="logo-lg"><b>KOMPANIA</b>.IO</span>
+      <span class="sr-only">Toggle navigation</span>
+
     </a>
-    <nav class="navbar navbar-static-top">
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+   
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            <li class="dropdown"> 
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                    {{$user->name}}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{ URL::to('/business') }}">Profile</a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/logout') }}">Sign Out</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>  
+    </div>
 
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-
-      <div class="navbar-custom-menu">
-       
-      </div>
-      <div>
-        <li>
-
-        <a href="{{ url('/logout') }}" class="logo" style="float: right; onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
-
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-      </li>
-      </div>
-    </nav>
-  </header> 
+</nav>
+</header> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

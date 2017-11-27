@@ -9,7 +9,7 @@ class Sale extends Migration
     
     public function up()
     {
-        Schema::table('sale', function (Blueprint $table) {
+        Schema::create('sales', function (Blueprint $table) {
                 
                 $table->string('customer');
                 $table->string('Amount');
@@ -19,7 +19,7 @@ class Sale extends Migration
    
     public function down()
     {
-        Schema::table('sale', function (Blueprint $table) {
+        Schema::drop('sales', function (Blueprint $table) {
                 
                 $table->string('customer');
                 $table->string('Amount');

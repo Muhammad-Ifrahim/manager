@@ -3,7 +3,6 @@
      
      
      <ul class="sidebar-menu" data-widget="tree">
-     {{$user->accounts}}
        @if($user->accounts)
          <li id="BankAccount" >
             <a href="pages/widgets.html">
@@ -202,7 +201,8 @@
           </span>
         </a>
       </li>
-
+      
+      @if($user->customize)
       <li class="customize">
           <a href="{{ url('customize')}}">
             <i class="fa fa-wrench"></i>
@@ -210,6 +210,7 @@
             
           </a>
         </li>
+        @endif
     </ul>
   </section>
 </aside>

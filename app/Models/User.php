@@ -21,6 +21,7 @@ class User extends Authenticatable
     	'inventory',
     	'customer',
     	'employee',
+        'bId',
     ];
     public $timestamps = true;
 

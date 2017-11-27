@@ -10,20 +10,17 @@ class UserController extends Controller
     {
         $this->middleware('auth');
     }
-
     
     public function index()
     {
         
     }
-
     
     public function create()
     {
       
     }
 
-   
     public function store(Request $request)
     {
         dd('pak');
@@ -45,13 +42,11 @@ class UserController extends Controller
     {
        
     }
-
    
     public function edit($id)
     {
         
     }
-
    
     public function update(Request $request, $id)
     {

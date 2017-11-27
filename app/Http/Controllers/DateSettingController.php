@@ -21,23 +21,16 @@ public function __construct()
  
 public function index(){
   $user = App::make('user');
-  if($user->FixedAsset>0)
+  $bid = Session::get('bId'); 
+  $strtDate = StartDate::where('bId', $bid)->get();
+  if($strtDate==null)
   {
-    $bid = Session::get('bId'); 
-    $strtDate = StartDate::where('bId', $bid)->get();
-    if($strtDate==null)
-    {
-      return View::make('settings.startdate'); 
-    }
-    else
-    {
-      return View::make('settings.startdate-edit'); 
-    }  
+    return View::make('settings.startdate'); 
   }
   else
   {
-    return View::make('errors.notAllowed-view');
-  }
+    return View::make('settings.startdate-edit'); 
+  }  
 }
 
  public function create(){
