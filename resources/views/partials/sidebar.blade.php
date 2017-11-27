@@ -99,7 +99,7 @@
 
       @if($user->DeliveryNotes)
         <li id="DeliveryNotes">
-          <a href="pages/widgets.html">
+          <a href="{{ url('deliverynote')}}">
             <i class="fa fa-truck"></i> <span>Delivery Notes</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>

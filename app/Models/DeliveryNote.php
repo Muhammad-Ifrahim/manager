@@ -3,18 +3,15 @@
 namespace App\Models;   			//To reference Models
 use Illuminate\Database\Eloquent\Model;
 
-class Proforma extends Model
+class DeliveryNote extends Model
 {
-	public $primaryKey='saleqId';
-    public $table = 'salesquotes';  
-    public $timestamps=false;
+    public $table ='deliverynotes';
+    public $timestamps = false; // for false updated_at and created_at
 
-
-
-    public function reviews()
+     public function deliverynotes()
     {
    
-        return $this->belongsTo('Sale');
+        return $this->belongsTo('App\Models\DeliverySale');
     }
      public function inventoryItem()
     {

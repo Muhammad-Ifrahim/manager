@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class pearnitems extends Model
 {
+	
     public $primaryKey ='eId';
     protected $fillable =[
     	'name',
