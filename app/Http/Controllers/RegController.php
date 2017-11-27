@@ -68,7 +68,7 @@ class RegController extends Controller
         if($User->save()){
         }
         echo 'Right';
-        return Redirect::to('business');
+        return Redirect::to('customize');
     }
   }
 /*

@@ -21,9 +21,12 @@ public function __construct()
  
 public function index(){
   $user = App::make('user');
-  $bid = Session::get('bId'); 
+  $bid = Session::get('bId');
+  //In case if start date is already set show update page for date otherwise
+  //show the create date page
+  //as it is in manager.io
   $strtDate = StartDate::where('bId', $bid)->get();
-  if($strtDate==null)
+  if(sizeof($strtDate)<=0)
   {
     return View::make('settings.startdate'); 
   }

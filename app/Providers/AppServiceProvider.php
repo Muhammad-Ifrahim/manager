@@ -35,59 +35,65 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //To get id of only authenticated/logged user
         $this->app['events']->listen(Authenticated::class, function ($e) {          
         if($e->user->id)
         {
-        echo $e->user->id;
-        $user=User::find($e->user->id);
-        View::share('user',$user);
-echo $user->name;
-        App::singleton('user', function($app)
-        {
-            $user=User::find(7);
-            return $user;
-        });
-        //Get business id from users table
-        $bid = $user->bId;
-        Session::put('bId', $bid);
-        
-        $strtDate = StartDate::where('bId', $bid)->get();
-        view()->share('strtDate', $strtDate);
+            $user=User::find($e->user->id);
+            View::share('user',$user);
+            echo $user->name;
+            
+            App::singleton('user', function($app)
+            {
+                $user=User::find(13);
+                return $user;
+            });
+            //Get business id from users table
+            $bid = $user->bId;
+            Session::put('bId', $bid);
+            
+            $strtDate = StartDate::where('bId', $bid)->get();
+            if(sizeof($strtDate)>0)
+            {
+                view()->share('dateId', $strtDate[0]->id);
+                view()->share('dateValue', $strtDate[0]->date);
+            }
+    //        dd(sizeof($strtDate));
 
-        $pEarnItem = pearnitems::where('bId', $bid)->get();
-        view()->share('pEarnItem', $pEarnItem);
+            $pEarnItem = pearnitems::where('bId', $bid)->get();
+            view()->share('pEarnItem', $pEarnItem);
 
-        $pContributItem = pContributeItems::where('bId', $bid)->get();
-        view()->share('pContributItem', $pContributItem);
+            $pContributItem = pContributeItems::where('bId', $bid)->get();
+            view()->share('pContributItem', $pContributItem);
 
-        $pDeductItem = pDeductItems::where('bId', $bid)->get();
-        view()->share('pDeductItem', $pDeductItem);
+            $pDeductItem = pDeductItems::where('bId', $bid)->get();
+            view()->share('pDeductItem', $pDeductItem);
 
-        $customers=Customer::all();            //this is used to share data between all view
-        View::share('customers',$customers);
+            $customers=Customer::all();            //this is used to share data between all view
+            View::share('customers',$customers);
 
-        $employees=Employee::where('bId', $bid)->get();
-        View::share('employees',$employees);
+            $employees=Employee::where('bId', $bid)->get();
+            View::share('employees',$employees);
 
-        $expAccounts = expenseAccounts::where('bId',$bid)->get();
-        View::share('expAccounts',$expAccounts);
+            $expAccounts = expenseAccounts::where('bId',$bid)->get();
+            View::share('expAccounts',$expAccounts);
 
-        //For Payslips     
-        $payslp = Payslips::where('bId', $bid)->get();
-        View::share('payslp', $payslp);
+            //For Payslips     
+            $payslp = Payslips::where('bId', $bid)->get();
+            View::share('payslp', $payslp);
 
-        $business = Business::all();
-        View::share('business', $business);
-        
-        //To avoid migration issue
-        Schema::defaultStringLength(191);
+            $business = Business::all();
+            View::share('business', $business);
+            
+            //To avoid migration issue
+            Schema::defaultStringLength(191);
 
-        $fixedassets=FixedAsset::all();
-        View::share('fixedassets',$fixedassets);
+            $fixedassets=FixedAsset::all();
+            View::share('fixedassets',$fixedassets);
 
-        $inventory=Inventory::all();
-        View::share('inventory',$inventory);
-        }
+            $inventory=Inventory::all();
+            View::share('inventory',$inventory);
+            }
 
         // $proforma=Proforma::all(); 
         // View::share('proforma',$proforma);

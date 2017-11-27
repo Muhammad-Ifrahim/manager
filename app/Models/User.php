@@ -19,7 +19,6 @@ class User extends Authenticatable
     	'customer',
     	'accounts',
     	'inventory',
-    	'customer',
     	'employee',
         'bId',
     ];
