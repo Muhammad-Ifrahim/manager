@@ -23,9 +23,11 @@ class EmployeeController extends Controller
   public function index(){
     //To get value from shared variable (AppServiceProvider)
     $user = Config::get('userU');
+    $bid = Session::get('bId');
+
     if($user->employee>0)
     {
-      $employees=Employee::all(); 
+      $employees=Employee::where('bId',$bid)->get(); 
       return View::make('employee.employee-view')->with('employees',$employees);
     }
     else

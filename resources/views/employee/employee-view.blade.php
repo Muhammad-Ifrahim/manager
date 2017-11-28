@@ -38,13 +38,13 @@
              <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th class="col-md-1" >Name</th>
+                  <th class="col-md-1">Name</th>
                   <th class="col-md-1">Telephone</th>
                   <th class="col-md-1">Mobile</th>
                   <th class="col-md-1">Email</th>
                   <th class="col-md-1">Advance Paid</th>
-                  <th class="col-md-1" >Amount To Pay</th>
-                  <th class="col-md-1" >Last Modified</th>
+                  <th class="col-md-1">Amount To Pay</th>
+                  <th class="col-md-1">Last Modified</th>
                   <th class="col-md-1">Action</th>                 
                 </tr>
                 </thead>
@@ -96,6 +96,8 @@
                  <td></td>
                  <td><strong>{{$sumPa}}</strong></td>
                  <td><strong>{{$sumAp}}</strong></td>
+                 <td></td>
+                 <td></td>
                  </tr>
                 </tbody>
               </table>

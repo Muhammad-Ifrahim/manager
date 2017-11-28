@@ -5,7 +5,6 @@
 
     font-size: 18px;
     border: 2px solid lightblue;
-    height: 100%;
     margin-top: 2px;
     margin-left: 25px;
     padding-top: 6px;
@@ -46,7 +45,6 @@
     pointer-events:none;
     font-size: 18px;
     border: 2px solid rgba(76, 175, 80, 0.87);    
-    height: 100%;
     margin-top: 2px;
     margin-left: 25px;
     padding-top: 6px;
