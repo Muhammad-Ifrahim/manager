@@ -28,44 +28,40 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">DELIVERY NOTES</h3>
-              <a type="button" href="{{url('deliverynote/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Delivery</a>
+              <h3 class="box-title">Supplier</h3>
+              <a type="button" href="{{url('supplier/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Supplier</a>
             </div>
             <!-- /.box-header  -->
             <div class="box-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th class="col-md-1">Date</th>
-                  <th class="col-md-1">Order No</th>
-                  <th class="col-md-1">Invoice Number</th>
-                  <th class="col-md-3">Customer</th>
-                  <th class="col-md-1">Description</th>
+                  <th class="col-md-1">Code</th>
+                  <th class="col-md-1">Name</th>
+                  <th class="col-md-1">Telephone</th>
+                  <th class="col-md-1">Email</th>
+                  <th class="col-md-1">Accounts Payable</th>
                   <th class="col-md-1">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-              @Foreach($deliverySale as $key => $value)
+              @Foreach($supplier as $key => $value)
                   <tr>
-                    <td class="col-md-1">{{$value->DeliveryDate}}</td>
-                    <td class="col-md-1"></td>
-                    <td class="col-md-1">{{$value->Reference}}</td>
-                    <td class="col-md-3">{{$value->user->Name}}</td>
-                    <td class="col-md-1">{{$value->Description}}</td>
+                    <td class="col-md-1">{{$value->Code}}</td>
+                    <td class="col-md-1">{{$value->Name}} </td>
+                    <td class="col-md-1">{{$value->Telephone}}</td>
+                    <td class="col-md-1">{{$value->Email}}</td>
+                    <td class="col-md-1">{{$value->CreditLimit}}</td>
                     <td class="col-md-1">
                      <div class="action-region">
-                       <a href="{{ URL::to('deliverynote/' . $value->id . '/edit') }}">
-                        <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Delivery Note"></span>
+                       <a href="{{ URL::to('supplier/' . $value->supId . '/edit') }}">
+                        <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Supplier"></span>
                        </a>
                        
-                       {{ Form::open(array('url' => 'deliverynote/' . $value->id, 'class' => 'pull-left')) }}
+                       {{ Form::open(array('url' => 'supplier/' . $value->supId, 'class' => 'pull-left')) }}
                         {{ Form::hidden('_method', 'DELETE') }}
-                        {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Delivery Note"></span>', array( 'type'=>'submit')) }}
+                        {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Supplier"></span>', array( 'type'=>'submit')) }}
                         {{ Form::close() }} 
-
-                        <a href="{{ url('/deliverynote/' . $value->id . '/print') }}">
-                        <span class="fa fa-print" data-toggle="tooltip" data-original-title="Print Report"></span>
-                       </a>
 
                       </div>
 

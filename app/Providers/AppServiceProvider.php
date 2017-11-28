@@ -31,8 +31,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+     $bid = '1';
+      if (!empty($bid)) {
+
+          
         //Hardcoded temporarily
-        $bid = '1';
+        
         Session::put('bId', $bid);
         
         $strtDate = StartDate::where('bId', $bid)->get();
@@ -81,6 +86,7 @@ class AppServiceProvider extends ServiceProvider
 
         // $proforma=Proforma::all(); 
         // View::share('proforma',$proforma); 
+      }
     }
 
     /**

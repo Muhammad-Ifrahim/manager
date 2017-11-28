@@ -111,7 +111,7 @@
 
       @if($user->Supplier)
         <li id="Suppliers">
-          <a href="pages/widgets.html">
+          <a href="{{url('supplier')}}">
             <i class="fa fa-building-o"></i> <span>Suppliers</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>
@@ -122,7 +122,7 @@
 
       @if($user->PurchaseOrder)
         <li id="PurchaseOrder" >
-          <a href="pages/widgets.html">
+          <a href="{{url('purchaseorder')}}">
             <i class="fa fa-shopping-cart"></i> <span>Purchase Order</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>

@@ -33,9 +33,12 @@ Route::resource('payslip', 'PayslipController');
 Route::resource('proforma','PerformaController');
 //Inventory
 //login
+Route::resource('supplier','SupplierController');
 
 Route::resource('Inventory','InventoryController');
 
+Route::resource('purchaseorder','PurchaseOrderController');
+Route::get('/purchaseorder/{id}/print', 'PurchaseOrderController@printReport');
 // Inventory to get in Routes 
 Route::get( '/getinventory', array(
 'as' => 'getinventory',
