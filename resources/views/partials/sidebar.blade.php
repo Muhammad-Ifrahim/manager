@@ -26,7 +26,7 @@
         </li>
       
         <li>
-          <a>
+          <a href="{{url('Journal')}}" >
             <i class="fa fa-book"></i> <span>Journal Enteries</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>
@@ -174,9 +174,8 @@
 
       @if($user->InventoryTransfer)  
         <li id="InventoryTransfer">
-          <a href="pages/widgets.html">
-            <i class="fa fa-exchange"></i>
-                 <span>Inventory Transfer</span>
+          <a href="{{ url('InventoryTransfer')}}">
+            <i class="fa fa-exchange"></i><span>Inventory Transfer</span>
             <span class="pull-right-container">
              <small class="label pull-right bg-green">0</small>
             </span>

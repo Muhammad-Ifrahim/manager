@@ -31,11 +31,15 @@ Route::get('/deliverynote/{id}/print', 'DeliveryNotesController@printReport');
 Route::resource('payslip', 'PayslipController');
 // Performa
 Route::resource('proforma','PerformaController');
+Route::resource('InventoryTransfer','InventoryTransferController');
+
 //Inventory
 //login
 Route::resource('supplier','SupplierController');
 
 Route::resource('Inventory','InventoryController');
+
+Route::resource('Journal','JournalController');
 
 Route::resource('purchaseorder','PurchaseOrderController');
 Route::get('/purchaseorder/{id}/print', 'PurchaseOrderController@printReport');
