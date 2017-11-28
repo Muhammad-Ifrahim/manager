@@ -18,14 +18,17 @@ class ApplicationController extends BaseController
     	$user = Auth::user();
 		// Get the currently authenticated user's ID...
 		$id = Auth::id();
-		//dd($id);
+
     	if ($id==null) {
     		return view('auth.login');
     	}
+        else if ($id==13) {
+            return Redirect::to('business');            
+        }
+
     	else
     	{
             return view('layouts.master');
-//    		return Redirect::to('/');
     	}
     }
 

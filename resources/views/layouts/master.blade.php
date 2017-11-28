@@ -33,9 +33,8 @@
       <div class="wrapper" >
 
         @include('partials.header')
-
-          @include('partials.sidebar')
               <div class="content-wrapper">
+                        @include('partials.sidebar')
                       @yield('content')
      
                 </div>

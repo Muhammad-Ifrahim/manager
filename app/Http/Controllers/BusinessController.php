@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Input;
 use App\Models\Business;
 use Illuminate\Support\Facades\Session;
+use  Illuminate\Support\Facades\App;
 
 use View;
 use Request;
@@ -22,7 +23,7 @@ class BusinessController extends Controller
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
-     */
+    */
     public function index()
     {
         $business=Business::all();
@@ -43,21 +44,22 @@ class BusinessController extends Controller
     {
         $validator = Validator::make(Request::all(), [
         'Name'  => 'required|max:255',
-    ]);
+        ]);
 
-    if ($validator->fails()) {
-       return redirect('business/create')->withInput()->withErrors($validator);
-    }
-    else{
-    $Business = new Business;
-    
-    $Business->fill(Request::all());
+        if ($validator->fails()) {
+           return redirect('business/create')->withInput()->withErrors($validator);
+        }
+        else
+        {
+            $Business = new Business;
+            
+            $Business->fill(Request::all());
 
-    if($Business->save()){
-      //Toastr::success('Successfully Created', 'Business', ["positionClass" => "toast-top-right"]);
-    }
-    $rout = '';
-    return Redirect::to($rout);
+            if($Business->save()){
+              //Toastr::success('Successfully Created', 'Business', ["positionClass" => "toast-top-right"]);
+            }
+            
+            return View::make('users.register');
         }
     }
 

@@ -67,6 +67,7 @@
   			<div class="box-body">
 
           <div class="col-md-6 ">
+
             {!! Form::open(['url' => 'customize',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
                <div  class="sidebar-customize">
                   <a>
@@ -83,7 +84,7 @@
                   </a>
                </div>
    
-        <div class="{{count($customers) !=0 ? 'sidebar-hide': 'sidebar-customize'}}">
+            <div class="{{count($customers) !=0 ? 'sidebar-hide': 'sidebar-customize'}}">
                    <a>
                    {{ Form::checkbox('customer', 'customer', $user->customer, ['id' => 'customer']) }} 
                     <i class="fa fa-users"></i> 

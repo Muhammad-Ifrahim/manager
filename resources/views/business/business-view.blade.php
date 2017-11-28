@@ -10,9 +10,17 @@
     color: rgba(76, 175, 80, 0.87);
     }
     </style>     
-
     
-
+    <script type="text/javascript">
+      function ConfirmDelete()
+      {
+      var x = confirm("Are you sure you want to delete?");
+      if (x)
+        return true;
+      else
+        return false;
+      }
+    </script>
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -34,11 +42,11 @@
                 <tbody>
                 @Foreach($business as $key => $value)
                     <tr>
-                      <td class="col-md-1"><a href="{{  url('/file/'.$value->bId)}}">{{$value->name}}
+                      <td class="col-md-1"><a href="{{  url($value->bId.'/business')}}">{{$value->name}}
                       </a>
                       
                       {{ Form::open(array('url' => 'business/' . $value->bId, 'class' => 'pull-right')) }}
-                      {{ Form::hidden('_method', 'DELETE') }}
+                      {{ Form::hidden('_method', 'DELETE')}}
                       {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Business"></span>', array( 'type'=>'submit')) }}
                       {{ Form::close() }} 
                       

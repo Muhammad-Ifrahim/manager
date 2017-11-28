@@ -10,6 +10,7 @@ use View;
 use Request;
 use Session;
 use Redirect;
+use Config;
 
 class DateSettingController extends Controller
 {
@@ -20,24 +21,20 @@ public function __construct()
 }
  
 public function index(){
-  $user = App::make('user');
-  if($user->FixedAsset>0)
+  $user = Config::get('userU');
+  $bid = Session::get('bId');
+  //In case if start date is already set show update page for date otherwise
+  //show the create date page
+  //as it is in manager.io
+  $strtDate = StartDate::where('bId', $bid)->get();
+  if(sizeof($strtDate)<=0)
   {
-    $bid = Session::get('bId'); 
-    $strtDate = StartDate::where('bId', $bid)->get();
-    if($strtDate==null)
-    {
-      return View::make('settings.startdate'); 
-    }
-    else
-    {
-      return View::make('settings.startdate-edit'); 
-    }  
+    return View::make('settings.startdate'); 
   }
   else
   {
-    return View::make('errors.notAllowed-view');
-  }
+    return View::make('settings.startdate-edit'); 
+  }  
 }
 
  public function create(){

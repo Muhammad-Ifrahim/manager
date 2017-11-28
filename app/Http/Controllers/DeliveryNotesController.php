@@ -18,7 +18,6 @@ use Redirect;
 use Response;
 use PDF;
 
-
 class DeliveryNotesController extends Controller
 {
     

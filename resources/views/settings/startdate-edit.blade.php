@@ -11,7 +11,7 @@
     }
     </style>    
         <!--I have used zero index here because this page will be called when we must have date in database-->
-       {{ Form::model($strtDate, array('route' => array('date-setter.update', $strtDate[0]->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+       {{ Form::model($strtDate, array('route' => array('date-setter.update', $dateId), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
        <!-- Blade -->
         <section class="content">
       <div class="row">
@@ -30,7 +30,7 @@
                         <div class="form-group"> <!-- Date input -->
                           <label class="control-label" for="date">Date</label>
                           <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" 
-                          value={{$strtDate[0]->date}} />
+                          value={{$dateValue}} />
                         </div>
                         <div class="form-group">
                           If start date is specified, all accounts will have an option to set starting balances as of start date.

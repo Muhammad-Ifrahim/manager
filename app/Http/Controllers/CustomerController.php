@@ -11,6 +11,7 @@ use Request;
 use Validator;
 use Toastr;
 use Redirect;
+use Config;
 
 class CustomerController extends Controller
 {
@@ -22,7 +23,7 @@ class CustomerController extends Controller
   }
 
    public function index(){
-    $user = App::make('user');
+    $user = Config::get('userU');
     if($user->customer>0)
     {
       $customers=Customer::all(); 
@@ -122,13 +123,8 @@ class CustomerController extends Controller
      if($customerDelete!=null)
      {
          $customerDelete->delete();
-         Toastr::success('Successfully Deleted', 'Customer', ["positionClass" => "toast-top-right"]);
-              
+         Toastr::success('Successfully Deleted', 'Customer', ["positionClass" => "toast-top-right"]);      
      }
-    
      return Redirect::to('customer');
-
    }
-
-
 }

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
 
+use Validator;
+
 trait RegistersUsers
 {
     use RedirectsUsers;
@@ -28,14 +30,27 @@ trait RegistersUsers
      */
     public function register(Request $request)
     {
-        $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
-
-        $this->guard()->login($user);
-
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+        //$validData = $this->validator($request->all());
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:20',
+            'email' => 'required|email|max:255|unique:users',
+            /*'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6|confirmed',*/
+        ]);
+        echo 'valid result';//dd($validData);
+        if ($validator->fails()) {
+            
+            return redirect()->back()
+            ->withErrors($validData)
+            ->withInput(); 
+        }
+        else
+        {
+            event(new Registered($user = $this->create($request->all())));
+            $this->guard()->login($user);
+            return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());   
+        }
     }
 
     /**

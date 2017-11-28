@@ -33,7 +33,7 @@
             </div>
             
             <div class="box-body">
-              Sorry for inconvenience.<br/><br/>
+              Sorry for inconvenience. Insufficient priviliges<br/><br/>
               <b>Restricted Access. Please Contact Your Administrator</b>
             </div>
           </div>

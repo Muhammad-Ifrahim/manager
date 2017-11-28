@@ -10,6 +10,8 @@ use Request;
 use Validator;
 use Toastr;
 use Redirect;
+use Config;
+
 class FixedAssetController extends Controller
 {
     public function __construct()
@@ -23,7 +25,7 @@ class FixedAssetController extends Controller
      */
     public function index()
     {
-        $user = App::make('user');
+        $user = Config::get('userU');
         if($user->FixedAsset>0)
         {
           $fixedasset=FixedAsset::all();

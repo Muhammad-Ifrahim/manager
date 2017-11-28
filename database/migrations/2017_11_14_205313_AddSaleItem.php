@@ -9,20 +9,18 @@ class AddSaleItem extends Migration
     
     public function up()
     {
-         Schema::table('sale', function (Blueprint $table) {
-                
+         Schema::table('sales', function (Blueprint $table) {
                 $table->string('Heading');
                 $table->string('Date');
                 $table->string('Quote');
                 $table->string('Notes');
-
            });
     }
 
    
     public function down()
     {
-         Schema::table('sale', function (Blueprint $table) {
+         Schema::table('sales', function (Blueprint $table) {
                 
            });
     }
