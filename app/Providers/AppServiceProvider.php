@@ -21,6 +21,7 @@ use App\Models\pContributeItems;
 use App\Models\expenseAccounts;
 use App\Models\Payslips;
 use App\Models\Proforma;
+use App\Models\Supplier;
 
 use Session;
 use View;
@@ -48,6 +49,7 @@ class AppServiceProvider extends ServiceProvider
     
             $user=User::find($user->id);
             Config::set('userU', $user); 
+
             
             $bid = $user->bId;
             Session::put('bId', $bid);
@@ -93,6 +95,10 @@ class AppServiceProvider extends ServiceProvider
 
             $inventory=Inventory::all();
             View::share('inventory',$inventory);
+
+            $supplier=Supplier::all();
+            View::share('supplier',$supplier);
+
             }
 
         // $proforma=Proforma::all(); 

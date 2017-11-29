@@ -33,6 +33,7 @@ Route::resource('payslip', 'PayslipController');
 // Performa
 Route::resource('proforma','PerformaController');
 Route::resource('InventoryTransfer','InventoryTransferController');
+Route::resource('InventoryLocation','InventoryLocationController');
 
 //Inventory
 //login

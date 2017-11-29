@@ -17,12 +17,17 @@ use Toastr;
 use Redirect;
 use Response;
 use PDF;
-
+use Config;
 class DeliveryNotesController extends Controller
 {
+    public function __construct()
+     {
+    $this->middleware('auth');
+    }
     
     public function index()
     {
+        $user = Config::get('userU');
         $deliverySale = DeliverySale::all();
         return view('deliverynotes.deliverynotes-view')->with('deliverySale',$deliverySale);
     }

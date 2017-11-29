@@ -34,37 +34,34 @@
         <div class="col-md-12">
   	 	   <div class="box">
             <div class="box-header">
-               <h2 class="box-title">Inventory Transfer </h2>
-                 <a type="button" href="{{url('InventoryTransfer/create')}}" class="btn btn-block btn-success" style="float: right;width: 13%">New Inventory Transfer</a>
+               <h2 class="box-title">Inventory Location</h2>
+                 <a type="button" href="{{url('InventoryLocation/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Inventory Location</a>
             </div>
 
             <div class="box-body">
-
+                    <!--  -->
                   <table id="example1" class="table table-bordered table-striped">
                   	<thead>
                     <tr>
-                  		<th class="col-md-1">Id #</th>
-                  		<th class="col-md-1">Date</th>
-                  		<th class="col-md-4">Description</th>
-                  		<th class="col-md-1">Action</th>
+                  		
+                  		<th class="col-md-8">Name</th>
+                  		<th class="col-md-2">Action</th>
                     </tr>
                   	</thead>
                   
                   	<tbody>
-                     @Foreach($InventoryTransfer as $key => $value)    
+                     @Foreach($InventoryLocation as $key => $value)    
                       <tr>
-                      <td class="col-md-1">{{$value->itransId}}</td>
-                  		<td class="col-md-1">{{$value->DeliveryDate}}</td>
-                  		<td class="col-md-4">{{$value->Description}}</td>
-                  		<td class="col-md-1">
+                  		<td class="col-md-8">{{$value->Name}}</td>
+                  		<td class="col-md-2">
                           <div class="action-region">
-                            <a href="{{ URL::to('InventoryTransfer/' . $value->itransId . '/edit') }}">
-                               <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Inventory Transfer"></span>
+                            <a href="{{ URL::to('InventoryLocation/' . $value->id . '/edit') }}">
+                               <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Location"></span>
                             </a>
 
-                          {{ Form::open(array('url' => 'InventoryTransfer/' . $value->itransId, 'class' => 'pull-left')) }}
+                          {{ Form::open(array('url' => 'InventoryLocation/' . $value->id, 'class' => 'pull-left')) }}
                            {{ Form::hidden('_method', 'DELETE') }}
-                           {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Inventory Transfer"></span>', array( 'type'=>'submit')) }}
+                           {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Location"></span>', array( 'type'=>'submit')) }}
                           {{ Form::close() }} 
                           </div>
                           

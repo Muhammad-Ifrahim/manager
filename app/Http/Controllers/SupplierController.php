@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use  Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use App\Models\Supplier;
@@ -10,12 +10,19 @@ use Request;
 use Validator;
 use Toastr;
 use Redirect;
+use Config;
 
 class SupplierController extends Controller
 {
+     public function __construct()
+     {
+    $this->middleware('auth');
+    }
+
     
     public function index()
     {
+       $user = Config::get('userU');
         $supplier = Supplier::all();
        return view('supplier.supplier-view')->with('supplier',$supplier);
     }

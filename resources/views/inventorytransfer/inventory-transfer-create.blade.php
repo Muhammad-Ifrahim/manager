@@ -204,7 +204,7 @@
          </div>
 
         <div class="box-body">
-          {!! Form::open(['url' => 'deliverynote',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
+          {!! Form::open(['url' => 'InventoryTransfer',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
                     
          
  
@@ -237,7 +237,7 @@
       <div class="form-group {{ $errors->has('BillingAddress') ? 'has-error' : ''}}">
            {!!Form::label('Description','Description',['class' => 'col-lg-2 control-label' ]) !!}
            <div class="col-lg-6">
-              {!! Form::text('Descriptions', $value=null, ['class' => 'form-control-heading'])!!}
+              {!! Form::text('Description', $value=null, ['class' => 'form-control-heading'])!!}
               <div class="help-block">{{ $errors->first('BillingAddress') }}</div>
            </div>
        </div>      
@@ -306,15 +306,44 @@
 
               </tbody>                                 
             </table>  
+
+
             
  
-       <div style="margin-left: 66%" >      
-          <div  class="col-lg-3" >
+       <div style="margin-left: 76%" >      
+          <div  class="col-lg-4" >
               <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
           </div>
          
       </div>
      
+     <div class="form-group">
+          {!!Form::label('From','From',['class' => 'col-lg-2 control-label ' ]) !!}
+        <div class="col-lg-6 ">
+          <select  name="InventoryLocationFrom" class="form-control-heading" id="InventoryLocationFrom">
+                    <option></option>
+             @foreach ($InventoryLocation as $key => $value)
+                     
+                     <option  value="{{ $value->id}}">{{ $value->Name}}</option>
+             @endforeach
+          </select>
+        </div>
+      </div> 
+
+
+      <div class="form-group">
+          {!!Form::label('To','To',['class' => 'col-lg-2 control-label ' ]) !!}
+        <div class="col-lg-6 ">
+          <select  name="InventoryLocationTo" class="form-control-heading" id="InventoryLocationTo">
+                    <option></option>
+             @foreach ($InventoryLocation as $key => $value)
+                     
+                     <option value="{{ $value->id}}">{{ $value->Name}}</option>
+                     
+             @endforeach
+          </select>
+        </div>
+      </div> 
         
         
 
@@ -322,7 +351,7 @@
         <!-- Submit Button -->
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-left'] ) !!}
+                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success '] ) !!}
             </div>
         </div>
          <!--  -->

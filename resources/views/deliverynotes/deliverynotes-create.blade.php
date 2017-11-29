@@ -255,7 +255,7 @@
 
       <div class="form-group">
           {!!Form::label('Customer','Customer',['class' => 'col-lg-2 control-label ' ]) !!}
-        <div class="col-lg-4 customerbody">
+        <div class="col-lg-5 customerbody">
           <select  name="customer" class="form-control-heading customer" id="customer">
                     <option></option>
              @foreach ($customers as $key => $value)
@@ -339,8 +339,8 @@
             </table>  
             
  
-       <div style="margin-left: 66%" >      
-          <div  class="col-lg-3" >
+       <div style="margin-left: 76%" >      
+          <div  class="col-lg-4" >
               <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
           </div>
          

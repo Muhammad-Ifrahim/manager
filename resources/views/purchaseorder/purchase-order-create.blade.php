@@ -209,7 +209,7 @@
     <div class="col-md-12">
       <div class="box">
          <div class="box-header">
-               <h2 class="box-title">SALES ORDER</h2>
+               <h2 class="box-title">PURCHASE ORDER</h2>
          </div>
 
     <div class="box-body">
@@ -354,7 +354,7 @@
    
     
       <div > 
-       <div style="margin-left: 66%" >      
+       <div style="margin-left: 70%" >      
           <div  class="col-lg-3" >
               <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
           </div>

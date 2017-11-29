@@ -2,11 +2,15 @@
 
 @section('content')
   <style type="text/css">
+    .form-control{
+       height: 44px;
+     }
     .form-group {
       margin-bottom: 35px;
       width: 65%;
       margin-left: 17%;
       margin-top: 10px;
+      height: 50px;
        }
     .form-horizontal{
       margin-left:4px;
@@ -50,7 +54,7 @@
            <!-- Name -->
         <div class="form-group {{ $errors->has('Name') ? 'has-error' : ''}} ">
             {!! Form::label('Name', 'Name:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-6">
                 {!! Form::text('Name', $value = null, ['class' => 'form-control', 'placeholder' => 'Name' ]) !!}
                  <div class="help-block">{{ $errors->first('Name') }}</div>
             </div>
@@ -59,7 +63,7 @@
         <!-- Code -->
         <div class="form-group {{ $errors->has('Code') ? 'has-error' : ''}} ">
             {!! Form::label('Code', 'Code:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-6">
                 {!! Form::text('Code', $value = null, ['class' => 'form-control', 'placeholder' => 'Code']) !!}
                  <div class="help-block">{{ $errors->first('Code') }}</div>
             </div>
@@ -68,7 +72,7 @@
        <!-- Description -->
          <div class="form-group {{ $errors->has('Description') ? 'has-error' : ''}} ">
             {!! Form::label('Description', 'Description:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-6">
                 {!! Form::text('Description', $value = null, ['class' => 'form-control', 'placeholder' => 'Description']) !!}
                  <div class="help-block">{{ $errors->first('Description') }}</div>
             </div>
@@ -76,7 +80,7 @@
 
          <div class="form-group {{ $errors->has('PurchaseCost') ? 'has-error' : ''}} ">
             {!! Form::label('PurchaseCost', 'Purchase Cost:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-6">
                 {!! Form::text('PurchaseCost', $value = null, ['class' => 'form-control', 'placeholder' => 'PurchaseCost']) !!}
                  <div class="help-block">{{ $errors->first('PurchaseCost') }}</div>
             </div>
@@ -84,7 +88,7 @@
 
           <div class="form-group {{ $errors->has('AccumulatedDepreciation') ? 'has-error' : ''}} ">
             {!! Form::label('AccumulatedDepreciation', 'Accumulated Depreciation:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-6">
                 {!! Form::text('AccumulatedDepreciation', $value = null, ['class' => 'form-control', 'placeholder' => 'Accumulated Depreciation']) !!}
                  <div class="help-block">{{ $errors->first('AccumulatedDepreciation') }}</div>
             </div>
@@ -92,7 +96,7 @@
 
           <div class="form-group {{ $errors->has('BookValue') ? 'has-error' : ''}} ">
             {!! Form::label('BookValue', 'Book Value:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-6">
                 {!! Form::text('BookValue', $value = null, ['class' => 'form-control', 'placeholder' => 'Book Value']) !!}
                  <div class="help-block">{{ $errors->first('BookValue') }}</div>
             </div>

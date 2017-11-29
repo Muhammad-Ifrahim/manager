@@ -137,7 +137,7 @@
     $('.add').click(function () {
       var inventory = $('.inventId').html();
       var n = ($('.neworderbody tr').length - 0) + 1;
-      var tr = '<tr><td><select class="form-control inventId form-control-heading" name="inventId[]">' + inventory + '</select></td>' +
+      var tr = '<tr><td><select class="form-control inventId form-control-heading" name="inventId[]"><option></option>' + inventory + '</select></td>' +
 
        '<td><input type="text" class="discription form-control-heading" name="discription[]"readonly ></td>' +
 
@@ -266,7 +266,7 @@ select.form-control.product_id {
 
       <div class="form-group">
           {!!Form::label('customer','Customer',['class' => 'col-lg-2 control-label ' ]) !!}
-        <div class="col-lg-4 customerbody">
+        <div class="col-lg-6 customerbody">
           <select  name="customer" class="form-control-heading customer" id="customer">
 
                     <option data-addres="{!! $sale->user->BillingAddress !!}" value="{{ $sale->customer}}">
@@ -379,7 +379,7 @@ select.form-control.product_id {
 
        <div > 
         
-       <div style="margin-left: 66%" >      
+       <div style="margin-left: 70%" >      
           <div  class="col-lg-3" >
               <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
           </div>
@@ -398,7 +398,7 @@ select.form-control.product_id {
         <div class="form-group {{ $errors->has('BillingAddress') ? 'has-error' : ''}}">
            {!!Form::label('BillingAddress','Billing Address:',['class' => 'col-lg-2 control-label' ]) !!}
            <div class="col-lg-10">
-              {!! Form::textarea('BillingAddress', $value=null, ['class' => 'addres form-control', 'rows' => 3])!!}
+              {!! Form::textarea('BillingAddress', $value=null, ['class' => 'addres form-control', 'rows' => 3,'readonly'])!!}
               <div class="help-block">{{ $errors->first('BillingAddress') }}</div>
            </div>
        </div>

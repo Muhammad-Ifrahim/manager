@@ -373,7 +373,7 @@ select.form-control.product_id {
 
        <div > 
         
-       <div style="margin-left: 66%" >      
+       <div style="margin-left: 70%" >      
           <div  class="col-lg-3" >
               <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
           </div>

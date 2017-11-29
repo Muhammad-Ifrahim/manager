@@ -1,5 +1,4 @@
-
-  @extends('layouts.master')
+@extends('layouts.master')
     @section('content')
     <style type="text/css">
         .box-header .box-title {
@@ -25,7 +24,6 @@
       <div class="row">
         <div class="col-md-12">
          
-
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Supplier</h3>

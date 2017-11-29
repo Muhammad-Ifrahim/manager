@@ -2,6 +2,9 @@
 
 @section('content')
   <style type="text/css">
+     .form-control{
+       height: 44px;
+     }
     .form-group {
       margin-bottom: 35px;
       width: 65%;
