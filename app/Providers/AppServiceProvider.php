@@ -25,6 +25,7 @@ use App\Models\Proforma;
 use Session;
 use View;
 use Auth;
+use Config;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,13 +42,16 @@ class AppServiceProvider extends ServiceProvider
         {
             $user=User::find($e->user->id);
             View::share('user',$user);
-            echo $user->name;
             
-            App::singleton('user', function($app)
+            /*App::singleton('user', function($app)
             {
                 $user=User::find(13);
                 return $user;
-            });
+            });*/
+
+            $user=User::find(13);
+            Config::set('userU', $user); 
+            
             //Get business id from users table
             $bid = $user->bId;
             Session::put('bId', $bid);

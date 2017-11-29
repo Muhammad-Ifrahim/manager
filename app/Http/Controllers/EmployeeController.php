@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Input;
 use App\Models\Employee;
 use App\Models\User;
 //use Illuminate\Http\Request;
-
+use Config;
 use View;
 use Session;
 use Request;
@@ -21,8 +21,8 @@ class EmployeeController extends Controller
     $this->middleware('auth');
   }
   public function index(){
-//    $user=User::find(6);
-    $user = App::make('user');
+    //To get value from shared variable (AppServiceProvider)
+    $user = Config::get('userU');
     if($user->employee>0)
     {
       $employees=Employee::all(); 

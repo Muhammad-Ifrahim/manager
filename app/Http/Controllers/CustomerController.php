@@ -11,6 +11,7 @@ use Request;
 use Validator;
 use Toastr;
 use Redirect;
+use Config;
 
 class CustomerController extends Controller
 {
@@ -22,7 +23,7 @@ class CustomerController extends Controller
   }
 
    public function index(){
-    $user = App::make('user');
+    $user = Config::get('userU');
     if($user->customer>0)
     {
       $customers=Customer::all(); 

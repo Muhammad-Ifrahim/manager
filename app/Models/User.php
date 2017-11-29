@@ -20,6 +20,15 @@ class User extends Authenticatable
     	'accounts',
     	'inventory',
     	'employee',
+        'SalesQuote',
+        'SalesOrder',
+        'SalesInvoice',
+        'DeliveryNotes',
+        'Supplier',
+        'PurchaseOrder',
+        'PurchaseInvoice',
+        'InventoryTransfer',
+        'FixedAsset',
         'bId',
     ];
     public $timestamps = true;

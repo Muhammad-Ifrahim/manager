@@ -20,7 +20,8 @@ class RegController extends Controller
     |--------------------------------------------------------------------------
     | Register Controller
     |--------------------------------------------------------------------------
-    |
+    | I have overriden laravel registration
+    | Default Registeration is not used because it logs in newly created user
     | This controller handles the registration of new users as well as their
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.

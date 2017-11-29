@@ -10,6 +10,7 @@ use View;
 use Request;
 use Session;
 use Redirect;
+use Config;
 
 class DateSettingController extends Controller
 {
@@ -20,7 +21,7 @@ public function __construct()
 }
  
 public function index(){
-  $user = App::make('user');
+  $user = Config::get('userU');
   $bid = Session::get('bId');
   //In case if start date is already set show update page for date otherwise
   //show the create date page

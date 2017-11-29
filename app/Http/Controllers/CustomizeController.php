@@ -14,6 +14,7 @@ use Request;
 use Validator;
 use Toastr;
 use Redirect;
+use Config;
 
 class CustomizeController extends Controller
 {
