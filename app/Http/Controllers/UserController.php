@@ -23,7 +23,6 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        dd('pak');
         //      $user=User::find(6);
         //      $user->fill(Input::all());
         //      $user->save();

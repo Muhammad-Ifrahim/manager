@@ -54,7 +54,9 @@
                   $sumPa=0;
                   $sumAp=0;
                 @endphp
+
                 @Foreach($employees as $key => $value)
+
                     <tr>
                       <td class="col-md-1">{{$value->name}}</td>
                       <td class="col-md-1">{{$value->telephone}}</td>
@@ -89,17 +91,28 @@
                     </td>
                     </tr>
                  @endForeach
-                 <tr>
+                 
+                </tbody>
+                <tr>
                  <td></td>
                  <td></td>
                  <td></td>
                  <td></td>
-                 <td><strong>{{$sumPa}}</strong></td>
-                 <td><strong>{{$sumAp}}</strong></td>
+
+                 <td>
+                 @if($sumPa>0)
+                 <strong>{{$sumPa}}</strong>
+                 @endif
+                 </td>
+                 <td>
+                 @if($sumAp>0)
+                 <strong>{{$sumAp}}</strong>
+                 @endif
+                 </td>
+  
                  <td></td>
                  <td></td>
                  </tr>
-                </tbody>
               </table>
             </div>
           </div>
