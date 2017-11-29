@@ -50,7 +50,7 @@
           <a href="{{ url('proforma')}}">
             <i class="fa fa-pencil-square"></i> <span>Proforma</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($Sale)}}</small>
             </span>
           </a>
         </li>
@@ -103,7 +103,7 @@
           <a href="{{ url('deliverynote')}}">
             <i class="fa fa-truck"></i> <span>Delivery Notes</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($DeliverySale)}}</small>
             </span>
           </a>
         </li>
