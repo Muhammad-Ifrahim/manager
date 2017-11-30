@@ -25,7 +25,9 @@ class EmployeeController extends Controller
     $user = Config::get('userU');
     if($user->employee>0)
     {
-      $employees=Employee::all(); 
+      $busid = Session::get('bId');
+      $employees=Employee::where('bId',$busid)->get(); 
+    //  echo 'okkkk'; dd($employees);
       return View::make('employee.employee-view')->with('employees',$employees);
     }
     else

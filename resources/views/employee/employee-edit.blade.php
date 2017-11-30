@@ -192,7 +192,7 @@
       </div>
 
       <div class="col-lg-30" id="stDate" style="display: none;">
-      {{ Form::text('stDate', $strtDate[0]->date, array('disabled')) }}
+      {{ Form::text('stDate', $dateValue, array('disabled')) }}
       </div>
 
       <div id="bal" style="display:none;">
