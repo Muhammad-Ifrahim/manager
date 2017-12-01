@@ -49,7 +49,7 @@
           <a href="{{ url('proforma')}}">
             <i class="fa fa-pencil-square"></i> <span>Proforma</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($sale)}}</small>
             </span>
           </a>
         </li>
@@ -102,7 +102,7 @@
           <a href="{{ url('deliverynote')}}">
             <i class="fa fa-truck"></i> <span>Delivery Notes</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($DeliverySale)}}</small>
             </span>
           </a>
         </li>
@@ -113,7 +113,7 @@
           <a href="{{url('supplier')}}">
             <i class="fa fa-building-o"></i> <span>Suppliers</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($supplier)}}</small>
             </span>
           </a>
         </li>
@@ -165,7 +165,7 @@
           <a href="{{ url('Inventory')}}">
             <i class="fa fa-archive"></i> <span>Inventory Items</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($inventory)}}</small>
             </span>
           </a>
        </li>
@@ -176,7 +176,7 @@
           <a href="{{ url('InventoryTransfer')}}">
             <i class="fa fa-exchange"></i><span>Inventory Transfer</span>
             <span class="pull-right-container">
-             <small class="label pull-right bg-green">0</small>
+             <small class="label pull-right bg-green">{{count($InventoryTransfer)}}</small>
             </span>
           </a>
         </li>

@@ -21,7 +21,12 @@ use App\Models\pContributeItems;
 use App\Models\expenseAccounts;
 use App\Models\Payslips;
 use App\Models\Proforma;
+use App\Models\Sale;
+use App\Models\PurchaseOrder;
 use App\Models\Supplier;
+use App\Models\DeliverySale;
+use App\Models\InventoryTransfer;
+use App\Models\InventoryLocation;
 
 use Session;
 use View;
@@ -82,7 +87,7 @@ class AppServiceProvider extends ServiceProvider
             $pDeductItem = pDeductItems::where('bId', $bid)->get();
             View::share('pDeductItem', $pDeductItem);
 
-            $customers=Customer::all();            //this is used to share data between all view
+            $customers=Customer::where('bId', $bid)->get();            //this is used to share data between all view
             View::share('customers',$customers);
 
             $employees=Employee::where('bId', $bid)->get();
@@ -104,11 +109,20 @@ class AppServiceProvider extends ServiceProvider
             $fixedassets=FixedAsset::all();
             View::share('fixedassets',$fixedassets);
 
-            $inventory=Inventory::all();
+            $sale=Sale::where('bId', $bid)->get();
+            View::share('sale',$sale);
+
+            $inventory=Inventory::where('bId', $bid)->get();
             View::share('inventory',$inventory);
 
-            $supplier=Supplier::all();
+            $supplier=Supplier::where('bId', $bid)->get();
             View::share('supplier',$supplier);
+
+            $DeliverySale=DeliverySale::where('bId', $bid)->get();
+            View::share('DeliverySale',$DeliverySale);    
+
+            $InventoryTransfer=InventoryTransfer::where('bId', $bid)->get();
+            View::share('InventoryTransfer',$InventoryTransfer);                    
 
             }
 
