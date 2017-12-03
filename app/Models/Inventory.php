@@ -16,7 +16,7 @@ class Inventory extends Model
         'Description',
         'QtyOnHand',
         'AverageCost',
-        'ValueOnHand'
+        'ValueOnHand',
     ];
     public $timestamps=false;
   public function inventory()

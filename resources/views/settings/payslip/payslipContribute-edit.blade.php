@@ -40,7 +40,7 @@
                       {!! Form::label('Expense Account', 'Expense Account:', ['class' => 'col-lg-2 control-label']) !!}
                         <div class="col-lg-10">  
                           <select  name="eAccount" class="form-control">
-                          </option>
+                          
                             @foreach ($expAccounts as $key => $value)
                               @if($value->id==$pcont->eAccount)
                               <option value="{{ $value->id}}" selected="selected">{{ $value->title}}</option>

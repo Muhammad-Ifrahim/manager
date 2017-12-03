@@ -35,7 +35,9 @@ class InventoryController extends Controller
     public function store(Request $request)
     {
 
+
        $bid = Session::get('bId');  
+
         $validator = Validator::make(Request::all(), [
 
         'ItemCode'  => 'numeric|nullable',

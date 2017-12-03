@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
 use App\Models\pContributeItems;
+use App\Models\expenseAccounts;
 
 use View;
 use Validator;
@@ -20,6 +21,8 @@ class pContributeitemsController extends Controller
   }
    
    public function index(){
+    $titl = expenseAccounts::find(1)->pContributeItems()->title;
+    dd($titl);
     return View::make('settings.payslip.payslipContribute-view'); 
    }
 

@@ -21,6 +21,7 @@ use App\Models\pContributeItems;
 use App\Models\expenseAccounts;
 use App\Models\Payslips;
 use App\Models\Proforma;
+use App\Models\Role;
 use App\Models\Sale;
 use App\Models\PurchaseOrder;
 use App\Models\Supplier;
@@ -47,12 +48,10 @@ class AppServiceProvider extends ServiceProvider
         //To get id of only authenticated/logged user
         $this->app['events']->listen(Authenticated::class, function ($e) {          
         if($e->user->id)
-
         {
             $user=User::find($e->user->id);
             View::share('user',$user);
             
-
             /*App::singleton('user', function($app)
             {
                 $user=User::find(13);
@@ -66,6 +65,11 @@ class AppServiceProvider extends ServiceProvider
             $bid = $user->bId;
             Session::put('bId', $bid);
             
+            $allUser = User::where('bId', $bid)->get();
+            View::share('allUser', $allUser);
+            
+            $roles = Role::all();
+            View::share('roles',$roles);
             $strtDate = StartDate::where('bId', $bid)->get();
             View::share('strtDate', $strtDate);
             if(sizeof($strtDate)>0)
@@ -103,7 +107,8 @@ class AppServiceProvider extends ServiceProvider
 
             $business = Business::all();
             View::share('business', $business);
-            
+            Config::set('business', $business); 
+
             //To avoid migration issue
             Schema::defaultStringLength(191);
 
@@ -123,6 +128,7 @@ class AppServiceProvider extends ServiceProvider
             View::share('DeliverySale',$DeliverySale);    
 
             $InventoryTransfer=InventoryTransfer::where('bId', $bid)->get();
+
             View::share('InventoryTransfer',$InventoryTransfer); 
 
             $PurchaseOrderSale=PurchaseOrderSale::where('bId', $bid)->get();
@@ -135,6 +141,7 @@ class AppServiceProvider extends ServiceProvider
         // View::share('proforma',$proforma);
         }); 
       }
+
     
     /**
      * Register gupnp_service_proxy_add_notify(proxy, value, type, callback) application services.

@@ -21,7 +21,6 @@ return array(
     'App\\Http\\Controllers\\ApplicationController' => $baseDir . '/app/Http/Controllers/ApplicationController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
-    'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\BaseController' => $baseDir . '/app/Http/Controllers/BaseController.php',
     'App\\Http\\Controllers\\BusinessController' => $baseDir . '/app/Http/Controllers/BusinessController.php',
@@ -37,7 +36,11 @@ return array(
     'App\\Http\\Controllers\\OtherBusinessController' => $baseDir . '/app/Http/Controllers/OtherBusinessController.php',
     'App\\Http\\Controllers\\PayslipController' => $baseDir . '/app/Http/Controllers/PayslipController.php',
     'App\\Http\\Controllers\\PerformaController' => $baseDir . '/app/Http/Controllers/PerformaController.php',
+
+    'App\\Http\\Controllers\\RegController' => $baseDir . '/app/Http/Controllers/RegController.php',
+
     'App\\Http\\Controllers\\PurchaseOrderController' => $baseDir . '/app/Http/Controllers/PurchaseOrderController.php',
+
     'App\\Http\\Controllers\\SettingController' => $baseDir . '/app/Http/Controllers/SettingController.php',
     'App\\Http\\Controllers\\SupplierController' => $baseDir . '/app/Http/Controllers/SupplierController.php',
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
@@ -1894,6 +1897,8 @@ return array(
     'Illuminate\\View\\ViewName' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewName.php',
     'Illuminate\\View\\ViewServiceProvider' => $vendorDir . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
     'Inventory' => $baseDir . '/database/migrations/2017_11_07_050948_Inventory.php',
+    'InventoryItemBid' => $baseDir . '/database/migrations/2017_11_30_032658_inventoryItem_Bid.php',
+    'InventorytransferBid' => $baseDir . '/database/migrations/2017_11_30_032846_inventorytransfer_Bid.php',
     'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => $vendorDir . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
     'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => $vendorDir . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
     'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => $vendorDir . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
@@ -2922,8 +2927,13 @@ return array(
     'Psy\\VersionUpdater\\GitHubChecker' => $vendorDir . '/psy/psysh/src/Psy/VersionUpdater/GitHubChecker.php',
     'Psy\\VersionUpdater\\IntervalChecker' => $vendorDir . '/psy/psysh/src/Psy/VersionUpdater/IntervalChecker.php',
     'Psy\\VersionUpdater\\NoopChecker' => $vendorDir . '/psy/psysh/src/Psy/VersionUpdater/NoopChecker.php',
+
+    'PurchaseInvoiceBid' => $baseDir . '/database/migrations/2017_11_30_034019_purchaseInvoice_Bid.php',
+    'PurchaseOrderBid' => $baseDir . '/database/migrations/2017_11_30_034131_purchaseOrder_Bid.php',
+
     'PurchaseOrderSale' => $baseDir . '/database/migrations/2017_11_23_142401_purchaseOrderSale.php',
     'PurchaseOrderSaleAddForiegn' => $baseDir . '/database/migrations/2017_11_23_144601_purchaseOrderSaleAddForiegn.php',
+
     'Ramsey\\Uuid\\BinaryUtils' => $vendorDir . '/ramsey/uuid/src/BinaryUtils.php',
     'Ramsey\\Uuid\\Builder\\DefaultUuidBuilder' => $vendorDir . '/ramsey/uuid/src/Builder/DefaultUuidBuilder.php',
     'Ramsey\\Uuid\\Builder\\DegradedUuidBuilder' => $vendorDir . '/ramsey/uuid/src/Builder/DegradedUuidBuilder.php',
@@ -2974,6 +2984,8 @@ return array(
     'RenamepContributionItem' => $baseDir . '/database/migrations/2017_11_10_040557_renamepContributionItem.php',
     'RenamepDeductItem' => $baseDir . '/database/migrations/2017_11_10_040451_renamepDeductItem.php',
     'Renametable' => $baseDir . '/database/migrations/2017_11_10_031113_renametable.php',
+    'RoleTable2' => $baseDir . '/database/migrations/2017_12_03_153938_Role_Table2.php',
+    'RoleTable3' => $baseDir . '/database/migrations/2017_12_03_154459_Role_Table3.php',
     'Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/CSSList/AtRuleBlockList.php',
     'Sabberworm\\CSS\\CSSList\\CSSBlockList' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/CSSList/CSSBlockList.php',
     'Sabberworm\\CSS\\CSSList\\CSSList' => $vendorDir . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/CSSList/CSSList.php',
@@ -3665,6 +3677,7 @@ return array(
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Property' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Property.php',
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
+    'UserType' => $baseDir . '/database/migrations/2017_12_03_063000_User_Type.php',
     'Users' => $baseDir . '/database/migrations/2017_10_23_175807_users.php',
     'Webmozart\\Assert\\Assert' => $vendorDir . '/webmozart/assert/src/Assert.php',
     'XdgBaseDir\\Xdg' => $vendorDir . '/dnoegel/php-xdg-base-dir/src/Xdg.php',

@@ -123,6 +123,7 @@
            <div class="col-lg-7">
               {!! Form::textarea('Description', $value=null, ['class' => 'form-control', 'rows' => 3])!!}
               <div class="help-block">{{ $errors->first('Discription') }}</div>
+
            </div>
        </div>
        

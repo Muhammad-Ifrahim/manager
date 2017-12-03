@@ -29,6 +29,7 @@ class User extends Authenticatable
         'PurchaseInvoice',
         'InventoryTransfer',
         'FixedAsset',
+        'userType',
         'bId',
     ];
     public $timestamps = true;

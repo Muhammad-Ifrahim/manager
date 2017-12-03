@@ -25,12 +25,19 @@ class CustomizeController extends Controller
      */
     public function __construct()
     {
-        
         $this->middleware('auth');
     }
 
     function index(){
-    	return View::make('customize.customize-layout');
+      $currUser = Config::get('userU');
+      if($currUser->userType=='Admin' || $currUser->userType=='Manager')
+      {
+        return View::make('customize.customize-layout');        
+      }
+      else
+      {
+        return View::make('errors.notAllowed-view');
+      }
     }
 
     function store(Request $request){
@@ -55,6 +62,15 @@ class CustomizeController extends Controller
         $user->save();   	
         
         Toastr::success('Successfully Customize', 'Sidebar', ["positionClass" => "toast-top-right"]);
-        return Redirect::to('business');
+        $cUser = Config::get('userU');
+        if($cUser->userType=='Admin')
+        {
+          return Redirect::to('business');
+        }
+        else if ($cUser->userType=='Manager')
+        {
+          return Redirect::to('user');
+        }
+
     }
 }

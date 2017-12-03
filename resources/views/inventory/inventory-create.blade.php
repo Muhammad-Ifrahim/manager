@@ -117,10 +117,12 @@
        </div>
        <!-- Billing Address -->
        <div class="form-group {{ $errors->has('Description') ? 'has-error' : ''}}">
+
            {!!Form::label('Discription','`Description`:',['class' => 'col-lg-2 control-label' ]) !!}
            <div class="col-lg-8">
               {!! Form::textarea(`Description`, $value=null, ['class' => 'form-control', 'rows' => 5])!!}
               <div class="help-block">{{ $errors->first('Discription') }}</div>
+
            </div>
        </div>
        
