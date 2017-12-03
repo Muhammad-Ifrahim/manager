@@ -9,6 +9,7 @@ use Validator;
 use Toastr;
 use Redirect;
 use Config;
+use Session;
 
 
 class InventoryController extends Controller
@@ -21,8 +22,10 @@ class InventoryController extends Controller
     public function index()
     {
       $user = Config::get('userU');
-        $inventory =Inventory::all();
-        return view('inventory.inventory-view')->with('inventory',$inventory);
+      $bid = Session::get('bId'); 
+      $inventory =Inventory::where('bId', $bid)->get();
+      
+      return view('inventory.inventory-view')->with('inventory',$inventory);
     }
     public function create()
     {
@@ -31,15 +34,16 @@ class InventoryController extends Controller
 
     public function store(Request $request)
     {
-       
+
+       $bid = Session::get('bId');  
         $validator = Validator::make(Request::all(), [
 
-        'ItemCode'  => 'integer',
+        'ItemCode'  => 'numeric|nullable',
         'ItemName'  => 'string|required',
         'UnitName' => 'string|nullable',
         'PurchasePrice' => 'integer|nullable',
         'SalePrice' => 'integer|nullable',
-        'Discription'=>'string|nullable',
+        'Description'=>'string|nullable',
         'QtyOnHand'=>'integer|nullable',
         'AverageCost' =>'integer|nullable',
         
@@ -52,6 +56,7 @@ class InventoryController extends Controller
       else{
              $inventory = new Inventory;
              $inventory->fill(Request::all());
+             $inventory->bId=$bid;
              if($inventory->save()){
                Toastr::success('Successfully Added', 'Inventory', ["positionClass" => "toast-top-right"]);
               }
@@ -72,7 +77,8 @@ class InventoryController extends Controller
 
     public function update(Request $request, $id)
     {
-          $validator = Validator::make(Request::all(), [
+        $bid = Session::get('bId');
+        $validator = Validator::make(Request::all(), [
 
         'ItemCode'  => 'integer',
         'ItemName'  => 'string|required',
@@ -94,6 +100,7 @@ class InventoryController extends Controller
           $inventory=Inventory::find($id);
           if ($inventory) {
              $inventory->fill(Request::all());
+             $inventory->bId=$bid;
              if($inventory->save()){
                Toastr::success('Successfully Added', 'Inventory', ["positionClass" => "toast-top-right"]);
           

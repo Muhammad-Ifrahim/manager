@@ -24,8 +24,8 @@ class PerformaController extends Controller
     }
     public function index()
     {
-               
-     $sale=Sale::all(); 
+     $bid = Session::get('bId');              
+     $sale=Sale::where('bId', $bid)->get(); 
      return View::make('proforma.proforma-view')->with('sale',$sale); 
         
     }
@@ -41,12 +41,14 @@ class PerformaController extends Controller
     {
         
         $sale = new Sale;
+        $bid = Session::get('bId'); 
         $input = Input::all();
        // dd(Input::all());
         $sale->Heading=is_null(Input::get('Heading')) ? '' : Input::get('Heading');
         $sale->Date=is_null(Input::get('date')) ? '' : Input::get('date');
         $sale->customer =Input::get('customer'); 
         $sale->Amount = is_null(Input::get('NetAmount')) ? 0 : Input::get('NetAmount');
+        $sale->bId=$bid;
         $sale->save();
         $j = $sale->SaleId;
         
@@ -77,7 +79,7 @@ class PerformaController extends Controller
   
     public function edit($id)
     { 
-        $sale=Sale::find($id);
+      $sale=Sale::find($id);
       $salesItem = Sale::with('saleQuote')->with('saleQuote.inventoryItem')->where('SaleId',$id)->get();  
       return view('proforma.proforma-edit')->with('sale',$sale)->with('salesItem',$salesItem);  
 
@@ -88,6 +90,7 @@ class PerformaController extends Controller
     public function update(Request $request, $id)
     {
         $sale=Sale::find($id);
+        $bid = Session::get('bId');
         if ($sale!=null) {
              
         $sale->saleQuote()->delete();
@@ -96,6 +99,7 @@ class PerformaController extends Controller
         $sale->Date=is_null(Input::get('Date')) ? '' : Input::get('Date');
         $sale->customer =Input::get('customer'); 
         $sale->Amount = is_null(Input::get('NetAmount')) ? 0 : Input::get('NetAmount');
+        $sale->bId=$bid;
         $sale->save();
         $j = $sale->SaleId;
         

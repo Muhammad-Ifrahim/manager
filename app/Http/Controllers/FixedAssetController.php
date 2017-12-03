@@ -26,9 +26,10 @@ class FixedAssetController extends Controller
     public function index()
     {
         $user = Config::get('userU');
+        $bid = Session::get('bId'); 
         if($user->FixedAsset>0)
         {
-          $fixedasset=FixedAsset::all();
+          $fixedasset=FixedAsset::where('bId', $bid)->get();
           return  View::make('fixedasset.fixed-asset-view')->with('fixedasset',$fixedasset);    
         }
         else
@@ -55,6 +56,7 @@ class FixedAssetController extends Controller
      */
     public function store(Request $request)
     {
+        $bid = Session::get('bId');
          $validator = Validator::make(Request::all(), [
 
         'Name'  => 'required|max:255',
@@ -72,6 +74,7 @@ class FixedAssetController extends Controller
       else{
              $fixedasset = new FixedAsset;
              $fixedasset->fill(Request::all());
+             $fixedasset->bId=$bid;
              if($fixedasset->save()){
                
         Toastr::success('Successfully Created', 'Asset', ["positionClass" => "toast-top-right"]);
@@ -119,6 +122,7 @@ class FixedAssetController extends Controller
          if($fixedasset){
 
              $fixedasset->fill(Request::all());
+             $fixedasset->bId=$bid;
             if($fixedasset->save())
             {
                   

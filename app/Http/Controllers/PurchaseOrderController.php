@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\PurchaseOrderSale;
 use App\Models\PurchaseOrder;
 use App\Models\Supplier;
+use Session;
 use Input;
 use Toastr;
 use Redirect;
@@ -20,7 +21,8 @@ class PurchaseOrderController extends Controller
     public function index()
     {
 
-        $purchaseordersale = PurchaseOrderSale::all();
+        $bid = Session::get('bId'); 
+        $purchaseordersale = PurchaseOrderSale::where('bId', $bid)->get();
         return view('purchaseorder.purchase-order-view')->with('purchaseordersale',$purchaseordersale);
     }
 
@@ -34,7 +36,8 @@ class PurchaseOrderController extends Controller
   
     public function store(Request $request)
     {
-         $purchaseordersale = new PurchaseOrderSale;
+        $bid = Session::get('bId');
+        $purchaseordersale = new PurchaseOrderSale;
         $input = Input::all();
         //dd(Input::all());
         $purchaseordersale->IssueDate=is_null(Input::get('IssueDate')) ? '' : Input::get('IssueDate');
@@ -45,7 +48,7 @@ class PurchaseOrderController extends Controller
         $purchaseordersale->AuthorizedBy = is_null(Input::get('AuthorizedBy')) ? '' : Input::get('AuthorizedBy');
         $purchaseordersale->Amount = is_null(Input::get('NetAmount')) ? 0 : Input::get('NetAmount');
         $purchaseordersale->Reference='';
-        
+        $purchaseordersale->bId=$bid;
         
         
         if($purchaseordersale->save()){
@@ -74,7 +77,8 @@ class PurchaseOrderController extends Controller
     public function edit($id)
     {
 
-    $supplier=Supplier::all();    
+   $bid = Session::get('bId');
+   $supplier=Supplier::where('bId', $bid)->get();    
    $purchaseordersale=PurchaseOrderSale::find($id);
    $purchaseorder=PurchaseOrderSale::with('purchaseSale')->with('purchaseSale.inventoryItem')->where('id',$id)->get();
       return view('purchaseorder.purchase-order-edit')->with('purchaseordersale',$purchaseordersale)->with('purchaseorder',$purchaseorder)->with('supplier',$supplier);  
@@ -83,7 +87,7 @@ class PurchaseOrderController extends Controller
 
     public function update(Request $request, $id)
     {
-
+        $bid = Session::get('bId');
         $purchaseordersale =PurchaseOrderSale::find($id);
 
         if ($purchaseordersale!=null) {
@@ -98,7 +102,7 @@ class PurchaseOrderController extends Controller
             $purchaseordersale->AuthorizedBy = is_null(Input::get('AuthorizedBy')) ? '' : Input::get('AuthorizedBy');
             $purchaseordersale->Amount = is_null(Input::get('NetAmount')) ? 0 : Input::get('NetAmount');
             $purchaseordersale->Reference='';
-            
+            $purchaseordersale->bId=$bid;
         
         
         if($purchaseordersale->save()){
@@ -137,12 +141,13 @@ class PurchaseOrderController extends Controller
 
     public function printReport($id){
 
-     $supplier=Supplier::all();    
+     $bid = Session::get('bId');
+     $supplier=Supplier::where('bId', $bid)->get();   
      $purchaseordersale=PurchaseOrderSale::find($id);
      $purchaseorder=PurchaseOrderSale::with('purchaseSale')->with('purchaseSale.inventoryItem')->where('id',$id)->get();
-    $pdf = new PDF();
-    $pdf=PDF::loadView('purchaseorder.purchase-order-print',['purchaseordersale'=>$purchaseordersale,'purchaseorder'=>$purchaseorder])->setPaper('A4');
-    return  $pdf->stream('purchaseorder.pdf',array('Attachment'=>0));   
+     $pdf = new PDF();
+     $pdf=PDF::loadView('purchaseorder.purchase-order-print',['purchaseordersale'=>$purchaseordersale,'purchaseorder'=>$purchaseorder])->setPaper('A4');
+     return  $pdf->stream('purchaseorder.pdf',array('Attachment'=>0));   
      
 
     }

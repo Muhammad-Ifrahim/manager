@@ -27,6 +27,7 @@ use App\Models\Supplier;
 use App\Models\DeliverySale;
 use App\Models\InventoryTransfer;
 use App\Models\InventoryLocation;
+use App\Models\PurchaseOrderSale;
 
 use Session;
 use View;
@@ -122,7 +123,10 @@ class AppServiceProvider extends ServiceProvider
             View::share('DeliverySale',$DeliverySale);    
 
             $InventoryTransfer=InventoryTransfer::where('bId', $bid)->get();
-            View::share('InventoryTransfer',$InventoryTransfer);                    
+            View::share('InventoryTransfer',$InventoryTransfer); 
+
+            $PurchaseOrderSale=PurchaseOrderSale::where('bId', $bid)->get();
+            View::share('PurchaseOrderSale',$PurchaseOrderSale);                    
 
             }
 

@@ -24,9 +24,10 @@ class CustomerController extends Controller
 
    public function index(){
     $user = Config::get('userU');
+    $bid = Session::get('bId');
     if($user->customer>0)
     {
-      $customers=Customer::all(); 
+      $customers=Customer::where('bId', $bid)->get(); 
       return View::make('customer.customer-view')->with('customers',$customers);
     }
     else
@@ -38,16 +39,17 @@ class CustomerController extends Controller
       return View::make('customer.customer-create');         //Return and Show the Insert View
    }
    public function  store(Request $request){
-        // validations of the Input 
+      
+    $bid = Session::get('bId');  
     $validator = Validator::make(Request::all(), [
 
         'Name'  => 'required|max:255',
         'Code'  => 'string|nullable',
-        'Email' => 'email|required',
-        'Telephone' => 'nullable|regex:/(01)[0-9]{9}/',
+        'Email' => 'email|nullable',
+        'Telephone' => 'required|min:11|numeric',
         'BillingAddress' => 'nullable|string',
-        'Fax'=>'nullable|regex:/(012)[0-9]{7}/',
-        'Mobile'=>'nullable|regex:/(01)[0-9]{9}/',
+        'Fax'=>'nullable|min:11|numeric',
+        'Mobile'=>'nullable|min:11|numeric',
         'CreditLimit' =>'integer|nullable',
         
     ]);
@@ -59,8 +61,10 @@ class CustomerController extends Controller
       else{
              $Customer = new Customer;
              $Customer->fill(Request::all());
+             $Customer->bId=$bid;
              if($Customer->save()){
-               //Toastr::success('Successfully Created', 'Customer', ["positionClass" => "toast-top-right"]);
+                
+                  Toastr::success('Successfully Created', 'Customer', ["positionClass" => "toast-top-right"]);
               }
            return Redirect::to('customer');
         }
@@ -72,18 +76,16 @@ class CustomerController extends Controller
         return View::make('customer.customer-edit')->with('customer',$customer);  
    }
    public function update($Id){
-
+         $bid = Session::get('bId');
          $validationRules=array(
 
         'Name'  => 'required|max:255',
         'Code'  => 'string|nullable',
-        'Email' => 'email|required',
-        'BusinessIdentifier' => 'string|nullable',
-        'Telephone' => 'nullable|regex:/(01)[0-9]{9}/',
+        'Email' => 'email|nullable',
+        'Telephone' => 'required|min:11|numeric',
         'BillingAddress' => 'nullable|string',
-        'AdditionalInformation'=>'string|nullable',
-        'Fax'=>'nullable|regex:/(012)[0-9]{7}/',
-        'Mobile'=>'nullable|regex:/(01)[0-9]{9}/',
+        'Fax'=>'nullable|min:11|numeric',
+        'Mobile'=>'nullable|min:11|numeric',
         'CreditLimit' =>'integer|nullable',
 
          );
@@ -100,6 +102,7 @@ class CustomerController extends Controller
          if($customer){
 
              $customer->fill(Request::all());
+             $customer->bId=$bid;
             if($customer->save())
             {
                   $customer=Customer::find($Id);

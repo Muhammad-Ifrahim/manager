@@ -22,7 +22,8 @@ class InventoryLocationController extends Controller
     
     public function index()
     {
-        $InventoryLocation=InventoryLocation::all();
+        $bid = Session::get('bId'); 
+        $InventoryLocation=InventoryLocation::where('bId', $bid)->get();
         return view('inventorylocation.inventory-location-view')->with('InventoryLocation',$InventoryLocation);
     }
 
@@ -35,10 +36,12 @@ class InventoryLocationController extends Controller
 
     public function store(Request $request)
     {
+        $bid = Session::get('bId'); 
         $InventoryLocation=new InventoryLocation;
         if($InventoryLocation!=null){
             
               $InventoryLocation->fill(Request::all());
+              $InventoryLocation->bId=$bid;
               $InventoryLocation->save();
             Toastr::success('Successfully Created', 'Inventory Location', ["positionClass" => "toast-top-right"]);
               return Redirect::to('InventoryLocation');
@@ -47,42 +50,26 @@ class InventoryLocationController extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+   
     public function edit($id)
     {
         $InventoryLocation=InventoryLocation::find($id);
         return view('inventorylocation.inventory-location-edit')->with('InventoryLocation',$InventoryLocation);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $InventoryLocation=InventoryLocation::find($id);
           if($InventoryLocation!=null){
             
               $InventoryLocation->fill(Request::all());
+              $InventoryLocation->bId=$bid;
               $InventoryLocation->save();
               Toastr::success('Successfully Updated', 'Inventory Location', ["positionClass" => "toast-top-right"]);
               return Redirect::to('InventoryLocation');

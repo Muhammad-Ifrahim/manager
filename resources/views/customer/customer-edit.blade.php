@@ -138,7 +138,7 @@
         <!-- Submit Button -->
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-                {!! Form::submit('Update', ['class' => 'btn btn-lg btn-success pull-right'] ) !!}
+                {!! Form::submit('Update', ['class' => 'btn btn-lg btn-success '] ) !!}
             </div>
         </div>
  

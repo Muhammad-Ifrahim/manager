@@ -3,6 +3,9 @@
 @section('content')
  
   <style type="text/css">
+    .form-control{
+        height: 43px;
+    }
   	.form-group {
     	margin-bottom: 35px;
     	width: 65%;
@@ -84,7 +87,7 @@
         <!-- Name -->
         <div class="form-group {{ $errors->has('Name') ? 'has-error' : ''}} ">
             {!! Form::label('Name', 'Name:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-5">
                 {!! Form::text('Name', $value = null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
                  {!! $errors->first('Name', '<p class="help-block"> Name Required</p>') !!}
             </div>
@@ -92,34 +95,34 @@
 
         <div class="form-group">
             {!! Form::label('Address', 'Address:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-5">
                 {!! Form::text('Address', $value = null, ['class' => 'form-control', 'placeholder' => 'Address']) !!}
             </div>
         </div>
 
         <div class="form-group">
             {!! Form::label('Email Address', 'Email Address:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-5">
                 {!! Form::text('Email Address', $value = null, ['class' => 'form-control', 'placeholder' => 'someone@email.com']) !!}
             </div>
         </div>
 
         <div class="form-group">
             {!! Form::label('Telephone', 'Telephone:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-5">
                 {!! Form::text('Telephone', $value = null, ['class' => 'form-control', 'placeholder' => 'Telephone']) !!}
             </div>
         </div>
 
         <div class="form-group">
             {!! Form::label('Mobile', 'Mobile:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-5">
                 {!! Form::text('Mobile', $value = null, ['class' => 'form-control', 'placeholder' => 'Mobile']) !!}
             </div>
         </div>
         <div class="form-group">
             {!! Form::label('Additional Information', 'Additional Information:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-5">
                 {!! Form::text('Additional Information', $value = null, ['class' => 'form-control', 'placeholder' => 'Additional Information']) !!}
             </div>
         </div>
@@ -139,7 +142,7 @@
         {{ Form::hidden('', $show, ['id'=>'divId']) }} 
         </div>
         
-        <div class="col-lg-30">
+        <div class="col-lg-5" style="margin-left: 25px">
             {{ Form::checkbox('checkValue','1', false, ['id' => 'checker']) }} Starting Balance as at 
             @foreach($strtDate as $object)
                 {{ $object->date}}
@@ -149,27 +152,29 @@
         <div id="shownDiv" class="shownDiv" style="display:none;">
             You will be able to enter starting balance once you set Start date under Settings tab
         </div>
+      
+        <div class="inline-block">
+            <div id="amount1" class="col-lg-5" style="display:none;">
+            {{ Form::select('paymentStatus', ['ap'=>'Amount to pay', 'pa'=>'Paid in advance']) }}
+            </div>
 
-        <div id="amount1" style="display:none;">
-        {{ Form::select('paymentStatus', ['ap'=>'Amount to pay', 'pa'=>'Paid in advance']) }}
-        </div>
+            <div class="col-lg-5" id="stDate" style="display: none;">
+            {{ Form::text('stDate', $dateValue, array('disabled')) }}
+            </div>
 
-        <div class="col-lg-30" id="stDate" style="display: none;">
-        {{ Form::text('stDate', $dateValue, array('disabled')) }}
-        </div>
-
-        <div id="bal" style="display:none;">
-            {!! Form::text('amount', $value = null, ['class' => 'form-control']) !!}
-        </div>
+            <div id="bal" class="col-lg-5" style="display:none;">
+                {!! Form::text('amount', $value = null, ['class' => 'form-control']) !!}
+            </div>
+        </div>    
 
         {{ Form::hidden('bId', Session::get('bId')) }}
 
         <!-- Submit Button -->
         <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-info pull-middle'] ) !!}
+            <div class="col-lg-5">
+                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-middle'] ) !!}
             </div>
-            <div class="btn-group">
+        <!--     <div class="btn-group">
               <button type="button" class="btn btn-danger">Submit</button>
               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"         aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
@@ -178,7 +183,7 @@
               <ul class="dropdown-menu">
                 <li><a href="#">Create and Add More</a>
               </ul>
-            </div>
+            </div> -->
         </div>
     {!! Form::close()  !!}
      </div>

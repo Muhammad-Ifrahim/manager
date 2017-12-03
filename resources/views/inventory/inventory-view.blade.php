@@ -52,7 +52,7 @@
                   <tr>
                     <td class="col-md-1">{{$value->ItemCode}}</td>
                     <td class="col-md-1">{{$value->ItemName}} </td>
-                    <td class="col-md-1">{{$value->UnitName}}</td>
+                    <td class="col-md-1">{{$value->Description}}</td>
                     <td class="col-md-1">{{$value->PurchasePrice}}</td>
                     <td class="col-md-1">{{$value->SalePrice}}</td>
                     <td class="col-md-1">{{$value->QtyOnHand}}</td>

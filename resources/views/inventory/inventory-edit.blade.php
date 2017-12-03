@@ -2,6 +2,9 @@
 
 @section('content')
   <style type="text/css">
+    .form-control{
+      height: 43px;
+    }
   	.form-group {
     	margin-bottom: 35px;
     	width: 65%;
@@ -31,6 +34,14 @@
   </style>
   <script>
     $(document).ready(function() {
+
+       $( "input[type='text']" ).change(function() {
+     
+            var qtyhand=$('#QtyOnHand').val()- 0;
+          var avgcost=$('#AverageCost').val()- 0;
+          var total = qtyhand * avgcost;
+          $('#ValueOnHand').val(total);  
+        });
 
          $('#Qty').hide();
         $("#checker").click(function(){
@@ -68,7 +79,7 @@
            <!-- Name -->
         <div class="form-group {{ $errors->has('ItemCode') ? 'has-error' : ''}} ">
             {!! Form::label('ItemCode', 'Item Code:', ['class' => 'col-lg-2 control-label']) !!}
-            <div class="col-lg-10">
+            <div class="col-lg-5">
                 {!! Form::text('ItemCode', $value = null, ['class' => 'form-control', 'placeholder' => 'Item Code']) !!}
                  <div class="help-block">{{ $errors->first('ItemCode') }}</div>
             </div>
@@ -76,7 +87,7 @@
        <!-- Code -->
        <div class="form-group {{ $errors->has('ItemName') ? 'has-error' : '' }} ">
            {!!Form::label('ItemName','Item Name:',['class' => 'col-lg-2 control-label' ]) !!}
-           <div class="col-lg-10">
+           <div class="col-lg-5">
               {!! Form::text('ItemName', $value=null, ['class' => 'form-control','placeholder' => 'Optional'])!!}
                <div class="help-block">{{ $errors->first('ItemName') }}</div>
            </div>
@@ -84,7 +95,7 @@
        <!-- Buisness Identifier -->
          <div class="form-group {{ $errors->has('UnitName') ? 'has-error' : '' }} ">
            {!!Form::label('Unit Name','Unit Name:',['class' => 'col-lg-2 control-label' ]) !!}
-           <div class="col-lg-10">
+           <div class="col-lg-5">
             {!! Form::text('UnitName', $value=null, ['class' => 'form-control','placeholder' => 'Item Name'])!!}
              <div class="help-block">{{ $errors->first('UnitName') }}</div>
            </div>
@@ -93,7 +104,7 @@
         <!-- Email -->
        <div class="form-group {{ $errors->has('PurchasePrice') ? 'has-error' : '' }} ">
            {!!Form::label('Purchase Price','Purchase Price:',['class' => 'col-lg-2 control-label' ]) !!}
-           <div class="col-lg-10">
+           <div class="col-lg-5">
               {!! Form::text('PurchasePrice', $value=null, ['class' => 'form-control','placeholder' => 'Purchase Price'])!!}
             <div class="help-block">{{ $errors->first('Email') }}</div>
            </div>
@@ -101,7 +112,7 @@
        <!-- Telephone -->
        <div class="form-group {{ $errors->has('SalePrice') ? 'has-error' : ''}}  ">
            {!!Form::label('Sale Price','Sale Price:',['class' => 'col-lg-2 control-label' ]) !!}
-           <div class="col-lg-10">
+           <div class="col-lg-5">
               {!! Form::text('SalePrice', $value=null, ['class' => 'form-control','placeholder' => 'Sale Price'])!!}
               <div class="help-block">{{ $errors->first('SalePrice') }}</div>
            </div>
@@ -109,13 +120,13 @@
        <!-- Billing Address -->
        <div class="form-group {{ $errors->has('Discription') ? 'has-error' : ''}}">
            {!!Form::label('Discription','Discription:',['class' => 'col-lg-2 control-label' ]) !!}
-           <div class="col-lg-10">
-              {!! Form::textarea('Discription', $value=null, ['class' => 'form-control', 'rows' => 3])!!}
+           <div class="col-lg-7">
+              {!! Form::textarea('Description', $value=null, ['class' => 'form-control', 'rows' => 3])!!}
               <div class="help-block">{{ $errors->first('Discription') }}</div>
            </div>
        </div>
        
-        <div class="col-lg-30" style="margin-left:100px">
+        <div class="col-lg-5" style="margin-left:100px" >
             {{ Form::checkbox('checkValue','1', false, ['id' => 'checker']) }} 
 
           <span style="margin-left: 12px;font-weight: bold;">  Starting Balance as at :
@@ -126,12 +137,12 @@
            </span>   
         </div>  
 
-        <div id="Qty" style="margin-top: 10px">
+        <div id="Qty" style="margin-top: 25px">
 
        <div class="form-group {{ $errors->has('QtyOnHand') ? 'has-error' : ''}}" style="margin-bottom: 7px;" >
            {!!Form::label('Qty on Hand','Qty on Hand: ---',['class' => 'col-lg-3 control-label' ]) !!}
            <div class="col-lg-3">
-              {!! Form::text('QtyOnHand', $value=null, ['class' => 'form-control'])!!}
+              {!! Form::text('QtyOnHand', $value=null, ['class' => 'form-control','id' => 'QtyOnHand'])!!}
               <div class="help-block">{{ $errors->first('QtyOnHand') }}</div>
            </div>
           </div>
@@ -139,7 +150,7 @@
           <div class="form-group {{ $errors->has('AverageCost') ? 'has-error' : ''}}" style="margin-bottom: 7px;">
            {!!Form::label('Average Cost','Average Cost: ---',['class' => 'col-lg-3 control-label' ]) !!}
            <div class="col-lg-3">
-              {!! Form::text('AverageCost', $value=null, ['class' => 'form-control'])!!}
+              {!! Form::text('AverageCost', $value=null, ['class' => 'form-control','id' => 'AverageCost'])!!}
               <div class="help-block">{{ $errors->first('AverageCost') }}</div>
            </div>
           </div>
@@ -148,7 +159,7 @@
           <div class="form-group {{ $errors->has('ValueOnHand') ? 'has-error' : ''}}" style="margin-bottom: 7px;">
            {!!Form::label('ValueOnHand','Value  on Hand: ---',['class' => 'col-lg-3 control-label']) !!}
            <div class="col-lg-3">
-              {!! Form::text('ValueOnHand', $value=null, ['class' => 'form-control'],['readonly'] )!!}
+              {!! Form::text('ValueOnHand', $value=null, ['class' => 'form-control','readonly','id' => 'ValueOnHand'] )!!}
               <div class="help-block">{{ $errors->first('ValueOnHand') }}</div>
            </div>
           </div>
@@ -158,7 +169,7 @@
         
         <div class="form-group" >
             <div class="col-lg-10 col-lg-offset-2">
-                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-info pull-right'] ) !!}
+                {!! Form::submit('Update', ['class' => 'btn btn-lg btn-success '] ) !!}
             </div>
         </div>
     {!! Form::close()  !!}

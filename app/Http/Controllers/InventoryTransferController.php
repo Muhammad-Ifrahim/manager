@@ -27,7 +27,8 @@ class InventoryTransferController extends Controller
     
     public function index()
     {
-       $InventoryTransfer =InventoryTransfer::all();   
+       $bid = Session::get('bId'); 
+       $InventoryTransfer =InventoryTransfer::where('bId', $bid)->get();   
        return view('inventorytransfer.inventory-transfer-view')->with('InventoryTransfer',$InventoryTransfer);
 
     }
@@ -44,6 +45,7 @@ class InventoryTransferController extends Controller
     
     public function store(Request $request)
     {
+        $bid = Session::get('bId');
         $InventoryTransfer =new  InventoryTransfer;
           $input = Input::all();
 
@@ -51,6 +53,7 @@ class InventoryTransferController extends Controller
         $InventoryTransfer->Description=is_null(Input::get('Description')) ? '' : Input::get('Description');
         $InventoryTransfer->InventoryLocationFrom=Input::get('InventoryLocationFrom');
         $InventoryTransfer->InventoryLocationTo=Input::get('InventoryLocationTo');
+        $InventoryTransfer->bId=$bid;
 
         if ($InventoryTransfer->save()) {
 
@@ -87,6 +90,7 @@ class InventoryTransferController extends Controller
   
     public function update(Request $request, $id){
 
+       $bid = Session::get('bId');
       $InventoryTransfer = InventoryTransfer::find($id);
 
        if($InventoryTransfer!=null){
@@ -96,6 +100,7 @@ class InventoryTransferController extends Controller
         $InventoryTransfer->Description=is_null(Input::get('Description')) ? '' : Input::get('Description');
         $InventoryTransfer->InventoryLocationFrom=Input::get('InventoryLocationFrom');
         $InventoryTransfer->InventoryLocationTo=Input::get('InventoryLocationTo');
+        $InventoryTransfer->bId=$bid;
 
         if ($InventoryTransfer->save()) {
              for($id = 0; $id < count($input['inventId']); $id++){

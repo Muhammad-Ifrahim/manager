@@ -124,7 +124,7 @@
           <a href="{{url('purchaseorder')}}">
             <i class="fa fa-shopping-cart"></i> <span>Purchase Order</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($PurchaseOrderSale)}}</small>
             </span>
           </a>
         </li>

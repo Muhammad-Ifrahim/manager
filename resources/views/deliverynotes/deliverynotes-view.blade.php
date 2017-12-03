@@ -48,7 +48,7 @@
               @Foreach($deliverySale as $key => $value)
                   <tr>
                     <td class="col-md-1">{{$value->DeliveryDate}}</td>
-                    <td class="col-md-1"></td>
+                    <td class="col-md-1">{{$value->OrderNo}}</td>
                     <td class="col-md-1">{{$value->Reference}}</td>
                     <td class="col-md-3">{{$value->user->Name}}</td>
                     <td class="col-md-1">{{$value->Description}}</td>

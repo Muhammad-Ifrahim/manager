@@ -16,7 +16,9 @@ class Customer extends Model
     	'BusinessIdentifier',
     	'BillingAddress',
     	'AdditionalInformation',
+        'bId',
     	'CreditLimit'
+
     ];
 
     public $timestamps = false; // for false updated_at and created_at

@@ -28,7 +28,8 @@ class DeliveryNotesController extends Controller
     public function index()
     {
         $user = Config::get('userU');
-        $deliverySale = DeliverySale::all();
+        $bid = Session::get('bId');   
+        $deliverySale = DeliverySale::where('bId', $bid)->get();
         return view('deliverynotes.deliverynotes-view')->with('deliverySale',$deliverySale);
     }
 
@@ -40,6 +41,7 @@ class DeliveryNotesController extends Controller
   
     public function store(Request $request)
     {
+        $bid = Session::get('bId');
         $deliverySale = new DeliverySale;
         $input = Input::all();
         //dd($input);
@@ -50,6 +52,7 @@ class DeliveryNotesController extends Controller
     $deliverySale->Description = is_null(Input::get('Descriptions')) ? '' : Input::get('Descriptions');
     $deliverySale->Notes = is_null(Input::get('Notes')) ? '' : Input::get('Notes');
     $deliverySale->customer = Input::get('customer');
+    $deliverySale->bId=$bid;
 
         $deliverySale->save();
         $j = $deliverySale->id;
@@ -95,6 +98,7 @@ class DeliveryNotesController extends Controller
    
     public function update(Request $request, $id)
     {
+        $bid = Session::get('bId');
          $deliverySale = DeliverySale::find($id);
          if ($deliverySale!=null) {
            
@@ -107,6 +111,7 @@ class DeliveryNotesController extends Controller
             $deliverySale->Description = is_null(Input::get('Descriptions')) ? '' : Input::get('Descriptions');
             $deliverySale->Notes = is_null(Input::get('Notes')) ? '' : Input::get('Notes');
             $deliverySale->customer = Input::get('customer');
+            $deliverySale->bId=$bid;
 
         $deliverySale->save();
         $j = $deliverySale->id;
@@ -121,7 +126,7 @@ class DeliveryNotesController extends Controller
             }
             
         }
-        Toastr::success('Created Successfully', 'Delivery Note', ["positionClass" => "toast-top-right"]);
+        Toastr::success('Successfully Updated', 'Delivery Note', ["positionClass" => "toast-top-right"]);
         return Redirect::to('deliverynote');
             
          }

@@ -35,7 +35,7 @@
   	 	   <div class="box">
             <div class="box-header">
                <h2 class="box-title">Inventory Transfer </h2>
-                 <a type="button" href="{{url('InventoryTransfer/create')}}" class="btn btn-block btn-success" style="float: right;width: 13%">New Inventory Transfer</a>
+                 <a type="button" href="{{url('InventoryTransfer/create')}}" class="btn btn-block btn-info" style="float: right;width: 13%">New Inventory Transfer</a>
             </div>
 
             <div class="box-body">

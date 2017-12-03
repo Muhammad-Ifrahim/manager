@@ -23,7 +23,8 @@ class SupplierController extends Controller
     public function index()
     {
        $user = Config::get('userU');
-        $supplier = Supplier::all();
+       $bid = Session::get('bId'); 
+       $supplier = Supplier::where('bId', $bid)->get();
        return view('supplier.supplier-view')->with('supplier',$supplier);
     }
 
@@ -36,15 +37,16 @@ class SupplierController extends Controller
     
     public function store(Request $request)
     {
+        $bid = Session::get('bId');
         $validator = Validator::make(Request::all(), [
 
         'Name'  => 'required|max:255',
         'Code'  => 'string|nullable',
-        'Email' => 'email|required',
-        'Telephone' => 'nullable',
-        'BillingAddress' => 'nullable|string',
-        'Fax'=>'nullable',
-        'Mobile'=>'nullable',
+        'Email' => 'email|nullable',
+        'Telephone' => 'required|min:11|numeric',
+        'BillingAddress' => 'required|string',
+        'Fax'=>'min:11|numeric|nullable',
+        'Mobile'=>'min:11|numeric|nullable',
         'CreditLimit' =>'integer|nullable',
         
     ]);
@@ -55,6 +57,7 @@ class SupplierController extends Controller
       }
       else{
              $supplier = new Supplier;
+             $supplier->bId=$bid;
              $supplier->fill(Request::all());
              if($supplier->save()){
                Toastr::success('Successfully Created', 'Supplier', ["positionClass" => "toast-top-right"]);
@@ -81,15 +84,16 @@ class SupplierController extends Controller
 
     
     public function update(Request $request, $id){
+      $bid = Session::get('bId');
       $validator = Validator::make(Request::all(), [
-
+        
         'Name'  => 'required|max:255',
         'Code'  => 'string|nullable',
-        'Email' => 'email|required',
-        'Telephone' => 'nullable',
-        'BillingAddress' => 'nullable|string',
-        'Fax'=>'nullable',
-        'Mobile'=>'nullable',
+        'Email' => 'email|nullable',
+        'Telephone' => 'required|min:11|numeric',
+        'BillingAddress' => 'required|string',
+        'Fax'=>'min:11|numeric|nullable',
+        'Mobile'=>'min:11|numeric|nullable',
         'CreditLimit' =>'integer|nullable',
         
     ]);
@@ -102,8 +106,9 @@ class SupplierController extends Controller
              $supplier = Supplier::find($id);
              if ($supplier!=null) {
                     $supplier->fill(Request::all());
+                    $supplier->bId=$bid;
                       if($supplier->save()){
-                         Toastr::success('Successfully update', 'Supplier', ["positionClass" => "toast-top-right"]);
+                         Toastr::success('Successfully updated', 'Supplier', ["positionClass" => "toast-top-right"]);
                        }
                     return Redirect::to('supplier');
                 }
@@ -114,8 +119,7 @@ class SupplierController extends Controller
     public function destroy($id)
     {
         $supplier =Supplier::find($id);
-
-        if($supplier!=null){
+         if($supplier!=null){
 
             $supplier->delete();
             Toastr::success('Successfully Deleted', 'Supplier', ["positionClass" => "toast-top-right"]);

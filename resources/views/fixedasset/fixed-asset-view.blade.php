@@ -35,7 +35,7 @@
   	 	   <div class="box">
             <div class="box-header">
                <h2 class="box-title">Fixed Assest</h2>
-                 <a type="button" href="{{url('fixedasset/create')}}" class="btn btn-block btn-success" style="float: right;width: 13%">New Fixed Assest</a>
+                 <a type="button" href="{{url('fixedasset/create')}}" class="btn btn-block btn-info" style="float: right;width: 13%">New Fixed Assest</a>
             </div>
 
             <div class="box-body">

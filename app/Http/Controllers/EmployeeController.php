@@ -45,6 +45,7 @@ class EmployeeController extends Controller
   }   
 
   public function store(Request $request){
+     $bid = Session::get('bId');
     //echo "Saver";
 
 /*    $n = array();
@@ -63,6 +64,7 @@ class EmployeeController extends Controller
     else{
         $Employee = new Employee;
         $Employee->fill(Request::all());
+        $Employee->bId=$bid;
         if($Employee->save()){
         } 
         return Redirect::to('employee');
@@ -75,6 +77,7 @@ class EmployeeController extends Controller
   }
 
    public function update($Id){
+    $bid = Session::get('bId');
      $validationRules=array(
     'Name'  => 'required|max:255',
      );
@@ -97,6 +100,7 @@ class EmployeeController extends Controller
           $employee=Employee::find($Id);
           if($employee){
               $employee->fill(Request::all());
+              $employee->bId=$bid;
               echo "ok-tk";
               //dd($employee);
       //        dd(Request::all());

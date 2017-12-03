@@ -389,8 +389,8 @@
       
        <div class="form-group">
            {!!Form::label('Authorized by','Authorized by',['class' => 'col-lg-2 control-label' ]) !!}
-           <div class="col-lg-10">
-              {!! Form::textarea('AuthorizedBy', $value=null, ['class' => 'form-control', 'rows' => 3, ])!!}
+           <div class="col-lg-6">
+              {!! Form::text('AuthorizedBy', $value=null, ['class' => 'form-control-heading'])!!}
               <div class="help-block">{{ $errors->first('Notes') }}</div>
            </div>
        </div>

@@ -40,7 +40,7 @@
        <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-               <h2 class="box-title">Add Expense</h2>
+               <h2 class="box-title">Fixed Asset</h2>
             </div>
         
         <div class="box-body">
@@ -104,8 +104,8 @@
 
            <!-- Submit Button -->
         <div class="form-group">
-            <div class="col-lg-10 col-lg-offset-2">
-                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-right'] ) !!}
+            <div class="col-lg-10 ">
+                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success '] ) !!}
             </div>
         </div>
       
