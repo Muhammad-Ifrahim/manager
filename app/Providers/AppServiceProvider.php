@@ -22,6 +22,12 @@ use App\Models\expenseAccounts;
 use App\Models\Payslips;
 use App\Models\Proforma;
 use App\Models\Role;
+use App\Models\Sale;
+use App\Models\PurchaseOrder;
+use App\Models\Supplier;
+use App\Models\DeliverySale;
+use App\Models\InventoryTransfer;
+use App\Models\InventoryLocation;
 
 use Session;
 use View;
@@ -37,6 +43,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         //To get id of only authenticated/logged user
         $this->app['events']->listen(Authenticated::class, function ($e) {          
         if($e->user->id)
@@ -44,10 +51,16 @@ class AppServiceProvider extends ServiceProvider
             $user=User::find($e->user->id);
             View::share('user',$user);
             
+            /*App::singleton('user', function($app)
+            {
+                $user=User::find(13);
+                return $user;
+            });*/
+
             $user=User::find($user->id);
             Config::set('userU', $user); 
+
             
-            //Get business id from users table
             $bid = $user->bId;
             Session::put('bId', $bid);
             
@@ -63,12 +76,12 @@ class AppServiceProvider extends ServiceProvider
                 View::share('dateId', $strtDate[0]->id);
                 View::share('dateValue', $strtDate[0]->date);
             }
-            else
+        else
             {
                 View::share('dateId', '0');
                 View::share('dateValue', '0');
-            }
-
+            }   
+    //        dd(sizeof($strtDate));
             $pEarnItem = pearnitems::where('bId', $bid)->get();
             View::share('pEarnItem', $pEarnItem);
 
@@ -78,7 +91,7 @@ class AppServiceProvider extends ServiceProvider
             $pDeductItem = pDeductItems::where('bId', $bid)->get();
             View::share('pDeductItem', $pDeductItem);
 
-            $customers=Customer::all();            //this is used to share data between all view
+            $customers=Customer::where('bId', $bid)->get();            //this is used to share data between all view
             View::share('customers',$customers);
 
             $employees=Employee::where('bId', $bid)->get();
@@ -101,15 +114,24 @@ class AppServiceProvider extends ServiceProvider
             $fixedassets=FixedAsset::all();
             View::share('fixedassets',$fixedassets);
 
-            $inventory=Inventory::all();
+            $sale=Sale::where('bId', $bid)->get();
+            View::share('sale',$sale);
+
+            $inventory=Inventory::where('bId', $bid)->get();
             View::share('inventory',$inventory);
-            }
 
-        // $proforma=Proforma::all(); 
-        // View::share('proforma',$proforma);
-        }); 
+            $supplier=Supplier::where('bId', $bid)->get();
+            View::share('supplier',$supplier);
+
+            $DeliverySale=DeliverySale::where('bId', $bid)->get();
+            View::share('DeliverySale',$DeliverySale);    
+
+            $InventoryTransfer=InventoryTransfer::where('bId', $bid)->get();
+            View::share('InventoryTransfer',$InventoryTransfer);                    
+        }
+      }); 
     }
-
+    
     /**
      * Register gupnp_service_proxy_add_notify(proxy, value, type, callback) application services.
      *

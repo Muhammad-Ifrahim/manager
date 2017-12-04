@@ -25,7 +25,7 @@
         </li>
       
         <li>
-          <a>
+          <a href="{{url('Journal')}}" >
             <i class="fa fa-book"></i> <span>Journal Enteries</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>
@@ -49,7 +49,7 @@
           <a href="{{ url('proforma')}}">
             <i class="fa fa-pencil-square"></i> <span>Proforma</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($sale)}}</small>
             </span>
           </a>
         </li>
@@ -102,7 +102,7 @@
           <a href="{{ url('deliverynote')}}">
             <i class="fa fa-truck"></i> <span>Delivery Notes</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($DeliverySale)}}</small>
             </span>
           </a>
         </li>
@@ -110,10 +110,10 @@
 
       @if($user->Supplier)
         <li id="Suppliers">
-          <a href="pages/widgets.html">
+          <a href="{{url('supplier')}}">
             <i class="fa fa-building-o"></i> <span>Suppliers</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($supplier)}}</small>
             </span>
           </a>
         </li>
@@ -121,7 +121,7 @@
 
       @if($user->PurchaseOrder)
         <li id="PurchaseOrder" >
-          <a href="pages/widgets.html">
+          <a href="{{url('purchaseorder')}}">
             <i class="fa fa-shopping-cart"></i> <span>Purchase Order</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>
@@ -165,7 +165,7 @@
           <a href="{{ url('Inventory')}}">
             <i class="fa fa-archive"></i> <span>Inventory Items</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($inventory)}}</small>
             </span>
           </a>
        </li>
@@ -173,11 +173,10 @@
 
       @if($user->InventoryTransfer)  
         <li id="InventoryTransfer">
-          <a href="pages/widgets.html">
-            <i class="fa fa-exchange"></i>
-                 <span>Inventory Transfer</span>
+          <a href="{{ url('InventoryTransfer')}}">
+            <i class="fa fa-exchange"></i><span>Inventory Transfer</span>
             <span class="pull-right-container">
-             <small class="label pull-right bg-green">0</small>
+             <small class="label pull-right bg-green">{{count($InventoryTransfer)}}</small>
             </span>
           </a>
         </li>

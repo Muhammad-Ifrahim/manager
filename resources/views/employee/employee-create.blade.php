@@ -140,7 +140,8 @@
         </div>
         
         <div class="col-lg-30">
-            {{ Form::checkbox('checkValue','1', false, ['id' => 'checker']) }} Starting Balance as at @foreach ($strtDate as $object)
+            {{ Form::checkbox('checkValue','1', false, ['id' => 'checker']) }} Starting Balance as at 
+            @foreach($strtDate as $object)
                 {{ $object->date}}
                @endforeach
         </div>  

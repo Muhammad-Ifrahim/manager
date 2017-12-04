@@ -8,6 +8,7 @@ use Request;
 use Validator;
 use Toastr;
 use Redirect;
+use Config;
 
 
 class InventoryController extends Controller
@@ -19,6 +20,7 @@ class InventoryController extends Controller
   }
     public function index()
     {
+      $user = Config::get('userU');
         $inventory =Inventory::all();
         return view('inventory.inventory-view')->with('inventory',$inventory);
     }

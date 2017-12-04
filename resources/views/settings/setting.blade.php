@@ -28,10 +28,16 @@
                 <h3 class="box-title">Settings</h3>
             </div>
             <div class="box-body">
-            <ul >  
-              <li class="settings">
+              
+             <div class="row">
+               <div class="col-md-12">
+                  <div class="col-md-4">  
                 <a href="{{url('date-setter')}}">
                   <i class="fa fa-calendar" ></i> <span>Start Date</span>
+                </a>
+                </div>
+
+                <div class="col-md-4">
 
                 <a href="{{url('pearnitem')}}">
                   <i class="fa fa-newspaper-o" ></i> <span>Payslip Items</span>
@@ -39,8 +45,19 @@
                   <span class="pull-right-container">
                   </span>
                 </a>
-              </li>
-            </ul>
+                </div>
+
+                <div class="col-md-4">
+
+                <a href="{{url('InventoryLocation')}}">
+                  <i class="fa fa-archive" ></i> <span>Inventory Location</span>
+                  <span class="pull-right-container">
+                  </span>
+                </a>
+                </div>
+              </div>
+             </div> 
+            
             </div>
           </div>
         </div>

@@ -27,7 +27,6 @@
            <link rel="stylesheet" href="{{ asset('asset/bootstrap-daterangepicker/daterangepicker.css') }}">
            <link rel="stylesheet" href="{{ asset('asset/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> 
-
   </head>
     <body class="hold-transition skin-blue sidebar-mini">
       <div class="wrapper" >
@@ -58,7 +57,6 @@
       <script src="{{ asset('asset/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
       <script src="{{ asset('asset/bootstrap/dist/js/bootstrap.min.js') }}"></script>
       <script src="{{ asset('asset/dist/js/adminlte.min.js') }}"></script>
-
       <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script> -->
 
       <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
@@ -72,7 +70,9 @@
      <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
 
      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-   
+
+     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> 
          {!! Toastr::message() !!}
      
                           <!-- Scripts Ended -->

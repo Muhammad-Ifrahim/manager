@@ -2,17 +2,17 @@
 
 @section('content')
   <style type="text/css">
-  	.form-control{
-      height: 44px;
+    .form-control{
+       height: 44px;
      }
-    .form-group {
-      margin-bottom: 35px;
-      width: 65%;
-      margin-left: 17%;
-      margin-top: 10px;
+  	.form-group {
+    	margin-bottom: 35px;
+    	width: 65%;
+    	margin-left: 17%;
+    	margin-top: 10px;
        }
     .form-horizontal{
-      margin-left:4px;
+   		margin-left:4px;
       }
     .btn-info, .btn-success {
       padding-top: 6px;
@@ -22,12 +22,11 @@
       float: left;
      }
     .box-footer{
-      margin-left: 10%;
+    	margin-left: 10%;
      }
     .box-header .box-title {
-        
-       display: inline-block;
-       font-size: 28px;
+      display: inline-block;
+      font-size: 23px;
       margin: 3px;
       line-height: 1;
       color: rgba(76, 175, 80, 0.87);
@@ -40,7 +39,7 @@
        <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-               <h2 class="box-title">Edit Customer: {{$customer->Name}}</h2>
+               <h2 class="box-title"> Supplier</h2>
             </div>
         
         <div class="box-body">
@@ -48,7 +47,7 @@
         
          @include('common.errors')
  
-        {{ Form::model($customer, array('route' => array('customer.update', $customer->custId), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+        {{ Form::model($supplier, array('route' => array('supplier.update', $supplier->supId), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
          
         <!-- Name -->
         <div class="form-group {{ $errors->has('Name') ? 'has-error' : ''}} ">
@@ -94,7 +93,7 @@
        <!-- Billing Address -->
        <div class="form-group {{ $errors->has('BillingAddress') ? 'has-error' : ''}}">
            {!!Form::label('BillingAddress','Billing Address:',['class' => 'col-lg-2 control-label' ]) !!}
-           <div class="col-lg-5">
+           <div class="col-lg-7">
               {!! Form::textarea('BillingAddress', $value=null, ['class' => 'form-control', 'rows' => 3])!!}
               <div class="help-block">{{ $errors->first('BillingAddress') }}</div>
            </div>
@@ -141,9 +140,6 @@
                 {!! Form::submit('Update', ['class' => 'btn btn-lg btn-success pull-right'] ) !!}
             </div>
         </div>
- 
-    
- 
     {!! Form::close()  !!}
      </div>
      </div>

@@ -100,13 +100,7 @@
    
  </style>
 
-
 <script type="text/javascript">
-
-  $( document ).ready(function() {
-      var addres = $('.customer option:selected').attr('data-addres');
-      $('.addres').val(addres);
-    });
   function totalAmount(){
     var t = 0;
     $('.amount').each(function(i,e){
@@ -118,7 +112,7 @@
   }
 
    $(document).ready(function(){
-        var date_input=$('input[name="Date"]'); //our date input has the name "date"
+        var date_input=$('input[name="DeliveryDate"]'); //our date input has the name "date"
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
         var options={
           format: 'yyyy/mm/dd',
@@ -142,13 +136,7 @@
        '<td><input type="text" class="discription form-control-heading" name="discription[]"readonly ></td>' +
 
       '<td><input type="number" class="qty form-control-heading" name="qty[]" ></td>' +
-
-      '<td><input type="text" class="price form-control-heading" name="price[]" readonly></td>' +
-
-      '<td><input type="text" class="dis form-control-heading" name="dis[]"></td>' +
-
-      '<td><input type="text" class="amount form-control-heading" name="amount[]" readonly></td>' +
-        
+   
       '<td><span class="fa fa-trash delete" data-toggle="tooltip" data-original-title="Remove Item" value="x" style="margin-left: 36px;margin-top: 14px;"></span></td></tr>';
       $('.neworderbody').append(tr);
     });
@@ -175,12 +163,12 @@
       tr.find('.price').val(SalesPrice);
       tr.find('.discription').val(description);
          
-      var qty = tr.find('.qty').val() - 0;
-      var dis = tr.find('.dis').val() - 0;
-      var price = tr.find('.price').val() - 0;
+      // var qty = tr.find('.qty').val() - 0;
+      // var dis = tr.find('.dis').val() - 0;
+      // var price = tr.find('.price').val() - 0;
     
-      var total = (qty * price) - ((qty * price * dis)/100);
-      tr.find('.amount').val(total);
+      // var total = (qty * price) - ((qty * price * dis)/100);
+      // tr.find('.amount').val(total);
       totalAmount();
     });
     $('.neworderbody').delegate('.qty , .dis', 'keyup', function () {
@@ -205,86 +193,59 @@
   });
 </script>
 
-<!-- <style>
-.hidden{
-  display : none;  
-}
 
-.show{
-  display : block !important;
-}
-select.form-control.product_id {
-    width: 150px;
-}
-</style> -->
 <div class="content">
 
   <div class="row">
     <div class="col-md-12">
       <div class="box">
          <div class="box-header">
-               <h2 class="box-title">PROFORMA </h2>
+               <h2 class="box-title">EDIT INVENTORY TRANSFER</h2>
          </div>
 
         <div class="box-body">
-          {{ Form::model($sale, array('route' => array('proforma.update', $sale->SaleId), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
-                    
-          <div class="form-group">
-              <div class="{{ $errors->has('Name') ? 'has-error' : ''}} ">
-                <div class="col-lg-6" style="margin-left: 17%">
-                    <div >
-                     {!! Form::label('Heading', 'Heading', ['class' => 'col-lg-2 control-label head']) !!}
-                     </div>
-                    <div style="margin-top: 10%">
-                    {!! Form::text('Heading', $value = null, ['class' => 'form-control-heading', 'placeholder' => 'Proforma Heading' ]) !!}
-                     <div class="help-block">{{ $errors->first('Name') }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+             {{ Form::model($InventoryTransfer, array('route' => array('InventoryTransfer.update', $InventoryTransfer->itransId), 'method' => 'PUT', 'class' => 'form-horizontal')) }}         
+         
  
        <div class="form-group">   
           <div class="{{ $errors->has('IssueDate') ? 'has-error' : ''}} ">
-              {!! Form::label('Issue Date', 'Issue Date', ['class' => 'col-lg-2 control-label']) !!}
-              <div class="col-lg-4">
-                  {!! Form::text('Date', $value = null, array( 'id'=> 'Date',
+              {!! Form::label('Date', ' Date', ['class' => 'col-lg-2 control-label']) !!}
+              <div class="col-lg-3">
+                  {!! Form::text('DeliveryDate', $value = null, array( 'id'=> 'date',
                   'class'  => 'form-control-heading')); !!}
                    <div class="help-block">{{ $errors->first('IssueDate') }}</div>
               </div>
           </div>
           
          <div class="{{ $errors->has('Code') ? 'has-error' : '' }} ">
-             {!!Form::label('QuoteNumber','Quote #',['class' => 'col-lg-2 control-label' ]) !!}
-             <div class="col-lg-4">
-                {!! Form::text('QuoteNumber', $value=null, ['class' => 'form-control-heading','placeholder' => 'Automatic'])!!}
+             {!!Form::label('Reference','Reference #',['class' => 'col-lg-2 control-label' ]) !!}
+             <div class="col-lg-3">
+                {!! Form::text('Reference', $value=null, ['class' => 'form-control-heading','placeholder' => 'Reference'])!!}
                  <div class="help-block">{{ $errors->first('QuoteNumber') }}</div>
              </div>
          </div>
+
+
       </div>
 
+
+
      
+ 
 
-      <div class="form-group">
-          {!!Form::label('customer','Customer',['class' => 'col-lg-2 control-label ' ]) !!}
-        <div class="col-lg-6 customerbody">
-          <select  name="customer" class="form-control-heading customer" id="customer">
-
-                    <option data-addres="{!! $sale->user->BillingAddress !!}" value="{{ $sale->customer}}">
-                      {{ $sale->user->Name}}</option>
-
-             @foreach ($customers as $key => $value)
-                      @if($sale->customer!=$value->custId)
-                     <option data-addres="{!! $value->BillingAddress !!}" value="{{ $value->custId}}">{{$value->custId}}-{{ $value->Name}}</option>
-                     @endif
-             @endforeach
-          </select>
-        </div>
-      </div>        
+      <div class="form-group {{ $errors->has('BillingAddress') ? 'has-error' : ''}}">
+           {!!Form::label('Description','Description',['class' => 'col-lg-2 control-label' ]) !!}
+           <div class="col-lg-6">
+              {!! Form::text('Description', $value=null, ['class' => 'form-control-heading'])!!}
+              <div class="help-block">{{ $errors->first('BillingAddress') }}</div>
+           </div>
+       </div>      
             
     <table class="table col-lg-12">
         <thead>
 
           <tr> 
+            
                 
           <th>
              <div class="col-lg-3">
@@ -304,23 +265,7 @@ select.form-control.product_id {
           </div>  
         </th>
 
-             <th>
-               <div class="col-lg-1">
-                 {!!Form::label('UnitPrice','Price',['class' => 'col-lg-1 control-label head-item' ]) !!}
-               </div>  
-             </th>
-
-             <th>
-               <div class="col-lg-1">
-                 {!!Form::label('Discount','Discount',['class' => 'col-lg-1 control-label head-item' ]) !!}
-               </div>  
-             </th>
-
-            <th>     
-              <div class="col-lg-1">
-                 {!!Form::label('Amount','Amount',['class' => 'col-lg-1 control-label head-item' ]) !!}
-              </div>
-            </th> 
+           
 
             <th>     
               <div class="col-lg-1">
@@ -331,17 +276,16 @@ select.form-control.product_id {
 
               </thead>
               <tbody class="neworderbody">
-                @Foreach($salesItem as $key =>$sale) 
-                  @Foreach($sale->saleQuote as $key=>$value)
                 <tr>
-                 
-                  <td class="col-lg-3">
-                    <select class="form-control inventId form-control-heading" name="inventId[]">
-                      <option data-pro="{!! $value->inventoryItem->Description !!}" data-price="{!! $value->SalePrice !!}" value="{!! $value->inventId !!}">
-                        {!! $value->inventoryItem->ItemName!!}
-                      </option>
+              @Foreach($InventoryTransferItem as $key =>$sale) 
+                  @Foreach($sale->items as $key=>$value) 
+                  <td class="no col-lg-3">
+                    <select class="form-control col-lg-3 inventId form-control-heading" name="inventId[]">
+
+                      <option  data-pro="{!! $value->inventoryItem->Description !!}"  value="{{$value->inventoryItem->inventId }}">{{ $value->inventoryItem->ItemName}}</option>
+
                       @foreach($inventory as $invent)
-                         @if($invent->inventId !=$value->inventId)
+                          @if($invent->inventId!=$value->inventid)
                       <option data-pro="{!! $invent->Description !!}" data-price="{!! $invent->SalePrice !!}" value="{!! $invent->inventId !!}">{!! $invent->ItemName!!}</option>
                          @endif
                       @endforeach
@@ -353,71 +297,68 @@ select.form-control.product_id {
                   </td>
 
                   <td class="col-lg-1">
-                    <input type="number" class="qty form-control form-control-heading " name="qty[]" value="{{$value->Quantity}}" >
+                    <input type="number" class="qty form-control form-control-heading " name="qty[]" 
+                    value="{{$value->Quantity}}" >
                   </td>   
-                  <td class="col-lg-1" >
-                <input type="text" class="price form-control form-control-heading" name="price[]" readonly value="{{$value->SalePrice}}">
-                  </td>
-                  <td class="col-lg-1">
-                  <input type="text" class="dis form-control form-control-heading " name="dis[]" value="{{$value->Discount}}" >
-                  </td>                
-                  <td class="col-lg-1">
-                    <input type="text" class="amount form-control form-control-heading " name="amount[]" value="{{$value->Amount}}" readonly>
-                  </td>
+                  
                   <td class="col-lg-1">
                     <!-- <span class="fa fa-trash delete" ></span> -->
 
-                    <span class="fa fa-trash delete" data-toggle="tooltip" data-original-title="Remove Item" value="x" style="margin-left: 36px;margin-top: 14px;"></span>
+                    <!-- <span class="fa fa-trash delete" data-toggle="tooltip" data-original-title="Remove Item" value="x" style="margin-left: 36px;margin-top: 14px;"></span> -->
                     
                   </td>
-
                 </tr>
-                @endforeach
-                @endforeach
+                 @endforeach
+              @endforeach
               </tbody>                                 
-            </table> 
+            </table>  
 
-       <div > 
-        
-       <div style="margin-left: 70%" >      
-          <div  class="col-lg-3" >
+
+            
+ 
+       <div style="margin-left: 76%" >      
+          <div  class="col-lg-4" >
               <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
           </div>
-          
-         <div class="col-lg-3" style="margin-left: 48px;width: 148px">
-      <input type="text" class=" form-control-heading " name="NetAmount" name="total" id="total"
-             placeholder="Net Amount" readonly value="{{$sale->Amount}}">
-         </div>
          
       </div>
-     </div>       
-                
+     
+     <div class="form-group">
+          {!!Form::label('From','From',['class' => 'col-lg-2 control-label ' ]) !!}
+       <div class="col-lg-6 ">
+        <select  name="InventoryLocationFrom" class="form-control-heading" id="InventoryLocationFrom">
+          <option  value="{{ $InventoryTransfer->InventoryLocationFrom}}">{{ $InventoryTransfer->inventoryLocation->Name}}</option>
+             @foreach ($InventoryLocation as $key => $value)
+                  @if($InventoryTransfer->InventoryLocationFrom !=$value->id)
+                     <option  value="{{ $value->id}}">{{ $value->Name}}</option>
+                   @endif  
+             @endforeach
+          </select>
+        </div>
+      </div> 
+
+
+      <div class="form-group">
+          {!!Form::label('To','To',['class' => 'col-lg-2 control-label ' ]) !!}
+        <div class="col-lg-6 ">
+          <select  name="InventoryLocationTo" class="form-control-heading" id="InventoryLocationTo">
+            <option  value="{{ $InventoryTransfer->InventoryLocationTo}}">{{ $InventoryTransfer->inventoryLocationTo->Name}}</option>
+             @foreach ($InventoryLocation as $key => $value)
+                     @if($InventoryTransfer->InventoryLocationTo !=$value->id)
+                     <option value="{{ $value->id}}">{{ $value->Name}}</option>
+                     @endif
+             @endforeach
+          </select>
+        </div>
+      </div> 
         
-         
-         <!--  -->
-        <div class="form-group {{ $errors->has('BillingAddress') ? 'has-error' : ''}}">
-           {!!Form::label('BillingAddress','Billing Address:',['class' => 'col-lg-2 control-label' ]) !!}
-           <div class="col-lg-10">
-              {!! Form::textarea('BillingAddress', $value=null, ['class' => 'addres form-control', 'rows' => 3,'readonly'])!!}
-              <div class="help-block">{{ $errors->first('BillingAddress') }}</div>
-           </div>
-       </div>
-      <!-- Fax -->
-    
-      
-       <div class="form-group">
-           {!!Form::label('Notes','Notes:',['class' => 'col-lg-2 control-label' ]) !!}
-           <div class="col-lg-10">
-              {!! Form::textarea('Notes', $value=null, ['class' => 'form-control', 'rows' => 3])!!}
-              <div class="help-block">{{ $errors->first('Notes') }}</div>
-           </div>
-       </div>
+        
 
 
         <!-- Submit Button -->
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">
-                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-left'] ) !!}
+                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success '] ) !!}
             </div>
         </div>
          <!--  -->

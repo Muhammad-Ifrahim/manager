@@ -6,7 +6,7 @@ use App\Models\Customer;
 
 class Sale extends Model
 {
-	public $table ='sales';
+	public $table ='sale';
     public $primaryKey ='SaleId';
 
     public $timestamps =false;

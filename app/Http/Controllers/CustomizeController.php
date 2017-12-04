@@ -42,7 +42,8 @@ class CustomizeController extends Controller
 
     function store(Request $request){
         $user = User::find(DB::table('users')->max('id'));
-        //dd(input::all());
+
+
        	$user->accounts=Input::has('accounts') ? 1 : 0;
        	$user->customer=Input::has('customer') ? 1 : 0;
        	$user->SalesQuote=Input::has('SalesQuote') ? 1 : 0;
@@ -57,8 +58,7 @@ class CustomizeController extends Controller
        	$user->employee=Input::has('Employee') ? 1 : 0;
         $user->FixedAsset=Input::has('FixedAsset') ? 1 : 0; 
 
-        //Update the recently created user
-        //$user->fill(Request::all());
+
         $user->save();   	
         
         Toastr::success('Successfully Customize', 'Sidebar', ["positionClass" => "toast-top-right"]);
