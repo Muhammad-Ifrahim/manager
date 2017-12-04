@@ -8,17 +8,28 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    @php
+    $appl = 'KOMPANIA.IO';
+    @endphp
+    <title> {{$appl}}</title>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style type="text/css">
+        .color-me{
+            color:white;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+          <!--nav class="navbar navbar-static-top">
             <div class="container">
-                <div class="navbar-header">
-
+                <div class="navbar-header"-->
+<nav class="navbar navbar-light" style="background-color: #3c8dbc;">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand color-me" href="{{ url('/') }}">KOMPANIA.IO</a>
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
                         <span class="sr-only">Toggle Navigation</span>
@@ -29,21 +40,26 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'KOMPANIA') }}
+    <!-- Styles -->
+           
+                     <title>  {{ config('app.name', 'KOMPANIA') }}</title>
                     </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav navbar-left">
                         &nbsp;
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <a class="color-me navbar-brand" href="{{ route('login') }}">
+                            <span class="glyphicon glyphicon-user-in">                              
+                            </span>Login
+                            </a>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

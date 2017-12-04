@@ -11,4 +11,9 @@ class expenseaccounts extends Model
         'bId',
     ];
     public $timestamps = true;
+
+    public function pContributeItems()
+  	{
+    	return $this->hasMany('App\Models\pContributeItems', 'lAccount', 'id');
+  	}
 }

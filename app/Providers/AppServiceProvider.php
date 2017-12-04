@@ -21,6 +21,7 @@ use App\Models\pContributeItems;
 use App\Models\expenseAccounts;
 use App\Models\Payslips;
 use App\Models\Proforma;
+use App\Models\Role;
 
 use Session;
 use View;
@@ -43,12 +44,6 @@ class AppServiceProvider extends ServiceProvider
             $user=User::find($e->user->id);
             View::share('user',$user);
             
-            /*App::singleton('user', function($app)
-            {
-                $user=User::find(13);
-                return $user;
-            });*/
-
             $user=User::find($user->id);
             Config::set('userU', $user); 
             
@@ -56,6 +51,11 @@ class AppServiceProvider extends ServiceProvider
             $bid = $user->bId;
             Session::put('bId', $bid);
             
+            $allUser = User::where('bId', $bid)->get();
+            View::share('allUser', $allUser);
+            
+            $roles = Role::all();
+            View::share('roles',$roles);
             $strtDate = StartDate::where('bId', $bid)->get();
             View::share('strtDate', $strtDate);
             if(sizeof($strtDate)>0)
@@ -67,8 +67,7 @@ class AppServiceProvider extends ServiceProvider
             {
                 View::share('dateId', '0');
                 View::share('dateValue', '0');
-            }   
-    //        dd(sizeof($strtDate));
+            }
 
             $pEarnItem = pearnitems::where('bId', $bid)->get();
             View::share('pEarnItem', $pEarnItem);
@@ -94,7 +93,8 @@ class AppServiceProvider extends ServiceProvider
 
             $business = Business::all();
             View::share('business', $business);
-            
+            Config::set('business', $business); 
+
             //To avoid migration issue
             Schema::defaultStringLength(191);
 

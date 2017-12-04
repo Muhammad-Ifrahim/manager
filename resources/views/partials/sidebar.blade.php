@@ -202,7 +202,17 @@
         </a>
       </li>
       
-      @if($user->customize)
+      @if($user->userType=='Admin' || $user->userType=='Manager' )
+      <li class="user">
+          <a href="{{ url('user')}}">
+            <i class="fa fa-users"></i>
+             <span style="text-align: center;">Manage People</span>
+            
+          </a>
+        </li>
+        @endif
+
+      @if($user->userType=='Admin' || $user->userType=='Manager' )
       <li class="customize">
           <a href="{{ url('customize')}}">
             <i class="fa fa-wrench"></i>

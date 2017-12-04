@@ -12,6 +12,7 @@ use View;
 use Request;
 use Validator;
 use Redirect;
+use Config;
 
 class BusinessController extends Controller
 {
@@ -26,8 +27,16 @@ class BusinessController extends Controller
     */
     public function index()
     {
-        $business=Business::all();
-        return View::make('business.business-view')->with('business', $business);
+        $currUser = Config::get('userU');
+        if($currUser->userType=='Admin')
+        { 
+            $business=Business::all();
+            return View::make('business.business-view')->with('business', $business);   
+        }
+        else
+        {
+            return View::make('errors.notAllowed-view');
+        }
     }
 
     /**

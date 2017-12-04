@@ -9,8 +9,6 @@ class Proforma extends Model
     public $table = 'salesquotes';  
     public $timestamps=false;
 
-
-
     public function reviews()
     {
    
@@ -18,7 +16,6 @@ class Proforma extends Model
     }
      public function inventoryItem()
     {
-   
         return $this->belongsTo('App\Models\Inventory','inventId');
     }
 }

@@ -29,7 +29,6 @@ class InventoryController extends Controller
 
     public function store(Request $request)
     {
-       
         $validator = Validator::make(Request::all(), [
 
         'ItemCode'  => 'integer',
@@ -37,7 +36,7 @@ class InventoryController extends Controller
         'UnitName' => 'string|nullable',
         'PurchasePrice' => 'integer|nullable',
         'SalePrice' => 'integer|nullable',
-        'Discription'=>'string|nullable',
+        'Description'=>'string|nullable',
         'QtyOnHand'=>'integer|nullable',
         'AverageCost' =>'integer|nullable',
         

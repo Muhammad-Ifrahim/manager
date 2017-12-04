@@ -124,11 +124,11 @@
            </div>
        </div>
        <!-- Billing Address -->
-       <div class="form-group {{ $errors->has('Discription') ? 'has-error' : ''}}">
-           {!!Form::label('Discription','Discription:',['class' => 'col-lg-2 control-label' ]) !!}
+       <div class="form-group {{ $errors->has('Description') ? 'has-error' : ''}}">
+           {!!Form::label('Description','Description:',['class' => 'col-lg-2 control-label' ]) !!}
            <div class="col-lg-10">
-              {!! Form::textarea('Discription', $value=null, ['class' => 'form-control', 'rows' => 3])!!}
-              <div class="help-block">{{ $errors->first('Discription') }}</div>
+              {!! Form::textarea('Description', $value=null, ['class' => 'form-control', 'rows' => 3])!!}
+              <div class="help-block">{{ $errors->first('Description') }}</div>
            </div>
        </div>
        

@@ -6,6 +6,7 @@ use  Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Session;
+
 use View;
 use Request;
 use Validator;

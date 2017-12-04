@@ -13,4 +13,9 @@ class pcontributeitems extends Model
         'bId',
     ];
     public $timestamps = true;
+
+    public function expenseAccounts()
+	{
+	   return $this->belongsTo('App\Models\expenseAccounts', 'lAccout');
+	}
 }

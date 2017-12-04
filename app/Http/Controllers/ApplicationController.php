@@ -10,19 +10,21 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use View;
 use Debugbar;
 use Redirect;
+use Config;
 
 class ApplicationController extends BaseController
 {
-	//use CustomerTrait; 					//Trait is class develop to used by Multiple Users    
+	//Used CustomerTrati - Trait is class develop to used by Multiple Users    
     function index(){
     	$user = Auth::user();
 		// Get the currently authenticated user's ID...
 		$id = Auth::id();
+        $userU = Config::get('userU');
 
     	if ($id==null) {
     		return view('auth.login');
     	}
-        else if ($id==13) {
+        else if ($userU->userType=='Admin') {
             return Redirect::to('business');            
         }
 
