@@ -39,30 +39,29 @@
                 <thead>
                 <tr>
                   <th class="col-md-1" >Date</th>
-                  <th class="col-md-1">Employee</th>
+                  <th class="col-md-2">Employee</th>
                   <th class="col-md-1">Gross Pay</th>
                   <th class="col-md-1">Deduction</th>
                   <th class="col-md-1">Net Pay</th>
                   <th class="col-md-1" >Contribution</th>
-                  <th class="col-md-1" >Last Modified</th>
                   <th class="col-md-1">Action</th>                 
                 </tr>
                 </thead>
                 <tbody>
-                @Foreach($payslp as $key => $value)
+                @Foreach($payslip as $key => $value)
                     <tr>
-                      <td class="col-md-1">{{$value->pdate}}</td>
-                      <td class="col-md-1">{{'--'}}</td>
-                      <td class="col-md-1">{{$value->earn_grossPay}}</td>
-                      <td class="col-md-1">{{$value->deduct_total }}</td>
-                      <td class="col-md-1">{{$value->deduct_netpay }}</td>
-                      <td class="col-md-1">{{$value->econt_total}}</td> 
-                      <td class="col-md-1">{{$value->updated_at}}</td>
+                      <td class="col-md-1">{{$value->Date}}</td>
+                      <td class="col-md-2">{{$value->User->name}}</td>
+                      <td class="col-md-1">{{$value->GrossPay}}</td>
+                      <td class="col-md-1">{{$value->Deduction}}</td>
+                      <td class="col-md-1">{{$value->NetPay}}</td>
+                      <td class="col-md-1">{{$value->Contribution}}</td> 
+                      <td class="col-md-1">
                       <div class="action-region">
-                       <a href="{{ URL::to('payslip/' . $value->pId . '/edit') }}">
+                       <a href="{{ URL::to('payslip/' . $value->payId . '/edit') }}">
                         <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Payslip"></span>
                        </a>
-                       {{ Form::open(array('url' => 'payslip/' . $value->pId, 'class' => 'pull-left')) }}
+                       {{ Form::open(array('url' => 'payslip/' . $value->payId, 'class' => 'pull-left')) }}
                         {{ Form::hidden('_method', 'DELETE') }}
                         {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Payslip"></span>', array( 'type'=>'submit')) }}
                        {{ Form::close() }}                    
