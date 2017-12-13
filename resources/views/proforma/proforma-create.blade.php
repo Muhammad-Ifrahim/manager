@@ -107,7 +107,10 @@
       var amt = $(this).val()-0;
       t += amt;
     });
-   // $('.total').html(t);
+     var tax = $('.tax option:selected').attr('data-price');
+     var taxvalue = (Math.floor(t * (tax/100))).toFixed(2);
+     $('.taxvalue').val(taxvalue);
+     t = t + parseInt(taxvalue);
      $("#total").val(t);
   }
 
@@ -152,6 +155,15 @@
       $(this).parent().parent().remove();
       totalAmount();
     });
+
+    //tax
+   $('.taxbody').delegate('.tax', 'change', function () {
+      var tr = $(this).parent().parent();
+      var taxvalue = tr.find('.tax option:selected').attr('data-price');
+   //   $('.taxvalue').val(taxvalue);
+      totalAmount();
+      });
+
 
    // customer
     $('.customerbody').delegate('.customer', 'change', function () {
@@ -358,11 +370,31 @@ select.form-control.product_id {
 
               </tbody>                                 
             </table>  
-            
+    
+
+     <div class="row" >
+       <div class="col-lg-12" >
+        <div class="col-lg-4 col-lg-offset-7">     
+          <div  class="col-lg-6 taxbody pul-right" >
+             <select class="tax form-control-heading" name="tax" id="tax">
+                      @foreach($Tax as $tax)
+                      <option  data-price="{{$tax->value }}" value="{{$tax->id }}">{{$tax->Tax }}</option>
+                      @endforeach
+              </select>
+          </div>
           
+         <div class="col-lg-6" >
+             <input type="text" class="taxvalue form-control-heading "  name="taxvalue" id="taxvalue"
+             placeholder="Tax %" readonly>
+         </div>
+        </div> 
+      </div>
+     </div>
+
+     
    
     
-      <div > 
+      <div class="row"  style="margin-top: 15px;"> 
        <div style="margin-left: 66%" >      
           <div  class="col-lg-3" >
               <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
