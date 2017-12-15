@@ -1,13 +1,9 @@
-
  <!DOCTYPE html>
  <html>
- <head>
-     
+ <head>     
      <title>Report</title>
  </head>
  <body>
-   
-
       <style type="text/css">
        .box-title {
           display: inline-block;
@@ -77,12 +73,15 @@
       text-align: left;
       border: none;
       }
-         
-         
+
+      tr.hide_all > td, td.hide_all{
+        border-style:hidden;
+      }
     </style>     
    
-      <div>   
-        <h1 class="box-title">{{$sale[0]->Heading}}</h1>
+  <div>
+
+    <h1 class="box-title">{{$sale[0]->Heading}}</h1>
             <div  >
               <div style="width:400px;height: 100px;float: left" >
                 <p>Name <b>{{$sale[0]->user->Name}}</b></p>
@@ -92,17 +91,12 @@
               <div style="width:800px;height: 100px;">
                 <b>Issue Date :<p>{{$sale[0]->Date}}</p></b>
                 <b>Reference  :<p>{{$sale[0]->SaleId}}</p></b>                
-              </div>
-            
+              </div>            
             </div> 
-
-        
-              
-            </div>
-            
+     </div>
             <!-- /.box-header  -->
   <div style="margin-top: 50px;border: 1px solid black;">
-     <table style=" width: 100%">
+<table style=" width: 100%" table table-striped pagin-table table-bordered>
         <thead>
               <tr>
                 <th>Code</th>
@@ -117,16 +111,15 @@
           @Foreach($sale as $key=>$value)
           @Foreach($value->saleQuote as $key=>$value) 
              <tr>
-             
-             <td class="verticalSplit" >{{$value->inventoryItem->ItemCode }}</td>
-             <td class="verticalSplit" >{{$value->inventoryItem->Description}}</td>
-             <td class="verticalSplit" >{{$value->Quantity}}</td>
-             <td class="verticalSplit" >{{$value->SalePrice}}</td>
-             <td class="verticalSplit" >{{$value->Discount}}</td>
-             <td class="verticalSplit" >{{$value->Amount}}</td>
-            
+             <td class="verticalSplit">{{$value->inventoryItem->ItemCode }}</td>
+             <td class="verticalSplit">{{$value->inventoryItem->Description}}</td>
+             <td class="verticalSplit">{{$value->Quantity}}</td>
+             <td class="verticalSplit">{{$value->SalePrice}}</td>
+             <td class="verticalSplit">{{$value->Discount}}</td>
+             <td class="verticalSplit">{{$value->Amount}}</td>
            </tr>
           @endForeach
+          <hr>
           @endForeach 
       
                 
@@ -147,28 +140,28 @@
 
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
-             <td style="width: 18.4%" >Subtotal</td>
+             <td style="width: 18.8%" class="hide_all">Subtotal</td>
              <td style="width: 17.8%" >{{$sale[0]->Amount}}</td>
            </tr>
               
-              <tr>
+            <tr>
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
 
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
-             <td style="width: 18.4%" >Rounding</td>
+             <td style="width: 18.4%" class="hide_all">Rounding</td>
              <td style="width: 17.8%" ></td>
-           </tr>
-          </tr>
+            </tr>
+           
               <tr>
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
 
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
-             <td style="width: 18.4%;font-weight:bold"  >Total</td>
-             <td style="width: 17.8%;font-weight:bold" >{{$sale[0]->Amount}}</td>
+             <td style="width: 18.4%;font-weight:bold" class="hide_all">Total</td>
+             <td style="width: 17.8%;font-weight:bold">{{$sale[0]->Amount}}</td>
            </tr>
                 
         </tbody>
@@ -177,9 +170,5 @@
         </tbody>     
      </table>
 </div>
-<div>
-  
-</div>
-          
  </body>
  </html>

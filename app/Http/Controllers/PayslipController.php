@@ -23,10 +23,12 @@ class PayslipController extends Controller
   }
    
    public function index(){
+
     $bid = Session::get('bId'); 
     $payslip=Payslips::where('bId',$bid)->get();    
   //   dd($payslip);    
     return View::make('settings.payslip.payslip-view')->with('payslip',$payslip); 
+
    }
 
    public function create(){
@@ -151,6 +153,7 @@ class PayslipController extends Controller
 
   public function destroy($Id)
    {
+
         $payslip=Payslips::find($Id);
         $payslip->PayslipsEarnItem()->delete();
         $payslip->PayslipsDeductItem()->delete();

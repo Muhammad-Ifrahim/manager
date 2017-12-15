@@ -13,6 +13,7 @@ class Payslips extends Model
 
     public $timestamps = false; // for false updated_at and created_at
 
+
    
     public function User(){
 
@@ -36,5 +37,6 @@ class Payslips extends Model
      return $this->HasMany('App\Models\PayslipsContribute', 'payId');
     	
     }
+
 
 }

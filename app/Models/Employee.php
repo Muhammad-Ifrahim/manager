@@ -19,4 +19,9 @@ class Employee extends Model
         'bId',
     ];
     public $timestamps = true;
+
+    public function payslips()
+    {
+        return $this->belongsTo('App\Models\payslips');
+    }
 }

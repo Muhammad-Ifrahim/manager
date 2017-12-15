@@ -23,6 +23,19 @@
       } 
     </style>     
 
+    <script>
+
+      function ConfirmDelete()
+      {
+      var x = confirm("Are you sure you want to delete?");
+      if (x)
+        return true;
+      else
+        return false;
+      }
+
+    </script>
+
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
@@ -83,7 +96,7 @@
                        <a href="{{ URL::to('employee/' . $value->empId . '/edit') }}">
                         <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Employee"></span>
                        </a>
-                       {{ Form::open(array('url' => 'employee/' . $value->empId, 'class' => 'pull-left')) }}
+                       {{ Form::open(array('url' => 'employee/' . $value->empId, 'class' => 'pull-left', 'onsubmit' => 'return ConfirmDelete()')) }}
                         {{ Form::hidden('_method', 'DELETE') }}
                         {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Employee"></span>', array( 'type'=>'submit')) }}
                        {{ Form::close() }}                    

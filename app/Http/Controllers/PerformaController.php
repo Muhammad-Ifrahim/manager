@@ -26,8 +26,7 @@ class PerformaController extends Controller
     {
      $bid = Session::get('bId');              
      $sale=Sale::where('bId', $bid)->get(); 
-     return View::make('proforma.proforma-view')->with('sale',$sale); 
-        
+     return View::make('proforma.proforma-view')->with('sale',$sale);
     }
 
     public function create()
@@ -65,7 +64,6 @@ class PerformaController extends Controller
                 $proforma->Amount = $input['amount'][$id];
                 $proforma->save();
             }
-            
         }
         Toastr::success('Proforma Created Successfully', 'Proforma', ["positionClass" => "toast-top-right"]);
         return Redirect::to('proforma');
@@ -78,7 +76,6 @@ class PerformaController extends Controller
          
     }
 
-  
     public function edit($id)
     { 
       $sale=Sale::find($id);
@@ -160,14 +157,11 @@ class PerformaController extends Controller
         return Response::json(array('data' => $proforma));
       
     }
-    public function printReport($id){
-         
-
-        $sale = Sale::with('saleQuote')->with('saleQuote.inventoryItem')->with('user')->where('SaleId',$id)->get();
+    public function printReport($id){     
+       $sale = Sale::with('saleQuote')->with('saleQuote.inventoryItem')->with('user')->
+        where('SaleId',$id)->get();
        $pdf = new PDF();
        $pdf=PDF::loadView('proforma.proforma-print',['sale'=>$sale])->setPaper('A4');
-     return  $pdf->stream('proforma.pdf',array('Attachment'=>0));
-    //   return $pdf->stream();
-       
+       return  $pdf->stream('proforma.pdf',array('Attachment'=>0));
     }
 }
