@@ -4,7 +4,7 @@
  
   <style type="text/css">
     .form-control{
-        height: 43px;
+        height: 37px;
     }
   	.form-group {
     	margin-bottom: 35px;

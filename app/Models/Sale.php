@@ -19,4 +19,8 @@ class Sale extends Model
     {
        return $this->hasMany('App\Models\Proforma', 'saleId');
     }
+    public function TaxName(){
+
+         return $this->belongsTo('App\Models\Tax', 'Tax');
+    }
 }

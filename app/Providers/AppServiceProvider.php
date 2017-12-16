@@ -29,7 +29,9 @@ use App\Models\DeliverySale;
 use App\Models\InventoryTransfer;
 use App\Models\InventoryLocation;
 use App\Models\PurchaseOrderSale;
+use App\Models\Tax;
 use App\Models\PayslipReport;
+
 
 use Session;
 use View;
@@ -142,7 +144,10 @@ class AppServiceProvider extends ServiceProvider
             View::share('InventoryTransfer',$InventoryTransfer); 
 
             $PurchaseOrderSale=PurchaseOrderSale::where('bId', $bid)->get();
-            View::share('PurchaseOrderSale',$PurchaseOrderSale);                    
+            View::share('PurchaseOrderSale',$PurchaseOrderSale); 
+
+            $Tax=Tax::all();
+            View::share('Tax',$Tax);                    
 
             }
 

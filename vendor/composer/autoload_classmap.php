@@ -65,7 +65,9 @@ return array(
     'App\\Models\\InventoryLocation' => $baseDir . '/app/Models/InventoryLocation.php',
     'App\\Models\\InventoryTransfer' => $baseDir . '/app/Models/InventoryTransfer.php',
     'App\\Models\\InventoryTransferItem' => $baseDir . '/app/Models/InventoryTransferItem.php',
+
     'App\\Models\\PayslipReport' => $baseDir . '/app/Models/PayslipReport.php',
+
     'App\\Models\\Payslips' => $baseDir . '/app/Models/Payslips.php',
     'App\\Models\\Proforma' => $baseDir . '/app/Models/Proforma.php',
     'App\\Models\\PurchaseOrder' => $baseDir . '/app/Models/PurchaseOrder.php',
@@ -146,6 +148,7 @@ return array(
     'Collective\\Html\\HtmlFacade' => $vendorDir . '/laravelcollective/html/src/HtmlFacade.php',
     'Collective\\Html\\HtmlServiceProvider' => $vendorDir . '/laravelcollective/html/src/HtmlServiceProvider.php',
     'Cpdf' => $vendorDir . '/dompdf/dompdf/lib/Cpdf.php',
+    'CreateRoles' => $baseDir . '/database/migrations/2017_12_03_171215_createRoles.php',
     'Cron\\AbstractField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
     'Cron\\CronExpression' => $vendorDir . '/mtdowling/cron-expression/src/Cron/CronExpression.php',
     'Cron\\DayOfMonthField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/DayOfMonthField.php',
@@ -2990,6 +2993,7 @@ return array(
     'Ramsey\\Uuid\\UuidFactory' => $vendorDir . '/ramsey/uuid/src/UuidFactory.php',
     'Ramsey\\Uuid\\UuidFactoryInterface' => $vendorDir . '/ramsey/uuid/src/UuidFactoryInterface.php',
     'Ramsey\\Uuid\\UuidInterface' => $vendorDir . '/ramsey/uuid/src/UuidInterface.php',
+    'RemovePaySlip' => $baseDir . '/database/migrations/2017_12_04_112754_removePaySlip.php',
     'RenameEmployeeColumn' => $baseDir . '/database/migrations/2017_12_10_093646_RenameEmployeeColumn.php',
     'RenameStnkColumn' => $baseDir . '/database/2017_11_05_130735_rename_stnk_column.php',
     'RenamepContributionItem' => $baseDir . '/database/migrations/2017_11_10_040557_renamepContributionItem.php',

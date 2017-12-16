@@ -47,6 +47,8 @@ class PerformaController extends Controller
         $sale->Date=is_null(Input::get('date')) ? '' : Input::get('date');
         $sale->customer =Input::get('customer'); 
         $sale->Amount = is_null(Input::get('NetAmount')) ? 0 : Input::get('NetAmount');
+        $sale->Tax = Input::get('tax');
+        $sale->TaxAmount = Input::get('taxvalue');
         $sale->bId=$bid;
         $sale->save();
         $j = $sale->SaleId;
@@ -96,6 +98,8 @@ class PerformaController extends Controller
         $sale->Date=is_null(Input::get('Date')) ? '' : Input::get('Date');
         $sale->customer =Input::get('customer'); 
         $sale->Amount = is_null(Input::get('NetAmount')) ? 0 : Input::get('NetAmount');
+        $sale->Tax = Input::get('tax');
+        $sale->TaxAmount = Input::get('taxvalue');
         $sale->bId=$bid;
         $sale->save();
         $j = $sale->SaleId;
