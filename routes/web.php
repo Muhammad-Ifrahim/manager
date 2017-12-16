@@ -34,9 +34,9 @@ Route::resource('payslip', 'PayslipController');
 Route::resource('proforma','PerformaController');
 Route::resource('InventoryTransfer','InventoryTransferController');
 Route::resource('InventoryLocation','InventoryLocationController');
+Route::resource('Reports', 'ReportController');
+Route::resource('EarnReport', 'EarnReportController');
 
-//Inventory
-//login
 Route::resource('supplier','SupplierController');
 
 Route::resource('Inventory','InventoryController');

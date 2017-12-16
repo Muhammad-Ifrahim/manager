@@ -29,6 +29,7 @@ use App\Models\DeliverySale;
 use App\Models\InventoryTransfer;
 use App\Models\InventoryLocation;
 use App\Models\PurchaseOrderSale;
+use App\Models\PayslipReport;
 
 use Session;
 use View;
@@ -77,7 +78,7 @@ class AppServiceProvider extends ServiceProvider
                 View::share('dateId', $strtDate[0]->id);
                 View::share('dateValue', $strtDate[0]->date);
             }
-        else
+            else
             {
                 View::share('dateId', '0');
                 View::share('dateValue', '0');
@@ -104,6 +105,15 @@ class AppServiceProvider extends ServiceProvider
             //For Payslips     
             $payslp = Payslips::where('bId', $bid)->get();
             View::share('payslp', $payslp);
+
+            $earnRep = PayslipReport::where('bId', $bid)->get();
+            View::share('earnRep', $earnRep);
+
+            /*$p = Payslips::find(1);
+            foreach ($p->pearnitems as $emp) 
+            { 
+                echo $emp->name;
+            }*/
 
             $business = Business::all();
             View::share('business', $business);

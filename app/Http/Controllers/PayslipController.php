@@ -20,6 +20,7 @@ class PayslipController extends Controller
   }
    
    public function index(){
+
     return View::make('settings.payslip.payslip-view'); 
    }
 

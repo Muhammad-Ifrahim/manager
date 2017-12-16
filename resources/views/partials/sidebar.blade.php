@@ -152,7 +152,7 @@
           
          
          <li >
-          <a href="pages/widgets.html">
+          <a href="{{ url('Reports')}}">
             <i class="fa fa-print"></i> <span>Reports</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>

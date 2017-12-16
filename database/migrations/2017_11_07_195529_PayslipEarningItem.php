@@ -18,6 +18,11 @@ class PayslipEarningItem extends Migration
             $table->increments('eId');
             $table->string('name', 75);
             $table->integer('eAccount');
+            $table->unsignedInteger('bId');
+            $table->foreign('bId')
+            ->references('id')
+            ->on('business')
+            ->onDelete('cascade');
             $table->timestamps();        
         });
     }

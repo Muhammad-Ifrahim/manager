@@ -27,4 +27,14 @@ class Payslips extends Model
     ];
 
     public $timestamps = false; // for false updated_at and created_at
+
+    public function employees()
+    {
+        return $this->hasMany('App\Models\Employee');
+    }
+
+    public function pearnitems()
+    {
+        return $this->hasMany('App\Models\pearnitems');
+    }
 }
