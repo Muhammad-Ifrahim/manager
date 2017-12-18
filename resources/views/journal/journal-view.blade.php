@@ -138,9 +138,9 @@
 
        '<td><input type="text" class="discription form-control-heading" name="discription[]" ></td>' +
 
-      '<td><input type="text" class="dis form-control-heading" name="dis[]"></td>' +
+      '<td><input type="text" class="debt form-control-heading" name="debt[]"></td>' +
 
-      '<td><input type="text" class="amount form-control-heading" name="amount[]" ></td>' +
+      '<td><input type="text" class="credit form-control-heading" name="credit[]" ></td>' +
         
       '<td><span class="fa fa-trash delete" data-toggle="tooltip" data-original-title="Remove Item" value="x" style="margin-left: 36px;margin-top: 14px;"></span></td></tr>';
       $('.neworderbody').append(tr);
@@ -252,7 +252,7 @@ select.form-control.product_id {
           <div class="{{ $errors->has('IssueDate') ? 'has-error' : ''}} ">
               {!! Form::label('Narration', 'Narration', ['class' => 'col-lg-2 control-label']) !!}
               <div class="col-lg-6">
-                  {!! Form::text('date', $value = null, array( 'id'=> 'date',
+                  {!! Form::text('Narration', $value = null, array( 'id'=> 'date',
                   'class'  => 'form-control-heading')); !!}
                    <div class="help-block">{{ $errors->first('IssueDate') }}</div>
               </div>
@@ -316,10 +316,10 @@ select.form-control.product_id {
                     <input type="text" class="discription form-control-heading " name="discription[]" >
                   </td>
                   <td class="col-lg-1">
-                  <input type="text" class="dis form-control form-control-heading " name="dis[]" >
+                  <input type="text" class="debt form-control form-control-heading " name="debt[]" >
                   </td>                
                   <td class="col-lg-1">
-                    <input type="text" class="amount form-control form-control-heading " name="amount[]" >
+                    <input type="text" class="credit form-control form-control-heading " name="credit[]" >
                   </td>
                   <td class="col-lg-1">
                     <!-- <span class="fa fa-trash delete" ></span> -->
@@ -343,10 +343,10 @@ select.form-control.product_id {
                     <input type="text" class="discription form-control-heading " name="discription[]" >
                   </td>
                   <td class="col-lg-1">
-                  <input type="text" class="dis form-control form-control-heading " name="dis[]" >
+                  <input type="text" class="debt form-control form-control-heading " name="debt[]" >
                   </td>                
                   <td class="col-lg-1">
-                    <input type="text" class="amount form-control form-control-heading " name="amount[]">
+                    <input type="text" class="credit form-control form-control-heading " name="credit[]">
                   </td>
                   <td class="col-lg-1">
                     <!-- <span class="fa fa-trash delete" ></span> -->
@@ -369,12 +369,12 @@ select.form-control.product_id {
            <div class="col-lg-6"></div>
 
            <div  class="col-lg-2 taxbody " >
-             <input type="text" class=" form-control-heading " name="NetAmount" name="total" id="total"
+             <input type="text" class="debtTotal form-control-heading " name="debtTotal" name="debtTotal" id="debtTotal"
              placeholder="Debit" readonly>  
           </div>
           
          <div class="col-lg-2" >
-             <input type="text" class="taxvalue form-control-heading "  name="taxvalue" id="taxvalue"
+             <input type="text" class="debtTotal form-control-heading "  name="creditTotal" id="creditTotal"
              placeholder="Credit" readonly>
          </div>
          <div class="col-lg-1">

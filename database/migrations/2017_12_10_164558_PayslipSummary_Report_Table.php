@@ -23,7 +23,7 @@ class PayslipSummaryReportTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('bId');
             $table->foreign('bId')
-            ->references('id')
+            ->references('bId')
             ->on('business')
             ->onDelete('cascade');        
         });
@@ -36,7 +36,7 @@ class PayslipSummaryReportTable extends Migration
      */
     public function down()
     {
-        Schema::create('payslipReports', function(Blueprint $table)
+        Schema::drop('payslipReports', function(Blueprint $table)
         {
             $table->increments('id');
             $table->string('description', 200);
@@ -45,7 +45,7 @@ class PayslipSummaryReportTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('bId');
             $table->foreign('bId')
-            ->references('id')
+            ->references('bId')
             ->on('business')
             ->onDelete('cascade');  
         });

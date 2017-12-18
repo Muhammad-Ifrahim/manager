@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class PayslipsDeduct extends Model
 {
     public $primaryKey ='payslipsdeductitemsid';
-    public $table='payslipsdeductItems';
+    public $table='payslipsdeductitems';
 
     public function Deduct(){
     	return $this->belongsTo('App\Models\pDeductItems', 'Deduction');
