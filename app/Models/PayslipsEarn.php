@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 class PayslipsEarn extends Model
 {
     public $primaryKey ='payslipsearnitemid';
-    public $table='payslipsearnItems';
-
+    public $table='payslipsearnitems';
+    
     public function Earn(){
     	return $this->belongsTo('App\Models\pearnitems', 'Earning');
     }

@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payslips extends Model
 {
+    public $table="payslips";
     public $primaryKey ='payId';
     public $fillable = [
     	'pdate', 

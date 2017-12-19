@@ -108,7 +108,9 @@
       t += amt;
     });
      var tax = $('.tax option:selected').attr('data-price');
-     var taxvalue = (Math.floor(t * (tax/100))).toFixed(2);
+     console.log(t* (tax/100));
+     var taxvalue = (t * (tax/100)).toFixed(2);
+     // console.log(taxvalue);
      $('.taxvalue').val(taxvalue);
      t = t + parseInt(taxvalue);
      $("#total").val(t);
@@ -397,7 +399,7 @@ select.form-control.product_id {
       <div class="row"  style="margin-top: 15px;"> 
        <div style="margin-left: 66%" >      
           <div  class="col-lg-3" >
-              <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
+              <input type="button" class=" add btn btn-info" value="Add Item">
           </div>
           
          <div class="col-lg-3" style="margin-left: 48px;width: 148px">

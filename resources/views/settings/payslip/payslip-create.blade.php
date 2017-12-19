@@ -28,7 +28,7 @@
        }
     .btn-info{
     padding-top: 6px;
-    height: 41px;
+    height: 37px;
    /*margin-left: 43%;*/
     width: 12%;
     float: left;
@@ -56,7 +56,7 @@
       }
     .btn-info {
     padding-top: 6px;
-    height: 44px;
+    height: 37px;
     margin-left: 14%;
     width: 173%;
     float: left;
@@ -553,24 +553,21 @@
       </div>
      </div>       
          
-     <br>
-     <br>
-
 
        <!--Employeer Contribution Deduction  -->
-       <div class="form-group" >
-           {!!Form::label('Notes','Notes:',['class' => 'col-lg-2 control-label' ]) !!}
-           <div class="col-lg-7">
-              {!! Form::textarea('Notes', $value=null, ['class' => 'form-control', 'rows' => 3, ])!!}
-              <div class="help-block">{{ $errors->first('Notes') }}</div>
-           </div>
-       </div>
+     <div class="form-group" >
+         {!!Form::label('Notes','Notes:',['class' => 'col-lg-2 control-label' ]) !!}
+         <div class="col-lg-7">
+            {!! Form::textarea('Notes', $value=null, ['class' => 'form-control', 'rows' => 3, ])!!}
+            <div class="help-block">{{ $errors->first('Notes') }}</div>
+         </div>
+     </div>
 
 
         <!-- Submit Button -->
-        <div class="form-group">
+        <div class="form-group " >
             <div class="col-lg-10 ">
-                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-left'] ) !!}
+                {!! Form::submit('Submit', ['class' => 'btn btn-success '] ) !!}
             </div>
         </div>
          <!--  -->

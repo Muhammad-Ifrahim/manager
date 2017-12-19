@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class PayslipsContribute extends Model
 {
     public $primaryKey ='payslipscontributeitemsid';
-    public $table='payslipscontributeItems';
+    public $table='payslipscontributeitems';
 
     public function Contribute(){
     	return $this->belongsTo('App\Models\pContributeItems', 'Contribution');
