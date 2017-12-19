@@ -279,15 +279,13 @@
          
       </div>
 
-     
-
       <div class="form-group">
           {!!Form::label('Employee','Employee',['class' => 'col-lg-2 control-label ' ]) !!}
         <div class="col-lg-6 customerbody">
           <select  name="Employee" class="form-control-heading Employee" id="Employee">
                     <option></option>
              @foreach ($employees as $key => $value)
-                     <option  value="{{ $value->empId}}">{{ $value->name}}</option>
+                     <option  value="{{$value->empId}}">{{ $value->name}}</option>
              @endforeach
           </select>
         </div>
@@ -295,10 +293,7 @@
             
     <table class="table col-lg-12">
         <thead>
-
           <tr> 
-            
-                
           <th>
              <div class="col-lg-3">
                {!!Form::label('Earning','Earning',['class' => 'col-lg-3 control-label head-item' ]) !!}

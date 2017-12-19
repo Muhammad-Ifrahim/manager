@@ -25,8 +25,7 @@ class PayslipController extends Controller
    public function index(){
 
     $bid = Session::get('bId'); 
-    $payslip=Payslips::where('bId',$bid)->get();    
-  //   dd($payslip);    
+    $payslip=Payslips::where('bId',$bid)->get();     
     return View::make('settings.payslip.payslip-view')->with('payslip',$payslip); 
 
    }
