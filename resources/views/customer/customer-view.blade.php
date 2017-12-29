@@ -56,7 +56,7 @@
                     <td class="col-md-1"></td>
                     <td class="col-md-1"></td>
                     <td class="col-md-1"></td>
-                    <td class="col-md-1">{{$value->CreditLimit}}</td>
+                    <td class="col-md-1">{{number_format($value->CreditLimit,2)}}</td>
                     <td class="col-md-1">
                      <div class="action-region">
                        <a href="{{ URL::to('customer/' . $value->custId . '/edit') }}">

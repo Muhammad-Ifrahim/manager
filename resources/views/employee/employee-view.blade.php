@@ -87,7 +87,7 @@
                         $sumAp = $sumAp + $value->amount;
                         @endphp
                         <td class="col-md-1"></td>
-                        <td class="col-md-1">{{$value->amount}}</td> 
+                        <td class="col-md-1">{{number_format($value->amount,2)}}</td> 
 
                       @endif                 
                       <td class="col-md-1">{{$value->updated_at}}</td>
@@ -114,12 +114,12 @@
 
                  <td>
                  @if($sumPa>0)
-                 <strong>{{$sumPa}}</strong>
+                 <strong>{{number_format($sumPa,2)}}</strong>
                  @endif
                  </td>
                  <td>
                  @if($sumAp>0)
-                 <strong>{{$sumAp}}</strong>
+                 <strong>{{number_format($sumAp,2)}}</strong>
                  @endif
                  </td>
   

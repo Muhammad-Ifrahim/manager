@@ -52,10 +52,10 @@
                     <tr>
                       <td class="col-md-1">{{$value->Date}}</td>
                       <td class="col-md-2">{{$value->User->name}}</td>
-                      <td class="col-md-1">{{$value->GrossPay}}</td>
-                      <td class="col-md-1">{{$value->Deduction}}</td>
-                      <td class="col-md-1">{{$value->NetPay}}</td>
-                      <td class="col-md-1">{{$value->Contribution}}</td> 
+                      <td class="col-md-1">{{number_format($value->GrossPay,2) }}</td>
+                      <td class="col-md-1">{{number_format($value->Deduction,2)}}</td>
+                      <td class="col-md-1">{{number_format($value->NetPay,2)}}</td>
+                      <td class="col-md-1">{{number_format($value->Contribution,2)}}</td> 
                       <td class="col-md-1">
                       <div class="action-region">
                        <a href="{{ URL::to('payslip/' . $value->payId . '/edit') }}">

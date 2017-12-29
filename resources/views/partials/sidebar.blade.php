@@ -1,23 +1,33 @@
+
 <aside class="main-sidebar">
     <section class="sidebar">
-     
-     
+      
      <ul class="sidebar-menu" data-widget="tree">
+       
+        <li id="BankTransaction" >
+          <a href="{{url('summary')}}">
+            <i class="fa fa-tv"></i> <span>Summary</span>
+          </a>
+        </li>
+
+        
        @if($user->accounts)
          <li id="BankAccount" >
-            <a href="pages/widgets.html">
+            <a href="">
               <i class="fa fa-university"></i> <span>Bank Accounts</span>
               <span class="pull-right-container">
-                <small class="label pull-right bg-green">0</small>
+                <small class="label pull-right bg-blue">In Progress</small>
               </span>
             </a>
           </li>
         @endif
 
+        
+
       
         <li id="BankTransaction" >
-          <a href="pages/widgets.html">
-            <i class="fa fa-money"></i> <span>Bank Transactions</span>
+          <a href="">
+            <i class="fa fa-money"></i> <span>Cash Account</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>
             </span>
@@ -28,7 +38,16 @@
           <a href="{{url('Journal')}}" >
             <i class="fa fa-book"></i> <span>Journal Enteries</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($Journal)}}</small>
+            </span>
+          </a>
+        </li> 
+
+        <li>
+          <a href="{{url('ledgers')}}" >
+            <i class="fa fa-book"></i> <span>Ledgers</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-blue">T-Accounts</small>
             </span>
           </a>
         </li> 
@@ -59,14 +78,14 @@
           <a href="{{ url('payslip') }}">
             <i class="fa fa-newspaper-o"></i> <span>Payslips</span>
             <span class="pull-right-container">
-              <small class="label pull-right bg-green">0</small>
+              <small class="label pull-right bg-green">{{count($payslp)}}</small>
             </span>
           </a>
       </li>
 
       @if($user->SalesOrder)
         <li id="SalesOrder" >
-          <a href="pages/widgets.html">
+          <a href="">
             <i class="fa fa-th-list"></i> <span>Sales Order</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>
@@ -75,7 +94,7 @@
         </li>
       @endif  
 
-      @if($user->SalesInvoice)
+     <!--  @if($user->SalesInvoice)
         <li id="SalesInvoices">
           <a href="pages/widgets.html">
             <i class="fa fa-th"></i> <span>Sales Invoices</span>
@@ -84,7 +103,7 @@
             </span>
           </a>
         </li>
-      @endif  
+      @endif   -->
 
       @if($user->employee)
         <li id="Employee">
@@ -130,7 +149,7 @@
         </li>
       @endif
 
-      @if($user->PurchaseInvoice)
+      <!-- @if($user->PurchaseInvoice)
          <li id="PurchaseInvoices" >
           <a href="pages/widgets.html">
             <i class="fa fa-calendar"></i> <span>Purchase Invoices</span>
@@ -139,7 +158,7 @@
             </span>
           </a>
         </li>
-      @endif
+      @endif -->
 
         <li id="Emails">
           <a href="pages/widgets.html">

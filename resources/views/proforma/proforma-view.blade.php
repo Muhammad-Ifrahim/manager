@@ -49,7 +49,7 @@
                     <td class="col-md-1">{{$value->Date}}</td>
                     <td class="col-md-1">{{$value->SaleId}}</td>
                     <td class="col-md-4">{{$value->user->Name}} </td>
-                    <td class="col-md-1">{{$value->Amount}}</td>
+                    <td class="col-md-1">{{number_format($value->Amount,2)}}</td>
                     <td class="col-md-1">
                      <div class="action-region">
                        <a href="{{ URL::to('proforma/' . $value->SaleId . '/edit') }}">

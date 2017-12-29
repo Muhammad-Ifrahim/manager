@@ -12,6 +12,7 @@
 */
 Auth::routes();
 Route::resource('/','ApplicationController');
+Route::resource('summary','SummaryController');
 Route::resource('customer','CustomerController');
 Route::resource('employee','EmployeeController');
 Route::resource('customize','CustomizeController');                
@@ -25,6 +26,7 @@ Route::resource('pdeductitem', 'pDeductItemController');
 Route::resource('pcontributeitem', 'pContributeItemsController');
 Route::resource('pearnitem', 'pEarnItemsController');
 Route::resource('user', 'RegController');
+Route::resource('ledgers', 'LedgerController');
 
 Route::resource('deliverynote','DeliveryNotesController');
 Route::get('/deliverynote/{id}/print', 'DeliveryNotesController@printReport');

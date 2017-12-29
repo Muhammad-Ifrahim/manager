@@ -26,13 +26,7 @@
       margin-top: 10px;
      
        }
-    .btn-info{
-    padding-top: 6px;
-    height: 41px;
-   /*margin-left: 43%;*/
-    width: 12%;
-    float: left;
-      }
+   
 
    .form-control-heading{
     display: block;
@@ -55,11 +49,11 @@
       margin-left:4px;
       }
     .btn-info {
-    padding-top: 6px;
-    height: 44px;
-    margin-left: 14%;
+   /* padding-top: 6px;*/
+    height: 37px;
+   /* margin-left: 14%;*/
     width: 173%;
-    float: left;
+    /*float: left;*/
     border-radius: 6px 6px 6px 6px;
      }
     .btn-success{

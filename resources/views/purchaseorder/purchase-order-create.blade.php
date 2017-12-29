@@ -36,7 +36,7 @@
    .form-control-heading{
     display: block;
     width: 100%;
-    height: 44px;
+    height: 37px;
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
@@ -55,7 +55,7 @@
       }
     .btn-info {
     padding-top: 6px;
-    height: 44px;
+    height: 37px;
     margin-left: 14%;
     width: 173%;
     float: left;

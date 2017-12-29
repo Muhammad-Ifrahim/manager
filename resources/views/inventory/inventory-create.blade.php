@@ -16,7 +16,7 @@
       }
     .btn-info, .btn-success {
       padding-top: 6px;
-      height: 41px;
+      height: 37px;
       margin-left: 25%;
       width: 25%;
       float: left;

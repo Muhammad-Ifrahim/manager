@@ -31,6 +31,9 @@ use App\Models\InventoryLocation;
 use App\Models\PurchaseOrderSale;
 use App\Models\Tax;
 use App\Models\PayslipReport;
+use App\Models\Accounts;
+use App\Models\Journal;
+use App\Models\JournalEntry;
 
 
 use Session;
@@ -147,9 +150,26 @@ class AppServiceProvider extends ServiceProvider
             View::share('PurchaseOrderSale',$PurchaseOrderSale); 
 
             $Tax=Tax::all();
-            View::share('Tax',$Tax);                    
+            View::share('Tax',$Tax);   
+
+            $account=Accounts::where('AccountType','!=','Income')->get();
+            $accountType = $account->groupBy('AccountType');
+            View::share('account',$account);
+            View::share('accountType',$accountType);
+
+             // Expeneses
+            $accountCredit=Accounts::where('AccountType','!=','Expenses')->get();
+            $accountCreditType = $accountCredit->groupBy('AccountType');
+            View::share('accountCredit',$accountCredit);
+            View::share('accountCreditType',$accountCreditType);               
+
+
+            $Journal=Journal::where('bId', $bid)->get();
+            View::share('Journal',$Journal);  
 
             }
+
+
 
         // $proforma=Proforma::all(); 
 

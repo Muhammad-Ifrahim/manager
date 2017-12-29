@@ -49,7 +49,7 @@
                     <td class="col-md-1">{{$value->Name}} </td>
                     <td class="col-md-1">{{$value->Telephone}}</td>
                     <td class="col-md-1">{{$value->Email}}</td>
-                    <td class="col-md-1">{{$value->CreditLimit}}</td>
+                    <td class="col-md-1">{{number_format($value->CreditLimit,2)}}</td>
                     <td class="col-md-1">
                      <div class="action-region">
                        <a href="{{ URL::to('supplier/' . $value->supId . '/edit') }}">
