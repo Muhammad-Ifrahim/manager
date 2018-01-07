@@ -93,52 +93,90 @@
     <h3 class="box-align2">For the period from {{$pslipRep[0]->from}} to {{$pslipRep[0]->to}}
     </h3>
             <!-- /.box-header  -->
-  <div style="margin-top: 50px;border: 1px solid black;">
-<table style=" width: 100%" table table-striped pagin-table table-bordered>
+  <div style="margin-top: 50px; border:1px solid black;">
+    <table style=" width: 100%" table table-striped pagin-table table-bordered>
+  {{-- I have added php tags to use php code in order to display Payslip earning item names uniquely --}}
         <thead>
               <tr>
                 <th>Employee</th>
-                @Foreach($pslips[0]->pearnitems as $key=>$value)
-                @if($value->eId==$pslips[0]->eId)
-                {
-                  <th>{{$value->name}}</th>
-                }
-                @endif
-                @endForeach
+                {{-- Get All PayslipEarning Items --}}
+
+                @php
+                $earnNameTemp = $earnName;
+                $totalNetPay = 0;
+                $totalPCol = array();
+                @endphp
+
+                @for ($i=0; $i < sizeof($pslips); $i++) {  
+                  @for ($j=0; $j < sizeof($pslips[$i]->PayslipsEarnItem); $j++) { 
+                    @if(in_array($pslips[$i]->PayslipsEarnItem[$j]->Earn->name, $earnNameTemp))
+                    {
+                      <th>{{$pslips[$i]->PayslipsEarnItem[$j]->Earn->name}}</th>
+                      
+                      @php
+                      $colName = array();
+                      array_push($colName, $pslips[$i]->PayslipsEarnItem[$j]->Earn->name);
+                      $earnNameTemp =  array_diff($earnName, [$pslips[$i]->PayslipsEarnItem[$j]->Earn->name]);
+                      @endphp
+                    
+                    }@endif
+                  }@endfor
+                }@endfor
                 <th>Total</th>
               </tr>
         </thead>
-        {{$pslips}}
+        
         <tbody>
-          @Foreach($pslips[0]->employees as $key=>$value)
-             <tr>
-             <td class="verticalSplit">{{$value->name}}</td>
-          @endForeach
-
-          @Foreach($pslips as $key => $value)
-           <td class="verticalSplit">{{$value->earn_total}}</td>
-          @endForeach
-
-          @Foreach($pslips as $key => $value)
-           <td class="verticalSplit">{{$value->earn_total}}</td>
-          @endForeach
-           </tr>
-          <hr>
-        </tbody>
-        <tbody>      
+           {{--$pslips--}}
+          @for ($i=0; $i < sizeof($pslips); $i++) { 
+            
+            <tr>
+              @if(in_array($pslips[$i]->User->name, $empName))
+                {
+                  <td class="verticalSplit">{{$pslips[$i]->User->name}}</td>
+                  @php
+                   $empName =  array_diff($empName, [$pslips[$i]->User->name]);
+                  @endphp
+                }@endif
               
-        </tbody>     
+              @php
+                $total_size = sizeof($colName)+1;
+              @endphp
+              
+              @for ($j=0; $j < sizeof($pslips[$i]->PayslipsEarnItem); $j++) {
+                <td class="verticalSplit">{{$pslips[$i]->[$j]->Amount}}</td> 
+                @php
+
+                $totalCol1 = $pslips[$i]->PayslipsEarnItem[$j]->Amount;
+                $total_size = $total_size-1;
+                @endphp
+              }@endfor
+              @for ($k=0; $k < $total_size;$k++)
+              <td class="verticalSplit">{{''}}</td>              
+              @endfor
+              <td class="verticalSplit">{{$pslips[$i]->NetPay}}</td>
+              @php
+                $totalNetPay += $pslips[$i]->NetPay;
+              @endphp
+            </tr>   
+          }@endfor
+
+          <tr>
+            <td>{{''}}</td>
+                        <td>{{''}}</td>
+                                    <td>{{''}}</td>
+            <td> {{$totalNetPay}} </td>
+          </tr>
+          
+        </tbody>
      </table>
 </div>
-  <div >
+  <!--div >
      <table style=" width: 100%">
-       
         <tbody>
-       
            <tr>
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
-
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
              <td style="width: 18.8%" class="hide_all">Subtotal</td>
@@ -148,28 +186,26 @@
             <tr>
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
-
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
              <td style="width: 18.4%" class="hide_all">Rounding</td>
              <td style="width: 17.8%" ></td>
             </tr>
            
-              <tr>
+            <tr>
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
-
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
              <td style="width: 18.4%;font-weight:bold" class="hide_all">Total</td>
              <td style="width: 17.8%;font-weight:bold">{{$sale[0]->Amount}}</td>
-           </tr>
+            </tr>
                 
         </tbody>
         <tbody>      
               
         </tbody>     
      </table>
-</div>
+</div-->
  </body>
  </html>

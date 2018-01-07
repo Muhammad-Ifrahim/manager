@@ -6,6 +6,7 @@ use App\Models\Business;
 use App\Models\Payslips;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
+use App\Models\EarnReport;
 
 use Config;
 use View;
@@ -52,7 +53,8 @@ class EarnReportController extends Controller
   public function create(){
        $busid = Session::get('bId');
        //To get all info for Report
-       $pslips = Payslips::where('bId',$busid)->get();
+       //$pslips = Payslips::where('bId',$busid)->get();
+       $pslips = Payslips::all();
        //To get Business Name
        $busName = Business::where('bId',$busid)->get();
        //To get From and To Dates 
@@ -60,12 +62,68 @@ class EarnReportController extends Controller
        
        /*return View::make('reports.payslips.pEarnSummary-Pdf')->with(['pslipRep'=>$pslipRep,
         'pslips'=>$pslips, 'busName'=>$busName[0]->name]);*/
+        echo $pslips[0]->User->name; 
+       //echo $pslips[1]->User->name;
+        echo $pslips[0]->PayslipsEarnItem[0]->Description;
+        echo '-  Size  -'. sizeof($pslips[2]->PayslipsEarnItem).' - ';
+        echo "</br>";
+        $empName = array();
+        $earnName = array();
+        $allArr = array();
+        $tempArr = array();
+        for ($i=0; $i < sizeof($pslips); $i++) { 
+            for($j=0; $j < sizeof($pslips[$i]->PayslipsEarnItem); $j++) 
+            {
+              if(!in_array($pslips[$i]->User->name, $empName))
+              array_push($empName, $pslips[$i]->User->name);
+              echo 'Payslips Employee  - '.$pslips[$i]->User->name.' - ';
+              echo $pslips[$i]->PayslipsEarnItem[$j]->Earn->name.' - ';
+              array_push($earnName, $pslips[$i]->PayslipsEarnItem[$j]->Earn->name);
+              
+              $tot = 0;
 
+            $tempArr[$pslips[$i]->PayslipsEarnItem[$j]->Earn->name.$i] = $pslips[$i]->PayslipsEarnItem[$j]->Price;
+             
+         //print_r($tempArr[$pslips[$i]->PayslipsEarnItem[$j]->Earn->name], [$pslips[$i]->PayslipsEarnItem[$j]->Price]);
+                 
+                  echo $pslips[$i]->PayslipsEarnItem[$j]->Price;
+
+                  echo "</br>";     
+             //     echo 'Temp --';
+
+               //   print_r($tempArr);echo "</br>";  
+                 //    echo "</br>";  
+           //            echo 'All--  ';
+                 // $allArr[]=$tempArr;
+         //         print_r($allArr);echo "</br>";    
+            }
+        }
+        print_r(array_keys($tempArr));
+        
+        echo '<br>';
+        for($i=0;$j<sizeof(array_keys($tempArr));$j++)
+        {
+
+        }
+echo '<br>';
+        dd($tempArr);
+//$empName =  array_diff($empName, [ $pslips[1]->User->name]);
+//dd( $empName );
+//        echo $pslips[2]->PayslipsEarnItem[1]->Earn;
+        echo "++++";
+        
+//dd('After');
        $pdf = new PDF();
-       $pdf=PDF::loadView('reports.payslips.pEarnSummary-Pdf',['pslipRep'=>$pslipRep,
-        'pslips'=>$pslips, 'busName'=>$busName[0]->name])
-       ->setPaper('A4');
-       return  $pdf->stream('pEarnSummary.pdf',array('Attachment'=>0));                                                                                                                                            
+       if(sizeof($pslips)>0)
+       {
+/*        return View::make('reports.payslips.pEarnSummary-Pdf')->with(['pslipRep'=>$pslipRep,
+        'pslips'=>$pslips, 'empName'=>$empName,'earnName'=> $earnName,'busName'=>$busName[0]->name]);*/
+          $pdf=PDF::loadView('reports.payslips.pEarnSummary-Pdf',['pslipRep'=>$pslipRep,
+          'pslips'=>$pslips, 'empName'=>$empName, 'earnName'=> $earnName, 'busName'=>$busName[0]->name])
+           ->setPaper('A4');
+          return  $pdf->stream('pEarnSummary.pdf',array('Attachment'=>0));    
+       }
+                                                                                                                                        
        return View::make('reports.payslips.pEarnSummary-Create');
   }   
 
@@ -83,7 +141,7 @@ class EarnReportController extends Controller
       return redirect('EarnReport/create')->withInput()->withErrors($validator);
     }
     else{
-        $earnReport = new EarnReport;
+        $earnReport = new PayslipReport;
         $earnReport->fill(Request::all());
         $earnReport->bId=$bid;
         if($earnReport->save()){

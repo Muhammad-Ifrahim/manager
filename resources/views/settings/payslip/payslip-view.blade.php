@@ -38,7 +38,7 @@
              <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th class="col-md-1" >Date</th>
+                  <th class="col-md-1">Date</th>
                   <th class="col-md-2">Employee</th>
                   <th class="col-md-1">Gross Pay</th>
                   <th class="col-md-1">Deduction</th>

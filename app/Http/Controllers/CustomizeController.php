@@ -43,7 +43,6 @@ class CustomizeController extends Controller
     function store(Request $request){
         $user = User::find(DB::table('users')->max('id'));
 
-
        	$user->accounts=Input::has('accounts') ? 1 : 0;
        	$user->customer=Input::has('customer') ? 1 : 0;
        	$user->SalesQuote=Input::has('SalesQuote') ? 1 : 0;
