@@ -11,7 +11,7 @@
       <style type="text/css">
        .box-title {
           display: inline-block;
-          font-size: 50px;
+          font-size: 30px;
           font-weight:bold
           line-height: 1;
           color: rgba(76, 175, 80, 0.87);
@@ -82,7 +82,7 @@
     </style>     
    
       <div>   
-        <h1 class="box-title">Purchase Order</h1>
+        <h3 class="box-title">Purchase Order</h3>
             <div  >
               <div style="width:400px;height: 100px;float: left" >
                 <p>Name <b>{{$purchaseordersale->supplierName->Name}}</b></p>
@@ -148,7 +148,7 @@
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
              <td style="width: 19%;font-weight:bold"  >Total</td>
-             <td style="width: 17.8%;font-weight:bold" >{{$purchaseordersale->Amount}}</td>
+             <td style="width: 17.6%;font-weight:bold" >{{$purchaseordersale->Amount}}</td>
            </tr>
                 
         </tbody>

@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('content')
 <style type="text/css">
   .title{
@@ -15,6 +14,8 @@
    }
 </style>
 <section class="content">
+ <div class="">
+  <div class="">
   <div class="row">
     <div class="col-md-12">
         <div class="col-md-6">
@@ -262,7 +263,8 @@
     </div>
     
   </div>
-   
+  </div>
+ </div>  
 </section>
 
 

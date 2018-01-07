@@ -15,7 +15,6 @@ use App\Models\RetainedEarnings;
 use App\Models\StartingBalance;
 use App\Models\InterestReceived;
 use App\Models\InventorySales;
-
 use App\Models\AccountingFees;
 use App\Models\Advertising;
 use App\Models\BankCharges;
@@ -268,6 +267,7 @@ class JournalController extends Controller
              $Journal->JournalEmployeeAccount()->delete();
              $Journal->JournalPayrollLiabilities()->delete();
              $Journal->JournalRetainedEarnings()->delete();
+             $Journal->JournalStartingBalance()->delete();
              $Journal->JournalInterestReceived()->delete();
              $Journal->JournalInventorySales()->delete();
              $Journal->JournalAccountingFees()->delete();
@@ -289,5 +289,14 @@ class JournalController extends Controller
                return Redirect::to('Journal');         
          }
         
+    }
+
+    public function print($id){
+         $Journal = Journal::find($id);
+        $JournalEntry=Journal::with('JournalEntries')->Where('id',$id)->get();
+        $pdf=new PDF();
+        $pdf=PDF::loadView('journal.jornal-pdf',['Journal'=>$Journal,'JournalEntry'=>$JournalEntry])->setPaper('A4');
+        return  $pdf->stream('proforma.pdf',array('Attachment'=>0));
+      //  return view('journal.journal-edit')->with('Journal',$Journal)->with('JournalEntry',$JournalEntry);
     }
 }

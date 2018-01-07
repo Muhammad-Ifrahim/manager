@@ -26,7 +26,7 @@
 
       
         <li id="BankTransaction" >
-          <a href="">
+          <a href="{{url('cash')}}">
             <i class="fa fa-money"></i> <span>Cash Account</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>
@@ -72,7 +72,19 @@
             </span>
           </a>
         </li>
-      @endif  
+      @endif
+
+      @if($user->SalesQuote)
+        <li id="SalesQuotes">
+          <a href="{{ url('saleinvoice')}}">
+            <i class="fa fa-file-text-o"></i> <span>Sale Invoice</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">{{count($saleInvoice)}}</small>
+            </span>
+          </a>
+      @endif 
+
+
 
       <li id="PaySlips">
           <a href="{{ url('payslip') }}">
@@ -161,7 +173,7 @@
       @endif -->
 
         <li id="Emails">
-          <a href="pages/widgets.html">
+          <a href="">
             <i class="fa fa-envelope"></i> <span>Emails</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>

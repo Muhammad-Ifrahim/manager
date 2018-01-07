@@ -20,6 +20,10 @@
             text-decoration: none;
             margin: 0 10px;
          } 
+         .label{
+          font-size: 53%;
+          font-weight: 400px;
+         }
     </style>     
     <section class="content">
       <div class="row">
@@ -47,11 +51,16 @@
               @Foreach($Journal as $key => $value)
                   <tr>
                     <td class="col-md-1">{{$value->Date}}</td>
+                    @if($value->otherid!=NULL) 
+                    <td class="col-md-4" style="color: green">{{$value->Narration}}</td>
+                    @else
                     <td class="col-md-4">{{$value->Narration}}</td>
+                    @endif
                     <td class="col-md-1">{{number_format($value->Debit,2)}} </td>
                     <td class="col-md-1">{{number_format($value->Credit,2)}}</td>
                     <td class="col-md-1">
                      <div class="action-region">
+                      @if($value->otherid==NULL)
                        <a href="{{ URL::to('Journal/' . $value->id . '/edit') }}">
                         <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Journal Entry"></span>
                        </a>
@@ -61,11 +70,21 @@
                         {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Journal Entry"></span>', array( 'type'=>'submit')) }}
                         {{ Form::close() }} 
 
-                        <a href="{{ url('/JournalPrint/' . $value->id . '/print') }}">
-                        <span class="fa fa-print" data-toggle="tooltip" data-original-title="Print Report"></span>
+                        <a href="{{ url('/Journal/' . $value->id . '/print') }}">
+                        <span class="fa fa-print" data-toggle="tooltip" data-original-title="Print Journal Report"></span>
                        </a>
+                        
 
                       </div>
+                        @else
+                        <span class="pull-right-container">
+                              <small class="label bg-green">Accounts</small>
+                        </span>
+                        <a href="{{ url('/Journal/' . $value->id . '/print') }}">
+                        <span class="fa fa-print" data-toggle="tooltip" data-original-title="Print Journal Report"></span>
+                       </a>
+
+                        @endif
 
                     </td>
 

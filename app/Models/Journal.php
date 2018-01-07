@@ -39,9 +39,14 @@ class Journal extends Model
 
     	return  $this->hasMany('App\Models\JournalEntry', 'journalid')->orderBy('jouId');;
     }
-    public  function JournalAccountReceivable(){
+
+   public  function JournalAccountReceivable(){
 
         return  $this->hasMany('App\Models\AccountReceivable', 'journalid');
+    }
+    public  function JournalStartingBalance(){
+
+        return  $this->hasMany('App\Models\StartingBalance', 'journalid');
     }
 
     public  function JournalCashAtBank(){

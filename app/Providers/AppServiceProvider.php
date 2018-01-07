@@ -5,9 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use  Illuminate\Support\Facades\Schema;
 use  Illuminate\Support\Facades\App;
-//use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Authenticated;
-
 use App\Models\Customer;
 use App\Models\Business;
 use App\Models\Employee;
@@ -34,8 +32,7 @@ use App\Models\PayslipReport;
 use App\Models\Accounts;
 use App\Models\Journal;
 use App\Models\JournalEntry;
-
-
+use App\Models\SaleInvoice;
 use Session;
 use View;
 use Auth;
@@ -132,6 +129,9 @@ class AppServiceProvider extends ServiceProvider
 
             $sale=Sale::where('bId', $bid)->get();
             View::share('sale',$sale);
+
+            $saleInvoice=SaleInvoice::where('bId', $bid)->get();
+            View::share('saleInvoice',$saleInvoice);
 
             $inventory=Inventory::where('bId', $bid)->get();
             View::share('inventory',$inventory);

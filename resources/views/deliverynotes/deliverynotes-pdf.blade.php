@@ -11,7 +11,7 @@
       <style type="text/css">
        .box-title {
           display: inline-block;
-          font-size: 50px;
+          font-size: 30px;
           font-weight:bold
           line-height: 1;
           color: rgba(76, 175, 80, 0.87);
@@ -88,10 +88,10 @@
               <div>
                 <p>Name <b>{{$deliverySale[0]->user->Name}}</b></p>
                 <p>Address <b>{{$deliverySale[0]->user->BillingAddress}}</b></p>
-                <b>Delivery Date :{{$deliverySale[0]->IssueDate}}</b>
-                <b>Reference :{{$deliverySale[0]->Reference}}</b>
-                <b>Order Number :{{$deliverySale[0]->OrderNumber}}</b>
-                <b>Invoice Number :{{$deliverySale[0]->InvoiceNumber}}</b>                
+                <p>Delivery Date: <b>{{$deliverySale[0]->IssueDate}}</b></p>
+                <p>Reference : <b>{{$deliverySale[0]->Reference}}</b></p>
+                <p>Order Number :<b>{{$deliverySale[0]->OrderNumber}}</b></p>
+                <p>Invoice Number :<b>{{$deliverySale[0]->InvoiceNumber}}</b></p>                
             
             
             </div>  

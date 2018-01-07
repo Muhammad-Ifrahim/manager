@@ -64,7 +64,12 @@
                        {{ Form::open(array('url' => 'payslip/' . $value->payId, 'class' => 'pull-left')) }}
                         {{ Form::hidden('_method', 'DELETE') }}
                         {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Payslip"></span>', array( 'type'=>'submit')) }}
-                       {{ Form::close() }}                    
+                       {{ Form::close() }}
+
+                       <a href="{{ url('/payslip/' . $value->payId . '/print') }}">
+                        <span class="fa fa-print" data-toggle="tooltip" data-original-title="Print Report"></span>
+                       </a>
+
                       </div>
                     </td>
                     </tr>

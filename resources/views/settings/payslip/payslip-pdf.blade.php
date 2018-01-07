@@ -81,45 +81,37 @@
    
   <div>
 
-    <h1 class="box-title">{{$sale[0]->Heading}}</h1>
+    <h1 class="box-title">Payslip</h1>
             <div  >
               <div style="width:400px;height: 100px;float: left" >
-                <p>Name <b>{{$sale[0]->user->Name}}</b></p>
-                <p>Address <b>{{$sale[0]->user->BillingAddress}}</b></p>
-                <p>Buisness Identifer <b>{{$sale[0]->user->BusinessIdentifier}}</b></p>
+                <p>Name <b>{{$payslip->User->name}}</b></p>
               </div>
               <div style="width:800px;height: 100px;">
-                <b>Issue Date :<p>{{$sale[0]->Date}}</p></b>
-                <b>Reference  :<p>{{$sale[0]->SaleId}}</p></b>                
+                <b>Issue Date :<p>{{$payslip->Date}}</p></b>
               </div>            
             </div> 
      </div>
             <!-- /.box-header  -->
-  <div style="margin-top: 50px;border: 1px solid black;">
+  <div style="margin-top: 30px;border: 1px solid black;">
 <table style=" width: 100%" table table-striped pagin-table table-bordered>
         <thead>
               <tr>
-                <th>Code</th>
                 <th>Description</th>
                 <th>Qty</th>
-                <th>Unit price</th>
-                <th>Discount</th>
-                <th>Amount</th>
+                <th>Rate</th>
+                <th>Total</th>
               </tr>
         </thead>
         <tbody>
-          @Foreach($sale as $key=>$value)
-          @Foreach($value->saleQuote as $key=>$value) 
+          @Foreach($PayslipsEarn as $key=>$value)
+          @Foreach($value->PayslipsEarnItem as $key=>$value) 
              <tr>
-             <td class="verticalSplit">{{$value->inventoryItem->ItemCode }}</td>
-             <td class="verticalSplit">{{$value->inventoryItem->Description}}</td>
+             <td class="verticalSplit">{{$value->Earn->name}}</td>
              <td class="verticalSplit">{{$value->Quantity}}</td>
-             <td class="verticalSplit">{{$value->SalePrice}}</td>
-             <td class="verticalSplit">{{$value->Discount}}</td>
+             <td class="verticalSplit">{{$value->Price}}</td>
              <td class="verticalSplit">{{$value->Amount}}</td>
            </tr>
           @endForeach
-          <hr>
           @endForeach 
       
                 
@@ -140,8 +132,8 @@
 
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
-             <td style="width: 18.8%" class="hide_all">Subtotal</td>
-             <td style="width: 17.6%" >{{$sale[0]->Amount}}</td>
+             <td style="width: 18.8%" class="hide_all">Gross Pay</td>
+             <td style="width: 22.3%" >{{$payslip->GrossPay}}</td>
            </tr>
               
             <tr>
@@ -150,8 +142,18 @@
 
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
-             <td style="width: 18.4%" class="hide_all">Rounding</td>
-             <td style="width: 17.6%" ></td>
+             <td style="width: 18.4%" class="hide_all">Deduction</td>
+             <td style="width: 22.3%" >{{$payslip->Deduction}}</td>
+            </tr>
+
+            <tr>
+             <td class="lastRow" ></td>
+             <td class="lastRow" ></td>
+
+             <td class="lastRow" ></td>
+             <td class="lastRow" ></td>
+             <td style="width: 18.4%" class="hide_all">Net Pay</td>
+             <td style="width: 22.3%" >{{$payslip->NetPay}}</td>
             </tr>
            
               <tr>
@@ -160,8 +162,8 @@
 
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
-             <td style="width: 18.4%;font-weight:bold" class="hide_all">Total</td>
-             <td style="width: 17.6%;font-weight:bold">{{$sale[0]->Amount}}</td>
+             <td style="width: 18.4%;font-weight:bold" class="hide_all">Contribution</td>
+             <td style="width: 22.3%;font-weight:bold">{{$payslip->Contribution}}</td>
            </tr>
                 
         </tbody>

@@ -163,7 +163,16 @@
               <div class="help-block">{{ $errors->first('ValueOnHand') }}</div>
            </div>
           </div>
-            
+
+       <div class="col-lg-2" style="margin-left: 180px;margin-bottom:7px" >
+          <select class="form-control col-lg-2 account form-control-heading" name="account" id="account">                     
+              @foreach($account as $accounts)
+                 @if($accounts->id==3 ||$accounts->id==5)
+                 <option value="{{$accounts->id}}" data="{{ $accounts->AccountName}}">{{ $accounts->AccountName}}</option>
+                 @endif
+              @endforeach
+            </select>
+        </div>    
         </div>   
         <!-- Submit Button -->
         

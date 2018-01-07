@@ -83,8 +83,8 @@
       margin-left: 10%;
      }
     .box-header .box-title {
-      font-weight: 600;
-      font-size: 35px;
+       font-weight: 400;
+      font-size: 26px;
       display: inline-block;
       line-height: 1;
       color: rgba(76, 175, 80, 0.87);
@@ -209,18 +209,6 @@
   });
 </script>
 
-<!-- <style>
-.hidden{
-  display : none;  
-}
-
-.show{
-  display : block !important;
-}
-select.form-control.product_id {
-    width: 150px;
-}
-</style> -->
 <div class="content">
 
   <div class="row">

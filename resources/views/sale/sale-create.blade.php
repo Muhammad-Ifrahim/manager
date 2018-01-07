@@ -25,7 +25,13 @@
       margin-top: 10px;
      
        }
-    
+    .btn-info{
+    padding-top: 6px;
+    height: 41px;
+   /*margin-left: 43%;*/
+    width: 12%;
+    float: left;
+      }
 
    .form-control-heading{
     display: block;
@@ -77,8 +83,8 @@
       margin-left: 10%;
      }
     .box-header .box-title {
-      font-weight: 600;
-      font-size: 35px;
+      font-weight: 400;
+      font-size: 25px;
       display: inline-block;
       line-height: 1;
       color: rgba(76, 175, 80, 0.87);
@@ -101,12 +107,17 @@
       var amt = $(this).val()-0;
       t += amt;
     });
-   // $('.total').html(t);
+     var tax = $('.tax option:selected').attr('data-price');
+     console.log(t* (tax/100));
+     var taxvalue = (t * (tax/100)).toFixed(2);
+     // console.log(taxvalue);
+     $('.taxvalue').val(taxvalue);
+     t = t + parseInt(taxvalue);
      $("#total").val(t);
   }
 
    $(document).ready(function(){
-        var date_input=$('input[name="DeliveryDate"]'); //our date input has the name "date"
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
         var options={
           format: 'yyyy/mm/dd',
@@ -117,7 +128,18 @@
         date_input.datepicker(options);
       });
       
-
+    $(document).ready(function(){
+        var date_input=$('input[name="duedate"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        var options={
+          format: 'yyyy/mm/dd',
+          container: container,
+          todayHighlight: true,
+          autoclose: true,
+        };
+        date_input.datepicker(options);
+      });
+      
 
   $(function () {
   
@@ -130,7 +152,11 @@
        '<td><input type="text" class="discription form-control-heading" name="discription[]"readonly ></td>' +
 
       '<td><input type="number" class="qty form-control-heading" name="qty[]" ></td>' +
-   
+
+      '<td><input type="text" class="price form-control-heading" name="price[]" readonly></td>' +
+
+      '<td><input type="text" class="amount form-control-heading" name="amount[]" readonly></td>' +
+        
       '<td><span class="fa fa-trash delete" data-toggle="tooltip" data-original-title="Remove Item" value="x" style="margin-left: 36px;margin-top: 14px;"></span></td></tr>';
       $('.neworderbody').append(tr);
     });
@@ -140,6 +166,15 @@
       $(this).parent().parent().remove();
       totalAmount();
     });
+
+    //tax
+   $('.taxbody').delegate('.tax', 'change', function () {
+      var tr = $(this).parent().parent();
+      var taxvalue = tr.find('.tax option:selected').attr('data-price');
+   //   $('.taxvalue').val(taxvalue);
+      totalAmount();
+      });
+
 
    // customer
     $('.customerbody').delegate('.customer', 'change', function () {
@@ -157,21 +192,20 @@
       tr.find('.price').val(SalesPrice);
       tr.find('.discription').val(description);
          
-      // var qty = tr.find('.qty').val() - 0;
-      // var dis = tr.find('.dis').val() - 0;
-      // var price = tr.find('.price').val() - 0;
+      var qty = tr.find('.qty').val() - 0;
+      var dis = tr.find('.dis').val() - 0;
+      var price = tr.find('.price').val() - 0;
     
-      // var total = (qty * price) - ((qty * price * dis)/100);
-      // tr.find('.amount').val(total);
+      var total = qty * price;
+      tr.find('.amount').val(total);
       totalAmount();
     });
     $('.neworderbody').delegate('.qty , .dis', 'keyup', function () {
       var tr = $(this).parent().parent();
       var qty = tr.find('.qty').val() - 0;
-      var dis = tr.find('.dis').val() - 0;
       var price = tr.find('.price').val() - 0;
     
-      var total = (qty * price) - ((qty * price * dis)/100);
+      var total = qty * price;
       tr.find('.amount').val(total);
       totalAmount();
     });
@@ -187,69 +221,75 @@
   });
 </script>
 
+<!-- <style>
+.hidden{
+  display : none;  
+}
 
+.show{
+  display : block !important;
+}
+select.form-control.product_id {
+    width: 150px;
+}
+</style> -->
 <div class="content">
 
   <div class="row">
     <div class="col-md-12">
       <div class="box">
          <div class="box-header">
-               <h2 class="box-title">DELIVERY NOTES</h2>
+               <h2 class="box-title">Sale Invoice</h2>
          </div>
 
         <div class="box-body">
-          {!! Form::open(['url' => 'deliverynote',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
+          {!! Form::open(['url' => 'saleinvoice',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
                     
-         
+        
  
        <div class="form-group">   
           <div class="{{ $errors->has('IssueDate') ? 'has-error' : ''}} ">
-              {!! Form::label('Issue Date', 'Delivery Date', ['class' => 'col-lg-2 control-label']) !!}
-              <div class="col-lg-3">
-                  {!! Form::text('DeliveryDate', $value = null, array( 'id'=> 'date',
+              {!! Form::label('Issue Date', 'Issue Date', ['class' => 'col-lg-2 control-label']) !!}
+              <div class="col-lg-4">
+                  {!! Form::text('date', $value = null, array( 'id'=> 'date',
                   'class'  => 'form-control-heading')); !!}
                    <div class="help-block">{{ $errors->first('IssueDate') }}</div>
               </div>
           </div>
           
          <div class="{{ $errors->has('Code') ? 'has-error' : '' }} ">
-             {!!Form::label('Reference','Reference #',['class' => 'col-lg-2 control-label' ]) !!}
-             <div class="col-lg-3">
-                {!! Form::text('Reference', $value=null, ['class' => 'form-control-heading','placeholder' => 'Reference'])!!}
+             {!!Form::label('Due Date','Due Date',['class' => 'col-lg-2 control-label' ]) !!}
+             <div class="col-lg-4">
+                {!! Form::text('duedate', $value=null, ['class' => 'form-control-heading','placeholder' => 'Automatic'])!!}
                  <div class="help-block">{{ $errors->first('QuoteNumber') }}</div>
              </div>
          </div>
-
-
       </div>
 
-
-       <div class="form-group">   
+        <div class="form-group">   
           <div class="{{ $errors->has('IssueDate') ? 'has-error' : ''}} ">
-              {!! Form::label('Order No', 'Order No #', ['class' => 'col-lg-2 control-label']) !!}
-              <div class="col-lg-3">
-                  {!! Form::text('OrderNo', $value = null, array( 'id'=> 'date',
-                  'class'  => 'form-control-heading','placeholder' => 'Order No')); !!}
+              {!! Form::label('Invoice Number', 'Invoice Number', ['class' => 'col-lg-2 control-label']) !!}
+              <div class="col-lg-4">
+                  {!! Form::text('InvoiceNumber', $value = null, array( 'id'=> 'date',
+                  'class'  => 'form-control-heading')); !!}
                    <div class="help-block">{{ $errors->first('IssueDate') }}</div>
               </div>
           </div>
           
          <div class="{{ $errors->has('Code') ? 'has-error' : '' }} ">
-             {!!Form::label('InvoiceNumber','Invoice No #',['class' => 'col-lg-2 control-label' ]) !!}
-             <div class="col-lg-3">
-                {!! Form::text('InvoiceNumber', $value=null, ['class' => 'form-control-heading','placeholder' => 'Invoice Number'])!!}
+             {!!Form::label('QuoteNumber','Quote #',['class' => 'col-lg-2 control-label' ]) !!}
+             <div class="col-lg-4">
+                {!! Form::text('QuoteNumber', $value=null, ['class' => 'form-control-heading','placeholder' => 'Automatic'])!!}
                  <div class="help-block">{{ $errors->first('QuoteNumber') }}</div>
              </div>
          </div>
-
-         
       </div>
 
      
 
       <div class="form-group">
           {!!Form::label('Customer','Customer',['class' => 'col-lg-2 control-label ' ]) !!}
-        <div class="col-lg-5 customerbody">
+        <div class="col-lg-6 customerbody">
           <select  name="customer" class="form-control-heading customer" id="customer">
                     <option></option>
              @foreach ($customers as $key => $value)
@@ -257,15 +297,7 @@
              @endforeach
           </select>
         </div>
-      </div>  
-
-      <div class="form-group {{ $errors->has('BillingAddress') ? 'has-error' : ''}}">
-           {!!Form::label('Description','Description',['class' => 'col-lg-2 control-label' ]) !!}
-           <div class="col-lg-6">
-              {!! Form::text('Descriptions', $value=null, ['class' => 'form-control-heading'])!!}
-              <div class="help-block">{{ $errors->first('BillingAddress') }}</div>
-           </div>
-       </div>      
+      </div>        
             
     <table class="table col-lg-12">
         <thead>
@@ -291,7 +323,18 @@
           </div>  
         </th>
 
-           
+             <th>
+               <div class="col-lg-1">
+                 {!!Form::label('UnitPrice','Price',['class' => 'col-lg-1 control-label head-item' ]) !!}
+               </div>  
+             </th>
+
+
+            <th>     
+              <div class="col-lg-1">
+                 {!!Form::label('Amount','Amount',['class' => 'col-lg-1 control-label head-item' ]) !!}
+              </div>
+            </th> 
 
             <th>     
               <div class="col-lg-1">
@@ -320,7 +363,13 @@
                   <td class="col-lg-1">
                     <input type="number" class="qty form-control form-control-heading " name="qty[]" >
                   </td>   
-                  
+                  <td class="col-lg-1">
+                <input type="text" class="price form-control form-control-heading" name="price[]" readonly>
+                  </td>
+                               
+                  <td class="col-lg-1">
+                    <input type="text" class="amount form-control form-control-heading " name="amount[]" readonly>
+                  </td>
                   <td class="col-lg-1">
                     <!-- <span class="fa fa-trash delete" ></span> -->
 
@@ -331,15 +380,43 @@
 
               </tbody>                                 
             </table>  
-            
- 
-       <div style="margin-left: 75%" >      
-          <div  class="col-lg-4" >
-              <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
+    
+
+     <div class="row" >
+       <div class="col-lg-12" >
+        <div class="col-lg-4 col-lg-offset-7">     
+          <div  class="col-lg-6 taxbody pul-right" >
+             <select class="tax form-control-heading" name="tax" id="tax">
+                      @foreach($Tax as $tax)
+                      <option  data-price="{{$tax->value }}" value="{{$tax->id }}">{{$tax->Tax }}</option>
+                      @endforeach
+              </select>
           </div>
+          
+         <div class="col-lg-6" >
+             <input type="text" class="taxvalue form-control-heading "  name="taxvalue" id="taxvalue"
+             placeholder="Tax %" readonly>
+         </div>
+        </div> 
+      </div>
+     </div>
+
+     
+   
+    
+      <div class="row"  style="margin-top: 15px;"> 
+       <div style="margin-left: 66%" >      
+          <div  class="col-lg-3" >
+              <input type="button" class=" add btn btn-info" value="Add Item">
+          </div>
+          
+         <div class="col-lg-3" style="margin-left: 48px;width: 148px">
+             <input type="text" class=" form-control-heading " name="NetAmount" name="total" id="total"
+             placeholder="Net Amount" readonly>
+         </div>
          
       </div>
-     
+     </div>     
         
          
          <!--  -->
