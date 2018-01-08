@@ -5,15 +5,12 @@
      <ul class="sidebar-menu" data-widget="tree">
 
        @if($user->accounts && $user->userType!='Admin' )
-         <li id="BankAccount" >
-            <a href="{{url('NotAvailable')}}">
-
         <li id="BankTransaction" >
           <a href="{{url('summary')}}">
             <i class="fa fa-tv"></i> <span>Summary</span>
           </a>
         </li>
-
+        @endif
         
        @if($user->accounts)
          <li id="BankAccount" >
@@ -39,7 +36,7 @@
         </li>
       
         <li>
-          <a href="{{url('NotAvailable')}}" >
+          <a href="{{url('Journal')}}" >
             <i class="fa fa-book"></i> <span>Journal Enteries</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">{{count($Journal)}}</small>
@@ -123,6 +120,7 @@
           </a>
         </li>
       @endif   -->
+       @endif
 
       @if($user->employee && $user->userType!='Admin')
         <li id="Employee">
@@ -180,6 +178,7 @@
           </a>
         </li>
       @endif -->
+       @endif
 
         <li id="Emails">
           <a href="{{url('NotAvailable')}}">

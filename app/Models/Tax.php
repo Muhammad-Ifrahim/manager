@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tax extends Model
 {
-	public $table ='tax';
+	public $table ='Tax';
     public $primaryKey ='id';
 
     public $timestamps =false;

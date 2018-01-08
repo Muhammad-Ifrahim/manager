@@ -161,19 +161,75 @@ class InventoryController extends Controller
           foreach ($inventory as $key => $value) {
                $Id=$value->journal->id;
             }
-          if ($inventory) {
+            
+            if ($inventory!=NULL) {
+                 if ($Id!=NULL) {                
+                   app('App\Http\Controllers\JournalController')->destroy($Id);      
+                  }
+              $Inventory=Inventory::where('inventId',$id);
+               if($Inventory){
+                   $Inventory->delete(); 
+                   $inventory = new Inventory;
+                   $inventory->fill(Request::all());
+                   $input=Input::all();
+                   $inventory->bId=$bid;
+                   $inventory->accountId=$input['account'];
 
-            // $inventory->fill(Request::all());
-            //$inventory->bId=$bid;
-            //if($inventory->save()){
-               Toastr::success('Successfully Added', 'Inventory', ["positionClass" => "toast-top-right"]);
-            //}
+                   if($inventory->save()){
+                      $Journal=new Journal;
+                      $Journal->Date='';
+                      $Journal->QuoteNumber=0;
+                      $Journal->Narration='Inventory on Hand(Debit)/Starting Balance Equity(Credit)';
+                      $Journal->Debit=$input['ValueOnHand'];
+                      $Journal->Credit=$input['ValueOnHand'];
+                      $Journal->bId =$bid;
+                      $Journal->otherid=1;
+                      $Journal->inventaccountId=$inventory->inventId;
+                         if ($Journal->save()){
+                            $JournalEntry = new JournalEntry;
+                            $JournalEntry->journalid=$Journal->id;
+                            $JournalEntry->Account=4;
+                            $JournalEntry->Description='Inventory on Hand';
+                            $JournalEntry->Debit=$input['ValueOnHand'];
+                            $JournalEntry->Credit=NULL;
+                            $JournalEntry->save();
 
-          }
+                               //CREDIT SIDE
+                            
+                            $JournalEntry = new JournalEntry;
+                            $JournalEntry->journalid=$Journal->id;
+                            $JournalEntry->Account=$input['account'];
+                            $JournalEntry->Description='Cash-Account Payable';
+                            $JournalEntry->Debit=NULL;
+                            $JournalEntry->Credit=$input['ValueOnHand'];
+
+                                if ($JournalEntry->save()) {
+                                    
+                                      $AccountName = new  InventoryOnHand;
+                                      $AccountName->Description='Cash Account';
+                                      $AccountName->Debit=$input['ValueOnHand'];
+                                      $AccountName->Credit=NULL;
+                                      $AccountName->bId=$bid;
+                                      $AccountName->journalid=$Journal->id;
+                                      $AccountName->save(); 
+
+                                 if ($input['account']==3) {$AccountName = new  CashOnHand;}
+                                  if ($input['account']==5) {$AccountName = new  AccountsPayable;}
+                                      $AccountName->Description='Starting Balance';
+                                      $AccountName->Debit=NULL;
+                                      $AccountName->Credit=$input['ValueOnHand'];
+                                      $AccountName->bId=$bid;
+                                      $AccountName->journalid=$Journal->id;
+                                      $AccountName->save(); 
+                        }
+                      }
+                    }
+                 }
+               }
+               Toastr::success('Successfully Updated', 'Inventory', ["positionClass" => "toast-top-right"]);
+           }
            return Redirect::to('Inventory');
         }
-        
-    }
 
     public function destroy($id)
     {
@@ -188,7 +244,9 @@ class InventoryController extends Controller
               }
               $Inventory=Inventory::where('inventId',$id);
               if($Inventory){
-                     $Inventory->delete();   
+                     
+                  $Inventory->delete();
+
                }
         }
         Toastr::success('Successfully Deleted', 'Inventory Item', ["positionClass" => "toast-top-right"]);

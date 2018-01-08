@@ -51,7 +51,7 @@
         <div class="col-md-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">CashAccount</h3>
+              <h3 class="box-title">Cash Account</h3>
               <a type="button" href="{{url('cash/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Cash Account</a>
             </div>
             <!-- /.box-header  -->
