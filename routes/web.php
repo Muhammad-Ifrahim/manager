@@ -14,7 +14,8 @@ Auth::routes();
 Route::resource('/','ApplicationController');
 Route::resource('customer','CustomerController');
 Route::resource('employee','EmployeeController');
-Route::resource('customize','CustomizeController');                
+Route::resource('customize','CustomizeController');
+Route::resource('NotAvailable','NothingController');                
 //Fixed Asset
 Route::resource('fixedasset', 'FixedAssetController');
 Route::resource('settings', 'SettingController');
@@ -25,7 +26,6 @@ Route::resource('pdeductitem', 'pDeductItemController');
 Route::resource('pcontributeitem', 'pContributeItemsController');
 Route::resource('pearnitem', 'pEarnItemsController');
 Route::resource('user', 'RegController');
-
 Route::resource('deliverynote','DeliveryNotesController');
 Route::get('/deliverynote/{id}/print', 'DeliveryNotesController@printReport');
 //Payslips
@@ -36,20 +36,21 @@ Route::resource('InventoryTransfer','InventoryTransferController');
 Route::resource('InventoryLocation','InventoryLocationController');
 Route::resource('Reports', 'ReportController');
 Route::resource('EarnReport', 'EarnReportController');
-
 Route::resource('supplier','SupplierController');
-
 Route::resource('Inventory','InventoryController');
-
 Route::resource('Journal','JournalController');
-
 Route::resource('purchaseorder','PurchaseOrderController');
 Route::get('/purchaseorder/{id}/print', 'PurchaseOrderController@printReport');
+
 // Inventory to get in Routes 
 Route::get( '/getinventory', array(
 'as' => 'getinventory',
 'uses' => 'PerformaController@getinventory'
 ) );
+
 Route::get('/logout', 'Auth\LoginController@logout');
 Route::get('{bisId}/business', 'OtherBusinessController@index');
+Route::get('/printContributeReport', 'EarnReportController@printContributeReport');
+Route::get('/printDeductionReport', 'EarnReportController@printDeductionReport');
+Route::get('/printSummaryReport', 'EarnReportController@printSummaryReport');
 Route::get('/proformaPrint/{id}/print', 'PerformaController@printReport');

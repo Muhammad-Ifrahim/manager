@@ -45,7 +45,7 @@
                       <td class="col-md-1"><a href="{{  url($value->bId.'/business')}}">{{$value->name}}
                       </a>
                       
-                      {{ Form::open(array('url' => 'business/' . $value->bId, 'class' => 'pull-right')) }}
+                      {{ Form::open(array('url' => 'business/' . $value->bId, 'class' => 'pull-right', 'onsubmit' => 'return ConfirmDelete()')) }}
                       {{ Form::hidden('_method', 'DELETE')}}
                       {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Business"></span>', array( 'type'=>'submit')) }}
                       {{ Form::close() }} 

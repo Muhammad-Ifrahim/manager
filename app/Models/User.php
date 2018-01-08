@@ -30,6 +30,8 @@ class User extends Authenticatable
         'InventoryTransfer',
         'FixedAsset',
         'userType',
+        'payslips',
+        'reports',
         'bId',
     ];
     public $timestamps = true;
@@ -43,5 +45,9 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function User(){
+        return $this->belongsTo('App\Models\Role', 'Role');
     }
 }

@@ -5,10 +5,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tax extends Model
 {
-	public $table ='Tax';
+	public $table ='tax';
     public $primaryKey ='id';
 
     public $timestamps =false;
-
-   
 }

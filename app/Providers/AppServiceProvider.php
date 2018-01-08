@@ -68,7 +68,7 @@ class AppServiceProvider extends ServiceProvider
             $bid = $user->bId;
             Session::put('bId', $bid);
             
-            $allUser = User::where('bId', $bid)->get();
+            $allUser = User::where('bId', $bid)->where('userType','<>','Manager')->get();
             View::share('allUser', $allUser);
             
             $roles = Role::all();

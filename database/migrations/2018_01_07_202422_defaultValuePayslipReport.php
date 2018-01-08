@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class NullableDescription extends Migration
+class DefaultValuePayslipReport extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class NullableDescription extends Migration
      */
     public function up()
     {
-        Schema::table('payslipreports', function (Blueprint $table) {
-            $table->string('description')->nullable()->change();
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('payslips')->default(0)->change();
+            $table->integer('reports')->default(0)->change();
         });
     }
 
@@ -25,7 +26,7 @@ class NullableDescription extends Migration
      */
     public function down()
     {
-        Schema::table('payslipreports', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

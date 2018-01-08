@@ -3,9 +3,9 @@
      
      
      <ul class="sidebar-menu" data-widget="tree">
-       @if($user->accounts)
+       @if($user->accounts && $user->userType!='Admin' )
          <li id="BankAccount" >
-            <a href="pages/widgets.html">
+            <a href="{{url('NotAvailable')}}">
               <i class="fa fa-university"></i> <span>Bank Accounts</span>
               <span class="pull-right-container">
                 <small class="label pull-right bg-green">0</small>
@@ -16,7 +16,7 @@
 
       
         <li id="BankTransaction" >
-          <a href="pages/widgets.html">
+          <a href="{{url('NotAvailable')}}">
             <i class="fa fa-money"></i> <span>Bank Transactions</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>
@@ -25,7 +25,7 @@
         </li>
       
         <li>
-          <a href="{{url('Journal')}}" >
+          <a href="{{url('NotAvailable')}}" >
             <i class="fa fa-book"></i> <span>Journal Enteries</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>
@@ -33,7 +33,7 @@
           </a>
         </li> 
         
-      @if($user->customer)
+      @if($user->customer && $user->userType!='Admin')
         <li id="customers" >
           <a  href="{{url('customer')}}">
             <i class="fa fa-users"></i> <span>Customer</span>
@@ -43,8 +43,7 @@
           </a>
         </li>
       @endif 
-
-      @if($user->SalesQuote)
+      @if($user->SalesQuote && $user->userType!='Admin')
         <li id="SalesQuotes">
           <a href="{{ url('proforma')}}">
             <i class="fa fa-pencil-square"></i> <span>Proforma</span>
@@ -55,6 +54,7 @@
         </li>
       @endif  
 
+      @if($user->payslips && $user->userType!='Admin')
       <li id="PaySlips">
           <a href="{{ url('payslip') }}">
             <i class="fa fa-newspaper-o"></i> <span>Payslips</span>
@@ -63,8 +63,9 @@
             </span>
           </a>
       </li>
+      @endif
 
-      @if($user->SalesOrder)
+      @if($user->SalesOrder && $user->userType!='Admin')
         <li id="SalesOrder" >
           <a href="pages/widgets.html">
             <i class="fa fa-th-list"></i> <span>Sales Order</span>
@@ -75,7 +76,7 @@
         </li>
       @endif  
 
-      @if($user->SalesInvoice)
+      @if($user->SalesInvoice && $user->userType!='Admin')
         <li id="SalesInvoices">
           <a href="pages/widgets.html">
             <i class="fa fa-th"></i> <span>Sales Invoices</span>
@@ -86,7 +87,7 @@
         </li>
       @endif  
 
-      @if($user->employee)
+      @if($user->employee && $user->userType!='Admin')
         <li id="Employee">
            <a href="{{url('employee')}}">
             <i class="fa fa-id-card"></i> <span>Employee</span>
@@ -97,7 +98,7 @@
         </li>
       @endif
 
-      @if($user->DeliveryNotes)
+      @if($user->DeliveryNotes && $user->userType!='Admin')
         <li id="DeliveryNotes">
           <a href="{{ url('deliverynote')}}">
             <i class="fa fa-truck"></i> <span>Delivery Notes</span>
@@ -108,7 +109,7 @@
         </li>
       @endif
 
-      @if($user->Supplier)
+      @if($user->Supplier && $user->userType!='Admin')
         <li id="Suppliers">
           <a href="{{url('supplier')}}">
             <i class="fa fa-building-o"></i> <span>Suppliers</span>
@@ -119,7 +120,7 @@
         </li>
       @endif
 
-      @if($user->PurchaseOrder)
+      @if($user->PurchaseOrder && $user->userType!='Admin')
         <li id="PurchaseOrder" >
           <a href="{{url('purchaseorder')}}">
             <i class="fa fa-shopping-cart"></i> <span>Purchase Order</span>
@@ -130,7 +131,7 @@
         </li>
       @endif
 
-      @if($user->PurchaseInvoice)
+      @if($user->PurchaseInvoice && $user->userType!='Admin')
          <li id="PurchaseInvoices" >
           <a href="pages/widgets.html">
             <i class="fa fa-calendar"></i> <span>Purchase Invoices</span>
@@ -142,7 +143,7 @@
       @endif
 
         <li id="Emails">
-          <a href="pages/widgets.html">
+          <a href="{{url('NotAvailable')}}">
             <i class="fa fa-envelope"></i> <span>Emails</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">0</small>
@@ -150,7 +151,7 @@
           </a>
         </li>
           
-         
+      @if($user->report && $user->userType!='Admin')       
          <li >
           <a href="{{ url('Reports')}}">
             <i class="fa fa-print"></i> <span>Reports</span>
@@ -159,8 +160,9 @@
             </span>
           </a>
         </li>
-      
-      @if($user->inventory)
+      @endif
+
+      @if($user->inventory && $user->userType!='Admin')
        <li id="InventoryItems">
           <a href="{{ url('Inventory')}}">
             <i class="fa fa-archive"></i> <span>Inventory Items</span>
@@ -171,7 +173,7 @@
        </li>
       @endif
 
-      @if($user->InventoryTransfer)  
+      @if($user->InventoryTransfer && $user->userType!='Admin')  
         <li id="InventoryTransfer">
           <a href="{{ url('InventoryTransfer')}}">
             <i class="fa fa-exchange"></i><span>Inventory Transfer</span>
@@ -182,7 +184,7 @@
         </li>
       @endif
 
-      @if($user->FixedAsset)
+      @if($user->FixedAsset && $user->userType!='Admin')
        <li id="FixedAsset" >
           <a href="{{url('fixedasset')}}">
             <i class="fa fa-print"></i> <span>Fixed Asset</span>
@@ -192,7 +194,8 @@
           </a>
        </li>
       @endif
-
+      
+      @if($user->userType=='Manager' )
       <li>
         <a href="{{url('settings')}}">
           <i class="fa fa-cog"></i> <span>Settings</span>
@@ -200,7 +203,8 @@
           </span>
         </a>
       </li>
-      
+      @endif
+
       @if($user->userType=='Admin' || $user->userType=='Manager' )
       <li class="user">
           <a href="{{ url('user')}}">
@@ -211,7 +215,7 @@
         </li>
         @endif
 
-      @if($user->userType=='Admin' || $user->userType=='Manager' )
+      @if($user->userType=='Manager' )
       <li class="customize">
           <a href="{{ url('customize')}}">
             <i class="fa fa-wrench"></i>

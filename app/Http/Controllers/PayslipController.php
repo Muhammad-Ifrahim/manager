@@ -13,6 +13,7 @@ use Request;
 use Session;
 use Redirect;
 use Toastr;
+use Config;
 
 class PayslipController extends Controller
 {
@@ -22,13 +23,20 @@ class PayslipController extends Controller
     $this->middleware('auth');
   }
    
-   public function index(){
+   public function index()
+   {
+    $user = Config::get('userU');
+    $bid = Session::get('bId');
 
-    $bid = Session::get('bId'); 
-
-    $payslip=Payslips::where('bId',$bid)->get();    
-    return View::make('settings.payslip.payslip-view')->with('payslip',$payslip); 
-
+    if ($user->payslips > 0) 
+    {
+      $payslip=Payslips::where('bId',$bid)->get();    
+      return View::make('settings.payslip.payslip-view')->with('payslip',$payslip); 
+    }
+    else
+    {
+      return View::make('errors.notAllowed-view');
+    }
    }
 
    public function create(){

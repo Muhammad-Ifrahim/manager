@@ -13,7 +13,7 @@ class PayslipSummaryReportTable extends Migration
      */
     public function up()
     {
-        Schema::create('payslipReports', function(Blueprint $table)
+        /*Schema::create('payslipReports', function(Blueprint $table)
         {
             $table->increments('id');
             $table->string('description', 200);
@@ -26,7 +26,7 @@ class PayslipSummaryReportTable extends Migration
             ->references('bId')
             ->on('business')
             ->onDelete('cascade');        
-        });
+        });*/
     }
 
     /**
@@ -36,7 +36,7 @@ class PayslipSummaryReportTable extends Migration
      */
     public function down()
     {
-        Schema::drop('payslipReports', function(Blueprint $table)
+       /* Schema::drop('payslipReports', function(Blueprint $table)
         {
             $table->increments('id');
             $table->string('description', 200);
@@ -48,6 +48,6 @@ class PayslipSummaryReportTable extends Migration
             ->references('bId')
             ->on('business')
             ->onDelete('cascade');  
-        });
+        });*/
     }
 }

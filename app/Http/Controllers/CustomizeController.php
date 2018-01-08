@@ -55,12 +55,13 @@ class CustomizeController extends Controller
        	$user->inventory=Input::has('InventoryItems') ? 1 : 0;
        	$user->InventoryTransfer=Input::has('InventoryTransfer') ? 1 : 0;
        	$user->employee=Input::has('Employee') ? 1 : 0;
-        $user->FixedAsset=Input::has('FixedAsset') ? 1 : 0; 
-
+        $user->FixedAsset=Input::has('FixedAsset') ? 1 : 0;
+        $user->payslips=Input::has('PaySlip') ? 1 : 0;
+        //$user->reports=Input::has('reports') ? 1 : 0; 
 
         $user->save();   	
         
-        Toastr::success('Successfully Customize', 'Sidebar', ["positionClass" => "toast-top-right"]);
+        Toastr::success('Successfully Customized', 'Sidebar', ["positionClass" => "toast-top-right"]);
         $cUser = Config::get('userU');
         if($cUser->userType=='Admin')
         {

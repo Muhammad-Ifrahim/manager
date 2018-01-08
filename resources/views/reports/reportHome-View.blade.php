@@ -83,9 +83,10 @@
   </div>
 
     <ul class="list-group">
-    <li class="list-group-item"><a href="#">Payslip Earning Summary</a></li>
-    <li class="list-group-item"><a href="#">Payslip Deduction Summary</a></li>
-    <li class="list-group-item"><a href="#">Payslip Contribution Summary</a></li>
+    <li class="list-group-item"><a href="{{ url('printSummaryReport')}}">Payslip Summary</a></li>
+    <li class="list-group-item"><a href="{{ url('printDeductionReport')}}">Payslip Deduction Summary</a>
+    </li>
+    <li class="list-group-item"><a href="{{url('printContributeReport')}}">Payslip Contribution Summary</a></li>
     </ul>
   
 </div>

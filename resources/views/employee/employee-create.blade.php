@@ -100,7 +100,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group{{ $errors->has('email') ? ' has-error' : ''}}">
             {!! Form::label('Email Address', 'Email Address:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-5">
                 {!! Form::text('Email Address', $value = null, ['class' => 'form-control', 'placeholder' => 'someone@email.com']) !!}
@@ -150,7 +150,8 @@
         </div>  
         
         <div id="shownDiv" class="shownDiv" style="display:none;">
-            You will be able to enter starting balance once you set Start date under Settings tab
+        <br>
+            <b>You will be able to enter starting balance once you set start date under    settings tab</b>
         </div>
       
         <div class="inline-block">
@@ -171,9 +172,9 @@
 
         <!-- Submit Button -->
         <div class="form-group">
-            <div class="col-lg-5">
+
                 {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-middle'] ) !!}
-            </div>
+            
         <!--     <div class="btn-group">
               <button type="button" class="btn btn-danger">Submit</button>
               <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown"         aria-haspopup="true" aria-expanded="false">

@@ -72,7 +72,7 @@
                         <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Report"></span>
                        </a>
 
-                       <a href="{{ URL::to('EarnReport/printReport') }}">
+                       <a href="{{ url('/EarnReport/printReport') }}">
                         <span class="fa fa-print" data-toggle="tooltip" data-original-title="Print Report"></span>
                        </a>
 

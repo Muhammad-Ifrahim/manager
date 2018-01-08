@@ -46,8 +46,7 @@ class EmployeeController extends Controller
 
   public function store(Request $request){
      $bid = Session::get('bId');
-    //echo "Saver";
-
+   
 /*    $n = array();
     $n = $request;
     echo $n->Name;
@@ -55,7 +54,8 @@ class EmployeeController extends Controller
 
     //validations of the Input 
     $validator = Validator::make(Request::all(), [
-        'Name'  => 'required|max:255',    
+        'Name'  => 'required|max:255',
+        'email' => 'email|max:255',   
     ]);
 
     if ($validator->fails()) {
