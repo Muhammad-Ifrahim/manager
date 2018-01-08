@@ -51,7 +51,7 @@
                     <td class="col-md-1">{{$value->id}}</td>
                     <td class="col-md-3">{{$value->supplierName->Name}}</td>
                     <td class="col-md-3">{{$value->DeliveryAddress}}</td>
-                    <td class="col-md-1">{{$value->Amount}}</td>
+                    <td class="col-md-1">{{number_format($value->Amount,2)}}</td>
                     <td class="col-md-2">
                      <div class="action-region">
                        <a href="{{ URL::to('purchaseorder/' . $value->id . '/edit') }}">

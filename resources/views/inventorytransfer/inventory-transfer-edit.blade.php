@@ -25,13 +25,7 @@
       margin-top: 10px;
      
        }
-    .btn-info{
-    padding-top: 6px;
-    height: 41px;
-   /*margin-left: 43%;*/
-    width: 12%;
-    float: left;
-      }
+    
 
    .form-control-heading{
     display: block;
@@ -55,7 +49,7 @@
       }
     .btn-info {
     padding-top: 6px;
-    height: 44px;
+    height: 37px;
     margin-left: 14%;
     width: 173%;
     float: left;

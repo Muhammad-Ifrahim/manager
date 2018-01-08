@@ -7,7 +7,7 @@
       <style type="text/css">
        .box-title {
           display: inline-block;
-          font-size: 50px;
+          font-size: 30px;
           font-weight:bold
           line-height: 1;
           color: rgba(76, 175, 80, 0.87);
@@ -141,7 +141,7 @@
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
              <td style="width: 18.8%" class="hide_all">Subtotal</td>
-             <td style="width: 17.8%" >{{$sale[0]->Amount}}</td>
+             <td style="width: 17.6%" >{{$sale[0]->Amount}}</td>
            </tr>
               
             <tr>
@@ -151,7 +151,7 @@
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
              <td style="width: 18.4%" class="hide_all">Rounding</td>
-             <td style="width: 17.8%" ></td>
+             <td style="width: 17.6%" ></td>
             </tr>
            
               <tr>
@@ -161,7 +161,7 @@
              <td class="lastRow" ></td>
              <td class="lastRow" ></td>
              <td style="width: 18.4%;font-weight:bold" class="hide_all">Total</td>
-             <td style="width: 17.8%;font-weight:bold">{{$sale[0]->Amount}}</td>
+             <td style="width: 17.6%;font-weight:bold">{{$sale[0]->Amount}}</td>
            </tr>
                 
         </tbody>

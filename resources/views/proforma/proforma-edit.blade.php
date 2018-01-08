@@ -395,10 +395,10 @@ select.form-control.product_id {
           <div  class="col-lg-6 taxbody pul-right" >
              <select class="tax form-control-heading" name="tax" id="tax">
                       
-                      <option  data-price="{{$sale->TaxName->value}}"  value="{{$sale->Tax}}">{{$sale->TaxName->Tax }}</option>
+                      <option  data-price="{{$sale->TaxName->value}}"  value="{{$sale->Tax}}">{{ $sale->TaxName->Tax}}</option>
                       @foreach($Tax as $tax)
                           @if($tax->id != $sale->Tax)
-                      <option  data-price="{{$tax->value }}" value="{{$tax->id }}">{{$tax->Tax }}</option>
+                            <option  data-price="{{$tax->value }}" value="{{$tax->id }}">{{$tax->Tax }}</option>
                           @endif
                       @endforeach
               </select>

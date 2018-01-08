@@ -14,6 +14,7 @@ use Session;
 use Redirect;
 use Toastr;
 use Config;
+use PDF;
 
 class PayslipController extends Controller
 {
@@ -97,7 +98,6 @@ class PayslipController extends Controller
   public function edit($Id){
     $payslip=Payslips::find($Id);
     $PayslipsEarn=Payslips::with('PayslipsEarnItem')->where('payId',$Id)->get();
-   //dd($PayslipsEarn);
     $PayslipsDeduct=Payslips::with('PayslipsDeductItem')->where('payId',$Id)->get();
     $PayslipsContribute=Payslips::with('PayslipsContributeItem')->where('payId',$Id)->get();
     return View::make('settings.payslip.payslip-edit')->with('PayslipsContribute',$PayslipsContribute)->with('PayslipsDeduct',$PayslipsDeduct)->with('PayslipsEarn',$PayslipsEarn)->with('payslip',$payslip);
@@ -166,8 +166,17 @@ class PayslipController extends Controller
         $payslip->PayslipsDeductItem()->delete();
         $payslip->PayslipsContributeItem()->delete();
         $payslip->delete();
-      
-          Toastr::success('Successfully Deleted', 'Payslips', ["positionClass" => "toast-top-right"]);
+        Toastr::success('Successfully Deleted', 'Payslips', ["positionClass" => "toast-top-right"]);
           return Redirect::to('payslip');
+  }
+  public function print($Id){
+    
+    $payslip=Payslips::find($Id);
+    $PayslipsEarn=Payslips::with('PayslipsEarnItem')->where('payId',$Id)->get();
+    $PayslipsDeduct=Payslips::with('PayslipsDeductItem')->where('payId',$Id)->get();
+    $pdf=new PDF();
+    $pdf=PDF::loadView('settings.payslip.payslip-pdf',['payslip'=>$payslip,'PayslipsEarn'=>$PayslipsEarn,'PayslipsDeduct'=>$PayslipsDeduct])->setPaper('A4');
+    return $pdf->stream('payslip.pdf',array('Attachment'=>0));
+
   }
 }

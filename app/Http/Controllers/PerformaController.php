@@ -7,7 +7,6 @@ use App\Models\Inventory;
 use App\Models\Sale;
 use Illuminate\Support\Facades\Session;
 use Carbon;
-//use App\Http\Controllers\Response;
 use View;
 use Request;
 use Validator;
@@ -42,7 +41,6 @@ class PerformaController extends Controller
         $sale = new Sale;
         $bid = Session::get('bId'); 
         $input = Input::all();
-       // dd(Input::all());
         $sale->Heading=is_null(Input::get('Heading')) ? '' : Input::get('Heading');
         $sale->Date=is_null(Input::get('date')) ? '' : Input::get('date');
         $sale->customer =Input::get('customer'); 
@@ -67,7 +65,6 @@ class PerformaController extends Controller
         }
         Toastr::success('Proforma Created Successfully', 'Proforma', ["positionClass" => "toast-top-right"]);
         return Redirect::to('proforma');
-
     }
 
     
@@ -81,8 +78,6 @@ class PerformaController extends Controller
       $sale=Sale::find($id);
       $salesItem = Sale::with('saleQuote')->with('saleQuote.inventoryItem')->where('SaleId',$id)->get();  
       return view('proforma.proforma-edit')->with('sale',$sale)->with('salesItem',$salesItem);  
-
-
     }
 
    
@@ -115,14 +110,11 @@ class PerformaController extends Controller
                 $proforma->Amount = $input['amount'][$id];
                 $proforma->save();
             }
-            
         }
         Toastr::success('Proforma Updated Successfully', 'Proforma', ["positionClass" => "toast-top-right"]);
         return Redirect::to('proforma');
 
          }
-
-        
     }
 
     public function destroy($id)
@@ -133,11 +125,8 @@ class PerformaController extends Controller
              $sale->saleQuote()->delete();
              $sale->delete();
              Toastr::success('Proforma Deleted', 'Proforma', ["positionClass" => "toast-top-right"]);
-                  
          }
-        
          return Redirect::to('proforma');
-          
     }
     // public function getinventory(Request $request){
     //       $inventId = Input::all();

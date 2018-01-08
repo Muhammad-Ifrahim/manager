@@ -131,7 +131,6 @@
             {{ Form::checkbox('checkValue','1', false, ['id' => 'checker']) }} 
 
           <span style="margin-left: 12px;font-weight: bold;">  Starting Balance as at :
-               
                @foreach ($strtDate as $object)
                 {{ $object->date}}
                @endforeach
@@ -164,6 +163,19 @@
               <div class="help-block">{{ $errors->first('ValueOnHand') }}</div>
            </div>
           </div>
+
+          <div class="col-lg-2" style="margin-left: 180px;margin-bottom:7px" >
+          <select class="form-control col-lg-2 account form-control-heading" name="account" id="account"> 
+             <option value="{{$inventory->Account->id}}" >{{ $inventory->Account->AccountName}}</option>                    
+              @foreach($account as $accounts)
+                 @if($accounts->id==3 ||$accounts->id==5)
+                    @if($inventory->Account->id!=$accounts->id)
+                 <option value="{{$accounts->id}}" data="{{ $accounts->AccountName}}">{{ $accounts->AccountName}}</option>
+                    @endif
+                 @endif
+              @endforeach
+            </select>
+        </div>
             
         </div>   
         <!-- Submit Button -->

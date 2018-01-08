@@ -5,7 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Accounts extends Model
 {
-    public $primaryKey ='accounts';
+    public $primaryKey ='id';
+    public  $table='account';
+
+     protected $fillable = [
+     	'AccontType'];
   
     public $timestamps = true;
 }

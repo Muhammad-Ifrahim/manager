@@ -25,18 +25,12 @@
       margin-top: 10px;
      
        }
-    .btn-info{
-    padding-top: 6px;
-    height: 41px;
-   /*margin-left: 43%;*/
-    width: 12%;
-    float: left;
-      }
+  
 
    .form-control-heading{
     display: block;
     width: 100%;
-    height: 44px;
+    height: 37px;
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
@@ -55,7 +49,7 @@
       }
     .btn-info {
     padding-top: 6px;
-    height: 44px;
+    height: 37px;
     margin-left: 14%;
     width: 173%;
     float: left;
@@ -373,7 +367,7 @@ select.form-control.product_id {
 
        <div > 
         
-       <div style="margin-left: 70%" >      
+       <div style="margin-left: 66%" >      
           <div  class="col-lg-3" >
               <input type="button" class=" add btn btn-lg btn-info" value="Add Item">
           </div>

@@ -35,7 +35,7 @@
   	 	   <div class="box">
             <div class="box-header">
                <h2 class="box-title">Fixed Assest</h2>
-                 <a type="button" href="{{url('fixedasset/create')}}" class="btn btn-block btn-info" style="float: right;width: 13%">New Fixed Assest</a>
+                 <a type="button" href="{{url('fixedasset/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Fixed Assest</a>
             </div>
 
             <div class="box-body">
@@ -59,9 +59,9 @@
                       <td class="col-md-1">{{$value->Code}}</td>
                   		<td class="col-md-1">{{$value->Name}}</td>
                   		<td class="col-md-1">{{$value->Description}}</td>
-                  		<td class="col-md-1">{{$value->PurchaseCost}}</td>
-                  		<td class="col-md-1">{{$value->AccumulatedDepreciation}}</td>
-                  		<td class="col-md-1">{{$value->BookValue}}</td>
+                  		<td class="col-md-1">{{number_format($value->PurchaseCost,2)}}</td>
+                  		<td class="col-md-1">{{number_format($value->AccumulatedDepreciation,2)}}</td>
+                  		<td class="col-md-1">{{number_format($value->BookValue,2)}}</td>
                   		<td class="col-md-1">
                           <div class="action-region">
                             <a href="{{ URL::to('fixedasset/' . $value->fixId . '/edit') }}">

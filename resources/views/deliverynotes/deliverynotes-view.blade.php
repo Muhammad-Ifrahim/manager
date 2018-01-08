@@ -28,7 +28,7 @@
 
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">DELIVERY NOTES</h3>
+              <h3 class="box-title">Delivery Notes</h3>
               <a type="button" href="{{url('deliverynote/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Delivery</a>
             </div>
             <!-- /.box-header  -->

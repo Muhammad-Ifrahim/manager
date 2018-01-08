@@ -5,9 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use  Illuminate\Support\Facades\Schema;
 use  Illuminate\Support\Facades\App;
-//use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Authenticated;
-
 use App\Models\Customer;
 use App\Models\Business;
 use App\Models\Employee;
@@ -31,8 +29,10 @@ use App\Models\InventoryLocation;
 use App\Models\PurchaseOrderSale;
 use App\Models\Tax;
 use App\Models\PayslipReport;
-
-
+use App\Models\Accounts;
+use App\Models\Journal;
+use App\Models\JournalEntry;
+use App\Models\SaleInvoice;
 use Session;
 use View;
 use Auth;
@@ -130,6 +130,9 @@ class AppServiceProvider extends ServiceProvider
             $sale=Sale::where('bId', $bid)->get();
             View::share('sale',$sale);
 
+            $saleInvoice=SaleInvoice::where('bId', $bid)->get();
+            View::share('saleInvoice',$saleInvoice);
+
             $inventory=Inventory::where('bId', $bid)->get();
             View::share('inventory',$inventory);
 
@@ -147,9 +150,26 @@ class AppServiceProvider extends ServiceProvider
             View::share('PurchaseOrderSale',$PurchaseOrderSale); 
 
             $Tax=Tax::all();
-            View::share('Tax',$Tax);                    
+            View::share('Tax',$Tax);   
+
+            $account=Accounts::where('AccountType','!=','Income')->get();
+            $accountType = $account->groupBy('AccountType');
+            View::share('account',$account);
+            View::share('accountType',$accountType);
+
+             // Expeneses
+            $accountCredit=Accounts::where('AccountType','!=','Expenses')->get();
+            $accountCreditType = $accountCredit->groupBy('AccountType');
+            View::share('accountCredit',$accountCredit);
+            View::share('accountCreditType',$accountCreditType);               
+
+
+            $Journal=Journal::where('bId', $bid)->get();
+            View::share('Journal',$Journal);  
 
             }
+
+
 
         // $proforma=Proforma::all(); 
 
