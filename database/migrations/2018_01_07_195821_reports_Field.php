@@ -13,7 +13,8 @@ class ReportsField extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) 
+        {
             $table->integer('reports');
         });
     }

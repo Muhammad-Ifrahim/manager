@@ -43,7 +43,7 @@
        <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-               <h2 class="box-title">Payslip Earning Summary</h2>
+               <h2 class="box-title">Payslip Summary</h2>
             </div>
         
         <div class="box-body">
@@ -73,14 +73,15 @@
                 {!! Form::text('Description', $value = null, ['class' => 'form-control', 'placeholder' => 'Description']) !!}
             </div>
         </div>
-        {{ Form::hidden('payType', 'Earn')}}
+        {{ Form::hidden('payType', 'Summary')}}
         {{ Form::hidden('bId', Session::get('bId'))}}
 
         <!-- Submit Button -->
-        <div class="form-group">
-            <div class="col-lg-5">
+        <div class="col-lg-5">
             {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-middle'] ) !!}
             </div>
+        <div class="form-group">
+            
         <!--     <div class="btn-group">
               <button type="button" class="btn btn-success">Submit</button>
               <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"         aria-haspopup="true" aria-expanded="false">

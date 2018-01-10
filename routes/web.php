@@ -44,11 +44,11 @@ Route::resource('proforma','PerformaController');
 Route::resource('InventoryTransfer','InventoryTransferController');
 Route::resource('InventoryLocation','InventoryLocationController');
 Route::resource('Reports', 'ReportController');
-Route::resource('EarnReport', 'EarnReportController');
+Route::resource('EarnReport/{rType}', 'EarnReportController');
 Route::resource('supplier','SupplierController');
 Route::resource('Inventory','InventoryController');
 Route::resource('Journal','JournalController');
-Route::get('/Journal/{id}/print', 'JournalController@print');
+Route::get('/Journal/{id}/print', 'JournalController@printreport');
 
 Route::resource('purchaseorder','PurchaseOrderController');
 Route::get('/purchaseorder/{id}/print', 'PurchaseOrderController@printReport');
@@ -65,3 +65,6 @@ Route::get('/printContributeReport', 'EarnReportController@printContributeReport
 Route::get('/printDeductionReport', 'EarnReportController@printDeductionReport');
 Route::get('/printSummaryReport', 'EarnReportController@printSummaryReport');
 Route::get('/proformaPrint/{id}/print', 'PerformaController@printReport');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

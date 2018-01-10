@@ -291,12 +291,13 @@ class JournalController extends Controller
         
     }
 
-    public function print($id){
-         $Journal = Journal::find($id);
+    public function printreport($id)
+    {
+        $Journal = Journal::find($id);
         $JournalEntry=Journal::with('JournalEntries')->Where('id',$id)->get();
-        $pdf=new PDF();
+       // $pdf=new PDF();
+        
         $pdf=PDF::loadView('journal.jornal-pdf',['Journal'=>$Journal,'JournalEntry'=>$JournalEntry])->setPaper('A4');
         return  $pdf->stream('proforma.pdf',array('Attachment'=>0));
-      //  return view('journal.journal-edit')->with('Journal',$Journal)->with('JournalEntry',$JournalEntry);
     }
 }

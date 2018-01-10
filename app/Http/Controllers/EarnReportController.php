@@ -23,7 +23,7 @@ class EarnReportController extends Controller
     $this->middleware('auth');
   }
 
-  public function index()
+  public function index($rType)
   {
     //To get value from shared variable (AppServiceProvider)
     $user = Config::get('userU');
@@ -32,7 +32,18 @@ class EarnReportController extends Controller
     if($user->employee>0)//+++++++++++++ Change condition
     {
       $busid = Session::get('bId');
-      return View::make('reports.payslips.pEarnSummary-View');
+      if ($rType=='sum') 
+      {
+        return View::make('reports.payslips.pEarnSummary-View');
+      }
+      else if ($rType=='con') 
+      {
+        return View::make('reports.payslips.pEarnSummary-View');
+      }
+      else if ($rType=='ded') 
+      {
+        return View::make('reports.payslips.pEarnSummary-View');
+      }
     }
     else
     {
@@ -77,7 +88,7 @@ class EarnReportController extends Controller
       }
       else
       {
-        echo $value->GrossPay.'--'. $value->Deduction.'--'. $value->NetPay;
+//        echo $value->GrossPay.'--'. $value->Deduction.'--'. $value->NetPay;
         if ($value->GrossPay==null) 
         {
          $value->GrossPay = 0;  
@@ -118,7 +129,7 @@ class EarnReportController extends Controller
      $pdf = new PDF();
      if(sizeof($pslips)>0)
      {
-      $pdf=PDF::loadView('reports.payslips.payslipSummary-Pdf',['pslipRep'=>$pslipRep,
+      $pdf=PDF::loadView('reports.payslips.payslipSummary-pdf',['pslipRep'=>$pslipRep,
       'pslips'=>$pslips, 'tempArr'=>$tempArr,'empName'=>$empName,
       'earnName'=> $earnName,'rowSum'=>$rowSum, 'busName'=>$busName[0]->name])->setPaper('A4');
         return  $pdf->stream('payslipSummary.pdf',array('Attachment'=>0));  
@@ -419,9 +430,20 @@ class EarnReportController extends Controller
      }                                             
   }
 
-  public function create()
+  public function create($rTyper)
   {
-    return View::make('reports.payslips.pEarnSummary-Create');
+    if ($rTyper=='sum') 
+      {
+        return View::make('reports.payslips.pEarnSummary-Create');
+      }
+      else if ($rTyper=='con') 
+      {
+        return View::make('reports.payslips.ConSummary-Create');
+      }
+      else if ($rTyper=='ded') 
+      {
+        return View::make('reports.payslips.pDedSummary-Create');
+      }
   }   
 
   public function store(Request $request){

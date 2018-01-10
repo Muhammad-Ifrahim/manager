@@ -42,9 +42,9 @@
          
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Payslip Earning Summary</h3>
+              <h3 class="box-title">Payslip Summary</h3>
 
-              <a type="button" href="{{url('EarnReport/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Report</a>
+              <a type="button" href="{{url('EarnReport/sum/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Report</a>
             </div>
             
             <div class="box-body">
