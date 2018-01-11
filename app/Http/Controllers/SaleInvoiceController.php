@@ -69,13 +69,16 @@ class SaleInvoiceController extends Controller
 
     public function show($id)
     {
-        //
+        
     }
 
     
     public function edit($id)
     {
-        //
+      $sale=SaleInvoice::find($id);
+      $salesItem = SaleInvoice::with('saleQuote')->with('saleQuote.inventoryItem')->where('saleinId',$id)->get();  
+     // dd($salesItem);
+      return view('sale.sale-edit')->with('sale',$sale)->with('salesItem',$salesItem); 
     }
 
    

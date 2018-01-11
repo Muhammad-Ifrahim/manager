@@ -15,6 +15,6 @@ class SaleItem extends Model
     }
      public function inventoryItem()
     {
-        return $this->belongsTo('App\Models\Inventory','inventId');
+        return $this->belongsTo('App\Models\Inventory','inventid');
     }
 }

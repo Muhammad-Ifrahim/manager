@@ -24,6 +24,7 @@
           $('#example21').DataTable()
           $('#example22').DataTable()
           $('#example23').DataTable()
+          $('#example24').DataTable()
         });
     </script>
     <style type="text/css">
@@ -1064,6 +1065,48 @@
                 </thead>
                 <tbody>
               @Foreach($Rounding as $key => $value)
+                  <tr>
+                    <td class="col-md-1">{{$value->id}}</td>
+                    <td class="col-md-1">{{$value->Description}} </td>
+                    <td class="col-md-1">{{$value->Debit}}</td>
+                    <td class="col-md-1">{{$value->Credit}}</td>
+                    <td class="col-md-1">
+                     <div class="action-region">
+                       <a href="{{ URL::to('ledgers/' . $value->journalid . '/edit') }}">
+                        <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit ledgers"></span>
+                       </a>
+                       
+                      </div>
+
+                    </td>
+
+                  </tr> 
+               @endForeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div> 
+
+           <div class="col-md-6">
+          <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Starting Balance Equity</h3>
+            </div>
+            <!-- /.box-header  -->
+            <div class="box-body">
+              <table id="example24" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th class="col-md-1">id</th>
+                  <th class="col-md-1">Description</th>
+                  <th class="col-md-1">Debit</th>
+                  <th class="col-md-1">Credit</th>
+                  <th class="col-md-1">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+              @Foreach($StartingBalance as $key => $value)
                   <tr>
                     <td class="col-md-1">{{$value->id}}</td>
                     <td class="col-md-1">{{$value->Description}} </td>

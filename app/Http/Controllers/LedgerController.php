@@ -15,6 +15,7 @@ use App\Models\AccountsPayable;
 use App\Models\EmployeeAccount;
 use App\Models\PayrollLiabilities;
 use App\Models\RetainedEarnings;
+use App\Models\StartingBalance;
 use App\Models\InterestReceived;
 use App\Models\InventorySales;
 
@@ -59,6 +60,7 @@ class LedgerController extends Controller
           $EmployeeAccount=EmployeeAccount::where('bId',$bid)->get();
           $PayrollLiabilities=PayrollLiabilities::where('bId',$bid)->get();
           $RetainedEarnings=RetainedEarnings::where('bId',$bid)->get();
+          $StartingBalance=StartingBalance::where('bId',$bid)->get();
           $InterestReceived=InterestReceived::where('bId',$bid)->get();
           $InventorySales=InventorySales::where('bId',$bid)->get();
                  // Expeneses
@@ -76,7 +78,7 @@ class LedgerController extends Controller
           $Repairs=Repairs::where('bId',$bid)->get();
           $Rounding=Rounding::where('bId',$bid)->get();
 
-        return view('ledgers.ledgers-view')->with('AccountReceivable',$AccountReceivable)->with('CashAtBank',$CashAtBank)->with('CashOnHand',$CashOnHand)->with('InventoryOnHand',$InventoryOnHand)->with('AccountsPayable',$AccountsPayable)->with('EmployeeAccount',$EmployeeAccount)->with('PayrollLiabilities',$PayrollLiabilities)->with('RetainedEarnings',$RetainedEarnings)->with('InterestReceived',$InterestReceived)->with('InventorySales',$InventorySales)->with('AccountingFees',$AccountingFees)->with('Advertising',$Advertising)->with('BankCharges',$BankCharges)->with('ComputerEquipment',$ComputerEquipment)->with('Donations',$Donations)->with('Electricity',$Electricity)->with('Entertainment',$Entertainment)->with('InventoryCost',$InventoryCost)->with('LegalFees',$LegalFees)->with('MotorVehicle',$InventorySales)->with('Rent',$Rent)->with('Repairs',$Repairs)->with('Rounding',$Rounding);    
+        return view('ledgers.ledgers-view')->with('AccountReceivable',$AccountReceivable)->with('CashAtBank',$CashAtBank)->with('CashOnHand',$CashOnHand)->with('InventoryOnHand',$InventoryOnHand)->with('AccountsPayable',$AccountsPayable)->with('EmployeeAccount',$EmployeeAccount)->with('PayrollLiabilities',$PayrollLiabilities)->with('RetainedEarnings',$RetainedEarnings)->with('InterestReceived',$InterestReceived)->with('InventorySales',$InventorySales)->with('AccountingFees',$AccountingFees)->with('Advertising',$Advertising)->with('BankCharges',$BankCharges)->with('ComputerEquipment',$ComputerEquipment)->with('Donations',$Donations)->with('Electricity',$Electricity)->with('Entertainment',$Entertainment)->with('InventoryCost',$InventoryCost)->with('LegalFees',$LegalFees)->with('MotorVehicle',$InventorySales)->with('Rent',$Rent)->with('Repairs',$Repairs)->with('Rounding',$Rounding)->with('StartingBalance',$StartingBalance);    
     }
    
     public function create()
