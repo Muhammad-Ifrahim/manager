@@ -99,8 +99,7 @@ class SupplierController extends Controller
     ]);
 
       if ($validator->fails()) {
-
-        return redirect('supplier/create')->withInput()->withErrors($validator);
+        return redirect('supplier/' . $id .'/edit')->withInput()->withErrors($validator);
       }
       else{
              $supplier = Supplier::find($id);

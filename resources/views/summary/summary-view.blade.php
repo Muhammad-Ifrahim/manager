@@ -114,20 +114,14 @@
         </div>
         <div class="col-md-6">
             <div class="panel panel-success">
-                <div class="panel-heading">
-                    <span class="title">Income</span> 
-                    <span class="pull-right">
-                     <label class="title">{{number_format($income,2)}}</label>
-                    </span> 
+                <div class="panel-heading text-center">
+                    <span class="title" >Income Summary</span> 
+                    <!-- <span class="pull-right">
+                     <label class="title">Income</label>
+                    </span>  -->
                 </div>
                 <div class="panel-body">
                   <ul class="list-group">
-                    <li class="list-group-item">
-                          Intrest Recived
-                       <span class="pull-right">
-                            <label class="title">{{number_format($InterestReceived,2)}}</label>
-                        </span>   
-                    </li>
                     <li class="list-group-item">
                           Inventory Sales
                        <span class="pull-right">
@@ -135,15 +129,26 @@
                         </span>   
                     </li>
                     <li class="list-group-item">
-                          Sales
+                          Cost of Sales
                        <span class="pull-right">
-                            <label class="title"></label>
+                            <label class="title">{{number_format($CostOfSale,2)}}</label>
                         </span>   
                     </li>
                     
                   </ul>
                 </div>
             </div>
+
+          <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="title">Gross Profit</span>
+                    <span class="pull-right">
+                       <label class="title">{{number_format($gross,2)}}</label>
+                   </span>  
+                </div>
+            </div>
+
+ 
 
             <div class="panel panel-success">
                 <div class="panel-heading">
@@ -250,14 +255,33 @@
                 </div>
             </div>
 
-             <div class="panel panel-success">
+            <div class="panel panel-success">
                 <div class="panel-heading">
-                    <span class="title">Net</span>
+                    <span class="title">Other Income</span>
+                    <span class="pull-right">
+                       <label class="title">{{number_format($InterestReceived,2)}}</label>
+                   </span>  
+                </div>
+                <div class="panel-body">
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                          Intrest Recived
+                       <span class="pull-right">
+                            <label class="title">{{number_format($InterestReceived,2)}}</label>
+                        </span>   
+                    </li>
+                  </ul>
+                </div>
+                
+            </div>
+
+             <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="title">Net Income</span>
                     <span class="pull-right">
                        <label class="title">{{number_format($net,2)}}</label>
                    </span>  
                 </div>
-                
             </div>
         </div>
     </div>

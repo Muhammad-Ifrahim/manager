@@ -28,6 +28,7 @@ use App\Models\Printing;
 use App\Models\Rent;
 use App\Models\Repairs;
 use App\Models\Rounding;
+use App\Models\CostOfSale;
 
 class Journal extends Model
 {
@@ -35,9 +36,13 @@ class Journal extends Model
     public  $table='Journal';
 
 
+    public  function JournalCostOfSale(){
+
+        return  $this->hasMany('App\Models\CostOfSale', 'journalid');
+    }
     public  function JournalEntries(){
 
-    	return  $this->hasMany('App\Models\JournalEntry', 'journalid')->orderBy('jouId');;
+    	return  $this->hasMany('App\Models\JournalEntry', 'journalid')->orderBy('jouId');
     }
 
    public  function JournalAccountReceivable(){

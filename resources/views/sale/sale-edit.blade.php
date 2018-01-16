@@ -121,7 +121,7 @@
   }
 
    $(document).ready(function(){
-        var date_input=$('input[name="Date"]'); //our date input has the name "date"
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
         var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
         var options={
           format: 'yyyy/mm/dd',
@@ -235,25 +235,30 @@ select.form-control.product_id {
         <div class="box-body">
           {{ Form::model($sale, array('route' => array('saleinvoice.update', $sale->saleinId), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
                     
-          <div class="form-group">
-              <div class="{{ $errors->has('Name') ? 'has-error' : ''}} ">
-                <div class="col-lg-6" style="margin-left: 17%">
-                    <div >
-                     {!! Form::label('Heading', 'Heading', ['class' => 'col-lg-2 control-label head']) !!}
-                     </div>
-                    <div style="margin-top: 10%">
-                    {!! Form::text('Heading', $value = null, ['class' => 'form-control-heading', 'placeholder' => 'Proforma Heading' ]) !!}
-                     <div class="help-block">{{ $errors->first('Name') }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
- 
-       <div class="form-group">   
+      <div class="form-group">   
           <div class="{{ $errors->has('IssueDate') ? 'has-error' : ''}} ">
               {!! Form::label('Issue Date', 'Issue Date', ['class' => 'col-lg-2 control-label']) !!}
               <div class="col-lg-4">
-                  {!! Form::text('Date', $value = null, array( 'id'=> 'Date',
+                  {!! Form::text('date', $value = null, array( 'id'=> 'date',
+                  'class'  => 'form-control-heading')); !!}
+                   <div class="help-block">{{ $errors->first('IssueDate') }}</div>
+              </div>
+          </div>
+          
+         <div class="{{ $errors->has('Code') ? 'has-error' : '' }} ">
+             {!!Form::label('Due Date','Due Date',['class' => 'col-lg-2 control-label' ]) !!}
+             <div class="col-lg-4">
+                {!! Form::text('date', $value=null, ['class' => 'form-control-heading','placeholder' => 'Due Date'])!!}
+                 <div class="help-block">{{ $errors->first('QuoteNumber') }}</div>
+             </div>
+         </div>
+      </div>
+
+        <div class="form-group">   
+          <div class="{{ $errors->has('IssueDate') ? 'has-error' : ''}} ">
+              {!! Form::label('Invoice Number', 'Invoice Number', ['class' => 'col-lg-2 control-label']) !!}
+              <div class="col-lg-4">
+                  {!! Form::text('InvoiceNumber', $value = null, array( 'id'=> 'date',
                   'class'  => 'form-control-heading')); !!}
                    <div class="help-block">{{ $errors->first('IssueDate') }}</div>
               </div>
@@ -266,9 +271,7 @@ select.form-control.product_id {
                  <div class="help-block">{{ $errors->first('QuoteNumber') }}</div>
              </div>
          </div>
-      </div>
-
-     
+      </div>     
 
       <div class="form-group">
           {!!Form::label('customer','Customer',['class' => 'col-lg-2 control-label ' ]) !!}
@@ -285,7 +288,22 @@ select.form-control.product_id {
              @endforeach
           </select>
         </div>
-      </div>        
+      </div>  
+
+
+      <div class="form-group">
+          {!!Form::label('Account','Account',['class' => 'col-lg-2 control-label ' ]) !!}
+        <div class="col-lg-6 ">
+          <select  name="Account" class="form-control-heading Account" id="Account">
+              @foreach($account->reverse() as $accounts)
+                 @if($accounts->id==1 ||$accounts->id==3)
+                 <option value="{{$accounts->id}}" data="{{ $accounts->AccountName}}">{{ $accounts->AccountName}}</option>
+                 @endif
+              @endforeach
+          </select>
+        </div>
+      </div>          
+                    
             
     <table class="table col-lg-12">
         <thead>

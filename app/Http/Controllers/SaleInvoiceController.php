@@ -5,6 +5,14 @@ use Illuminate\Support\Facades\Input;
 use App\Models\SaleInvoice;
 use App\Models\SaleItem;
 use App\Models\Inventory;
+use App\Models\Journal;
+use App\Models\JournalEntry;
+use App\Models\AccountReceivable;
+use App\Models\CashOnHand;
+use App\Models\SaleInvoiceSummary;
+use App\Models\InventorySales;
+use App\Models\InventoryOnHand;
+use App\Models\CostOfSale;
 use Illuminate\Support\Facades\Session;
 use Carbon;
 use View;
@@ -39,9 +47,11 @@ class SaleInvoiceController extends Controller
     public function store(Request $request)
     {
         //  dd(Input::all());
+        $check=false;
         $SaleInvoice = new SaleInvoice;
         $bid = Session::get('bId'); 
         $input = Input::all();
+        //dd($input);
         $SaleInvoice->IssueDate=Input::get('date');
         $SaleInvoice->DueDate=Input::get('duedate');
         $SaleInvoice->InvoiceNumber=Input::get('InvoiceNumber');
@@ -61,8 +71,108 @@ class SaleInvoiceController extends Controller
                 $SaleItem->Price = $input['price'][$id];
                 $SaleItem->Amount = $input['amount'][$id];
                 $SaleItem->save();
+                $check=true;
             }
-        }
+            if ($check) {
+
+                $Journal=new Journal;
+                $Journal->Date='';
+                $Journal->QuoteNumber=0;
+                $Journal->Narration='Cash OR Account Reciveable';
+                $Journal->Debit=$input['NetAmount'];
+                $Journal->Credit=$input['NetAmount'];
+                $Journal->bId=$bid;
+                $Journal->otherid=1;
+                $Journal->saleInvoiceId=$SaleInvoice->saleinId;
+
+               if ($Journal->save()){
+                  $JournalEntry = new JournalEntry;
+                  $JournalEntry->journalid=$Journal->id;
+                  $JournalEntry->Account=$input['Account'];
+                  $JournalEntry->Description='Cash Account / Account Reciveable';
+                  $JournalEntry->Debit=$input['NetAmount'];
+                  $JournalEntry->Credit=NULL;
+                  $JournalEntry->save();
+
+                     //CREDIT SIDE
+                  $JournalEntry = new JournalEntry;
+                  $JournalEntry->journalid=$Journal->id;
+                  $JournalEntry->Account=11;
+                  $JournalEntry->Description='Sale';
+                  $JournalEntry->Debit=NULL;
+                  $JournalEntry->Credit=$input['NetAmount'];
+                      if ($JournalEntry->save()) {
+                            if ($input['Account']==1) {
+                              $AccountName = new  AccountReceivable;
+                            }
+                            else {
+                              $AccountName = new  CashOnHand;
+                            }  
+                            
+                            $AccountName->Description='Cash Account / Account Reciveable';
+                            $AccountName->Debit=$input['NetAmount'];
+                            $AccountName->Credit=NULL;
+                            $AccountName->bId=$bid;
+                            $AccountName->journalid=$Journal->id;
+                            $AccountName->save(); 
+
+
+                            $AccountName = new  InventorySales;
+                            $AccountName->Description='Inventory Sale';
+                            $AccountName->Debit=NULL;
+                            $AccountName->Credit=$input['NetAmount'];
+                            $AccountName->bId=$bid;
+                            $AccountName->journalid=$Journal->id;
+                            $AccountName->save(); 
+                          }
+                  // else{
+                  //         $check=false;
+                  // }
+               }  
+            }
+
+
+            ///////////////////////////////////////////// SECOND ENTRY OF INVENTORY SALES/////////////////////////////////////
+            if ($check) {
+
+                  $JournalEntry = new JournalEntry;
+                  $JournalEntry->journalid=$Journal->id;
+                  $JournalEntry->Account=$input['Account'];
+                  $JournalEntry->Description='Cost of Sale ';
+                  $JournalEntry->Debit=$input['costofsale'];
+                  $JournalEntry->Credit=NULL;
+                  $JournalEntry->save();
+
+                     //CREDIT SIDE
+                  $JournalEntry = new JournalEntry;
+                  $JournalEntry->journalid=$Journal->id;
+                  $JournalEntry->Account=28;
+                  $JournalEntry->Description='Inventory on Hand';
+                  $JournalEntry->Debit=NULL;
+                  $JournalEntry->Credit=$input['costofsale'];
+                      if ($JournalEntry->save()) {
+                            
+                            $AccountName = new  CostOfSale;
+                            $AccountName->Description='Cost of Sale';
+                            $AccountName->Debit=$input['costofsale'];
+                            $AccountName->Credit=NULL;
+                            $AccountName->bId=$bid;
+                            $AccountName->journalid=$Journal->id;
+                            $AccountName->save(); 
+
+
+                            $AccountName = new  InventoryOnHand;
+                            $AccountName->Description='Inventory on Hand Credit';
+                            $AccountName->Debit=NULL;
+                            $AccountName->Credit=$input['costofsale'];
+                            $AccountName->bId=$bid;
+                            $AccountName->journalid=$Journal->id;
+                            $AccountName->save(); 
+                          }
+                
+                      }
+               
+                 }
         Toastr::success('Successfully Created', 'Sale Invoice', ["positionClass" => "toast-top-right"]);
         return Redirect::to('saleinvoice');
     }
@@ -89,6 +199,21 @@ class SaleInvoiceController extends Controller
 
     public function destroy($id)
     {
-        //
+        $SaleInvoice=SaleInvoice::with('journal')->where('saleinId',$id)->get();
+        foreach ($SaleInvoice as $key => $value) {
+            $Id=$value->journal->id;
+        }
+        if ($SaleInvoice!=NULL) {
+              if ($Id!=NULL) {                
+                app('App\Http\Controllers\JournalController')->destroy($Id);      
+              }
+              $SaleInvoice=SaleInvoice::where('saleinId',$id);
+              if($SaleInvoice){
+                     $SaleInvoice->delete();   
+               }
+        }
+        Toastr::success('Successfully Deleted', 'Sale Invoice', ["positionClass" => "toast-top-right"]);
+        return Redirect::to('saleinvoice');
+      
     }
 }

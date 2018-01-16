@@ -283,6 +283,7 @@ class JournalController extends Controller
              $Journal->JournalRent()->delete();
              $Journal->JournalRepairs()->delete();
              $Journal->JournalRounding()->delete();
+             $Journal->JournalCostOfSale()->delete();
                  $Journal->delete();
 
               Toastr::success('Successfully Deleted', 'Journal Entry', ["positionClass" => "toast-top-right"]);

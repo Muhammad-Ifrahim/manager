@@ -44,8 +44,7 @@
         
         <div class="box-body">
           
-        
-         @include('common.errors')
+        @include('common.errors')
  
         {{ Form::model($supplier, array('route' => array('supplier.update', $supplier->supId), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
          

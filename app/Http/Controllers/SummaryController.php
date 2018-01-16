@@ -19,7 +19,7 @@ use App\Models\RetainedEarnings;
 use App\Models\StartingBalance;
 use App\Models\InterestReceived;
 use App\Models\InventorySales;
-
+use App\Models\CostOfSale;
 use App\Models\AccountingFees;
 use App\Models\Advertising;
 use App\Models\BankCharges;
@@ -267,17 +267,29 @@ class SummaryController extends Controller
             }
           $Rounding=$debit-$credit;
 
+          $debit=0;
+          $credit=0;
+          $CostOfSale=CostOfSale::where('bId',$bid)->get();
+          foreach ($CostOfSale as $key => $value) {
+                  $debit+=$value->Debit;
+                  $credit+=$value->Credit;
+            }
+          $CostOfSale=$debit-$credit;
+
 
           $Assets=$AccountReceivable+$CashOnHand+$InventoryOnHand;
           $Liability=$AccountsPayable+$EmployeeAccount+$PayrollLiabilities;
-          $income=$InterestReceived+$InventorySales;
+          $income=$CostOfSale+$InventorySales;
+          $gross=$InventorySales-$CostOfSale;
           //$equity=$RetainedEarnings+$StartingBalance;
           $expenses=$AccountingFees+$Advertising+$AccountingFees+$Advertising+$BankCharges+$ComputerEquipment+$Donations+$Electricity+$Entertainment+$InventoryCost+$LegalFees+$MotorVehicle+$Rent+$Repairs;
-          $net=$income-$expenses;
+          $net=$gross-$expenses;
+          $net=$net+$InterestReceived;
+
           $RetainedEarnings +=$net;
           $equity=$RetainedEarnings+$StartingBalance;
 
-        return view('summary.summary-view')->with('AccountReceivable',$AccountReceivable)->with('CashAtBank',$CashAtBank)->with('CashOnHand',$CashOnHand)->with('InventoryOnHand',$InventoryOnHand)->with('AccountsPayable',$AccountsPayable)->with('EmployeeAccount',$EmployeeAccount)->with('PayrollLiabilities',$PayrollLiabilities)->with('RetainedEarnings',$RetainedEarnings)->with('InterestReceived',$InterestReceived)->with('InventorySales',$InventorySales)->with('AccountingFees',$AccountingFees)->with('Advertising',$Advertising)->with('BankCharges',$BankCharges)->with('ComputerEquipment',$ComputerEquipment)->with('Donations',$Donations)->with('Electricity',$Electricity)->with('Entertainment',$Entertainment)->with('InventoryCost',$InventoryCost)->with('LegalFees',$LegalFees)->with('MotorVehicle',$MotorVehicle)->with('Rent',$Rent)->with('Repairs',$Repairs)->with('Assets',$Assets)->with('Liability',$Liability)->with('income',$income)->with('expenses',$expenses)->with('Rounding',$Rounding)->with('StartingBalance',$StartingBalance)->with('equity',$equity)->with('net',$net);
+        return view('summary.summary-view')->with('AccountReceivable',$AccountReceivable)->with('CashAtBank',$CashAtBank)->with('CashOnHand',$CashOnHand)->with('InventoryOnHand',$InventoryOnHand)->with('AccountsPayable',$AccountsPayable)->with('EmployeeAccount',$EmployeeAccount)->with('PayrollLiabilities',$PayrollLiabilities)->with('RetainedEarnings',$RetainedEarnings)->with('InterestReceived',$InterestReceived)->with('InventorySales',$InventorySales)->with('AccountingFees',$AccountingFees)->with('Advertising',$Advertising)->with('BankCharges',$BankCharges)->with('ComputerEquipment',$ComputerEquipment)->with('Donations',$Donations)->with('Electricity',$Electricity)->with('Entertainment',$Entertainment)->with('InventoryCost',$InventoryCost)->with('LegalFees',$LegalFees)->with('MotorVehicle',$MotorVehicle)->with('Rent',$Rent)->with('Repairs',$Repairs)->with('Assets',$Assets)->with('Liability',$Liability)->with('income',$income)->with('expenses',$expenses)->with('Rounding',$Rounding)->with('StartingBalance',$StartingBalance)->with('equity',$equity)->with('net',$net)->with('CostOfSale',$CostOfSale)->with('gross',$gross);
        
     }
 

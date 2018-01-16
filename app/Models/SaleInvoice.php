@@ -11,6 +11,11 @@ class SaleInvoice extends Model
 
     public $timestamps =false;
 
+    public function journal(){
+ 
+        return $this->hasOne('App\Models\Journal', 'saleInvoiceId');
+    }
+
      public function user()
     {
        return $this->belongsTo('App\Models\Customer', 'customer');
