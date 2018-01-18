@@ -20,7 +20,7 @@
             text-decoration: none;
             margin: 0 10px;
          } 
-         .label{
+         .account{
           font-size: 53%;
           font-weight: 400px;
          }
@@ -77,8 +77,8 @@
 
                       </div>
                         @else
-                        <span class="pull-right-container">
-                              <small class="label bg-green">Accounts</small>
+                        <span class="pull-right-container" data-toggle="tooltip" data-original-title="Accounts Entry">
+                              <small class="account label bg-orange">Accounts</small>
                         </span>
                         <a href="{{ url('/Journal/' . $value->id . '/print') }}">
                         <span class="fa fa-print" data-toggle="tooltip" data-original-title="Print Journal Report"></span>
