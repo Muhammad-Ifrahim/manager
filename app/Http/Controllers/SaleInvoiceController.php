@@ -200,6 +200,7 @@ class SaleInvoiceController extends Controller
     public function destroy($id)
     {
         $SaleInvoice=SaleInvoice::with('journal')->where('saleinId',$id)->get();
+        $Id=NULL;
         foreach ($SaleInvoice as $key => $value) {
             $Id=$value->journal->id;
         }

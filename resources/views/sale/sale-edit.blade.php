@@ -103,11 +103,26 @@
 
 <script type="text/javascript">
 
-  $( document ).ready(function() {
-      var addres = $('.customer option:selected').attr('data-addres');
-      $('.addres').val(addres);
+  $(document).ready(function(){
+
+    var t = 0;
+    var cost=0;
+   
+    $('.costprice').each(function(i,e){
+        var costprice=$(this).val()-0;
+        
+        cost+=costprice;
     });
-   function totalAmount(){
+
+     //console.log(cost);
+  
+     $("#total").val(t);
+     $("#costofsale").val(cost);
+
+     //console.log( 'Upload' + cost);
+
+  });
+  function totalAmount(){
     var t = 0;
     var cost=0;
     $('.amount').each(function(i,e){
@@ -117,8 +132,11 @@
 
     $('.costprice').each(function(i,e){
         var costprice=$(this).val()-0;
+        console.log(costprice);
         cost+=costprice;
     });
+
+    //console.log('total Amount'+ cost);
 
      console.log(cost);
      var tax = $('.tax option:selected').attr('data-price');
@@ -141,7 +159,18 @@
         date_input.datepicker(options);
       });
       
-
+    $(document).ready(function(){
+        var date_input=$('input[name="duedate"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        var options={
+          format: 'yyyy/mm/dd',
+          container: container,
+          todayHighlight: true,
+          autoclose: true,
+        };
+        date_input.datepicker(options);
+      });
+      
 
   $(function () {
   
@@ -149,11 +178,11 @@
     $('.add').click(function () {
       var inventory = $('.inventId').html();
       var n = ($('.neworderbody tr').length - 0) + 1;
-      var tr = '<tr><td><select class="form-control inventId form-control-heading" name="inventId[]"><option></option>' + inventory + '</select></td>' +
+      var tr = '<tr><td><select class="form-control inventId form-control-heading" name="inventId[]">' + inventory + '</select></td>' +
 
        '<td><input type="text" class="discription form-control-heading" name="discription[]"readonly ></td>' +
 
-      '<td><input type="number" class="qty form-control-heading" name="qty[]" ></td>' +
+      '<td ><input type="number" class="qty form-control-heading" name="qty[]" ></td>' +
 
       '<td style="display: none;"><input type="text" class="costprice form-control-heading" name="costprice[]" readonly></td>' +
 
@@ -171,12 +200,14 @@
       totalAmount();
     });
 
-    $('.taxbody').delegate('.tax', 'change', function () {
+    //tax
+   $('.taxbody').delegate('.tax', 'change', function () {
       var tr = $(this).parent().parent();
       var taxvalue = tr.find('.tax option:selected').attr('data-price');
    //   $('.taxvalue').val(taxvalue);
       totalAmount();
       });
+
 
    // customer
     $('.customerbody').delegate('.customer', 'change', function () {
@@ -190,7 +221,10 @@
       var tr = $(this).parent().parent();
       var SalesPrice = tr.find('.inventId option:selected').attr('data-price');
       var CostPrice = tr.find('.inventId option:selected').attr('cost-price');
+      console.log(CostPrice);
+      //console.log(CostPrice +'Pakistan');
       var description = tr.find('.inventId option:selected').attr('data-pro');
+     // console.log(Sales);
       tr.find('.price').val(SalesPrice);
       tr.find('.discription').val(description);
          
@@ -199,6 +233,7 @@
       
       var cost= qty * CostPrice;
       tr.find('.costprice').val(cost);
+    //  console.log(cost);
       var total = qty * price;
       tr.find('.amount').val(total);
       totalAmount();
@@ -379,12 +414,12 @@ select.form-control.product_id {
                  
                   <td class="col-lg-3">
                     <select class="form-control inventId form-control-heading" name="inventId[]">
-                      <option data-pro="{!! $value->inventoryItem->Description !!}" data-price="{!! $value->inventoryItem->SalePrice !!}" value="{!! $value->inventid !!}">
+                      <option data-pro="{!! $value->inventoryItem->Description !!}" data-price="{!! $value->inventoryItem->SalePrice !!}" cost-price="{!! $value->inventoryItem->PurchasePrice !!}" value="{!! $value->inventid !!}">
                         {!! $value->inventoryItem->ItemName!!}
                       </option>
                       @foreach($inventory as $invent)
                          @if($invent->inventId !=$value->inventid)
-                      <option data-pro="{!! $invent->Description !!}" data-price="{!! $invent->SalePrice !!}" value="{!! $invent->inventId !!}">{!! $invent->ItemName!!}</option>
+                      <option data-pro="{!! $invent->Description !!}" data-price="{!! $invent->SalePrice !!}" cost-price="{!! $invent->PurchasePrice !!}" value="{!! $invent->inventId !!}" >{!! $invent->ItemName!!}</option>
                          @endif
                       @endforeach
                     </select>
@@ -399,7 +434,7 @@ select.form-control.product_id {
                   </td>  
 
                   <td class="col-lg-1" style="display: none;">
-                    <input type="text" class="costprice form-control form-control-heading" name="costprice[]" readonly>
+                    <input type="text" class="costprice form-control form-control-heading" name="costprice[]" value="{{$value->inventoryItem->PurchasePrice}}" readonly>
                   </td>
 
                   <td class="col-lg-1" >
