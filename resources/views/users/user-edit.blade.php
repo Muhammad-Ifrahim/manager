@@ -33,9 +33,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   <script>
   $(document).ready(function() {
-      console.log('1');
       var elem = document.getElementById('checker').value;
-      console.log('Checker '+elem);
       //In case when page loads and checkbox is true so onclick functionality will not work and we
       //need to show rest of fields depending checkbox value
       
@@ -56,9 +54,7 @@
       });
 
       $("#checker").click(function(){
-          console.log('2');
       var formElementVisible = $(this).is(":checked");
-      console.log(formElementVisible);
       //show if checked
       if ( formElementVisible ){
           var check = document.getElementById('divId').value;
@@ -108,9 +104,9 @@
         
         <!--Role--> 
         <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}} ">
+          @if($user->userType=='Manager')
             {!! Form::label('Role', 'Role:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-10">
-            @if($user->userType=='Manager')
               <select id="userType" name="userType" class="selectpicker">
                 </option>
                   @foreach ($roles as $key => $value)
@@ -123,9 +119,10 @@
                     @endif
                   @endforeach
               </select>
-            @endif
             </div>
+          @endif
         </div>
+       
         <!-- Name -->
         <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}} ">
             {!! Form::label('Name', 'Name:', ['class' => 'col-lg-2 control-label']) !!}
@@ -144,8 +141,8 @@
         <!-- Submit Button -->
         <div class="form-group">
             <div class="col-lg-10 col-lg-offset-2">               
-                <button type="button" class="btn btn-lg btn-success pull-midlle" onclick="window.location='{{ URL::previous() }}'">Cancel</button>
-                {!! Form::submit('Update', ['class' => 'btn btn-lg btn-success pull-midlle'] ) !!}
+              <button type="button" class="btn btn-lg btn-success pull-midlle" onclick="window.location='{{ URL::to('/user') }}'">Cancel</button>
+                {!! Form::submit('Next', ['class' => 'btn btn-lg btn-success pull-midlle'] ) !!}
             </div>
         </div>
     {!! Form::close()!!}

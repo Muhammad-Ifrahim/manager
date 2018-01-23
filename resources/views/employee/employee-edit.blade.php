@@ -131,10 +131,11 @@
            </div>
        </div>
        <!-- Buisness Identifier -->
-         <div class="form-group">
+         <div class="form-group" {{ $errors->has('Email_Address') ? ' has-error' : ''}}>
            {!!Form::label('Email Address','Email Address:',['class' => 'col-lg-2 control-label' ]) !!}
            <div class="col-lg-10">
-            {!! Form::text('Email Address', $value=$employee->email_address, ['class' => 'form-control','placeholder' => 'Optional'])!!}
+            {!! Form::text('Email_Address', $value=$employee->email_address, ['class' => 'form-control','placeholder' => 'Optional'])!!}
+            <div class="help-block">{{ $errors->first('Email_Address') }}</div>
            </div>
        </div>
 

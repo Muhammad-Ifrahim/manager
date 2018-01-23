@@ -13,6 +13,7 @@ use Session;
 use Request;
 use Validator;
 use Redirect;
+use Toastr;
 
 class EmployeeController extends Controller
 {
@@ -20,14 +21,14 @@ class EmployeeController extends Controller
   {
     $this->middleware('auth');
   }
-  public function index(){
+  public function index()
+  {
     //To get value from shared variable (AppServiceProvider)
     $user = Config::get('userU');
     $bid = Session::get('bId');
 
     if($user->employee>0)
     {
-
       $busid = Session::get('bId');
       $employees=Employee::where('bId',$busid)->get(); 
    
@@ -55,7 +56,8 @@ class EmployeeController extends Controller
     //validations of the Input 
     $validator = Validator::make(Request::all(), [
         'Name'  => 'required|max:255',
-        'email' => 'email|max:255',   
+        'Email_Address' => 'email|nullable',  
+        'Address' => 'nullable|max:255', 
     ]);
 
     if ($validator->fails()) {
@@ -71,7 +73,8 @@ class EmployeeController extends Controller
     }
   }
 
-  public function edit($Id){
+  public function edit($Id)
+  {
     $employee=Employee::find($Id);
     return View::make('employee.employee-edit')->with('employee',$employee);
   }
@@ -79,7 +82,9 @@ class EmployeeController extends Controller
    public function update($Id){
     $bid = Session::get('bId');
      $validationRules=array(
-    'Name'  => 'required|max:255',
+      'Name'  => 'required|max:255',
+      'Email_Address' => 'email|nullable',  
+      'Address' => 'nullable|max:255', 
      );
      //dd(Request::all());
 
@@ -101,7 +106,7 @@ class EmployeeController extends Controller
           if($employee){
               $employee->fill(Request::all());
               $employee->bId=$bid;
-              echo "ok-tk";
+
               //dd($employee);
       //        dd(Request::all());
 
@@ -109,15 +114,11 @@ class EmployeeController extends Controller
               {
                 $employee=Employee::find($Id);
                 //dd($employee);
-//              Toastr::success('Successfully Updated', 'Employee');
+              Toastr::success('Successfully Updated', 'Employee');
                 return Redirect::to('employee');
               }
           }
       }
-   }
-
-   public function show(){
-       
    }
 
    public function destroy($Id)

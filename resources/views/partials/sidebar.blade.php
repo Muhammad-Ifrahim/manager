@@ -10,8 +10,8 @@
             <i class="fa fa-tv"></i> <span>Summary</span>
           </a>
         </li>
-        @endif
-        
+       @endif
+
        @if($user->accounts)
          <li id="BankAccount" >
             <a href="">
@@ -23,9 +23,6 @@
           </li>
         @endif
 
-        
-
-      
         <li id="BankTransaction" >
           <a href="{{url('cash')}}">
             <i class="fa fa-money"></i> <span>Cash Account</span>
@@ -189,7 +186,7 @@
           </a>
         </li>
           
-      @if($user->report && $user->userType!='Admin')       
+      @if($user->userType!='Admin')       
          <li >
           <a href="{{ url('Reports')}}">
             <i class="fa fa-print"></i> <span>Reports</span>

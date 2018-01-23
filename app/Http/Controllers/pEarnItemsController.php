@@ -22,7 +22,8 @@ class pEarnItemsController extends Controller
     return View::make('settings.payslip.payslipEarn-view'); 
    }
 
-   public function create(){
+   public function create()
+   {
     return View::make('settings.payslip.payslipEarn-create'); 
    }   
 
@@ -30,7 +31,8 @@ class pEarnItemsController extends Controller
     $DateSet = new pearnitems;
     //dd(Request::all());
     $DateSet->fill(Request::all());
-    if($DateSet->save()){
+    if($DateSet->save())
+    {
       //Toastr::success('Successfully Created', 'Employee');
       return Redirect::to('pearnitem');
     }

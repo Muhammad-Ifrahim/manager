@@ -14,6 +14,7 @@ use Session;
 use Request;
 use Validator;
 use Redirect;
+use Toastr;
 use PDF;
 
 class EarnReportController extends Controller
@@ -23,7 +24,7 @@ class EarnReportController extends Controller
     $this->middleware('auth');
   }
 
-  public function index()
+  public function index($rType)
   {
     //To get value from shared variable (AppServiceProvider)
     $user = Config::get('userU');
@@ -32,7 +33,18 @@ class EarnReportController extends Controller
     if($user->employee>0)//+++++++++++++ Change condition
     {
       $busid = Session::get('bId');
-      return View::make('reports.payslips.pEarnSummary-View');
+      if ($rType=='sum') 
+      {
+        return View::make('reports.payslips.pEarnSummary-View');
+      }
+      else if ($rType=='con') 
+      {
+        return View::make('reports.payslips.pConSummary-View');
+      }
+      else if ($rType=='ded') 
+      {
+        return View::make('reports.payslips.pDedSummary-View');
+      }
     }
     else
     {
@@ -40,14 +52,24 @@ class EarnReportController extends Controller
     }
   }
 
-  public function printSummaryReport()
+  public function printSummaryReport($repId)
   {
     $busid = Session::get('bId');
-    $pslips = Payslips::all();//whereBetween('Date', [$from, $to])->get();
+    $from = 0;
+    $to = 0;
     //To get Business Name
     $busName = Business::where('bId',$busid)->get();
+    
     //To get From and To Dates 
-    $pslipRep = PayslipReport::where('id',1)->get();//Passed hardocded id
+    $pslipRep = PayslipReport::where('id',$repId)->get();
+    foreach ($pslipRep as $key => $value) 
+    {
+      $from = $value->from;
+      $to = $value->to;
+    }
+   
+    $pslips = Payslips::whereBetween('Date', [$from, $to])->get();
+
     $empName = array();
     $earnName = array();
     $summaryArr = array();
@@ -77,7 +99,7 @@ class EarnReportController extends Controller
       }
       else
       {
-        echo $value->GrossPay.'--'. $value->Deduction.'--'. $value->NetPay;
+//        echo $value->GrossPay.'--'. $value->Deduction.'--'. $value->NetPay;
         if ($value->GrossPay==null) 
         {
          $value->GrossPay = 0;  
@@ -118,23 +140,37 @@ class EarnReportController extends Controller
      $pdf = new PDF();
      if(sizeof($pslips)>0)
      {
-      $pdf=PDF::loadView('reports.payslips.payslipSummary-Pdf',['pslipRep'=>$pslipRep,
+      $pdf=PDF::loadView('reports.payslips.payslipSummary-pdf',['pslipRep'=>$pslipRep,
       'pslips'=>$pslips, 'tempArr'=>$tempArr,'empName'=>$empName,
       'earnName'=> $earnName,'rowSum'=>$rowSum, 'busName'=>$busName[0]->name])->setPaper('A4');
         return  $pdf->stream('payslipSummary.pdf',array('Attachment'=>0));  
      }
+     else
+     {
+      $pdf=PDF::loadView('errors.noRecord-view',['pslipRep'=>$pslipRep,
+      'pslips'=>$pslips, 'busName'=>$busName[0]->name])->setPaper('A4');
+        return  $pdf->stream('errors.noRecord-view.pdf',array('Attachment'=>0));  
+     }
   }
 
-  public function printDeductionReport()
+  public function printDeductionReport($repId)
   {
        $busid = Session::get('bId');
 
-       $pslips = Payslips::all();//whereBetween('Date', [$from, $to])->get();
        //To get Business Name
        $busName = Business::where('bId',$busid)->get();
        //To get From and To Dates 
-       $pslipRep = PayslipReport::where('id',1)->get();//Passed hardocded id
-       
+       $pslipRep = PayslipReport::where('id',$repId)->get();
+        foreach ($pslipRep as $key => $value) 
+        {
+          $from = $value->from;
+          $to = $value->to;
+        }
+        //echo $from.'-'.$to;
+        //$pslips = Payslips::all();
+        //dd('stop');   
+        $pslips = Payslips::whereBetween('Date', [$from, $to])->get();
+
         $empName = array();
         $earnName = array();
         $dedArr = array();
@@ -271,17 +307,31 @@ class EarnReportController extends Controller
         'sumRowArr'=>$sumRowArr, 'totalSumRow'=>$totalSumRow,'colSum'=>$colSum,'earnName'=> $earnName,
         'busName'=>$busName[0]->name])->setPaper('A4');
           return  $pdf->stream('pDeductSummary.pdf',array('Attachment'=>0));    
-       }      
+       }  
+       else
+       {
+        $pdf=PDF::loadView('errors.noRecord-view',['pslipRep'=>$pslipRep,
+        'pslips'=>$pslips, 'busName'=>$busName[0]->name])->setPaper('A4');
+          return  $pdf->stream('errors.noRecord-view.pdf',array('Attachment'=>0));  
+       }    
   }
 
-  public function printContributeReport()
+  public function printContributeReport($repId)
   {
     $busid = Session::get('bId');
-    $pslips = Payslips::all();//whereBetween('Date', [$from, $to])->get();
+
    //To get Business Name
     $busName = Business::where('bId',$busid)->get();
+
    //To get From and To Dates 
-    $pslipRep = PayslipReport::where('id',1)->get();//Passed hardocded id
+    $pslipRep = PayslipReport::where('id',$repId)->get();
+    foreach ($pslipRep as $key => $value) 
+    {
+      $from = $value->from;
+      $to = $value->to;
+    }
+   
+    $pslips = Payslips::whereBetween('Date', [$from, $to])->get();
 
     $empName = array();
     $earnName = array();
@@ -416,94 +466,169 @@ class EarnReportController extends Controller
       'sumRowArr'=>$sumRowArr, 'totalSumRow'=>$totalSumRow,'colSum'=>$colSum,'earnName'=> $earnName,
       'busName'=>$busName[0]->name])->setPaper('A4');
         return  $pdf->stream('payContributeSummary.pdf',array('Attachment'=>0));  
-     }                                             
+     }                                            
+     else
+     {
+      $pdf=PDF::loadView('errors.noRecord-view',['pslipRep'=>$pslipRep,
+      'pslips'=>$pslips, 'busName'=>$busName[0]->name])->setPaper('A4');
+        return  $pdf->stream('errors.noRecord-view.pdf',array('Attachment'=>0));  
+     } 
   }
 
-  public function create()
+  public function create($rTyper)
   {
-    return View::make('reports.payslips.pEarnSummary-Create');
+    if ($rTyper=='sum') 
+      {
+        return View::make('reports.payslips.pEarnSummary-Create');
+      }
+      else if ($rTyper=='con') 
+      {
+        return View::make('reports.payslips.pConSummary-Create');
+      }
+      else if ($rTyper=='ded') 
+      {
+        return View::make('reports.payslips.pDedSummary-Create');
+      }
   }   
 
-  public function store(Request $request){
+  public function store(Request $request, $type)
+  {
     $bid = Session::get('bId');
-
     $validator = Validator::make(Request::all(), [
-      //  'From'  => 'required',    
-      //  'To'  => 'required',    
-    ]);
-    
-    echo $validator->fails();
+        'from'  => 'required',
+        'to'  => 'required',
+    ]);    
 
-    if ($validator->fails()) {
-      return redirect('EarnReport/create')->withInput()->withErrors($validator);
+    $n = array();
+    $n = Request::all();
+    
+    if ($validator->fails())
+    {
+      return redirect('EarnReport/'.$type.'/create')->withInput()->withErrors($validator);
+    }
+    if($this->doValidate($n['from'], $n['to']))
+    {
+      Session::flash('message', "From date must be lesser than To date");
+      return redirect('EarnReport/'.$type.'/create')->withInput();   
     }
     else{
-        $earnReport = new PayslipReport;
-        $earnReport->fill(Request::all());
-        $earnReport->bId=$bid;
-        if($earnReport->save()){
-        } 
-        return Redirect::to('EarnReport');
+          $earnReport = new PayslipReport;
+          $earnReport->fill(Request::all());
+          $earnReport->bId=$bid;
+          
+          if($earnReport->save())
+          {
+            Toastr::success('Successfully Created', 'Report');
+            return Redirect::to('EarnReport/'.$type);
+          }
+          else
+          {
+            Toastr::success('Unable to Create', 'Report');
+          }
     }
   }
 
-  public function edit($Id){
-    $employee=Employee::find($Id);
-    return View::make('employee.employee-edit')->with('employee',$employee);
-  }
-
-   public function update($Id){
-    $bid = Session::get('bId');
-     $validationRules=array(
-    'Name'  => 'required|max:255',
-     );
-     //dd(Request::all());
-
-    $chkVal = array();
-    $chkVal = Request::has('checkValue');
-
-    if($chkVal==null)
+  public function doValidate($fromD, $toD)
+  {
+    if($fromD<$toD)
     {
-     // Request::set
+      return false;
+    }
+    else
+    {
+      return true;
     }
 
-     $validator=Validator::make(Request::all(),$validationRules);
+    ///(19|20)\d\d[- \/.](0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])/
+  }
 
-     if ($validator->fails()) {
-      return redirect('employee/' . $Id . '/edit')->withInput()->withErrors($validator);
+  public function edit($Id)
+  {
+     $allVar =explode('-', $Id) ;
+     $rId = $allVar[0];
+     $typ = $allVar[1];
+
+     $prep=PayslipReport::find($rId);    
+     
+     if($typ == 'sum')
+     {
+      $page = 'pEarnSummary-Edit';
      }
-      else{
-          $employee=Employee::find($Id);
-          if($employee){
-              $employee->fill(Request::all());
-              $employee->bId=$bid;
-              echo "ok-tk";
-              //dd($employee);
-      //        dd(Request::all());
+     else if($typ == 'con')
+     {
+      $page = 'pConSummary-Edit';
+     }
+     else if($typ == 'ded')
+     {
+      $page = 'pDedSummary-Edit';
+     }
+     return View::make('reports.payslips.'.$page)->with('pReport',$prep);
+  }
 
-              if($employee->save())
-              {
-                $employee=Employee::find($Id);
-                //dd($employee);
-//              Toastr::success('Successfully Updated', 'Employee');
-                return Redirect::to('employee');
-              }
+   public function update($Id)
+   {
+     $allVar =explode('-', $Id) ;
+     $rId = $allVar[0];
+     $typ = $allVar[1];
+
+     $bid = Session::get('bId');
+     
+    $validator = Validator::make(Request::all(), [
+        'from'  => 'required',
+        'to'  => 'required',
+    ]);    
+
+    $n = array();
+    $n = Request::all();
+
+    if ($validator->fails())
+    {
+      return redirect('EarnReport/' . $rId . '-'.$typ. '/edit')->withInput()
+      ->withErrors($validator);
+    }
+    if($this->doValidate($n['from'], $n['to']))
+    {
+      Session::flash('message', "From date must be lesser than To date");
+      return redirect('EarnReport/' . $rId . '-'.$typ. '/edit')->withInput();
+    }
+    if ($validator->fails()) 
+    {
+      return redirect('EarnReport/'.$rId.'-'.$typ. '/edit')->withInput()->withErrors($validator);
+    }
+    else
+    {
+      $pRep=PayslipReport::find($rId);
+      
+      if($pRep)
+      {
+          $pRep->fill(Request::all());
+          $pRep->bId=$bid;
+
+          if($pRep->save())
+          {
+            $pRep=PayslipReport::find($rId);
+            Toastr::success('Successfully Updated', 'Report');
+            return Redirect::to('EarnReport/'.$typ);
+          }
+          else
+          {
+            Toastr::success('Unable to Update', 'Report');
+            return Redirect::to('EarnReport/'.$typ);
           }
       }
-   }
-
-   public function show(){
-       
+    }
    }
 
    public function destroy($Id)
    {
-     $delEmployee=Employee::find($Id);
+     $allVar =explode('-', $Id) ;
+     $rId = $allVar[0];
+     $typ = $allVar[1];
+     $delEmployee=PayslipReport::find($rId);
      if($delEmployee!=null)
      {
          $delEmployee->delete();
      }
-    
-     return Redirect::to('employee');
+     return Redirect::to('EarnReport/'.$typ);
    }
 }

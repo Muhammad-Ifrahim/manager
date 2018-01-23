@@ -138,7 +138,8 @@
         <!-- Submit Button -->
         <div class="form-group">
             <div class="col-lg-10 ">
-                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success '] ) !!}
+              <button type="button" class="btn btn-lg btn-success pull-midlle" onclick="window.location='{{ URL::to('/customer') }}'">Cancel</button>
+              {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success '] ) !!}
             </div>
         </div>
  

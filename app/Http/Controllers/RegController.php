@@ -38,11 +38,21 @@ class RegController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(){
+    public function index()
+    {
       $currUser = Config::get('userU');
-      if($currUser->userType=='Admin' || $currUser->userType=='Manager')
+      $busId = Session::get('bId');
+
+      if($currUser->userType=='Admin')
+      {            
+        $allAUser = User::all();
+        return View::make('users.user-view')->with('allUser',$allAUser);
+      }
+      else if($currUser->userType=='Manager')
       {
-        return View::make('users.user-view');
+        $allUser = User::where('bId', $busId)->where('userType','<>','Manager')->get();
+
+        return View::make('users.user-view')->with('allUser',$allUser);        
       }
       else
       {
@@ -63,7 +73,8 @@ class RegController extends Controller
       }
     }
 
-  public function store(Request $request){
+  public function store(Request $request)
+  {
     $validator = Validator::make(Request::all(), [
         'name' => 'required|max:20',
         'email' => 'required|email|max:255|unique:users',
@@ -71,10 +82,12 @@ class RegController extends Controller
         'password_confirmation' => 'required|min:6', 
     ]);
 
-    if ($validator->fails()) {
+    if ($validator->fails())
+    {
         return redirect('user/create')->withInput()->withErrors($validator);
     }
-    else{
+    else
+    {
         $User = new User;
         $pass = Request::input('password');
         $pass = bcrypt($pass);
@@ -91,6 +104,14 @@ class RegController extends Controller
         {
           $b = Session::get('bId');
           $busId = Business::where('bId', $b)->get();
+          $uType = Request::input('userType');
+  
+          if ($uType!=null and $uType!='') 
+          {
+            $typeU = Role::find($uType);
+            Request::merge(['userType'=> $typeU->role]);
+          }
+
           if(sizeof($busId)>0)
           {
             Request::merge(['bId'=> $busId[0]->bId]);
@@ -114,35 +135,52 @@ class RegController extends Controller
   {
       $validator = Validator::make(Request::all(), [
         'name' => 'required|max:20',
-        'email' => 'required|email|max:255|unique:users',
+        'email' => 'required|email',
      ]);
 
-     if ($validator->fails()) {
+     if ($validator->fails()) 
+     {
       return redirect('user/' . $Id . '/edit')->withInput()->withErrors($validator);
      }
-     else{
-          $upUsr = User::find($Id);
-          if($upUsr)
-          {
-              $upUsr->fill(Request::all());
-              if($upUsr->save())
+     else {
+            $upUsr = User::find($Id);
+            $currUser = Config::get('userU');
+            if($currUser->userType=='Manager')
               {
-                $sRole=Role::find($Id);
-                Toastr::success('Successfully Updated', 'User');
-                return Redirect::to('user');
+                $uType = Request::input('userType');
+               
+                if ($uType!=null and $uType!='') 
+                {
+                  $typeU = Role::find($uType);
+                  Request::merge(['userType'=> $typeU->role]);
+                }
               }
-          }
+
+            if($upUsr)
+            {
+                $upUsr->fill(Request::all());
+                if($upUsr->save())
+                {
+                  $sRole=Role::find($Id);
+                  //Toastr::success('Successfully Updated', 'User');
+                  return Redirect::to('customize/'.$Id.'/edit');
+                }
+            }
       }
    }
-/*
-   public function destroy($Id)
+
+  public function destroy($Id)
    {
-     $delEmployee=Employee::find($Id);
-     if($delEmployee!=null)
+     $delUser=User::find($Id);
+     if($delUser!=null)
      {
-         $delEmployee->delete();
+         $delUser->delete();
+         Toastr::success('Successfully Deleted', 'User');
      }
-    
-     return Redirect::to('employee');
-   }*/
+    else
+    {
+      Toastr::success('Unable To Delete', 'User');
+    }
+    return Redirect::to('user');
+   }
 }

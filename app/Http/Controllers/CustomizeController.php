@@ -28,7 +28,8 @@ class CustomizeController extends Controller
         $this->middleware('auth');
     }
 
-    function index(){
+    function index()
+    {
       $currUser = Config::get('userU');
       if($currUser->userType=='Admin' || $currUser->userType=='Manager')
       {
@@ -40,37 +41,82 @@ class CustomizeController extends Controller
       }
     }
 
-    function store(Request $request){
-        $user = User::find(DB::table('users')->max('id'));
+    function store(Request $request)
+    {
+      $user = User::find(DB::table('users')->max('id'));
+     	$user->accounts=Input::has('accounts') ? 1 : 0;
+     	$user->customer=Input::has('customer') ? 1 : 0;
+     	$user->SalesQuote=Input::has('SalesQuote') ? 1 : 0;
+     	$user->SalesOrder=Input::has('SalesOrder') ? 1 : 0;
+     	$user->SalesInvoice=Input::has('SalesInvoice') ? 1 : 0;
+     	$user->DeliveryNotes=Input::has('DeliveryNotes') ? 1 : 0;
+     	$user->Supplier=Input::has('Supplier') ? 1 : 0;
+     	$user->PurchaseOrder=Input::has('PurchaseOrder') ? 1 : 0;
+     	$user->PurchaseInvoice=Input::has('PurchaseInvoice') ? 1 : 0;
+     	$user->inventory=Input::has('InventoryItems') ? 1 : 0;
+     	$user->InventoryTransfer=Input::has('InventoryTransfer') ? 1 : 0;
+     	$user->employee=Input::has('Employee') ? 1 : 0;
+      $user->FixedAsset=Input::has('FixedAsset') ? 1 : 0;
+      $user->payslips=Input::has('PaySlip') ? 1 : 0;
+      //$user->reports=Input::has('reports') ? 1 : 0; 
 
-       	$user->accounts=Input::has('accounts') ? 1 : 0;
-       	$user->customer=Input::has('customer') ? 1 : 0;
-       	$user->SalesQuote=Input::has('SalesQuote') ? 1 : 0;
-       	$user->SalesOrder=Input::has('SalesOrder') ? 1 : 0;
-       	$user->SalesInvoice=Input::has('SalesInvoice') ? 1 : 0;
-       	$user->DeliveryNotes=Input::has('DeliveryNotes') ? 1 : 0;
-       	$user->Supplier=Input::has('Supplier') ? 1 : 0;
-       	$user->PurchaseOrder=Input::has('PurchaseOrder') ? 1 : 0;
-       	$user->PurchaseInvoice=Input::has('PurchaseInvoice') ? 1 : 0;
-       	$user->inventory=Input::has('InventoryItems') ? 1 : 0;
-       	$user->InventoryTransfer=Input::has('InventoryTransfer') ? 1 : 0;
-       	$user->employee=Input::has('Employee') ? 1 : 0;
+      $user->save();   	
+      
+      Toastr::success('Successfully Customized', 'Sidebar', ["positionClass" => "toast-top-right"]);
+      
+      $cUser = Config::get('userU');
+      if($cUser->userType=='Admin')
+      {
+        return Redirect::to('business');
+      }
+      else if ($cUser->userType=='Manager')
+      {
+        return Redirect::to('user');
+      }
+    }
+
+    public function edit($uid)
+    {
+      $user = User::find($uid);
+      return View::make('customize.customizeLayout-edit')->with('user',$user)->with('uid',$uid);  
+    }
+
+    public function updater($Id)
+    {
+        $user = User::where('id', $Id);
+        //dd(DB::table('users')->where('id',$Id)->first());
+        $user = User::find($Id);
+        $user->accounts=Input::has('accounts') ? 1 : 0;
+        $user->customer=Input::has('customer') ? 1 : 0;
+        $user->SalesQuote=Input::has('SalesQuote') ? 1 : 0;
+        $user->SalesOrder=Input::has('SalesOrder') ? 1 : 0;
+        $user->SalesInvoice=Input::has('SalesInvoice') ? 1 : 0;
+        $user->DeliveryNotes=Input::has('DeliveryNotes') ? 1 : 0;
+        $user->Supplier=Input::has('Supplier') ? 1 : 0;
+        $user->PurchaseOrder=Input::has('PurchaseOrder') ? 1 : 0;
+        $user->PurchaseInvoice=Input::has('PurchaseInvoice') ? 1 : 0;
+        $user->inventory=Input::has('InventoryItems') ? 1 : 0;
+        $user->InventoryTransfer=Input::has('InventoryTransfer') ? 1 : 0;
+        $user->employee=Input::has('Employee') ? 1 : 0;
         $user->FixedAsset=Input::has('FixedAsset') ? 1 : 0;
         $user->payslips=Input::has('PaySlip') ? 1 : 0;
-        //$user->reports=Input::has('reports') ? 1 : 0; 
 
-        $user->save();   	
-        
-        Toastr::success('Successfully Customized', 'Sidebar', ["positionClass" => "toast-top-right"]);
-        $cUser = Config::get('userU');
-        if($cUser->userType=='Admin')
+        if ($user->save())
         {
-          return Redirect::to('business');
+          $cUser = Config::get('userU');
+          if($cUser->userType=='Admin')
+          {
+            return Redirect::to('business');
+          }
+          else if ($cUser->userType=='Manager')
+          {
+            Toastr::success('Successfully Customized','Sidebar',["positionClass"=>"toast-top-right"]);
+            return Redirect::to('user');
+          }
         }
-        else if ($cUser->userType=='Manager')
+        else
         {
-          return Redirect::to('user');
+          Toastr::success('Unable to Customize','Sidebar',["positionClass"=>"toast-top-right"]);    
         }
-
     }
 }

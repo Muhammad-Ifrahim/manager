@@ -67,30 +67,32 @@
           <div class="col-md-6 ">
 
             {!! Form::open(['url' => 'customize',  'method' => 'POST', 'class' => 'form-horizontal']) !!}
-               <div  class="{{$user->accounts==0 ? 'sidebar-hide': 'sidebar-customize'}}">
+
+              <div  class="{{$user->accounts==0 ? 'sidebar-hide': 'sidebar-customize'}}">
                   <a>
                      {{ Form::checkbox('accounts', 'accounts', $user->accounts, ['id' => 'accounts']) }}
                     <i class="fa fa-university"></i> 
                     <span>Bank Accounts</span>
                   </a>
-                </div>
-                <div class="{{$user->BankTransaction==0 ? 'sidebar-hide': 'sidebar-customize'}}">
+              </div>
+            
+              <div class="{{$user->BankTransaction==0 ? 'sidebar-hide': 'sidebar-customize'}}">
                    <a>
                  <input type="checkbox" name="BankTransaction" id="BankTransaction">
                     <i class="fa fa-money"></i> 
                     <span>Bank Transaction</span>
                   </a>
-               </div>
+              </div>
    
-            <div class="{{$user->customer==0 ? 'sidebar-hide': 'sidebar-customize'}}">
+              <div class="{{$user->customer==0 ? 'sidebar-hide': 'sidebar-customize'}}">
                    <a>
                    {{ Form::checkbox('customer', 'customer', $user->customer, ['id' => 'customer']) }} 
                     <i class="fa fa-users"></i> 
                     <span>Customer</span>
                   </a>
-            </div>
+              </div>
               
-               <div class="{{$user->SalesQuote==0 ? 'sidebar-hide': 'sidebar-customize'}}">
+              <div class="{{$user->SalesQuote==0 ? 'sidebar-hide': 'sidebar-customize'}}">
                    <a>
                     {{ Form::checkbox('SalesQuote', 'SalesQuote', $user->SalesQuote, ['id' => 'SalesQuote']) }}
                     <i class="fa fa-pencil-square"></i> 
@@ -257,5 +259,3 @@
    
    </script>
 @endSection('content')
-
-   

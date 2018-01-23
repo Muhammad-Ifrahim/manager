@@ -10,9 +10,4 @@ class Role extends Model
         'role',
     ];
     public $timestamps = true;
-
-    public function getUser()
-    {
-        return $this->belongsTo('App\Model\User');
-    }
 }

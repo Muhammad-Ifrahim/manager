@@ -13,7 +13,8 @@ class DefaultValuePayslipReport extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) 
+        {
             $table->integer('payslips')->default(0)->change();
             $table->integer('reports')->default(0)->change();
         });

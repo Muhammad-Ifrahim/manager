@@ -40,46 +40,49 @@ class PayslipController extends Controller
     }
    }
 
-   public function create(){
+   public function create()
+   {
     return View::make('settings.payslip.payslip-create'); 
    }   
 
   public function store(Request $request){
 
     $bid = Session::get('bId');         
+    
     $payslip=new Payslips;
     $Input=Input::all();
+    
     $payslip->Date=Input::get('date');
     $payslip->Employee=Input::get('Employee');
     $payslip->NetPay=Input::get('NetAmount');
     $payslip->Deduction=Input::get('deductamount');
     $payslip->GrossPay=Input::get('GrossPay');
     $payslip->Contribution=Input::get('ct');
+    
     $payslip->bId=$bid;
    
-     if ($payslip->save()) {
+     if ($payslip->save())
+     {
+        for ($Id=0; $Id <count($Input['EarnItem']) ; $Id++) 
+        {         
+          $PayslipsEarn =new PayslipsEarn;
+          $PayslipsEarn->payEarnId=$payslip->payId;
+          $PayslipsEarn->Earning=$Input['EarnItem'][$Id];
+          $PayslipsEarn->Description=$Input['discription'][$Id];
+          $PayslipsEarn->Quantity=$Input['qty'][$Id];
+          $PayslipsEarn->Price=$Input['price'][$Id];
+          $PayslipsEarn->Amount=$Input['amount'][$Id];
+          $PayslipsEarn->save();
+        }
+        for ($Id=0; $Id <count($Input['DeductItem']) ; $Id++) { 
+             $PayslipsDeduct = new PayslipsDeduct;
+             $PayslipsDeduct->payId=$payslip->payId;
+             $PayslipsDeduct->Deduction=$Input['DeductItem'][$Id];
+             $PayslipsDeduct->Description=$Input['discription-deduction'][$Id];
+             $PayslipsDeduct->Amount=$Input['amount-deduction'][$Id];
+             $PayslipsDeduct->save();
 
-          for ($Id=0; $Id <count($Input['EarnItem']) ; $Id++) {
-             
-                $PayslipsEarn =new PayslipsEarn;
-                $PayslipsEarn->payEarnId=$payslip->payId;
-                $PayslipsEarn->Earning=$Input['EarnItem'][$Id];
-                $PayslipsEarn->Description=$Input['discription'][$Id];
-                $PayslipsEarn->Quantity=$Input['qty'][$Id];
-                $PayslipsEarn->Price=$Input['price'][$Id];
-                $PayslipsEarn->Amount=$Input['amount'][$Id];
-                $PayslipsEarn->save();
-                   
-          }
-          for ($Id=0; $Id <count($Input['DeductItem']) ; $Id++) { 
-               $PayslipsDeduct = new PayslipsDeduct;
-               $PayslipsDeduct->payId=$payslip->payId;
-               $PayslipsDeduct->Deduction=$Input['DeductItem'][$Id];
-               $PayslipsDeduct->Description=$Input['discription-deduction'][$Id];
-               $PayslipsDeduct->Amount=$Input['amount-deduction'][$Id];
-               $PayslipsDeduct->save();
-
-          }
+        }
           for ($Id=0; $Id <count(($Input['ContributItem'])) ; $Id++) {
                 $PayslipsContribute = new PayslipsContribute;
                 $PayslipsContribute->payId=$payslip->payId;
@@ -169,8 +172,8 @@ class PayslipController extends Controller
         Toastr::success('Successfully Deleted', 'Payslips', ["positionClass" => "toast-top-right"]);
           return Redirect::to('payslip');
   }
-  public function print($Id){
-    
+  public function rint($Id)
+  {    
     $payslip=Payslips::find($Id);
     $PayslipsEarn=Payslips::with('PayslipsEarnItem')->where('payId',$Id)->get();
     $PayslipsDeduct=Payslips::with('PayslipsDeductItem')->where('payId',$Id)->get();
