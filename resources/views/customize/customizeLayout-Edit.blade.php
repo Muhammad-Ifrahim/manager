@@ -178,7 +178,7 @@
         </div>
         <div class="sidebar-customize">
            <a>
-            {{ Form::checkbox('PaySlip', 'PaySlip', $user->PaySlip, ['id' => 'PaySlip']) }} 
+            {{ Form::checkbox('PaySlip', 'PaySlip', $user->payslips, ['id' => 'PaySlip']) }} 
             <i class="fa fa-print"></i> 
             <span>Pay Slip</span>
           </a>
