@@ -47,6 +47,18 @@
                             <label class="title">{{number_format($InventoryOnHand,2)}}</label>
                         </span>   
                     </li>
+                    <li class="list-group-item">
+                          Fixed Assets
+                       <span class="pull-right">
+                            <label class="title"></label>
+                        </span>   
+                    </li>
+                    <li class="list-group-item">
+                          Fixed Assets Accumulated Deprication
+                       <span class="pull-right">
+                            <label class="title"></label>
+                        </span>   
+                    </li>
                     
                   </ul>
               </div>

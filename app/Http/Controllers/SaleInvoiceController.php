@@ -125,12 +125,8 @@ class SaleInvoiceController extends Controller
                             $AccountName->journalid=$Journal->id;
                             $AccountName->save(); 
                           }
-                  // else{
-                  //         $check=false;
-                  // }
                }  
             }
-
 
             ///////////////////////////////////////////// SECOND ENTRY OF INVENTORY SALES/////////////////////////////////////
             if ($check) {
@@ -194,7 +190,11 @@ class SaleInvoiceController extends Controller
    
     public function update(Request $request, $id)
     {
-        //
+
+             $this->destroy($id);
+             $this->store($request);
+      Toastr::success('Successfully Updaed', 'Sale Invoice', ["positionClass" => "toast-top-right"]);
+        return Redirect::to('saleinvoice');           
     }
 
     public function destroy($id)

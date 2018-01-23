@@ -107,17 +107,26 @@
       var addres = $('.customer option:selected').attr('data-addres');
       $('.addres').val(addres);
     });
-  function totalAmount(){
+   function totalAmount(){
     var t = 0;
+    var cost=0;
     $('.amount').each(function(i,e){
       var amt = $(this).val()-0;
       t += amt;
     });
+
+    $('.costprice').each(function(i,e){
+        var costprice=$(this).val()-0;
+        cost+=costprice;
+    });
+
+     console.log(cost);
      var tax = $('.tax option:selected').attr('data-price');
-     var taxvalue = (Math.floor(t * (tax/100))).toFixed(2);
+     var taxvalue = (t * (tax/100)).toFixed(2);
      $('.taxvalue').val(taxvalue);
      t = t + parseInt(taxvalue);
      $("#total").val(t);
+     $("#costofsale").val(cost);
   }
 
    $(document).ready(function(){
@@ -145,6 +154,8 @@
        '<td><input type="text" class="discription form-control-heading" name="discription[]"readonly ></td>' +
 
       '<td><input type="number" class="qty form-control-heading" name="qty[]" ></td>' +
+
+      '<td style="display: none;"><input type="text" class="costprice form-control-heading" name="costprice[]" readonly></td>' +
 
       '<td><input type="text" class="price form-control-heading" name="price[]" readonly></td>' +
 
@@ -178,24 +189,29 @@
     $('.neworderbody').delegate('.inventId', 'change', function () {
       var tr = $(this).parent().parent();
       var SalesPrice = tr.find('.inventId option:selected').attr('data-price');
+      var CostPrice = tr.find('.inventId option:selected').attr('cost-price');
       var description = tr.find('.inventId option:selected').attr('data-pro');
-     // console.log(Sales);
       tr.find('.price').val(SalesPrice);
       tr.find('.discription').val(description);
          
       var qty = tr.find('.qty').val() - 0;
       var price = tr.find('.price').val() - 0;
-    
-      var total = (qty * price);
+      
+      var cost= qty * CostPrice;
+      tr.find('.costprice').val(cost);
+      var total = qty * price;
       tr.find('.amount').val(total);
       totalAmount();
     });
-    $('.neworderbody').delegate('.qty ', 'keyup', function () {
-      var tr = $(this).parent().parent();
-      var qty = tr.find('.qty').val() - 0;
-      var price = tr.find('.price').val() - 0;
-    
-      var total = (qty * price);
+    $('.neworderbody').delegate('.qty , .dis', 'keyup', function () {
+      var tr=$(this).parent().parent();
+      var CostPrice=tr.find('.inventId option:selected').attr('cost-price');
+      
+      var qty=tr.find('.qty').val() - 0;
+      var price=tr.find('.price').val() - 0;
+      var cost=qty * CostPrice;
+      tr.find('.costprice').val(cost);
+      var total = qty * price;
       tr.find('.amount').val(total);
       totalAmount();
     });
@@ -328,19 +344,25 @@ select.form-control.product_id {
           </div>  
         </th>
 
-             <th>
-               <div class="col-lg-1">
-                 {!!Form::label('UnitPrice','Price',['class' => 'col-lg-1 control-label head-item' ]) !!}
-               </div>  
-             </th>
+        <th style="display: none;">
+            <div class="col-lg-1">
+                 {!!Form::label('actual','Price',['class' => 'col-lg-1 control-label head-item' ]) !!}
+            </div>  
+        </th>
 
-            
 
-            <th>     
-              <div class="col-lg-1">
-                 {!!Form::label('Amount','Amount',['class' => 'col-lg-1 control-label head-item' ]) !!}
-              </div>
-            </th> 
+       <th>
+         <div class="col-lg-1">
+           {!!Form::label('UnitPrice','Price',['class' => 'col-lg-1 control-label head-item' ]) !!}
+         </div>  
+       </th>
+
+
+      <th>     
+        <div class="col-lg-1">
+           {!!Form::label('Amount','Amount',['class' => 'col-lg-1 control-label head-item' ]) !!}
+        </div>
+      </th> 
 
             <th>     
               <div class="col-lg-1">
@@ -374,7 +396,12 @@ select.form-control.product_id {
 
                   <td class="col-lg-1">
                     <input type="number" class="qty form-control form-control-heading " name="qty[]" value="{{$value->Quantity}}" >
-                  </td>   
+                  </td>  
+
+                  <td class="col-lg-1" style="display: none;">
+                    <input type="text" class="costprice form-control form-control-heading" name="costprice[]" readonly>
+                  </td>
+
                   <td class="col-lg-1" >
                 <input type="text" class="price form-control form-control-heading" name="price[]" readonly value="{{$value->Price}}">
                   </td>
@@ -434,7 +461,10 @@ select.form-control.product_id {
       </div>
      </div>       
                 
-        
+      <div style="display: none;">
+     <input type="text" class=" form-control-heading " name="costofsale" name="costofsale" id="costofsale">   
+     </div>  
+
          
          <!--  -->
         <div class="form-group {{ $errors->has('BillingAddress') ? 'has-error' : ''}}">
