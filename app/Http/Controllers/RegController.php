@@ -45,13 +45,14 @@ class RegController extends Controller
 
       if($currUser->userType=='Admin')
       {            
-        $allAUser = User::all();
+        $allAUser = User::with('business')->where('userType','<>','Admin')->get();
+        //dd($allAUser);
         return View::make('users.user-view')->with('allUser',$allAUser);
       }
       else if($currUser->userType=='Manager')
       {
         $allUser = User::where('bId', $busId)->where('userType','<>','Manager')->get();
-
+         //dd($allUser);
         return View::make('users.user-view')->with('allUser',$allUser);        
       }
       else
