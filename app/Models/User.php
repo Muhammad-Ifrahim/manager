@@ -47,7 +47,8 @@ class User extends Authenticatable
         $this->notify(new ResetPasswordNotification($token));
     }
 
-    public function User(){
-        return $this->belongsTo('App\Models\Role', 'Role');
+    public function getUser()
+    {
+        return $this->hasOne('App\Models\Role', 'Role');
     }
 }

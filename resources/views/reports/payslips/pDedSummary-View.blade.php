@@ -60,7 +60,7 @@
                 </thead>
                 <tbody>
                 @Foreach($earnRep as $key => $value)
-                @if($value->payType=='Earn')
+                @if($value->payType=='Deduction')
                     <tr>
                       <td class="col-md-1">{{$value->from}}</td>
                       <td class="col-md-1">{{$value->to}}</td>
@@ -68,15 +68,15 @@
                       <td class="col-md-1">{{$value->updated_at}}</td>
                       <td class="col-md-1">
                       <div class="action-region">
-                       <a href="{{ URL::to('EarnReport/' . $value->id . '/edit') }}">
+                       <a href="{{ URL::to('EarnReport/' . $value->id .'-ded'. '/edit') }}">
                         <span class="fa fa-pencil-square-o" data-toggle="tooltip" data-original-title="Edit Report"></span>
                        </a>
 
-                       <a href="{{ url('/EarnReport/printReport') }}">
+                       <a href="{{ url('/printDeductionReport/'.$value->id) }}">
                         <span class="fa fa-print" data-toggle="tooltip" data-original-title="Print Report"></span>
                        </a>
 
-                       {{ Form::open(array('url' => 'EarnReport/' . $value->id, 'class' => 'pull-left', 'onsubmit' => 'return ConfirmDelete()')) }}
+                       {{ Form::open(array('url' => 'EarnReport/' . $value->id.'-ded/delete', 'class' => 'pull-left', 'onsubmit' => 'return ConfirmDelete()')) }}
                         {{ Form::hidden('_method', 'DELETE') }}
                         {{ Form::button('<span class="fa fa-trash" data-toggle="tooltip" data-original-title="Delete Report"></span>', array( 'type'=>'submit')) }}
                        {{ Form::close() }}              

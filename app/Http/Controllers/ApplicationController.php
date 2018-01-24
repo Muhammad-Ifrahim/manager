@@ -15,7 +15,8 @@ use Config;
 class ApplicationController extends BaseController
 {
 	//Used CustomerTrati - Trait is class develop to used by Multiple Users    
-    function index(){
+    function index()
+    {
     	$user = Auth::user();
 		// Get the currently authenticated user's ID...
 		$id = Auth::id();
@@ -33,5 +34,4 @@ class ApplicationController extends BaseController
             return view('layouts.master');
     	}
     }
-
 }

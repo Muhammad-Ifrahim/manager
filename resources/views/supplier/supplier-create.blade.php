@@ -96,7 +96,7 @@
        <div class="form-group {{ $errors->has('BillingAddress') ? 'has-error' : ''}}">
            {!!Form::label('BillingAddress','Billing Address:',['class' => 'col-lg-2 control-label' ]) !!}
            <div class="col-lg-10">
-              {!! Form::textarea('BillingAddress', $value=null, ['class' => 'form-control', 'rows' => 4])!!}
+              {!! Form::textarea('BillingAddress', $value=null, ['class' => 'form-control', 'rows' => 2])!!}
               <div class="help-block">{{ $errors->first('BillingAddress') }}</div>
            </div>
        </div>
@@ -140,13 +140,11 @@
        
         <!-- Submit Button -->
         <div class="form-group">
-            <div class="col-lg-6 ">
-                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success '] ) !!}
+            <div class="col-lg-8">
+              <button type="button" class="btn btn-lg btn-success pull-midlle" onclick="window.location='{{ URL::to('/supplier') }}'">Cancel</button>
+              {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success '] ) !!}
             </div>
         </div>
- 
-    
- 
     {!! Form::close()  !!}
      </div>
      </div>

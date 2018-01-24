@@ -67,12 +67,10 @@ class AppServiceProvider extends ServiceProvider
             
             $bid = $user->bId;
             Session::put('bId', $bid);
-            
-            $allUser = User::where('bId', $bid)->where('userType','<>','Manager')->get();
-            View::share('allUser', $allUser);
-            
+
             $roles = Role::all();
             View::share('roles',$roles);
+            
             $strtDate = StartDate::where('bId', $bid)->get();
             View::share('strtDate', $strtDate);
             if(sizeof($strtDate)>0)

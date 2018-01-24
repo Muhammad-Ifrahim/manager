@@ -35,7 +35,12 @@
     .date-size {
         width = 10px;
     }
-
+/*
+    .required:after {
+        content: '*';
+        color: red;
+        padding-left: 5px;
+    }*/
   </style>
   
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -100,10 +105,11 @@
             </div>
         </div>
 
-        <div class="form-group{{ $errors->has('email') ? ' has-error' : ''}}">
+        <div class="form-group{{ $errors->has('Email_Address') ? ' has-error' : ''}}">
             {!! Form::label('Email Address', 'Email Address:', ['class' => 'col-lg-2 control-label']) !!}
             <div class="col-lg-5">
-                {!! Form::text('Email Address', $value = null, ['class' => 'form-control', 'placeholder' => 'someone@email.com']) !!}
+                {!! Form::text('Email_Address', $value = null, ['class' => 'form-control', 'placeholder' => 'someone@email.com']) !!}
+             <div class="help-block">{{ $errors->first('Email_Address') }}</div>
             </div>
         </div>
 

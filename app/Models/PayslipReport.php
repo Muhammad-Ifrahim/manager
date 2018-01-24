@@ -8,8 +8,8 @@ class PayslipReport extends Model
     public $primaryKey ='id';
     public $table ='payslipreports';
     protected $fillable =[
-    	'From',
-    	'To',
+    	'from',
+    	'to',
     	'Description',
     	'payType',
         'bId',

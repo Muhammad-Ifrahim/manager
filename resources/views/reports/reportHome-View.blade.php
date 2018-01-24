@@ -86,7 +86,7 @@
     <li class="list-group-item"><a href="{{ url('EarnReport/sum')}}">Payslip Summary</a></li>
     <li class="list-group-item"><a href="{{ url('EarnReport/ded')}}">Payslip Deduction Summary</a>
     </li>
-    <li class="list-group-item"><a href="{{url('EarnReport/Con')}}">Payslip Contribution Summary</a></li>
+    <li class="list-group-item"><a href="{{url('EarnReport/con')}}">Payslip Contribution Summary</a></li>
     </ul>
   
 </div>

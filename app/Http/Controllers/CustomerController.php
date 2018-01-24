@@ -51,8 +51,7 @@ class CustomerController extends Controller
         'BillingAddress' => 'nullable|string',
         'Fax'=>'nullable|min:11|numeric',
         'Mobile'=>'nullable|min:11|numeric',
-        'CreditLimit' =>'integer|nullable',
-        
+        'CreditLimit' =>'integer|nullable', 
     ]);
 
       if ($validator->fails()) {
