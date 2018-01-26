@@ -51,4 +51,8 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Role', 'Role');
     }
+        public function business()
+    {
+        return $this->belongsTo('App\Models\Business', 'bId');
+    }
 }

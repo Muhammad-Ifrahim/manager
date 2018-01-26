@@ -51,15 +51,17 @@
                 <thead>
                 <tr>
                   <th class="col-md-1" >Name</th>
+                  <th class="col-md-1">Business</th>
                   <th class="col-md-1">Role</th>
                   <th class="col-md-1">Email</th>
                   <th class="col-md-1">Action</th>                 
                 </tr>
                 </thead>
                 <tbody>
-                @Foreach($allUser as $key => $value)
+                @Foreach($allUser as $allUserkey => $value)
                     <tr>
                       <td class="col-md-1">{{$value->name}}</td>
+                      <td class="col-md-1">{{$value->business->description}}</td>
                       <td class="col-md-1">{{$value->userType}}</td>  
                       <td class="col-md-1">{{$value->email}}</td>
                       <td class="col-md-1">
