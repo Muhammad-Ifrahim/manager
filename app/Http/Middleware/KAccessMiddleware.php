@@ -121,15 +121,15 @@ class KAccessMiddleware
                     return Redirect::to('notAllowed');
                 }
             }
-
-            if($kModule=='supplier')
+/*
+            if($kModule=='cash')
             {
                 if($request->user()->Supplier==0)
                 {
                     return Redirect::to('notAllowed');
                 }
             }
-
+*/
             if($kModule=='supplier')
             {
                 if($request->user()->Supplier==0)

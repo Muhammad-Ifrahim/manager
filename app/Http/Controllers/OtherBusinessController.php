@@ -12,6 +12,7 @@ use View;
 use Request;
 use Validator;
 use Redirect;
+use Config;
 
 class OtherBusinessController extends Controller
 {

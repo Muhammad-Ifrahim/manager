@@ -78,7 +78,7 @@ class CustomizeController extends Controller
     public function edit($uid)
     {
       $user = User::find($uid);
-      return View::make('customize.customizeLayout-Edit')->with('user',$user)->with('uid',$uid);  
+      return View::make('customize.customizeLayout-edit')->with('user',$user)->with('uid',$uid);  
     }
 
     public function updater($Id)
