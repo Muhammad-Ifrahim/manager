@@ -29,7 +29,8 @@ class CustomerController extends Controller
     if($user->customer>0)
     {
       $customers=Customer::where('bId', $bid)->get(); 
-      return View::make('customer.customer-view')->with('customers',$customers);
+     //      JSON($customers);sd
+     return View::make('customer.customer-view')->with('customers',$customers);
     }
     else
     {

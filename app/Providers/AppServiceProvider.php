@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use  Illuminate\Support\Facades\Schema;
-use  Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\App;
 use Illuminate\Auth\Events\Authenticated;
 use App\Models\Customer;
 use App\Models\Business;
@@ -33,6 +33,7 @@ use App\Models\Accounts;
 use App\Models\Journal;
 use App\Models\JournalEntry;
 use App\Models\SaleInvoice;
+use App\Models\pos;
 use Session;
 use View;
 use Auth;
@@ -163,7 +164,13 @@ class AppServiceProvider extends ServiceProvider
 
 
             $Journal=Journal::where('bId', $bid)->get();
-            View::share('Journal',$Journal);  
+            View::share('Journal',$Journal); 
+
+            //Sale In Progress and Sale Completed
+            $posSaleComplete=pos::where('bId',$bid)->Where('Status','Completed')->get();    
+            $posSalePending=pos::where('bId',$bid)->Where('Status','Pending')->get();            
+            view::share('posSaleComplete',$posSaleComplete);
+            view::share('posSalePending',$posSalePending);  
 
             }
 

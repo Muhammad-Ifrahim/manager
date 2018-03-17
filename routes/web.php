@@ -47,6 +47,8 @@ Route::group(['middleware' => 'App\Http\Middleware\KAccessMiddleware'], function
 	Route::get('/payslip/{id}/print','PayslipController@rint');
 	// Performa
 	Route::resource('saleinvoice','SaleInvoiceController');
+	Route::get('/saleinvoice/{id}/print', 'SaleInvoiceController@printreport');
+	
 	Route::resource('proforma','PerformaController');
 	Route::resource('InventoryTransfer','InventoryTransferController');
 	Route::resource('InventoryLocation','InventoryLocationController');
@@ -60,6 +62,16 @@ Route::group(['middleware' => 'App\Http\Middleware\KAccessMiddleware'], function
 	Route::resource('ReportUpdate', 'EarnReportController');
 
 	Route::resource('supplier','SupplierController');
+	
+
+	Route::resource('inProgress','POSSaleController');
+    Route::resource('pos','POSController');
+    Route::get('/saleCompleted',  array(
+    	'as' => 'saleCompleted',
+    	'uses'=> 'POSSaleController@saleCompleted'));
+	Route::get('/inProgress/{id}/print', 'POSSaleController@print');
+    
+    
 	Route::resource('Inventory','InventoryController');
 	Route::resource('Journal','JournalController');
 	Route::get('/Journal/{id}/print', 'JournalController@printreport');
