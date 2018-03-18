@@ -15,7 +15,8 @@ use Session;
 use Redirect;
 use Config;
 use Toastr;
-
+use Exception;
+//use Illuminate\Http\Request;
 class RegController extends Controller
 {
     /*
@@ -76,54 +77,144 @@ class RegController extends Controller
 
   public function store(Request $request)
   {
-    $validator = Validator::make(Request::all(), [
-        'name' => 'required|max:20',
-        'email' => 'required|email|max:255|unique:users',
-        'password' => 'required|min:6|confirmed',
-        'password_confirmation' => 'required|min:6', 
-    ]);
-
-    if ($validator->fails())
+    $Uid = Request::input('Uid');
+    if($Uid==0)
     {
-        return redirect('user/create')->withInput()->withErrors($validator);
+      $validator = Validator::make(Request::all(), [
+          'name' => 'required|max:20',
+          'email' => 'required|email|max:255',//|unique:users
+          'password' => 'required|min:6|confirmed',
+          'password_confirmation' => 'required|min:6', 
+      ]);
+
+      if ($validator->fails())
+      {
+          return redirect('user/create')->withInput()->withErrors($validator);
+      }
+      else
+      {
+          $User = new User;
+          $pass = Request::input('password');
+          $pass = bcrypt($pass);
+          Request::merge(['password'=> $pass]);
+          
+          $currUser = Config::get('userU');
+          if($currUser->userType=='Admin')
+          {
+            Request::merge(['userType'=> 'Manager']);
+            $busId = Business::find(DB::table('businesses')->max('bId'));
+            Request::merge(['bId'=> $busId->bId]);
+          }
+          else if ($currUser->userType=='Manager')
+          {
+            $b = Session::get('bId');
+            $busId = Business::where('bId', $b)->get();
+            $uType = Request::input('userType');
+    
+            if ($uType!=null and $uType!='') 
+            {
+              $typeU = Role::find($uType);
+              Request::merge(['userType'=> $typeU->role]);
+            }
+
+            if(sizeof($busId)>0)
+            {
+              Request::merge(['bId'=> $busId[0]->bId]);
+            }
+          }
+          $fUsername = Request::input('email');
+          //$existUname = User::where('username','=',);  
+          Request::merge(['username'=> $fUsername]);   
+          if($this->saveUser($fUsername)=='true')
+            {
+              return Redirect::to('customize');
+            }
+      }
     }
     else
     {
-        $User = new User;
-        $pass = Request::input('password');
-        $pass = bcrypt($pass);
-        Request::merge(['password'=> $pass]);
-        
-        $currUser = Config::get('userU');
-        if($currUser->userType=='Admin')
-        {
-          Request::merge(['userType'=> 'Manager']);
-          $busId = Business::find(DB::table('businesses')->max('bId'));
-          Request::merge(['bId'=> $busId->bId]);
-        }
-        else if ($currUser->userType=='Manager')
-        {
-          $b = Session::get('bId');
-          $busId = Business::where('bId', $b)->get();
-          $uType = Request::input('userType');
-  
-          if ($uType!=null and $uType!='') 
-          {
-            $typeU = Role::find($uType);
-            Request::merge(['userType'=> $typeU->role]);
-          }
-
-          if(sizeof($busId)>0)
-          {
-            Request::merge(['bId'=> $busId[0]->bId]);
-          }
-        }
-
-        $User->fill(Request::all());
-        if($User->save()){
-        }       
-        return Redirect::to('customize');
+      $linkedManagers = User::find($Uid);
+      $currUser = Config::get('userU');
+      if($currUser->userType=='Admin')
+      {
+        Request::merge(['userType'=> 'Manager']);
+        $busId = Business::find(DB::table('businesses')->max('bId'));
+        $linkedManagers->bId = $busId->bId;
+      }
+      $this->insertUser($linkedManagers);
+      return Redirect::to('business');
     }
+  }
+
+  public function insertUser($linkedManagers)
+  {
+      try
+      {
+        if($linkedManagers->username==null)
+        {
+          $linkedManagers->username = $linkedManagers->email;
+        }
+        DB::table('users')->insert([
+          ['name' => $linkedManagers->name,
+          'email' => $linkedManagers->email,
+          'username' => $linkedManagers->username,//Same as email
+          'password' => $linkedManagers->password,
+          'created_at' => $linkedManagers->created_at,
+          'updated_at' => $linkedManagers->updated_at,
+          'inventory' => $linkedManagers->inventory,
+          'customer' => $linkedManagers->customer,
+          'accounts' => $linkedManagers->accounts,
+          'employee' => $linkedManagers->employee,
+          'SalesQuote' => $linkedManagers->SalesQuote,
+          'SalesOrder' => $linkedManagers->SalesOrder,
+          'SalesInvoice' => $linkedManagers->SalesInvoice,
+          'DeliveryNotes'=>$linkedManagers->DeliveryNotes, 
+          'Supplier'=>$linkedManagers->Supplier, 
+          'PurchaseOrder'=>$linkedManagers->PurchaseOrder, 
+          'PurchaseInvoice'=>$linkedManagers->PurchaseInvoice,
+          'InventoryTransfer'=>$linkedManagers->InventoryTransfer, 
+          'FixedAsset'=>$linkedManagers->FixedAsset,
+          'customize'=>$linkedManagers->customize,
+          'userType'=>$linkedManagers->userType,
+          'payslips'=>$linkedManagers->payslips,
+          'bId'=>$linkedManagers->bId]
+          ]);
+      }
+      catch(Exception $ex)
+      { 
+        if (strpos($ex, 'Integrity constraint violation') == true)
+        {
+          $newUname = $this->genUserName($linkedManagers->email);
+          $linkedManagers->username= $newUname;
+          $this->insertUser($linkedManagers);
+        }
+      }
+  }
+
+  public function saveUser($prevUname)
+  {
+    try 
+    {
+      $User = new User;
+      $User->fill(Request::all());
+      return $User->save();
+    } 
+    catch(Exception $ex)
+    { 
+      if (strpos($ex, 'Integrity constraint violation') == true)
+      {
+        $newUname = $this->genUserName($prevUname);
+        Request::merge(['username'=> $newUname]);
+        saveUser($newUname);
+      }
+    }
+  }
+
+  public function genUserName($uname)
+  {
+    $num = rand(0,10000);
+    $uname = $uname.$num;
+    return $uname;
   }
 
   public function edit($Id)

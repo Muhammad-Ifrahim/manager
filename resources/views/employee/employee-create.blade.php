@@ -35,6 +35,17 @@
     .date-size {
         width = 10px;
     }
+    .forInline {
+        float: left;
+        margin: 5px;
+    }
+    .wider {
+        width: 75px;
+        text-align: center;
+    }
+    .highter {
+        height: 175px;
+    }
 /*
     .required:after {
         content: '*';
@@ -152,31 +163,34 @@
             {{ Form::checkbox('checkValue','1', false, ['id' => 'checker']) }} Starting Balance as at 
             @foreach($strtDate as $object)
                 {{ $object->date}}
-               @endforeach
+            @endforeach
         </div>  
         
         <div id="shownDiv" class="shownDiv" style="display:none;">
         <br>
-            <b>You will be able to enter starting balance once you set start date under    settings tab</b>
+            <b>You will be able to enter starting balance once you set start date under settings tab</b>
         </div>
-      
-        <div class="inline-block">
-            <div id="amount1" class="col-lg-5" style="display:none;">
-            {{ Form::select('paymentStatus', ['ap'=>'Amount to pay', 'pa'=>'Paid in advance']) }}
+        <br>
+        <br>
+        
+        <div style="margin-left: 35px">
+            <div id="stDate" class="forInline" style="display: none;">
+                {{ Form::text('stDate', $dateValue, array('disabled','class' => 'wider')) }}
             </div>
 
-            <div class="col-lg-5" id="stDate" style="display: none;">
-            {{ Form::text('stDate', $dateValue, array('disabled')) }}
+            <div id="amount1" class="forInline" style="display:none;">
+                {{ Form::select('paymentStatus', ['ap'=>'Amount to pay', 'pa'=>'Paid in advance'], array('class'=>'highter')) }}
             </div>
-
-            <div id="bal" class="col-lg-5" style="display:none;">
+            
+            <div id="bal" class="forInline" style="display:none;">
                 {!! Form::text('amount', $value = null, ['class' => 'form-control']) !!}
             </div>
+
         </div>    
 
         {{ Form::hidden('bId', Session::get('bId')) }}
 
-        <!-- Submit Button -->
+        <!-- 'required'=>'required' Submit Button -->
         <div class="form-group">
 
                 {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-middle'] ) !!}

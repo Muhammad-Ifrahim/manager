@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DefaultValuePayslipReport extends Migration
+class ChangeUserdeleteionBusiness extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,10 @@ class DefaultValuePayslipReport extends Migration
     {
         Schema::table('users', function (Blueprint $table) 
         {
-            $table->integer('payslips')->default(0)->change();
-            $table->integer('reports')->default(0)->change();
+            $table->integer('bId');
+            $table->foreign('bId')
+                ->references('bId')->on('businesses')
+                ->onDelete('cascade');
         });
     }
 
@@ -28,7 +30,10 @@ class DefaultValuePayslipReport extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
+        $table->foreign('bId')
+            ->references('bId')->on('businesses')
+            ->onDelete('cascade')
+            ->change();
         });
     }
 }

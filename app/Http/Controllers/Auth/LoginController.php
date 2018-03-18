@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -37,12 +38,22 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    /*protected function validateLogin(Request $request)
+    /**
+     * Get the needed authorization credentials from the request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function credentials(Request $request)
     {
-        $this->validate($request, [
-            $this->username() => 'required', 
-            'password' => 'required',
-            // new rules here
-        ]);
-    }*/
+//        dd(Request::all());   
+        $field = filter_var($request->get($this->username()), FILTER_VALIDATE_EMAIL)
+            ? $this->username()
+            : 'username';
+//            dd($field);
+        return [
+            'username' => $request->get($this->username()),
+            'password' => $request->password,
+        ];
+    }
 }

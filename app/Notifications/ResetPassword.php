@@ -16,9 +16,9 @@ class ResetPassword extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($token)
     {
-        //
+        $this->token = $token;
     }
 
     /**
@@ -41,9 +41,10 @@ class ResetPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('You are receiving this email as you have asked for password recovery. If this is correct, please click on the below link to reset your password. If you did not request this password change, please ignore this email - your password will remain unaffected.')
+                    ->action('Reset Password', route('password.reset',
+                        ['token' => $this->token]))
+                    ->line('Thank you for using Kompania!');
     }
 
     /**

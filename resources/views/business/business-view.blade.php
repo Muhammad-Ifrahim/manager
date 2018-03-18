@@ -29,7 +29,19 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Businesses</h3>
-              <a type="button" href="{{url('business/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Business</a>
+              <!--a type="button" href="{{url('business/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New Business</a-->
+              @if($user->userType=='Admin')
+              <div class="btn-group" style="float: right;width: 13%">
+              <button type="button" onclick="location.href='{{url('business/create')}}'" class="btn btn-primary">New Business</button>
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"         aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{url('business/createSub')}}">New Sub Business</a>
+              </ul>
+            </div>
+            @endif
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -53,6 +65,7 @@
                       </td>
                     </tr> 
                  @endForeach
+                 
                 </tbody>
               </table>
             </div>

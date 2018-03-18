@@ -42,8 +42,13 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title">Peoples</h3>
+              
+              @if($user->userType!='Admin')
+                <a type="button" href="{{url('user/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">
+                  New People
+                </a>
+              @endif
 
-              <a type="button" href="{{url('user/create')}}" class="btn btn-block btn-primary" style="float: right;width: 13%">New People</a>
             </div>
             
             <div class="box-body">
@@ -61,7 +66,7 @@
                 @Foreach($allUser as $allUserkey => $value)
                     <tr>
                       <td class="col-md-1">{{$value->name}}</td>
-                      <td class="col-md-1">{{$value->business->description}}</td>
+                      <td class="col-md-1">{{$value->business->name}}</td>
                       <td class="col-md-1">{{$value->userType}}</td>  
                       <td class="col-md-1">{{$value->email}}</td>
                       <td class="col-md-1">

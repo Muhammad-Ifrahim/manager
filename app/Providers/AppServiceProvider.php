@@ -3,9 +3,12 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use  Illuminate\Support\Facades\Schema;
-use  Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\App;
 use Illuminate\Auth\Events\Authenticated;
+use App\Mail\Emailer;
+use Illuminate\Support\Facades\Mail;
+
 use App\Models\Customer;
 use App\Models\Business;
 use App\Models\Employee;
@@ -54,13 +57,9 @@ class AppServiceProvider extends ServiceProvider
         {
             $user=User::find($e->user->id);
             View::share('user',$user);
-            
-            /*App::singleton('user', function($app)
-            {
-                $user=User::find(13);
-                return $user;
-            });*/
 
+//            Mail::to($user)->send(new Emailer($user));
+  
             $user=User::find($user->id);
             Config::set('userU', $user); 
 
@@ -98,6 +97,9 @@ class AppServiceProvider extends ServiceProvider
 
             $employees=Employee::where('bId', $bid)->get();
             View::share('employees',$employees);
+
+            $linkManagers = User::where('userType','=','Manager')->get();
+            View::share('linkManagers',$linkManagers);
 
             $expAccounts = expenseAccounts::where('bId',$bid)->get();
             View::share('expAccounts',$expAccounts);
@@ -160,7 +162,6 @@ class AppServiceProvider extends ServiceProvider
             $accountCreditType = $accountCredit->groupBy('AccountType');
             View::share('accountCredit',$accountCredit);
             View::share('accountCreditType',$accountCreditType);               
-
 
             $Journal=Journal::where('bId', $bid)->get();
             View::share('Journal',$Journal);  

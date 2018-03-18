@@ -12,7 +12,7 @@ use View;
 use Request;
 use Validator;
 use Redirect;
-use Config;
+//use Config;
 
 class OtherBusinessController extends Controller
 {
@@ -43,7 +43,20 @@ class OtherBusinessController extends Controller
                 return view('users.noUser-view');    
             }
         }
-        else
+        else if ($currUser->userType=='Manager') 
+        {
+            $userId = User::where('bId',$bisId)->first();
+            if ($userId['id']!=null) 
+            {
+                $user = User::find($userId['id']);
+                Auth::login($user);
+                return view('layouts.master');    
+            }
+            else
+            {
+                return view('users.noUser-view');    
+            }   
+        }
         {
             return View::make('errors.notAllowed-view');
         }

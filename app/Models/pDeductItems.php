@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-
 class pdeductitems extends Model
 {
     public $primaryKey ='dId';
@@ -12,7 +10,6 @@ class pdeductitems extends Model
         'bId',
     ];
     public $timestamps = true;
-
     public function payslips()
     {
         return $this->belongsTo('App\Models\payslips');

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a
+class ComposerStaticInit4e3d769a0beed8262ee21adb38eb8a23
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -366,8 +366,10 @@ class ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a
         'AddColumnInUserFixedAsset' => __DIR__ . '/../..' . '/database/migrations/2017_11_10_141312_addColumnInUserFixedAsset.php',
         'AddConstraintinSale' => __DIR__ . '/../..' . '/database/migrations/2017_11_16_170716_addConstraintinSale.php',
         'AddSaleItem' => __DIR__ . '/../..' . '/database/migrations/2017_11_14_205313_AddSaleItem.php',
+        'AddUsernameColumn' => __DIR__ . '/../..' . '/database/migrations/2018_02_26_062816_addUsernameColumn.php',
         'AddVotesToFixedAssetTable' => __DIR__ . '/../..' . '/database/migrations/2017_10_21_032319_add_votes_to_fixedAsset_table.php',
         'AddpayslipField' => __DIR__ . '/../..' . '/database/migrations/2018_01_07_194520_addpayslip_Field.php',
+        'AgainDeleteMig' => __DIR__ . '/../..' . '/database/migrations/2018_01_28_152502_againDeleteMig.php',
         'Amount' => __DIR__ . '/../..' . '/database/migrations/2017_11_05_130024_amount.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -409,63 +411,38 @@ class ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a
         'App\\Http\\Controllers\\pEarnItemsController' => __DIR__ . '/../..' . '/app/Http/Controllers/pEarnItemsController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
+        'App\\Http\\Middleware\\KAccessMiddleware' => __DIR__ . '/../..' . '/app/Http/Middleware/KAccessMiddleware.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Traits\\CustomerTrait' => __DIR__ . '/../..' . '/app/Http/Traits/CustomerTrait.php',
-        'App\\Models\\AccountReceivable' => __DIR__ . '/../..' . '/app/Models/AccountReceivable.php',
-        'App\\Models\\AccountingFees' => __DIR__ . '/../..' . '/app/Models/AccountingFees.php',
+        'App\\Mail\\Emailer' => __DIR__ . '/../..' . '/app/Mail/Emailer.php',
         'App\\Models\\Accounts' => __DIR__ . '/../..' . '/app/Models/Accounts.php',
-        'App\\Models\\AccountsPayable' => __DIR__ . '/../..' . '/app/Models/AccountsPayable.php',
-        'App\\Models\\Advertising' => __DIR__ . '/../..' . '/app/Models/Advertising.php',
-        'App\\Models\\BankCharges' => __DIR__ . '/../..' . '/app/Models/BankCharges.php',
         'App\\Models\\Business' => __DIR__ . '/../..' . '/app/Models/Business.php',
-        'App\\Models\\CashAccount' => __DIR__ . '/../..' . '/app/Models/CashAccount.php',
-        'App\\Models\\CashAtBank' => __DIR__ . '/../..' . '/app/Models/CashAtBank.php',
-        'App\\Models\\CashOnHand' => __DIR__ . '/../..' . '/app/Models/CashOnHand.php',
-        'App\\Models\\ComputerEquipment' => __DIR__ . '/../..' . '/app/Models/ComputerEquipment.php',
         'App\\Models\\Customer' => __DIR__ . '/../..' . '/app/Models/Customer.php',
         'App\\Models\\DeliveryNote' => __DIR__ . '/../..' . '/app/Models/DeliveryNote.php',
         'App\\Models\\DeliverySale' => __DIR__ . '/../..' . '/app/Models/DeliverySale.php',
-        'App\\Models\\Donations' => __DIR__ . '/../..' . '/app/Models/Donations.php',
-        'App\\Models\\Electricity' => __DIR__ . '/../..' . '/app/Models/Electricity.php',
         'App\\Models\\Employee' => __DIR__ . '/../..' . '/app/Models/Employee.php',
-        'App\\Models\\EmployeeAccount' => __DIR__ . '/../..' . '/app/Models/EmployeeAccount.php',
-        'App\\Models\\Entertainment' => __DIR__ . '/../..' . '/app/Models/Entertainment.php',
         'App\\Models\\FixedAsset' => __DIR__ . '/../..' . '/app/Models/FixedAsset.php',
-        'App\\Models\\InterestReceived' => __DIR__ . '/../..' . '/app/Models/InterestReceived.php',
         'App\\Models\\Inventory' => __DIR__ . '/../..' . '/app/Models/Inventory.php',
-        'App\\Models\\InventoryCost' => __DIR__ . '/../..' . '/app/Models/InventoryCost.php',
         'App\\Models\\InventoryLocation' => __DIR__ . '/../..' . '/app/Models/InventoryLocation.php',
-        'App\\Models\\InventoryOnHand' => __DIR__ . '/../..' . '/app/Models/InventoryOnHand.php',
-        'App\\Models\\InventorySales' => __DIR__ . '/../..' . '/app/Models/InventorySales.php',
         'App\\Models\\InventoryTransfer' => __DIR__ . '/../..' . '/app/Models/InventoryTransfer.php',
         'App\\Models\\InventoryTransferItem' => __DIR__ . '/../..' . '/app/Models/InventoryTransferItem.php',
         'App\\Models\\Journal' => __DIR__ . '/../..' . '/app/Models/Journal.php',
-        'App\\Models\\JournalEntry' => __DIR__ . '/../..' . '/app/Models/JournalEntry.php',
-        'App\\Models\\LegalFees' => __DIR__ . '/../..' . '/app/Models/LegalFees.php',
-        'App\\Models\\MotorVehicle' => __DIR__ . '/../..' . '/app/Models/MotorVehicle.php',
-        'App\\Models\\PayrollLiabilities' => __DIR__ . '/../..' . '/app/Models/PayrollLiabilities.php',
         'App\\Models\\PayslipReport' => __DIR__ . '/../..' . '/app/Models/PayslipReport.php',
         'App\\Models\\Payslips' => __DIR__ . '/../..' . '/app/Models/Payslips.php',
         'App\\Models\\PayslipsContribute' => __DIR__ . '/../..' . '/app/Models/PayslipsContribute.php',
         'App\\Models\\PayslipsDeduct' => __DIR__ . '/../..' . '/app/Models/PayslipsDeduct.php',
         'App\\Models\\PayslipsEarn' => __DIR__ . '/../..' . '/app/Models/PayslipsEarn.php',
-        'App\\Models\\Printing' => __DIR__ . '/../..' . '/app/Models/Printing.php',
         'App\\Models\\Proforma' => __DIR__ . '/../..' . '/app/Models/Proforma.php',
         'App\\Models\\PurchaseOrder' => __DIR__ . '/../..' . '/app/Models/PurchaseOrder.php',
         'App\\Models\\PurchaseOrderSale' => __DIR__ . '/../..' . '/app/Models/PurchaseOrderSale.php',
-        'App\\Models\\Rent' => __DIR__ . '/../..' . '/app/Models/Rent.php',
-        'App\\Models\\Repairs' => __DIR__ . '/../..' . '/app/Models/Repairs.php',
-        'App\\Models\\RetainedEarnings' => __DIR__ . '/../..' . '/app/Models/RetainedEarnings.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
-        'App\\Models\\Rounding' => __DIR__ . '/../..' . '/app/Models/Rounding.php',
         'App\\Models\\Sale' => __DIR__ . '/../..' . '/app/Models/Sale.php',
         'App\\Models\\SaleInvoice' => __DIR__ . '/../..' . '/app/Models/SaleInvoice.php',
-        'App\\Models\\SaleItem' => __DIR__ . '/../..' . '/app/Models/SaleItem.php',
         'App\\Models\\StartDate' => __DIR__ . '/../..' . '/app/Models/StartDate.php',
-        'App\\Models\\StartingBalance' => __DIR__ . '/../..' . '/app/Models/StartingBalance.php',
         'App\\Models\\Supplier' => __DIR__ . '/../..' . '/app/Models/Supplier.php',
+        'App\\Models\\Tasks' => __DIR__ . '/../..' . '/app/Models/Tasks.php',
         'App\\Models\\Tax' => __DIR__ . '/../..' . '/app/Models/Tax.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\expenseaccounts' => __DIR__ . '/../..' . '/app/Models/expenseAccounts.php',
@@ -530,8 +507,8 @@ class ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
         'Carbon\\CarbonInterval' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/CarbonInterval.php',
         'Carbon\\Exceptions\\InvalidDateException' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Exceptions/InvalidDateException.php',
-        'ChangeIdField' => __DIR__ . '/../..' . '/database/migrations/2018_01_16_202306_changeIdField.php',
         'ChangeTypeofDescription' => __DIR__ . '/../..' . '/database/migrations/2017_12_10_195245_changeTypeofDescription.php',
+        'ChangeUserdeleteionBusiness' => __DIR__ . '/../..' . '/database/migrations/2018_01_24_203625_changeUserdeleteionBusiness.php',
         'CheckValue' => __DIR__ . '/../..' . '/database/migrations/2017_11_05_045252_checkValue.php',
         'Collective\\Html\\Componentable' => __DIR__ . '/..' . '/laravelcollective/html/src/Componentable.php',
         'Collective\\Html\\Eloquent\\FormAccessible' => __DIR__ . '/..' . '/laravelcollective/html/src/Eloquent/FormAccessible.php',
@@ -622,7 +599,6 @@ class ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a
         'DeepCopy\\TypeFilter\\Spl\\SplDoublyLinkedListFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/Spl/SplDoublyLinkedListFilter.php',
         'DeepCopy\\TypeFilter\\TypeFilter' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeFilter/TypeFilter.php',
         'DeepCopy\\TypeMatcher\\TypeMatcher' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/TypeMatcher/TypeMatcher.php',
-        'DefaultValuePayslipReport' => __DIR__ . '/../..' . '/database/migrations/2018_01_07_202422_defaultValuePayslipReport.php',
         'Delivery' => __DIR__ . '/../..' . '/database/migrations/2017_11_20_081121_delivery.php',
         'DeliverySaleId' => __DIR__ . '/../..' . '/database/migrations/2017_11_20_090851_deliverySaleId.php',
         'DeliverySaleIdAddCOL' => __DIR__ . '/../..' . '/database/migrations/2017_11_20_091530_deliverySaleIdAddCOL.php',
@@ -1052,6 +1028,7 @@ class ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a
         'Dotenv\\Exception\\ValidationException' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Exception/ValidationException.php',
         'Dotenv\\Loader' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Loader.php',
         'Dotenv\\Validator' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Validator.php',
+        'DropEmailUnique' => __DIR__ . '/../..' . '/database/migrations/2018_02_26_064608_dropEmailUnique.php',
         'Error' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/Error.php',
         'ExpenseAccountTable' => __DIR__ . '/../..' . '/database/migrations/2017_11_13_144423_expense_account_table.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
@@ -3380,7 +3357,6 @@ class ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a
         'Ramsey\\Uuid\\UuidFactory' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactory.php',
         'Ramsey\\Uuid\\UuidFactoryInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactoryInterface.php',
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
-        'RelateUserwithRole' => __DIR__ . '/../..' . '/database/migrations/2018_01_16_195932_relateUserwithRole.php',
         'RemovePaySlip' => __DIR__ . '/../..' . '/database/migrations/2017_12_04_112754_removePaySlip.php',
         'RenameStnkColumn' => __DIR__ . '/../..' . '/database/2017_11_05_130735_rename_stnk_column.php',
         'RenamepContributionItem' => __DIR__ . '/../..' . '/database/migrations/2017_11_10_040557_renamepContributionItem.php',
@@ -4100,7 +4076,6 @@ class ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a
         'Symfony\\Component\\Yaml\\Yaml' => __DIR__ . '/..' . '/symfony/yaml/Yaml.php',
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
         'Symfony\\Polyfill\\Php70\\Php70' => __DIR__ . '/..' . '/symfony/polyfill-php70/Php70.php',
-        'TestMig' => __DIR__ . '/../..' . '/database/migrations/2018_01_17_191307_testMig.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
@@ -4190,10 +4165,10 @@ class ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit2bcc7fb4e30e4b50ced6cb3f693f3f2a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit4e3d769a0beed8262ee21adb38eb8a23::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit4e3d769a0beed8262ee21adb38eb8a23::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit4e3d769a0beed8262ee21adb38eb8a23::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit4e3d769a0beed8262ee21adb38eb8a23::$classMap;
 
         }, null, ClassLoader::class);
     }

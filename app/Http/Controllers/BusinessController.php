@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
 use App\Models\Business;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use  Illuminate\Support\Facades\App;
 
@@ -30,13 +31,30 @@ class BusinessController extends Controller
         $currUser = Config::get('userU');
         if($currUser->userType=='Admin')
         { 
-            $business=Business::all();
+            $business=Business::where('bId','<>','24')->get();
             return View::make('business.business-view')->with('business', $business);   
         }
-        else
+        else if($currUser->userType=='Manager')
         {
-            return View::make('errors.notAllowed-view');
+            $bids = $this->helperSubBusiness($currUser);
+           
+            $business=Business::whereIn('bId', $bids)->get();
+            return View::make('business.business-view')->with('business', $business);
         }
+    }
+
+    public function helperSubBusiness($usrId)
+    {
+        $bids = array();
+        $multId = User::where('email','=',$usrId->email)->get();
+        if($multId!=null)
+        {
+            foreach ($multId as $key => $value) 
+            {
+                array_push($bids, $value->bId);    
+            }
+        }
+        return $bids;
     }
 
     /**
@@ -49,8 +67,19 @@ class BusinessController extends Controller
         return View::make('business.business-create');  
     }
 
+    /**
+     * Show the form for creating a new sub resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createSub()
+    {
+        return View::make('business.subbusiness-create');  
+    }
+
     public function store(Request $request)
     {
+        $sb = Request::input('sub');
         $validator = Validator::make(Request::all(), [
         'Name'  => 'required|max:255',
         ]);
@@ -61,14 +90,21 @@ class BusinessController extends Controller
         else
         {
             $Business = new Business;
-            
+        
             $Business->fill(Request::all());
 
-            if($Business->save()){
-              //Toastr::success('Successfully Created', 'Business', ["positionClass" => "toast-top-right"]);
+            if($Business->save())
+            {
+
             }
-            
-            return View::make('users.register');
+            if ($sb==1) 
+            {
+                return View::make('users.linkManager-create');
+            }
+            else
+            {
+                return View::make('users.register');
+            }
         }
     }
 
@@ -80,7 +116,6 @@ class BusinessController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**

@@ -40,7 +40,7 @@
        <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-               <h2 class="box-title">Add Business</h2>
+               <h2 class="box-title">Add Sub-Business</h2>
             </div>
         
         <div class="box-body">
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        {{ Form::hidden('sub', '0') }}
+        {{ Form::hidden('sub', '1') }}
         
         <!-- Submit Button -->
         <div class="form-group">

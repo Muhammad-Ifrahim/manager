@@ -41,11 +41,11 @@
 
 @endforeach
 
-{{-- Salutation --}}
+{{-- Salutation config('app.name') --}}
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-Regards,<br>{{ config('app.name') }}
+Regards,<br>{{ 'Kompania' }}
 @endif
 
 {{-- Subcopy --}}

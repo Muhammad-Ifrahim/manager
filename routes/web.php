@@ -31,6 +31,7 @@ Route::group(['middleware' => 'App\Http\Middleware\KAccessMiddleware'], function
 	Route::resource('fixedasset', 'FixedAssetController');
 	Route::resource('settings', 'SettingController');
 	Route::resource('date-setter', 'DateSettingController');
+	Route::get('/business/createSub', 'BusinessController@createSub');
 	Route::resource('business', 'BusinessController');
 	//Settings of Payslip
 	Route::resource('pdeductitem', 'pDeductItemController');

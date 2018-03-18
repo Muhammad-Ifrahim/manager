@@ -4,6 +4,14 @@
       
      <ul class="sidebar-menu" data-widget="tree">
 
+       @if($user->userType=='Admin' )
+        <li id="business" >
+          <a href="{{url('business')}}">
+            <i class="fa fa-th-list"></i> <span>My Businesses</span>
+          </a>
+        </li>
+       @endif
+
        @if($user->accounts && $user->userType!='Admin' )
         <li id="BankTransaction" >
           <a href="{{url('summary')}}">
