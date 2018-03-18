@@ -31,14 +31,15 @@ class POSSaleController extends Controller
     public function index()
     {
         $bid=Session::get('bId');
-        $posSale=pos::where('bId',$bid)->get();
+        $posSale=pos::with('account')->where('bId',$bid)->get();
+     //   dd($posSale);
         return view::make('possale.pos-sale-view')->with('posSale',$posSale);
     }
 
     public function saleCompleted(){
         
        $bid=Session::get('bId');
-       $posSale=pos::where('bId',$bid)->get();
+       $posSale=pos::with('account')->where('bId',$bid)->get();
         return view::make('possale.pos-sale-view-completed')->with('posSale',$posSale); 
        
     }
@@ -62,25 +63,38 @@ class POSSaleController extends Controller
     {
        
         $posSale=pos::find($id);
-       //dd($posSale);
         $pos=pos::with('posItems')->with('posItems.inventory')->where('posSaleId',$id)->get();
-        //dd($pos);
-      //  $pos=SaleInvoice::with('saleQuote')->with('saleQuote.inventoryItem')->where('saleinId',$id)->get();
         return view::make('possale.possale-edit')->with('pos',$pos)->with('posSale',$posSale);
     }
 
     public function update(Request $request, $id)
     {
-
-        app('App\Http\Controllers\POSController')->store($request,$id);
+       try {
+        $possale=pos::find($id);
+       if ($possale!=null) {
+        $this->destroy($id);
+        app('App\Http\Controllers\POSController')->store($request);
+        return Redirect::to("saleCompleted");
+         }
+        } catch (Exception $e) {
+         
+       }
     }
 
      public function destroy($id)
     {
+      try {
+        
         $posSale=pos::find($id);
-        if ($possale!=null) {
-            dd("we are here");
-        }
+        if ($posSale!=null) {
+            $posSale->posItems()->delete();
+            $posSale->delete();
+           Toastr::success('Successfully Sale Updated', 'Sale Inprogess', ["positionClass" => "toast-top-right"]);     
+         }
+         return Redirect::to("inProgress");
+       } catch (Exception $e) {
+        
+      }
     }
     public function print($id){
 

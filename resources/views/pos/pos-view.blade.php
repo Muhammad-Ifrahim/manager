@@ -358,9 +358,7 @@
     <table class="table  panel panel-success ">
         <thead>
 
-          <tr> 
-            
-                
+          <tr>          
           <th>
              <div class="col-lg-1">
                {!!Form::label('Item','item',['class' => 'col-lg-3 control-label head-item' ]) !!}
@@ -435,8 +433,8 @@
            
            {!! Form::label('Tax', 'Tax', ['class' => 'col-lg-2 control-label']) !!}
            
-          <div  class="col-lg-4 taxbody pul-right" >
-             <select class="tax form-control" name="tax" id="Tax">
+          <div class="col-lg-4 taxbody pul-right" >
+             <select class="tax form-control" name="tax" id="tax">
                       @foreach($Tax as $tax)
                         @if($tax->Tax!='IR 2.2 %')
                       <option  data-price="{{$tax->value }}" value="{{$tax->id }}">{{$tax->Tax }}</option>
@@ -510,7 +508,7 @@
      </div>     
       --> 
       <div style="display: none;">
-     <input type="text" class=" form-control " name="costofsale" id="costofsale">   
+     <input type="text" class="form-control costofsale" name="costofsale" id="costofsale">   
      </div>    
          <!--  -->
      
@@ -608,7 +606,7 @@
 
                   {!!Form::label('Paying by','Paying by',['class' => 'col-lg-1 control-label' ]) !!}
                     <div class="col-lg-4">
-                      <select class="tax form-control" name="tax" id="Tax">
+                      <select class="form-control" >
                        <option   value="cash">CASH</option>
                     </select>
 

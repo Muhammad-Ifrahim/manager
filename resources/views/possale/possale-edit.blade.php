@@ -117,6 +117,9 @@
  </style>
 
 <script type="text/javascript">
+  $(document).ready(function(){
+     totalAmount();
+  });
   function totalAmount(){
     var t = 0;
     var cost=0;
@@ -331,7 +334,7 @@
       <div class="form-group">
           {!!Form::label('Account','Account',['class' => 'col-lg-2 control-label ' ]) !!}
         <div class="col-lg-6 ">
-          <select  name="Account" class="form-control Account" id="Account" disabled="true">
+          <select  name="Account" class="form-control Account" id="Account">
               @foreach($account->reverse() as $accounts)
                  @if($accounts->id==1 ||$accounts->id==3)
                  <option value="{{$accounts->id}}" data="{{ $accounts->AccountName}}">{{ $accounts->AccountName}}</option>
@@ -452,12 +455,13 @@
            {!! Form::label('Tax', 'Tax', ['class' => 'col-lg-2 control-label']) !!}
            
           <div  class="col-lg-4 taxbody pul-right" >
-             <select class="tax form-control" name="tax" id="Tax">
-                      @foreach($Tax as $tax)
-                        @if($tax->Tax!='IR 2.2 %')
-                      <option  data-price="{{$tax->value }}" value="{{$tax->id }}">{{$tax->Tax }}</option>
-                        @endif
-                      @endforeach
+             <select class="tax form-control" name="tax" id="tax">
+                @foreach($Tax as $tax)
+                   <option  data-price="{{$posSale->account->value }}" value="{{$posSale->account->id }}">{{$posSale->account->Tax }}</option>
+                  @if($tax->Tax!='IR 2.2 %')
+                   <option  data-price="{{$tax->value }}" value="{{$tax->id }}">{{$tax->Tax }}</option>
+                  @endif
+                @endforeach
               </select>
           </div>  
           
@@ -501,44 +505,16 @@
               <div class="btn-group">
                 <button type="button" class="payment-modal btn btn-lg btn-success" data-toggle="modal" data-target="#PaymentModal">Payment</button>
                   &nbsp;
-                <!-- <a  type="submit" class="btn btn-success">Sale In Progres</a> -->
                 {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-left'] ) !!}  
               </div>
           </div>
       </div>
 
-     
 
-<!--       
-    
-      <div class="row" > 
-       <div  >      
- <          <div  class="col-lg-3" >
-              <input type="button" class=" add btn btn-info" value="Add Item">
-          </div> 
-          
-         <div class="col-lg-3" >
-             <input type="text" class=" form-control " name="NetAmount" name="total" id="total"
-             placeholder="Net Amount" readonly>
-         </div>
-         costofsale
-      </div>
-     </div>     
-      --> 
       <div style="display: none;">
      <input type="text" class=" form-control " name="costofsale" id="costofsale">   
      </div>    
-         <!--  -->
-     
-
-
-        <!-- Submit Button -->
-        <!-- <div class="form-group">
-            <div class="col-lg-4">
-                {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-left'] ) !!}
-            </div>
-        </div> -->
-         <!--  -->
+    
          </div>
         </div>
    </div>
@@ -560,13 +536,7 @@
                         <div class="producttitle">{{$product->ItemName}}</div>
                           <div class="productprice">
                              <div class="pull-right">
-                             <!--  <input  type="text" id="Item" value='{{$product->ItemName}}'></input>
-                              <input  type="text" id="saleprice" value='{{$product->SalePrice}}'></input>
-                              <input  type="text" id="purchaseprice" value='{{$product->PurchasePrice}}'></input>
-                              <input  type="text" id="inventId" value='{{$product->inventId}}'></input>
-                              <input  type="text" id="Description" value='{{$product->Description}}'></input> -->
-                              <!-- <a href="#" class="btn btn-success btn-sm" data-id="123"  onclick="addItem()">Add Item</a> -->
-                              <!-- <a data-id='123' onclick="addItem(this)">link</a> -->
+                            
                               <button data-id="{!!$product->inventId!!}" data-name="{!!$product->ItemName!!}"
                                 data-saleprice="{!!$product->SalePrice!!}"
                                 data-purchaseprice="{!!$product->PurchasePrice!!}"
@@ -624,7 +594,7 @@
 
                   {!!Form::label('Paying by','Paying by',['class' => 'col-lg-1 control-label' ]) !!}
                     <div class="col-lg-4">
-                      <select class="tax form-control" name="tax" id="Tax">
+                      <select class=" form-control" >
                        <option   value="cash">CASH</option>
                     </select>
 
@@ -654,7 +624,7 @@
           <div class="form-group" style="margin-top: 10%">             
               {!! Form::label('Tax', 'Tax', ['class' => 'col-lg-2 control-label']) !!}       
               <div class="col-lg-4">
-                {!! Form::text('Sale Total', $value=null, ['id'=> 'Tax-Modal','class' => 'form-control','placeholder' => 'Total Amount','readonly'=>true ])!!}
+                {!! Form::text('Tax-Modal', $value=null, ['id'=> 'Tax-Modal','class' => 'Tax-Modal form-control','placeholder' => 'Total Amount','readonly'=>true ])!!}
               </div>
                {!!Form::label('Discount','Discount',['class' => 'col-lg-2 control-label' ]) !!}
                <div class="col-lg-4">
@@ -688,10 +658,12 @@
     $(document).on('click','.payment-modal',function(){
            
            $('#Method').val("Payment");
+
+          console.log($('#tax').html());
            console.log('dfdjfhdsjkhfjds');
            $('#Total-Modal').val($('#Total').val());
            $('#Items-Modal').val($('#Items').val());
-           $('#Tax-Modal').val($('#Tax').val());
+           $('#Tax-Modal').val($('#tax').val());
            $('#Discount-Modal').val($('#Discount').val());
           // console.log($('#Discount').val());
           // console.log($('#Items').val());

@@ -14,4 +14,8 @@ class pos extends Model
         
     return $this->hasMany('App\Models\posItem','posSaleId');
     }
+    public function account(){
+    	
+    	return $this->belongsTo('App\Models\Tax','Tax');
+    }
 }

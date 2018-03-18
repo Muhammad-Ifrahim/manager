@@ -44,26 +44,23 @@ class POSController extends Controller
 
 
     }
+    public function store(Request $request){
+     // dd("fdfdfdfds");
+      $pos=new pos();
+      $bid=Session::get('bId');
+      $input=input::all();
+    //  dd($input);
+    //  dd($input['Account']);
+      $pos->customer=Input::get('customer');
+      $pos->Account=Input::get('Account');
+      $pos->Items=Input::get('Items');
+      $pos->Total=Input::get('Total');
+      $pos->Tax=Input::get('tax');
+      $pos->Discount=Input::get('Discount');
+      $pos->Status=is_null(Input::get('Method')) ? 'Pending' :'Completed';
+      $pos->bId=$bid;
 
-   
-    public function store(Request $request)
-    {
-        $pos=new pos();
-
-        //$pos=findorfail($Id);
-        $bid=Session::get('bId');
-        $input=input::all();
-          // dd(Input::all());
-        $pos->customer=Input::get('customer');
-        $pos->Account=Input::get('Account');
-        $pos->Items=Input::get('Items');
-        $pos->Total=Input::get('Total');
-        $pos->Tax=Input::get('Tax');
-        $pos->Discount=Input::get('Discount');
-        $pos->Status=is_null(Input::get('Method')) ? 'Pending' :'Completed';
-        $pos->bId=$bid;
-        
-        if ($pos->save()) {
+       if($pos->save()){
             for ($id=0; $id <count($input['inventId']) ; $id++) { 
                 $posItem=new posItem();
                 $posItem->posSaleId=$pos->posSaleId;
@@ -71,11 +68,11 @@ class POSController extends Controller
                 $posItem->Qty = $input['qty'][$id];
                 $posItem->Price = $input['price'][$id];
                 $posItem->Amount = $input['amount'][$id];
-
                 $posItem->save();
 
-            }
-            if (Input::get('Method')!=null){
+        }
+      }
+     if (Input::get('Method')!=null){
                 $Journal=new Journal;
                 $Journal->Date=date("Y-m-d");
                 $Journal->QuoteNumber=0;
@@ -96,7 +93,6 @@ class POSController extends Controller
                   $JournalEntry->Credit=NULL;
                   $JournalEntry->save();
 
-                     //CREDIT SIDE
                   $JournalEntry = new JournalEntry;
                   $JournalEntry->journalid=$Journal->id;
                   $JournalEntry->Account=11;
@@ -104,7 +100,6 @@ class POSController extends Controller
                   $JournalEntry->Debit=NULL;
                   $JournalEntry->Credit=$input['Total'];
 
-                                 //HIT CASH ACCOUNT
                   if($JournalEntry->save()){ 
                      $AccountName = new  CashOnHand;                                 
                      $AccountName->Description='Cash Account / Account Reciveable';
@@ -125,8 +120,7 @@ class POSController extends Controller
                   }
                   
 
-                                 ////////////////////////////////////////////SECOND ENTRY OF SALES/////////////////////////////
-
+                                
                   $JournalEntry = new JournalEntry;
                   $JournalEntry->journalid=$Journal->id;
                   $JournalEntry->Account=$input['Account'];
@@ -161,15 +155,16 @@ class POSController extends Controller
                             $AccountName->journalid=$Journal->id;
                             $AccountName->save(); 
                         }
-
-                   }
-                 return Redirect::to('summary');
                 }
-             
-             }
-        
-         }
+               return Redirect::to("saleCompleted");
+        }
+        else{
+         return Redirect::to("inProgress"); 
+        }
+    }
 
+   
+  
     public function show($id)
     {
         //

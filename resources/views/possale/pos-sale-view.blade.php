@@ -51,7 +51,7 @@
                   <tr>
                     <td class="col-md-1">{{$value->posSaleId}}</td>
                     <td class="col-md-1">{{$value->Items}} </td>
-                    <td class="col-md-1">{{$value->Tax}}</td>
+                    <td class="col-md-1">{{$value->account->Tax}}</td>
                     <td class="col-md-1">{{$value->Discount}}</td>
                     <td class="col-md-1">{{$value->Status}}</td>
                     <td class="col-md-1">{{number_format($value->Total,2)}}</td>
