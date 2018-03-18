@@ -31,6 +31,8 @@
           </li>
         @endif
 
+        
+
         <li id="BankTransaction" >
           <a href="{{url('cash')}}">
             <i class="fa fa-money"></i> <span>Cash Account</span>
@@ -78,6 +80,24 @@
           </a>
         </li>
       @endif
+
+      <li id="inProgress">
+          <a href="{{url('inProgress')}}">
+            <i class="fa fa-spinner"></i><span>POS InProgress</span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-red">{{count($posSalePending)}}</small>
+            </span>
+          </a>
+      </li>
+
+      <li id="inProgress">
+          <a href="{{url('saleCompleted')}}">
+            <i class="fa fa-check"></i><span>POS Sale </span>
+            <span class="pull-right-container">
+              <small class="label pull-right bg-green">{{count($posSaleComplete)}}</small>
+            </span>
+          </a>
+      </li>
 
       @if($user->SalesQuote)
         <li id="SalesQuotes">

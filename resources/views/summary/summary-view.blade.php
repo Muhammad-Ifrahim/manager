@@ -12,6 +12,9 @@
    .list-group-item{
   border: none;
    }
+   .titleSecond{
+    color: red;
+   }
 </style>
 <section class="content">
  <div class="">
@@ -151,7 +154,7 @@
                 </div>
             </div>
 
-          <div class="panel panel-primary">
+          <div class="{{$gross>=0 ? 'panel panel-primary': 'panel panel-danger'}}">
                 <div class="panel-heading">
                     <span class="title">Gross Profit</span>
                     <span class="pull-right">
@@ -287,11 +290,11 @@
                 
             </div>
 
-             <div class="panel panel-primary">
+             <div class="{{$net>=0 ? 'panel panel-primary': 'panel panel-danger'}}">
                 <div class="panel-heading">
                     <span class="title">Net Income</span>
                     <span class="pull-right">
-                       <label class="title">{{number_format($net,2)}}</label>
+                       <label class="title"  >{{number_format($net,2)}}</label>
                    </span>  
                 </div>
             </div>
