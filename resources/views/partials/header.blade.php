@@ -1,3 +1,4 @@
+
 <header class="main-header">
   <a href="{{ URL::to('/') }}" class="logo">
     <span class="logo-mini"><b>K</b>.IO</span>
@@ -12,11 +13,15 @@
    
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
+        <li>
+          <a  type="button" href="{{url('pos')}}" class="btn btn-block btn-warning btn-md">POS</a>  
+        </li>
             <li class="dropdown"> 
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">
                     {{$user->name}}
                     <span class="caret"></span>
                 </a>
+
                 <ul class="dropdown-menu">
                     <li>
                         <a href="{{ URL::to('/business') }}">Profile</a>
@@ -26,6 +31,7 @@
                     </li>
                 </ul>
             </li>
+            
         </ul>  
     </div>
 

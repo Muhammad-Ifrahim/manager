@@ -186,15 +186,28 @@ class SaleInvoiceController extends Controller
      // dd($salesItem);
       return view('sale.sale-edit')->with('sale',$sale)->with('salesItem',$salesItem); 
     }
+    public function printreport($id){
+      try{
+       // dd("sdsdsdsds");
+        $sale=SaleInvoice::find($id);
+        $salesItem=SaleInvoice::with('saleQuote')->with('saleQuote.inventoryItem')->where('saleinId',$id)->get();
 
-   
+        $pdf=new PDF();
+        $pdf=PDF::loadView('sale.sale-print',['sale'=>$sale,'salesItem'=>$salesItem])->setPaper('A4');
+       return  $pdf->stream('sale-print.pdf',array('Attachment'=>0));
+       //   return view('sale.sale-print')->with('sale',$sale)->with('salesItem',$salesItem); 
+      }
+      catch(Exception $e){
+        echo "eror";
+      }
+    } 
     public function update(Request $request, $id)
     {
 
              $this->destroy($id);
              $this->store($request);
-      Toastr::success('Successfully Updaed', 'Sale Invoice', ["positionClass" => "toast-top-right"]);
-        return Redirect::to('saleinvoice');           
+            Toastr::success('Successfully Updaed', 'Sale Invoice', ["positionClass" => "toast-top-right"]);
+            return Redirect::to('saleinvoice');           
     }
 
     public function destroy($id)
