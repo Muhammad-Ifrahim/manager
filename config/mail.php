@@ -55,9 +55,9 @@ return [
     |
     */
 
-    'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+    'from' =>[
+        'address' => env('MAIL_FROM_ADDRESS', 'racontractt@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'Email From Usman Khan'),
     ],
 
     /*
@@ -71,7 +71,7 @@ return [
     |
     */
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
 
     /*
     |--------------------------------------------------------------------------
@@ -99,7 +99,7 @@ return [
     |
     */
 
-    'sendmail' => '/usr/sbin/sendmail -bs',
+      'sendmail' => '/usr/sbin/sendmail -bs',//env('MAIL_DRIVER'),
 
     /*
     |--------------------------------------------------------------------------

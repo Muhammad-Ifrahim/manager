@@ -2,48 +2,57 @@
 
 namespace App\Http\Controllers;
 
-
-
+use  Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Session;
-//use Illuminate\Http\Request;
+
 use View;
 use Request;
 use Validator;
 use Toastr;
 use Redirect;
+use Config;
 
 class CustomerController extends Controller
 {
    // Validation Rules
 
-  
-   public function __invoke(){
+  public function __construct()
+  {
+    $this->middleware('auth');
+  }
 
-   }
    public function index(){
-
-     $customers=Customer::all(); 
+    $user = Config::get('userU');
+    $bid = Session::get('bId');
+    if($user->customer>0)
+    {
+      $customers=Customer::where('bId', $bid)->get(); 
+     //      JSON($customers);sd
      return View::make('customer.customer-view')->with('customers',$customers);
-       
+    }
+    else
+    {
+      return View::make('errors.notAllowed-view');
+    }
    }
    public function  create(){
       return View::make('customer.customer-create');         //Return and Show the Insert View
    }
    public function  store(Request $request){
-        // validations of the Input 
+      
+    $bid = Session::get('bId');  
     $validator = Validator::make(Request::all(), [
 
         'Name'  => 'required|max:255',
         'Code'  => 'string|nullable',
-        'Email' => 'email|required',
-        'Telephone' => 'nullable|regex:/(01)[0-9]{9}/',
+        'Email' => 'email|nullable',
+        'Telephone' => 'required|min:11|numeric',
         'BillingAddress' => 'nullable|string',
-        'Fax'=>'nullable|regex:/(012)[0-9]{7}/',
-        'Mobile'=>'nullable|regex:/(01)[0-9]{9}/',
-        'CreditLimit' =>'integer|nullable',
-        
+        'Fax'=>'nullable|min:11|numeric',
+        'Mobile'=>'nullable|min:11|numeric',
+        'CreditLimit' =>'integer|nullable', 
     ]);
 
       if ($validator->fails()) {
@@ -53,10 +62,10 @@ class CustomerController extends Controller
       else{
              $Customer = new Customer;
              $Customer->fill(Request::all());
+             $Customer->bId=$bid;
              if($Customer->save()){
-               
-                Toastr::success('Successfully Created', 'Customer', ["positionClass" => "toast-top-right"]);
-            //  Session::flash('flash_message', 'customer successfully created!');
+                
+                  Toastr::success('Successfully Created', 'Customer', ["positionClass" => "toast-top-right"]);
               }
            return Redirect::to('customer');
         }
@@ -68,18 +77,16 @@ class CustomerController extends Controller
         return View::make('customer.customer-edit')->with('customer',$customer);  
    }
    public function update($Id){
-
+         $bid = Session::get('bId');
          $validationRules=array(
 
         'Name'  => 'required|max:255',
         'Code'  => 'string|nullable',
-        'Email' => 'email|required',
-        'BusinessIdentifier' => 'string|nullable',
-        'Telephone' => 'nullable|regex:/(01)[0-9]{9}/',
+        'Email' => 'email|nullable',
+        'Telephone' => 'required|min:11|numeric',
         'BillingAddress' => 'nullable|string',
-        'AdditionalInformation'=>'string|nullable',
-        'Fax'=>'nullable|regex:/(012)[0-9]{7}/',
-        'Mobile'=>'nullable|regex:/(01)[0-9]{9}/',
+        'Fax'=>'nullable|min:11|numeric',
+        'Mobile'=>'nullable|min:11|numeric',
         'CreditLimit' =>'integer|nullable',
 
          );
@@ -96,6 +103,7 @@ class CustomerController extends Controller
          if($customer){
 
              $customer->fill(Request::all());
+             $customer->bId=$bid;
             if($customer->save())
             {
                   $customer=Customer::find($Id);
@@ -113,6 +121,14 @@ class CustomerController extends Controller
         
     
    }
+   public function destroy($id){
 
-
+    $customerDelete=Customer::find($id);
+     if($customerDelete!=null)
+     {
+         $customerDelete->delete();
+         Toastr::success('Successfully Deleted', 'Customer', ["positionClass" => "toast-top-right"]);      
+     }
+     return Redirect::to('customer');
+   }
 }
