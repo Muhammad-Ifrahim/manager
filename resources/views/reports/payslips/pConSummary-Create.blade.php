@@ -103,16 +103,7 @@
           {!! Form::submit('Submit', ['class' => 'btn btn-lg btn-success pull-middle'] ) !!}
         </div>
         <div class="form-group">
-        <!--     <div class="btn-group">
-              <button type="button" class="btn btn-success">Submit</button>
-              <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"         aria-haspopup="true" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-              </button>
-              <ul class="dropdown-menu">
-                <li><a href="#">Create and Add More</a>
-              </ul>
-            </div> -->
+       
         </div>
     {!! Form::close()  !!}
      </div>

@@ -1,123 +1,107 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Aloha!</title>
-
-<style type="text/css">
+  <head>
+    <meta charset="UTF-8">
+    <title>Aloha!</title>
+    <style type="text/css">
     * {
-        font-family: Verdana, Arial, sans-serif;
+    font-family: Verdana, Arial, sans-serif;
     }
     table{
-        font-size: x-small;
+    font-size: x-small;
     }
     tfoot tr td{
-        font-weight: bold;
-        font-size: x-small;
+    font-weight: bold;
+    font-size: x-small;
     }
     .gray {
-        background-color: lightgray
+    background-color: lightgray
     }
-</style>
-
-</head>
-<body id="printingDiv ">
-
-  <table width="100%">
-    <tr>
-       <td valign="top"><img src="{{asset('images/meteor-logo.png')}}" alt="" width="150"/></td>
+    </style>
+  </head>
+  <body id="printingDiv ">
+    <table width="100%">
+      <tr>
+        <td valign="top"><img src="{{asset('images/meteor-logo.png')}}" alt="" width="150"/></td>
         <td align="right">
-            <h3>Shinra Electric power company</h3>
-            <pre>
-                Company representative name
-                Company address
-                Tax ID
-                phone
-                fax
-            </pre>
+          <h3>Shinra Electric power company</h3>
+                      <pre>
+                            Company representative name
+                            Company address
+                            Tax ID
+                            phone
+                            fax
+          </pre>
         </td>
-    </tr>
-
-  </table>
-
-  <table width="100%">
-    <tr>
+      </tr>
+    </table>
+    <table width="100%">
+      <tr>
         <td><strong>From:</strong> Linblum - Barrio teatral</td>
         <td><strong>To:</strong> Linblum - Barrio Comercial</td>
-    </tr>
-
-  </table>
-
-  <br/>
-
-  <table width="100%">
-    <thead style="background-color: lightgray;">
-      <tr>
-        <th>#</th>
-        <th>Description</th>
-        <th>Quantity</th>
-        <th>Unit Price $</th>
-        <th>Total $</th>
       </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Playstation IV - Black</td>
-        <td align="right">1</td>
-        <td align="right">1400.00</td>
-        <td align="right">1400.00</td>
-      </tr>
-      <tr>
+    </table>
+    <br/>
+    <table width="100%">
+      <thead style="background-color: lightgray;">
+        <tr>
+          <th>#</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Unit Price $</th>
+          <th>Total $</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Playstation IV - Black</td>
+          <td align="right">1</td>
+          <td align="right">1400.00</td>
+          <td align="right">1400.00</td>
+        </tr>
+        <tr>
           <th scope="row">1</th>
           <td>Metal Gear Solid - Phantom</td>
           <td align="right">1</td>
           <td align="right">105.00</td>
           <td align="right">105.00</td>
-      </tr>
-      <tr>
+        </tr>
+        <tr>
           <th scope="row">1</th>
           <td>Final Fantasy XV - Game</td>
           <td align="right">1</td>
           <td align="right">130.00</td>
           <td align="right">130.00</td>
+        </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="3"></td>
+        <td align="right">Subtotal $</td>
+        <td align="right">1635.00</td>
       </tr>
-    </tbody>
-
-    <tfoot>
-        <tr>
-            <td colspan="3"></td>
-            <td align="right">Subtotal $</td>
-            <td align="right">1635.00</td>
-        </tr>
-        <tr>
-            <td colspan="3"></td>
-            <td align="right">Tax $</td>
-            <td align="right">294.3</td>
-        </tr>
-        <tr>
-            <td colspan="3"></td>
-            <td align="right">Total $</td>
-            <td align="right" class="gray">$ 1929.3</td>
-        </tr>
-    </tfoot>
-  </table>
-
-</body>
-
- <p align="center"><input type="button" id="pr" value="Print" onclick="printpage()" class="btn btn-success" /></p>
-
-<script type="text/javascript">
-    function printpage() {
-         var printButton = document.getElementById("printingDiv");
-         printButton.style.visibility = 'hidden';
-
-        document.title = "";
-        document.URL   = "";
-
-        window.print();
-        printButton.style.visibility = 'visible';
-
-
-    }
-</script>
+      <tr>
+        <td colspan="3"></td>
+        <td align="right">Tax $</td>
+        <td align="right">294.3</td>
+      </tr>
+      <tr>
+        <td colspan="3"></td>
+        <td align="right">Total $</td>
+        <td align="right" class="gray">$ 1929.3</td>
+      </tr>
+      </tfoot>
+    </table>
+  </body>
+  <p align="center"><input type="button" id="pr" value="Print" onclick="printpage()" class="btn btn-success" /></p>
+  <script type="text/javascript">
+  function printpage() {
+  var printButton = document.getElementById("printingDiv");
+  printButton.style.visibility = 'hidden';
+  document.title = "";
+  document.URL   = "";
+  window.print();
+  printButton.style.visibility = 'visible';
+  }
+  </script>
