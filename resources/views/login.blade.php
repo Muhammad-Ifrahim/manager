@@ -3,12 +3,10 @@
 body{
 background: grey;
 }
-
 </style>
 @section('content')
-
 <div class="container" style="margin-top:50%;">
-  <div id="loginbox"  class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+  <div id="loginbox"  class="mainbox col-md-6 col-md-offset-3  col-sm-offset-2">
     <div class="panel panel-info" >
       <div class="panel-heading">
         <div class="panel-title">Sign In</div>
@@ -43,10 +41,9 @@ background: grey;
           </div>
         </div>
         
-        
         {!! Form::close()  !!}
       </div>
     </div>
   </div>
-  
-  @endSection('content')
+</div>  
+@endSection('content')

@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,11 +10,10 @@
 |
 */
 Auth::routes();
-
 Route::resource('/','ApplicationController');
 Route::group(['middleware' => 'App\Http\Middleware\KAccessMiddleware'], function()
 {
-	Route::get('notAllowed', function () 
+	Route::get('notAllowed', function ()
 	{
 		return View::make('errors.notAllowed-view');
 	});
@@ -24,9 +22,9 @@ Route::group(['middleware' => 'App\Http\Middleware\KAccessMiddleware'], function
 	Route::resource('employee','EmployeeController');
 	Route::resource('customize','CustomizeController');
 	Route::get('customize/{uid}/updater','CustomizeController@updater');
-	Route::resource('NotAvailable','NothingController');                
+	Route::resource('NotAvailable','NothingController');
 	//Fixed Asset
-	Route::resource('customize','CustomizeController');                
+	Route::resource('customize','CustomizeController');
 	//Fixed CashController
 	Route::resource('fixedasset', 'FixedAssetController');
 	Route::resource('settings', 'SettingController');
@@ -38,7 +36,6 @@ Route::group(['middleware' => 'App\Http\Middleware\KAccessMiddleware'], function
 	Route::resource('pearnitem', 'pEarnItemsController');
 	Route::resource('user', 'RegController');
 	Route::resource('ledgers', 'LedgerController');
-
 	Route::resource('cash','CashController');
 	Route::resource('deliverynote','DeliveryNotesController');
 	Route::get('/deliverynote/{id}/print', 'DeliveryNotesController@printReport');
@@ -53,38 +50,32 @@ Route::group(['middleware' => 'App\Http\Middleware\KAccessMiddleware'], function
 	Route::resource('InventoryTransfer','InventoryTransferController');
 	Route::resource('InventoryLocation','InventoryLocationController');
 	Route::resource('Reports', 'ReportController');
-
 	Route::get('EarnReport/{rType}', 'EarnReportController@index');
 	Route::post('EarnReport/{rType}/save', 'EarnReportController@store');
 	Route::get('EarnReport/{rType}/create', 'EarnReportController@create');
 	Route::delete('EarnReport/{rType}/delete', 'EarnReportController@destroy');
 	Route::get('EarnReport/{rType}/edit', 'EarnReportController@edit');
 	Route::resource('ReportUpdate', 'EarnReportController');
-
 	Route::resource('supplier','SupplierController');
 	
-
 	Route::resource('inProgress','POSSaleController');
-    Route::resource('pos','POSController');
-    Route::get('/saleCompleted',  array(
-    	'as' => 'saleCompleted',
-    	'uses'=> 'POSSaleController@saleCompleted'));
+	Route::resource('pos','POSController');
+	Route::get('/saleCompleted',  array(
+	'as' => 'saleCompleted',
+	'uses'=> 'POSSaleController@saleCompleted'));
 	Route::get('/inProgress/{id}/print', 'POSSaleController@print');
-    
-    
+
+
 	Route::resource('Inventory','InventoryController');
 	Route::resource('Journal','JournalController');
 	Route::get('/Journal/{id}/print', 'JournalController@printreport');
-
 	Route::resource('purchaseorder','PurchaseOrderController');
 	Route::get('/purchaseorder/{id}/print', 'PurchaseOrderController@printReport');
-
-	// Inventory to get in Routes 
+	// Inventory to get in Routes
 	Route::get( '/getinventory', array(
 		'as' => 'getinventory',
 		'uses' => 'PerformaController@getinventory'
 	));
-
 	Route::get('/logout', 'Auth\LoginController@logout');
 	Route::get('{bisId}/business', 'OtherBusinessController@index');
 	Route::get('/printContributeReport/{repId}', 'EarnReportController@printContributeReport');
